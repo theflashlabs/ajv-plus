@@ -123,7 +123,6 @@ export interface CurrentOptions {
   unevaluated?: boolean // NEW
   dynamicRef?: boolean // NEW
   schemaId?: "id" | "$id"
-  jtd?: boolean // NEW
   meta?: SchemaObject | boolean
   defaultMeta?: string | AnySchemaObject
   validateSchema?: boolean | "log"
@@ -134,7 +133,6 @@ export interface CurrentOptions {
   loopEnum?: number // NEW
   ownProperties?: boolean
   multipleOfPrecision?: number
-  int32range?: boolean // JTD only
   messages?: boolean
   code?: CodeOptions // NEW
   uriResolver?: UriResolver
@@ -227,7 +225,6 @@ type RequiredInstanceOptions = {
     | "addUsedSchema"
     | "validateSchema"
     | "validateFormats"
-    | "int32range"
     | "unicodeRegExp"
     | "uriResolver"]: NonNullable<Options[K]>
 } & {code: InstanceCodeOptions}
@@ -260,7 +257,6 @@ function requiredOptions(o: Options): RequiredInstanceOptions {
     validateSchema: o.validateSchema ?? true,
     validateFormats: o.validateFormats ?? true,
     unicodeRegExp: o.unicodeRegExp ?? true,
-    int32range: o.int32range ?? true,
     uriResolver: uriResolver,
   }
 }
@@ -683,8 +679,7 @@ export default class Ajv {
     if (typeof schema == "object") {
       id = schema[schemaId]
     } else {
-      if (this.opts.jtd) throw new Error("schema must be object")
-      else if (typeof schema != "boolean") throw new Error("schema must be object or boolean")
+      if (typeof schema != "boolean") throw new Error("schema must be object or boolean")
     }
     let sch = this._cache.get(schema)
     if (sch !== undefined) return sch
