@@ -4,8 +4,13 @@ import _Ajv from "./ajv"
 import standaloneCode from "../dist/standalone"
 import ajvFormats from "@theflashlabs/ajv-formats"
 import requireFromString = require("require-from-string")
-import {importFromStringSync} from "module-from-string"
 import assert = require("assert")
+
+async function importFromStringSync(codeString) {
+  const dataUrl = `data:text/javascript,${encodeURIComponent(codeString)}`
+  const module = await import(dataUrl)
+  return module
+}
 
 function testExportTypeEsm(moduleCode: string, singleExport: boolean) {
   //Must have
@@ -56,7 +61,7 @@ describe("standalone code generation", () => {
         testExports(m)
       })
 
-      it("should generate module code with named export - ESM", () => {
+      it("should generate module code with named export - ESM", async () => {
         ajv = new _Ajv({code: {source: true, esm: true}})
         ajv.addSchema(numSchema)
         ajv.addSchema(strSchema)
@@ -65,7 +70,7 @@ describe("standalone code generation", () => {
           validateString: "https://example.com/string.json",
         })
         testExportTypeEsm(moduleCode, false)
-        const m = importFromStringSync(moduleCode)
+        const m = await importFromStringSync(moduleCode)
         assert.strictEqual(Object.keys(m).length, 2)
         testExports(m)
       })
@@ -301,7 +306,7 @@ describe("standalone code generation", () => {
     }
   })
 
-  it("should generate module code with a single export - ESM", () => {
+  it("should generate module code with a single export - ESM", async () => {
     const ajv = new _Ajv({code: {source: true, esm: true}})
     const v = ajv.compile({
       type: "number",
@@ -309,7 +314,7 @@ describe("standalone code generation", () => {
     })
     const moduleCode = standaloneCode(ajv, v)
     testExportTypeEsm(moduleCode, true)
-    const m = importFromStringSync(moduleCode)
+    const m = await importFromStringSync(moduleCode)
     testExport(m.validate)
     testExport(m.default)
 
