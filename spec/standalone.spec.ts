@@ -71,6 +71,7 @@ describe("standalone code generation", () => {
         })
         testExportTypeEsm(moduleCode, false)
         const m = await importFromStringSync(moduleCode)
+        console.log("importFromStringSync: ", m)
         assert.strictEqual(Object.keys(m).length, 2)
         testExports(m)
       })
