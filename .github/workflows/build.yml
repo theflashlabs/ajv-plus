@@ -23,7 +23,7 @@ jobs:
       - run: npm install
       - run: git submodule update --init
       - name: update website
-        if: ${{ github.event_name == 'push' && matrix.node-version == '16.x' }}
+        if: ${{ false && github.event_name == 'push' && matrix.node-version == '16.x' }}
         run: ./scripts/publish-site
         env:
           GH_TOKEN_PUBLIC: ${{ secrets.GH_TOKEN_PUBLIC }}
