@@ -2,6 +2,9 @@
   "name": "ajv",
   "version": "8.17.1",
   "description": "Another JSON Schema Validator",
+  "engines": {
+    "node": "^20.0.0"
+  },
   "main": "dist/ajv.js",
   "types": "dist/ajv.d.ts",
   "files": [
