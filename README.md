@@ -7,7 +7,7 @@ Supports JSON Schema draft-04/06/07/2019-09/2020-12 ([draft-04 support](https://
 
 [![build](https://github.com/bavulapati/ajv-plus/actions/workflows/build.yml/badge.svg)](https://github.com/bavulapati/ajv-plus/actions?query=workflow%3Abuild)
 [![npm](https://img.shields.io/npm/v/ajv-plus.svg)](https://www.npmjs.com/package/ajv-plus)
-[![npm downloads](https://img.shields.io/npm/dm/ajv.svg)](https://www.npmjs.com/package/ajv-plus)
+[![npm downloads](https://img.shields.io/npm/dm/ajv-plus.svg)](https://www.npmjs.com/package/ajv-plus)
 [![Coverage Status](https://coveralls.io/repos/github/bavulapati/ajv-plus/badge.svg?branch=main)](https://coveralls.io/github/bavulapati/ajv-plus?branch=main)
 
 ## Why fork?
