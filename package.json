@@ -1,7 +1,7 @@
 {
   "name": "ajv-plus",
   "version": "0.1.0",
-  "description": "A maintained, JSON specification compliant fork of the AJV validator.",
+  "description": "A maintained and JSON specification-compliant fork of the original `ajv` package.",
   "main": "dist/ajv.js",
   "types": "dist/ajv.d.ts",
   "files": [
@@ -112,10 +112,6 @@
     "tsify": "^5.0.4",
     "typescript": "5.3.3",
     "uri-js": "^4.4.1"
-  },
-  "funding": {
-    "type": "github",
-    "url": "https://github.com/sponsors/bavulapati"
   },
   "prettier": "@ajv-validator/config/prettierrc.json",
   "husky": {
