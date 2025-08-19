@@ -23,6 +23,16 @@ Thanks to the original author Evgeny Poberezkin and all the contributors of [AJV
 
 Please review [Contributing guidelines](./CONTRIBUTING.md).
 
+## <a name="sponsors"></a>Please [sponsor Ajv-Plus development](https://github.com/sponsors/bavulapati)
+
+Your support is very important - the funds will be used to develop and maintain Ajv-Plus.
+
+Please sponsor Ajv-Plus via:
+
+- [GitHub sponsors page](https://github.com/sponsors/bavulapati)
+
+Thank you.
+
 ## Install
 
 To install latest version :
@@ -62,8 +72,6 @@ const validate = ajv.compile(schema)
 const valid = validate(data)
 if (!valid) console.log(validate.errors)
 ```
-
-Learn how to use Ajv and see more examples in the [Guide: getting started](https://ajv.js.org/guide/getting-started.html)
 
 ## Changes history
 

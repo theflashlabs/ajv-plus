@@ -113,6 +113,10 @@
     "typescript": "5.3.3",
     "uri-js": "^4.4.1"
   },
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/bavulapati"
+  },
   "prettier": "@ajv-validator/config/prettierrc.json",
   "husky": {
     "hooks": {
