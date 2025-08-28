@@ -3,6 +3,9 @@
   "include": ["."],
   "compilerOptions": {
     "types": ["node", "mocha"],
-    "noImplicitAny": false
+    "noImplicitAny": false,
+    "noEmit": true,
+    "module": "esnext",
+    "moduleResolution": "bundler"
   }
 }

@@ -1,5 +1,5 @@
 import _AjvJTD from "../ajv_jtd"
-import assert = require("assert")
+import assert from "node:assert"
 
 describe("JTD int32range option", function () {
   this.timeout(10000)

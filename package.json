@@ -14,8 +14,8 @@
     "eslint": "eslint \"lib/**/*.ts\" \"spec/**/*.*s\" --ignore-pattern spec/JSON-Schema-Test-Suite",
     "prettier:write": "prettier --write \"./**/*.{json,yaml,js,ts}\"",
     "prettier:check": "prettier --list-different \"./**/*.{json,yaml,js,ts}\"",
-    "test-spec": "cross-env TS_NODE_PROJECT=spec/tsconfig.json mocha -r ts-node/register \"spec/**/*.spec.{ts,js}\" -R dot",
-    "test-codegen": "nyc cross-env TS_NODE_PROJECT=spec/tsconfig.json mocha -r ts-node/register 'spec/codegen.spec.ts' -R spec",
+    "test-spec": "cross-env TS_NODE_PROJECT=spec/tsconfig.json mocha --import=tsx \"spec/**/*.spec.{ts,js}\" -R dot",
+    "test-codegen": "nyc cross-env TS_NODE_PROJECT=spec/tsconfig.json mocha --import=tsx 'spec/codegen.spec.ts' -R spec",
     "test-debug": "npm run test-spec -- --inspect-brk",
     "test-cov": "nyc npm run test-spec",
     "rollup": "rm -rf bundle && rollup -c",
@@ -104,6 +104,7 @@
     "rollup-plugin-terser": "^7.0.2",
     "ts-node": "^10.9.2",
     "tsify": "^5.0.4",
+    "tsx": "^4.20.5",
     "typescript": "5.3.3",
     "uri-js": "^4.4.1"
   },
