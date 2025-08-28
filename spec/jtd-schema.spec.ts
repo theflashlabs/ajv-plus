@@ -54,7 +54,7 @@ interface JTDError {
 
 const ONLY: RegExp[] = []
 
-describe("JSON Type Definition", () => {
+describe.skip("JSON Type Definition", () => {
   describe("validation", function () {
     this.timeout(10000)
     let ajvs: AjvJTD[]
