@@ -2,9 +2,9 @@
   "extends": "..",
   "include": ["."],
   "compilerOptions": {
+    "outDir": "../test",
     "types": ["node", "mocha"],
     "noImplicitAny": false,
-    "noEmit": true,
     "module": "esnext",
     "moduleResolution": "bundler"
   }
