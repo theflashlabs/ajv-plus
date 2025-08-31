@@ -30,7 +30,7 @@ instances.forEach(addRemoteRefsAndFormats)
 
 jsonSchemaTest(withStandalone(instances), {
   description: `Schema tests of ${instances.length} ajv instances with different options`,
-  suites: {"Schema tests": require("./_json/tests")},
+  suites: {"Schema tests": require("../spec/_json/tests")},
   only: [],
   assert: require("./chai").assert,
   afterError,
