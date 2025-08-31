@@ -39,7 +39,7 @@ runTest({
     ignoreKeywordsWithRef: true,
   }),
   draft: 6,
-  tests: skipTestCases(require("./_json/draft6"), {
+  tests: skipTestCases(require("../spec/_json/draft6"), {
     ref: {
       "$ref prevents a sibling $id from changing the base uri": [
         "$ref resolves to /definitions/base_foo, data does not validate",
