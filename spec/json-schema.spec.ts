@@ -118,7 +118,7 @@ runTest({
     formats: toHash(SKIP_FORMATS),
   }),
   draft: 2020,
-  tests: skipTestCases(require("./_json/draft2020"), {
+  tests: skipTestCases(require("../spec/_json/draft2020"), {
     dynamicRef: {
       "A $dynamicRef to a $dynamicAnchor in the same schema resource should behave like a normal $ref to an $anchor":
         ["An array of strings is valid"],
