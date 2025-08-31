@@ -3,10 +3,10 @@ import type {SchemaObject, JTDParser} from "../dist/jtd"
 import _AjvJTD from "./ajv_jtd"
 import getAjvInstances from "./ajv_instances"
 import {withStandalone} from "./ajv_standalone"
-const jtdValidationTests = require("./json-typedef-spec/tests/validation.json")
-const jtdInvalidSchemasTests = require("./json-typedef-spec/tests/invalid_schemas.json")
+const jtdValidationTests = require("../spec/json-typedef-spec/tests/validation.json")
+const jtdInvalidSchemasTests = require("../spec/json-typedef-spec/tests/invalid_schemas.json")
 // tests from https://github.com/nst/JSONTestSuite
-const jsonParseTests = require("./json_parse_tests.json")
+const jsonParseTests = require("../spec/json_parse_tests.json")
 import assert from "node:assert"
 import AjvPack from "../dist/standalone/instance"
 
