@@ -1,5 +1,7 @@
 import type AjvJTD from "../dist/jtd"
-import _Ajv from "../dist/jtd.js"
-const AjvClass: typeof AjvJTD = typeof window == "object" ? (window as any).ajvJTD : _Ajv
+const AjvClass: typeof AjvJTD =
+  typeof window == "object" ? (window as any).ajvJTD : require("" + "../dist/jtd")
 
 export default AjvClass
+module.exports = AjvClass
+module.exports.default = AjvClass

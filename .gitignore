@@ -42,7 +42,7 @@ bundle/
 
 package-lock.json
 
-spec/_json/*.js
+spec/_json/*.cjs
 
 # docs
 docs/code_of_conduct.md

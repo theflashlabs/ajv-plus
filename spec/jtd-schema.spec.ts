@@ -7,7 +7,7 @@ const jtdValidationTests = require("../spec/json-typedef-spec/tests/validation.j
 const jtdInvalidSchemasTests = require("../spec/json-typedef-spec/tests/invalid_schemas.json")
 // tests from https://github.com/nst/JSONTestSuite
 const jsonParseTests = require("../spec/json_parse_tests.json")
-import assert from "node:assert"
+import assert = require("node:assert")
 import AjvPack from "../dist/standalone/instance"
 
 interface TestCase {
