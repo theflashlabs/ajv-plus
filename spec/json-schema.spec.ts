@@ -60,7 +60,7 @@ runTest({
     formats: toHash(SKIP_FORMATS),
   }),
   draft: 7,
-  tests: skipTestCases(require("./_json/draft7"), {
+  tests: skipTestCases(require("../spec/_json/draft7"), {
     ref: {
       "$ref prevents a sibling $id from changing the base uri": [
         "$ref resolves to /definitions/base_foo, data does not validate",
@@ -80,7 +80,7 @@ runTest({
     formats: toHash(SKIP_FORMATS),
   }),
   draft: 2019,
-  tests: skipTestCases(require("./_json/draft2019"), {
+  tests: skipTestCases(require("../spec/_json/draft2019"), {
     recursiveRef: {
       "$recursiveRef with no $recursiveAnchor in the initial target schema resource": [
         "leaf node matches: recursion uses the inner schema",
