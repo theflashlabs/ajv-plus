@@ -43,6 +43,5 @@ function addRemoteRefsAndFormats(ajv: AjvCore) {
   ajv.opts.code.source = true
   for (const id in remoteRefs) ajv.addSchema(remoteRefs[id], id)
   ajv.addSchema(remoteRefsWithIds)
-  //@ts-ignore
   ajvFormats(ajv)
 }
