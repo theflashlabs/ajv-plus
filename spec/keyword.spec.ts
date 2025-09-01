@@ -1,4 +1,4 @@
-import type {ErrorObject, SchemaObject, SchemaValidateFunction} from "../lib/types"
+import type {ErrorObject, SchemaObject, SchemaValidateFunction} from "../dist/types"
 import type AjvCore from "../dist/core"
 // currently most tests include compiled code, if any code re-compiled locally, instanceof would fail
 import {_, nil} from "../dist/compile/codegen/code"

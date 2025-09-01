@@ -21,7 +21,7 @@ instances.forEach((ajv) => {
 jsonSchemaTest(withStandalone(instances), {
   description:
     "Extra keywords schemas tests of " + instances.length + " ajv instances with different options",
-  suites: {extras: require("./_json/extras")},
+  suites: {extras: require("../spec/_json/extras")},
   assert: chai.assert,
   afterError,
   afterEach,

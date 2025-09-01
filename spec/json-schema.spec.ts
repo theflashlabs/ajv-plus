@@ -8,19 +8,19 @@ import jsonSchemaTest = require("json-schema-test")
 import options from "./ajv_options"
 import {afterError, afterEach} from "./after_test"
 import ajvFormats from "ajv-formats"
-import draft6MetaSchema = require("../dist/refs/json-schema-draft-06.json")
+const draft6MetaSchema = require("../dist/refs/json-schema-draft-06.json")
 import {toHash} from "../dist/compile/util"
 import chai from "./chai"
 
 const remoteRefs = {
-  "http://localhost:1234/integer.json": require("./JSON-Schema-Test-Suite/remotes/integer.json"),
-  "http://localhost:1234/subSchemas.json": require("./JSON-Schema-Test-Suite/remotes/subSchemas.json"),
-  "http://localhost:1234/subSchemas-defs.json": require("./JSON-Schema-Test-Suite/remotes/subSchemas-defs.json"),
-  "http://localhost:1234/baseUriChange/folderInteger.json": require("./JSON-Schema-Test-Suite/remotes/baseUriChange/folderInteger.json"),
-  "http://localhost:1234/baseUriChangeFolder/folderInteger.json": require("./JSON-Schema-Test-Suite/remotes/baseUriChangeFolder/folderInteger.json"),
-  "http://localhost:1234/baseUriChangeFolderInSubschema/folderInteger.json": require("./JSON-Schema-Test-Suite/remotes/baseUriChangeFolderInSubschema/folderInteger.json"),
-  "http://localhost:1234/name.json": require("./JSON-Schema-Test-Suite/remotes/name.json"),
-  "http://localhost:1234/name-defs.json": require("./JSON-Schema-Test-Suite/remotes/name-defs.json"),
+  "http://localhost:1234/integer.json": require("../spec/JSON-Schema-Test-Suite/remotes/integer.json"),
+  "http://localhost:1234/subSchemas.json": require("../spec/JSON-Schema-Test-Suite/remotes/subSchemas.json"),
+  "http://localhost:1234/subSchemas-defs.json": require("../spec/JSON-Schema-Test-Suite/remotes/subSchemas-defs.json"),
+  "http://localhost:1234/baseUriChange/folderInteger.json": require("../spec/JSON-Schema-Test-Suite/remotes/baseUriChange/folderInteger.json"),
+  "http://localhost:1234/baseUriChangeFolder/folderInteger.json": require("../spec/JSON-Schema-Test-Suite/remotes/baseUriChangeFolder/folderInteger.json"),
+  "http://localhost:1234/baseUriChangeFolderInSubschema/folderInteger.json": require("../spec/JSON-Schema-Test-Suite/remotes/baseUriChangeFolderInSubschema/folderInteger.json"),
+  "http://localhost:1234/name.json": require("../spec/JSON-Schema-Test-Suite/remotes/name.json"),
+  "http://localhost:1234/name-defs.json": require("../spec/JSON-Schema-Test-Suite/remotes/name-defs.json"),
 }
 
 const SKIP_FORMATS = ["idn-email", "idn-hostname", "iri", "iri-reference"]
@@ -39,7 +39,7 @@ runTest({
     ignoreKeywordsWithRef: true,
   }),
   draft: 6,
-  tests: skipTestCases(require("./_json/draft6"), {
+  tests: skipTestCases(require("../spec/_json/draft6"), {
     ref: {
       "$ref prevents a sibling $id from changing the base uri": [
         "$ref resolves to /definitions/base_foo, data does not validate",
@@ -48,7 +48,7 @@ runTest({
     },
   }),
   remotes: {
-    "http://localhost:1234/ref-and-definitions.json": require("./JSON-Schema-Test-Suite/remotes/ref-and-definitions.json"),
+    "http://localhost:1234/ref-and-definitions.json": require("../spec/JSON-Schema-Test-Suite/remotes/ref-and-definitions.json"),
   },
   skip: ["optional/float-overflow", "unknownKeyword"],
 })
@@ -60,7 +60,7 @@ runTest({
     formats: toHash(SKIP_FORMATS),
   }),
   draft: 7,
-  tests: skipTestCases(require("./_json/draft7"), {
+  tests: skipTestCases(require("../spec/_json/draft7"), {
     ref: {
       "$ref prevents a sibling $id from changing the base uri": [
         "$ref resolves to /definitions/base_foo, data does not validate",
@@ -69,7 +69,7 @@ runTest({
     },
   }),
   remotes: {
-    "http://localhost:1234/ref-and-definitions.json": require("./JSON-Schema-Test-Suite/remotes/ref-and-definitions.json"),
+    "http://localhost:1234/ref-and-definitions.json": require("../spec/JSON-Schema-Test-Suite/remotes/ref-and-definitions.json"),
   },
   skip: SKIP_DRAFT7,
 })
@@ -80,7 +80,7 @@ runTest({
     formats: toHash(SKIP_FORMATS),
   }),
   draft: 2019,
-  tests: skipTestCases(require("./_json/draft2019"), {
+  tests: skipTestCases(require("../spec/_json/draft2019"), {
     recursiveRef: {
       "$recursiveRef with no $recursiveAnchor in the initial target schema resource": [
         "leaf node matches: recursion uses the inner schema",
@@ -106,8 +106,8 @@ runTest({
     },
   }),
   remotes: {
-    "http://localhost:1234/ref-and-defs.json": require("./JSON-Schema-Test-Suite/remotes/ref-and-defs.json"),
-    "http://localhost:1234/draft2019-09/metaschema-no-validation.json": require("./JSON-Schema-Test-Suite/remotes/draft2019-09/metaschema-no-validation.json"),
+    "http://localhost:1234/ref-and-defs.json": require("../spec/JSON-Schema-Test-Suite/remotes/ref-and-defs.json"),
+    "http://localhost:1234/draft2019-09/metaschema-no-validation.json": require("../spec/JSON-Schema-Test-Suite/remotes/draft2019-09/metaschema-no-validation.json"),
   },
   skip: SKIP_DRAFT7,
 })
@@ -118,7 +118,7 @@ runTest({
     formats: toHash(SKIP_FORMATS),
   }),
   draft: 2020,
-  tests: skipTestCases(require("./_json/draft2020"), {
+  tests: skipTestCases(require("../spec/_json/draft2020"), {
     dynamicRef: {
       "A $dynamicRef to a $dynamicAnchor in the same schema resource should behave like a normal $ref to an $anchor":
         ["An array of strings is valid"],
@@ -192,10 +192,10 @@ runTest({
     },
   }),
   remotes: {
-    "http://localhost:1234/ref-and-defs.json": require("./JSON-Schema-Test-Suite/remotes/ref-and-defs.json"),
-    "http://localhost:1234/draft2020-12/format-assertion-false.json": require("./JSON-Schema-Test-Suite/remotes/draft2020-12/format-assertion-false.json"),
-    "http://localhost:1234/draft2020-12/format-assertion-true.json": require("./JSON-Schema-Test-Suite/remotes/draft2020-12/format-assertion-true.json"),
-    "http://localhost:1234/draft2020-12/metaschema-no-validation.json": require("./JSON-Schema-Test-Suite/remotes/draft2020-12/metaschema-no-validation.json"),
+    "http://localhost:1234/ref-and-defs.json": require("../spec/JSON-Schema-Test-Suite/remotes/ref-and-defs.json"),
+    "http://localhost:1234/draft2020-12/format-assertion-false.json": require("../spec/JSON-Schema-Test-Suite/remotes/draft2020-12/format-assertion-false.json"),
+    "http://localhost:1234/draft2020-12/format-assertion-true.json": require("../spec/JSON-Schema-Test-Suite/remotes/draft2020-12/format-assertion-true.json"),
+    "http://localhost:1234/draft2020-12/metaschema-no-validation.json": require("../spec/JSON-Schema-Test-Suite/remotes/draft2020-12/metaschema-no-validation.json"),
   },
   skip: [...SKIP_DRAFT7, "optional/format-assertion"],
 })
@@ -222,6 +222,7 @@ function runTest({instances, draft, tests, skip = [], remotes = {}}: SchemaTest)
     }
     for (const id in remoteRefs) ajv.addSchema(remoteRefs[id], id)
     for (const id in remotes) ajv.addSchema(remotes[id], id)
+    //@ts-ignore
     ajvFormats(ajv)
   }
 

@@ -12,7 +12,7 @@ instances.forEach(addAsyncFormatsAndKeywords)
 jsonSchemaTest(instances, {
   description:
     "asynchronous schemas tests of " + instances.length + " ajv instances with different options",
-  suites: {"async schemas": require("./_json/async")},
+  suites: {"async schemas": require("../spec/_json/async")},
   async: true,
   asyncValid: "data",
   assert: chai.assert,

@@ -16,7 +16,7 @@ instances.forEach((ajv) => (ajv.opts.code.source = true))
 jsonSchemaTest(withStandalone(instances), {
   description:
     "Secure schemas tests of " + instances.length + " ajv instances with different options",
-  suites: {security: require("./_json/security")},
+  suites: {security: require("../spec/_json/security")},
   assert: chai.assert,
   afterError,
   afterEach,
