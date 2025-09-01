@@ -14,7 +14,7 @@
     "eslint": "eslint \"lib/**/*.ts\" \"spec/**/*.*s\" --ignore-pattern spec/JSON-Schema-Test-Suite",
     "prettier:write": "prettier --write \"./**/*.{json,yaml,js,ts}\"",
     "prettier:check": "prettier --list-different \"./**/*.{json,yaml,js,ts}\"",
-    "test-spec": "mocha \"test/**/*.spec.js\" -R dot",
+    "test-spec": "mocha",
     "test-codegen": "nyc mocha 'test/codegen.spec.js' -R spec",
     "test-debug": "npm run test-spec -- --inspect-brk",
     "test-cov": "nyc npm run test-spec",
