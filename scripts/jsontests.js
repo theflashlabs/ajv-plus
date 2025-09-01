@@ -28,5 +28,5 @@ for (const suite in testSuitePaths) {
       return `\n  {name: "${name}", test: require("${testPath}")},`
     })
     .reduce((list, f) => list + f)
-  fs.writeFileSync(`./spec/_json/${suite}.cjs`, `module.exports = [${code}\n]\n`)
+  fs.writeFileSync(`./spec/_json/${suite}.js`, `module.exports = [${code}\n]\n`)
 }
