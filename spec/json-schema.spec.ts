@@ -8,7 +8,7 @@ import jsonSchemaTest = require("json-schema-test")
 import options from "./ajv_options"
 import {afterError, afterEach} from "./after_test"
 import ajvFormats from "ajv-formats"
-import draft6MetaSchema = require("../lib/refs/json-schema-draft-06.json")
+const draft6MetaSchema = require("../dist/refs/json-schema-draft-06.json")
 import {toHash} from "../dist/compile/util"
 import chai from "./chai"
 
