@@ -245,10 +245,7 @@
             },
             "declarationDir": {
               "description": "Specify the output directory for generated declaration files.",
-              "type": [
-                "string",
-                "null"
-              ],
+              "type": ["string", "null"],
               "markdownDescription": "Specify the output directory for generated declaration files.\n\nSee more: https://www.typescriptlang.org/tsconfig#declarationDir"
             },
             "diagnostics": {
@@ -308,13 +305,7 @@
             },
             "jsx": {
               "description": "Specify what JSX code is generated.",
-              "enum": [
-                "preserve",
-                "react",
-                "react-jsx",
-                "react-jsxdev",
-                "react-native"
-              ]
+              "enum": ["preserve", "react", "react-jsx", "react-jsxdev", "react-native"]
             },
             "reactNamespace": {
               "description": "Specify the object invoked for `createElement`. This only applies when targeting `react` JSX emit.",
@@ -382,13 +373,7 @@
               "type": "string",
               "anyOf": [
                 {
-                  "enum": [
-                    "classic",
-                    "node",
-                    "node16",
-                    "nodenext",
-                    "bundler"
-                  ]
+                  "enum": ["classic", "node", "node16", "nodenext", "bundler"]
                 },
                 {
                   "pattern": "^(([Nn]ode)|([Nn]ode16)|([Nn]ode[Nn]ext)|([Cc]lassic)|([Bb]undler))$"
@@ -402,10 +387,7 @@
               "type": "string",
               "anyOf": [
                 {
-                  "enum": [
-                    "crlf",
-                    "lf"
-                  ]
+                  "enum": ["crlf", "lf"]
                 },
                 {
                   "pattern": "^(CRLF|LF|crlf|lf)$"
@@ -934,11 +916,7 @@
             "importsNotUsedAsValues": {
               "description": "Specify emit/checking behavior for imports that are only used for types.",
               "default": "remove",
-              "enum": [
-                "remove",
-                "preserve",
-                "error"
-              ]
+              "enum": ["remove", "preserve", "error"]
             },
             "alwaysStrict": {
               "description": "Ensure 'use strict' is always emitted.",

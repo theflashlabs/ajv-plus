@@ -16,10 +16,7 @@
           "body": {}
         },
         "ignoreTestFiles": {
-          "type": [
-            "string",
-            "array"
-          ],
+          "type": ["string", "array"],
           "items": {
             "type": "string"
           },
@@ -51,10 +48,7 @@
           "description": "Slow test threshold in milliseconds. Only affects the visual output of some reporters. For example, the spec reporter will display the test time in yellow if over the threshold. See https://on.cypress.io/configuration#Timeouts"
         },
         "testFiles": {
-          "type": [
-            "string",
-            "array"
-          ],
+          "type": ["string", "array"],
           "default": "**/*.*",
           "description": "A String or Array of string glob patterns of the test files to load. See https://on.cypress.io/configuration#Global"
         },
@@ -99,10 +93,7 @@
           "description": "Path to folder where application files will attempt to be served from"
         },
         "fixturesFolder": {
-          "type": [
-            "string",
-            "boolean"
-          ],
+          "type": ["string", "boolean"],
           "default": "cypress/fixtures",
           "description": "Path to folder containing fixture files (Pass false to disable)"
         },
@@ -117,18 +108,12 @@
           "description": "Path to folder where files downloaded during a test are saved"
         },
         "componentFolder": {
-          "type": [
-            "string",
-            "boolean"
-          ],
+          "type": ["string", "boolean"],
           "default": false,
           "description": "Path to folder containing component test files (Pass false to disable)"
         },
         "pluginsFile": {
-          "type": [
-            "string",
-            "boolean"
-          ],
+          "type": ["string", "boolean"],
           "default": "cypress/plugins/index.js",
           "description": "Path to plugins file. (Pass false to disable)"
         },
@@ -143,10 +128,7 @@
           "description": "Path to folder where screenshots will be saved from cy.screenshot() command or after a test fails during cypress run"
         },
         "supportFile": {
-          "type": [
-            "string",
-            "boolean"
-          ],
+          "type": ["string", "boolean"],
           "default": "cypress/support/index.js",
           "description": "Path to file to load before test files load. This file is compiled and bundled. (Pass false to disable)"
         },
@@ -161,10 +143,7 @@
           "description": "Whether Cypress will trash assets within the screenshotsFolder and videosFolder before tests run with cypress run"
         },
         "videoCompression": {
-          "type": [
-            "number",
-            "boolean"
-          ],
+          "type": ["number", "boolean"],
           "default": 32,
           "description": "The quality setting for the video compression, in Constant Rate Factor (CRF). The value can be false to disable compression or a value between 0 and 51, where a lower value results in better quality (at the expense of a higher file size)."
         },
@@ -189,10 +168,7 @@
           "description": "Enables you to override the default user agent the browser sends in all request headers. User agent values are typically used by servers to help identify the operating system, browser, and browser version. See User-Agent MDN Documentation for example user agent values here: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/User-Agent"
         },
         "blockHosts": {
-          "type": [
-            "string",
-            "array"
-          ],
+          "type": ["string", "array"],
           "items": {
             "type": "string"
           },
@@ -225,13 +201,7 @@
           "description": "Whether to wait for elements to finish animating before executing commands"
         },
         "scrollBehavior": {
-          "enum": [
-            false,
-            "center",
-            "top",
-            "bottom",
-            "nearest"
-          ],
+          "enum": [false, "center", "top", "bottom", "nearest"],
           "default": "top",
           "description": "Viewport position to which an element should be scrolled prior to action commands. Setting `false` disables scrolling."
         },
@@ -241,10 +211,7 @@
           "description": "A 6 character string use to identify this project in the Cypress Dashboard. See https://on.cypress.io/dashboard-service#Identification"
         },
         "nodeVersion": {
-          "enum": [
-            "system",
-            "bundled"
-          ],
+          "enum": ["system", "bundled"],
           "default": "system",
           "description": "DEPRECATED: If set to 'bundled', Cypress will use the Node version bundled with Cypress. Otherwise, Cypress will use the Node version that was used to launch the Cypress. This Node version is used when executing your plugins file and building spec files."
         },
@@ -274,11 +241,7 @@
           "description": "Generate and save commands directly to your test suite by interacting with your app as an end user would."
         },
         "retries": {
-          "type": [
-            "object",
-            "number",
-            "null"
-          ],
+          "type": ["object", "number", "null"],
           "default": {
             "runMode": 0,
             "openMode": 0
@@ -328,10 +291,7 @@
                           "type": "string"
                         }
                       },
-                      "required": [
-                        "cert",
-                        "key"
-                      ]
+                      "required": ["cert", "key"]
                     },
                     {
                       "description": "PFX file specific properties",
@@ -346,18 +306,13 @@
                           "type": "string"
                         }
                       },
-                      "required": [
-                        "pfx"
-                      ]
+                      "required": ["pfx"]
                     }
                   ]
                 }
               }
             },
-            "required": [
-              "url",
-              "certs"
-            ]
+            "required": ["url", "certs"]
           }
         }
       }

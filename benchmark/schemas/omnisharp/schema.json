@@ -251,12 +251,7 @@
           "items": {
             "type": "string"
           },
-          "default": [
-            "**/node_modules/**/*",
-            "**/bin/**/*",
-            "**/obj/**/*",
-            "**/.git/**/*"
-          ]
+          "default": ["**/node_modules/**/*", "**/bin/**/*", "**/obj/**/*", "**/.git/**/*"]
         },
         "ExcludeSearchPatterns": {
           "type": "array",
@@ -290,18 +285,12 @@
       "properties": {
         "InsertionBehavior": {
           "type": "string",
-          "enum": [
-            "WithOtherMembersOfTheSameKind",
-            "AtTheEnd"
-          ],
+          "enum": ["WithOtherMembersOfTheSameKind", "AtTheEnd"],
           "default": "WithOtherMembersOfTheSameKind"
         },
         "PropertyGenerationBehavior": {
           "type": "string",
-          "enum": [
-            "PreferThrowingProperties",
-            "PreferAutoProperties"
-          ],
+          "enum": ["PreferThrowingProperties", "PreferAutoProperties"],
           "default": "PreferThrowingProperties"
         }
       }
@@ -332,13 +321,7 @@
           "description": "Value of ToolsVersion to use when building projects passed to this task",
           "anyOf": [
             {
-              "enum": [
-                "Current",
-                "2.0",
-                "3.5",
-                "4.0",
-                "15.0"
-              ]
+              "enum": ["Current", "2.0", "3.5", "4.0", "15.0"]
             },
             {
               "type": "string"
@@ -354,10 +337,7 @@
           "description": "Build configuration used for project evaluation",
           "anyOf": [
             {
-              "enum": [
-                "Debug",
-                "Release"
-              ]
+              "enum": ["Debug", "Release"]
             },
             {
               "type": "string"
@@ -369,14 +349,7 @@
           "description": "Specifies which version of the Common Language Runtime (CLR) use for project evaluation",
           "anyOf": [
             {
-              "enum": [
-                "AnyCPU",
-                "x86",
-                "x64",
-                "ARM",
-                "ARM64",
-                "Itanium"
-              ]
+              "enum": ["AnyCPU", "x86", "x64", "ARM", "ARM64", "Itanium"]
             },
             {
               "type": "string"

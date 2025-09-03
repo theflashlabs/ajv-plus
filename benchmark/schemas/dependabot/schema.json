@@ -5,9 +5,7 @@
     "version": {
       "type": "integer",
       "default": 1,
-      "examples": [
-        1
-      ],
+      "examples": [1],
       "minimum": 1,
       "maximum": 1
     },
@@ -15,11 +13,7 @@
       "type": "array",
       "items": {
         "type": "object",
-        "required": [
-          "package_manager",
-          "directory",
-          "update_schedule"
-        ],
+        "required": ["package_manager", "directory", "update_schedule"],
         "properties": {
           "package_manager": {
             "type": "string",
@@ -42,29 +36,18 @@
               "github_actions"
             ],
             "description": "What package manager to use",
-            "examples": [
-              "ruby:bundler"
-            ]
+            "examples": ["ruby:bundler"]
           },
           "directory": {
             "type": "string",
             "description": "Where to look for package manifests",
-            "examples": [
-              "/app"
-            ]
+            "examples": ["/app"]
           },
           "update_schedule": {
             "type": "string",
-            "enum": [
-              "live",
-              "daily",
-              "weekly",
-              "monthly"
-            ],
+            "enum": ["live", "daily", "weekly", "monthly"],
             "description": "How often to check for updates",
-            "examples": [
-              "live"
-            ]
+            "examples": ["live"]
           },
           "target_branch": {
             "type": "string",
@@ -72,9 +55,7 @@
             "items": {
               "type": "string",
               "description": "branchname",
-              "examples": [
-                "develop"
-              ]
+              "examples": ["develop"]
             }
           },
           "default_reviewers": {
@@ -83,9 +64,7 @@
             "items": {
               "type": "string",
               "description": "reviewer github username",
-              "examples": [
-                "github-username"
-              ]
+              "examples": ["github-username"]
             }
           },
           "default_assignees": {
@@ -94,9 +73,7 @@
             "items": {
               "type": "string",
               "description": "assignee github username",
-              "examples": [
-                "github_username_1"
-              ]
+              "examples": ["github_username_1"]
             }
           },
           "default_labels": {
@@ -104,9 +81,7 @@
             "description": "Labels to set on update pull requests. By default 'dependencies' is used.",
             "items": {
               "type": "string",
-              "examples": [
-                "label-name"
-              ]
+              "examples": ["label-name"]
             }
           },
           "default_milestone": {
@@ -126,32 +101,19 @@
                     "dependency_name": {
                       "type": "string",
                       "description": "matching on dependency name ",
-                      "examples": [
-                        "react*"
-                      ]
+                      "examples": ["react*"]
                     },
                     "dependency_type": {
                       "type": "string",
                       "description": "only allow certain updates",
-                      "examples": [
-                        "development",
-                        "production",
-                        "direct",
-                        "indirect",
-                        "all"
-                      ]
+                      "examples": ["development", "production", "direct", "indirect", "all"]
                     },
                     "update_type": {
                       "type": "string",
-                      "enum": [
-                        "security",
-                        "all"
-                      ],
+                      "enum": ["security", "all"],
                       "description": "which updates to do",
                       "default": "security",
-                      "examples": [
-                        "all"
-                      ]
+                      "examples": ["all"]
                     }
                   }
                 }
@@ -171,16 +133,12 @@
                     "dependency_name": {
                       "type": "string",
                       "description": "matching on dependency name ",
-                      "examples": [
-                        "aws*"
-                      ]
+                      "examples": ["aws*"]
                     },
                     "version_requirement": {
                       "type": "string",
                       "description": "The version_requirement specifies the versions to ignore. The range format is specific to the package manager (e.g., ^1.0.0 for JS, or ~> 2.0 for Ruby).",
-                      "examples": [
-                        "4.x"
-                      ]
+                      "examples": ["4.x"]
                     }
                   }
                 }
@@ -200,33 +158,17 @@
                     "dependency_name": {
                       "type": "string",
                       "description": "matching on dependency name ",
-                      "examples": [
-                        "aws*"
-                      ]
+                      "examples": ["aws*"]
                     },
                     "dependency_type": {
                       "type": "string",
-                      "enum": [
-                        "development",
-                        "production",
-                        "all"
-                      ],
-                      "examples": [
-                        "production*"
-                      ]
+                      "enum": ["development", "production", "all"],
+                      "examples": ["production*"]
                     },
                     "update_type": {
                       "type": "string",
-                      "enum": [
-                        "security:patch",
-                        "semver:patch",
-                        "semver:minor",
-                        "in_range",
-                        "all"
-                      ],
-                      "examples": [
-                        "semver:patch"
-                      ]
+                      "enum": ["security:patch", "semver:patch", "semver:minor", "in_range", "all"],
+                      "examples": ["semver:patch"]
                     }
                   }
                 }
@@ -243,9 +185,7 @@
               "increase_versions_if_necessary"
             ],
             "description": "Specify how Dependabot should update your package manifest (e.g. package.json, Gemfile etc), as opposed to your lockfile. By default, version requirements are increased if it's an app and the range widened if it's a library.",
-            "examples": [
-              "widen_ranges"
-            ]
+            "examples": ["widen_ranges"]
           },
           "commit_message": {
             "type": "object",
@@ -253,15 +193,11 @@
             "properties": {
               "prefix": {
                 "type": "string",
-                "examples": [
-                  "chore"
-                ]
+                "examples": ["chore"]
               },
               "prefix_development": {
                 "type": "string",
-                "examples": [
-                  "fix"
-                ]
+                "examples": ["fix"]
               },
               "include_scope": {
                 "type": "boolean"
@@ -272,10 +208,7 @@
       }
     }
   },
-  "required": [
-    "version",
-    "update_configs"
-  ],
+  "required": ["version", "update_configs"],
   "title": "Dependabot configuration file",
   "type": "object",
   "$id": "https://json.schemastore.org/dependabot.json"

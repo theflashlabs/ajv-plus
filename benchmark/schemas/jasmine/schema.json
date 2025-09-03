@@ -19,10 +19,7 @@
   "definitions": {
     "root-items": {
       "type": "object",
-      "required": [
-        "spec_dir",
-        "spec_files"
-      ],
+      "required": ["spec_dir", "spec_files"],
       "properties": {
         "spec_dir": {
           "description": "Spec directory path relative to the current working dir when jasmine is executed.",

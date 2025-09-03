@@ -4,10 +4,7 @@
       "title": "PluginOptions",
       "type": "object",
       "additionalProperties": false,
-      "required": [
-        "name",
-        "path"
-      ],
+      "required": ["name", "path"],
       "properties": {
         "name": {
           "type": "string",
@@ -25,18 +22,11 @@
     },
     "simpleConfigType": {
       "title": "SimpleConfigType",
-      "enum": [
-        "string",
-        "integer",
-        "boolean",
-        "array"
-      ]
+      "enum": ["string", "integer", "boolean", "array"]
     },
     "configItemsType": {
       "type": "object",
-      "required": [
-        "type"
-      ],
+      "required": ["type"],
       "properties": {
         "type": {
           "oneOf": [
@@ -95,31 +85,19 @@
     },
     "description": {
       "description": "Description of the project.",
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "author": {
       "description": "Author is an optional author that created this project.",
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "website": {
       "description": "Website is an optional website for additional info about this project.",
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "license": {
       "description": "License is the optional license governing this project's usage.",
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "runtime": {
       "title": "ProjectRuntimeInfo",
@@ -149,17 +127,11 @@
     },
     "main": {
       "description": "Path to the Pulumi program. The default is the working directory.",
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "config": {
       "description": "A map of configuration keys to their types. Using config directory location relative to the location of Pulumi.yaml is a deprecated use of this key. Use stackConfigDir instead.",
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": ["object", "null"],
       "properties": {
         "secret": {
           "description": "If true this configuration value should be encrypted.",
@@ -189,17 +161,11 @@
     },
     "stackConfigDir": {
       "description": "Config directory location relative to the location of Pulumi.yaml.",
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "backend": {
       "description": "Backend of the project.",
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": ["object", "null"],
       "properties": {
         "url": {
           "description": "URL is optional field to explicitly set backend url",
@@ -210,10 +176,7 @@
     },
     "options": {
       "description": "Additional project options.",
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": ["object", "null"],
       "properties": {
         "refresh": {
           "description": "Set to \"always\" to refresh the state before performing a Pulumi operation.",
@@ -226,57 +189,36 @@
     "template": {
       "title": "ProjectTemplate",
       "description": "ProjectTemplate is a Pulumi project template manifest.",
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": ["object", "null"],
       "properties": {
         "description": {
           "description": "Description of the template.",
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "quickstart": {
           "description": "Quickstart contains optional text to be displayed after template creation.",
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "important": {
           "description": "Important indicates the template is important and should be listed by default.",
-          "type": [
-            "boolean",
-            "null"
-          ]
+          "type": ["boolean", "null"]
         },
         "config": {
           "description": "Config to apply to each stack in the project.",
-          "type": [
-            "object",
-            "null"
-          ],
+          "type": ["object", "null"],
           "additionalProperties": {
             "type": "object",
             "properties": {
               "description": {
                 "description": "Description of the config.",
-                "type": [
-                  "string",
-                  "null"
-                ]
+                "type": ["string", "null"]
               },
               "default": {
                 "description": "Default value of the config."
               },
               "secret": {
                 "description": "Boolean indicating if the configuration is labeled as a secret.",
-                "type": [
-                  "boolean",
-                  "null"
-                ]
+                "type": ["boolean", "null"]
               }
             }
           }
@@ -312,10 +254,7 @@
       }
     }
   },
-  "required": [
-    "name",
-    "runtime"
-  ],
+  "required": ["name", "runtime"],
   "title": "Pulumi Project",
   "type": "object"
 }

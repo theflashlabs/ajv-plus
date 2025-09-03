@@ -4,115 +4,50 @@
   "description": "Schema for UI5 Tooling Configuration File (ui5.yaml)",
   "$comment": "See https://sap.github.io/ui5-tooling/",
   "type": "object",
-  "required": [
-    "specVersion"
-  ],
+  "required": ["specVersion"],
   "properties": {
     "specVersion": {
-      "enum": [
-        "3.1",
-        "3.0",
-        "2.6",
-        "2.5",
-        "2.4",
-        "2.3",
-        "2.2",
-        "2.1",
-        "2.0",
-        "1.1",
-        "1.0",
-        "0.1"
-      ],
+      "enum": ["3.1", "3.0", "2.6", "2.5", "2.4", "2.3", "2.2", "2.1", "2.0", "1.1", "1.0", "0.1"],
       "errorMessage": "Unsupported \"specVersion\"\nYour UI5 CLI installation might be outdated.\nSupported specification versions: \"3.1\", \"3.0\", \"2.6\", \"2.5\", \"2.4\", \"2.3\", \"2.2\", \"2.1\", \"2.0\", \"1.1\", \"1.0\", \"0.1\"\nFor details, see: https://sap.github.io/ui5-tooling/pages/Configuration/#specification-versions"
     }
   },
   "if": {
     "properties": {
       "specVersion": {
-        "enum": [
-          "3.1",
-          "3.0",
-          "2.6",
-          "2.5",
-          "2.4",
-          "2.3",
-          "2.2",
-          "2.1",
-          "2.0"
-        ]
+        "enum": ["3.1", "3.0", "2.6", "2.5", "2.4", "2.3", "2.2", "2.1", "2.0"]
       }
     }
   },
   "then": {
     "type": "object",
-    "required": [
-      "specVersion"
-    ],
+    "required": ["specVersion"],
     "properties": {
       "specVersion": {
-        "enum": [
-          "3.1",
-          "3.0",
-          "2.6",
-          "2.5",
-          "2.4",
-          "2.3",
-          "2.2",
-          "2.1",
-          "2.0"
-        ]
+        "enum": ["3.1", "3.0", "2.6", "2.5", "2.4", "2.3", "2.2", "2.1", "2.0"]
       },
       "kind": {
-        "enum": [
-          "project",
-          "extension",
-          null
-        ]
+        "enum": ["project", "extension", null]
       }
     },
     "if": {
       "properties": {
         "kind": {
-          "enum": [
-            "project",
-            null
-          ]
+          "enum": ["project", null]
         }
       }
     },
     "then": {
       "type": "object",
-      "required": [
-        "specVersion",
-        "type"
-      ],
+      "required": ["specVersion", "type"],
       "properties": {
         "specVersion": {
-          "enum": [
-            "3.1",
-            "3.0",
-            "2.6",
-            "2.5",
-            "2.4",
-            "2.3",
-            "2.2",
-            "2.1",
-            "2.0"
-          ]
+          "enum": ["3.1", "3.0", "2.6", "2.5", "2.4", "2.3", "2.2", "2.1", "2.0"]
         },
         "kind": {
-          "enum": [
-            "project",
-            null
-          ]
+          "enum": ["project", null]
         },
         "type": {
-          "enum": [
-            "application",
-            "library",
-            "theme-library",
-            "module"
-          ]
+          "enum": ["application", "library", "theme-library", "module"]
         }
       },
       "if": {
@@ -133,18 +68,11 @@
         },
         "then": {
           "type": "object",
-          "required": [
-            "specVersion",
-            "type",
-            "metadata"
-          ],
+          "required": ["specVersion", "type", "metadata"],
           "if": {
             "properties": {
               "specVersion": {
-                "enum": [
-                  "3.0",
-                  "3.1"
-                ]
+                "enum": ["3.0", "3.1"]
               }
             }
           },
@@ -152,21 +80,13 @@
             "additionalProperties": false,
             "properties": {
               "specVersion": {
-                "enum": [
-                  "3.0",
-                  "3.1"
-                ]
+                "enum": ["3.0", "3.1"]
               },
               "kind": {
-                "enum": [
-                  "project",
-                  null
-                ]
+                "enum": ["project", null]
               },
               "type": {
-                "enum": [
-                  "application"
-                ]
+                "enum": ["application"]
               },
               "metadata": {
                 "$ref": "#/then/then/definitions/metadata-3.0"
@@ -193,9 +113,7 @@
             "if": {
               "properties": {
                 "specVersion": {
-                  "enum": [
-                    "2.6"
-                  ]
+                  "enum": ["2.6"]
                 }
               }
             },
@@ -203,20 +121,13 @@
               "additionalProperties": false,
               "properties": {
                 "specVersion": {
-                  "enum": [
-                    "2.6"
-                  ]
+                  "enum": ["2.6"]
                 },
                 "kind": {
-                  "enum": [
-                    "project",
-                    null
-                  ]
+                  "enum": ["project", null]
                 },
                 "type": {
-                  "enum": [
-                    "application"
-                  ]
+                  "enum": ["application"]
                 },
                 "metadata": {
                   "$ref": "#/then/then/definitions/metadata"
@@ -243,9 +154,7 @@
               "if": {
                 "properties": {
                   "specVersion": {
-                    "enum": [
-                      "2.5"
-                    ]
+                    "enum": ["2.5"]
                   }
                 }
               },
@@ -253,20 +162,13 @@
                 "additionalProperties": false,
                 "properties": {
                   "specVersion": {
-                    "enum": [
-                      "2.5"
-                    ]
+                    "enum": ["2.5"]
                   },
                   "kind": {
-                    "enum": [
-                      "project",
-                      null
-                    ]
+                    "enum": ["project", null]
                   },
                   "type": {
-                    "enum": [
-                      "application"
-                    ]
+                    "enum": ["application"]
                   },
                   "metadata": {
                     "$ref": "#/then/then/definitions/metadata"
@@ -293,9 +195,7 @@
                 "if": {
                   "properties": {
                     "specVersion": {
-                      "enum": [
-                        "2.4"
-                      ]
+                      "enum": ["2.4"]
                     }
                   }
                 },
@@ -303,20 +203,13 @@
                   "additionalProperties": false,
                   "properties": {
                     "specVersion": {
-                      "enum": [
-                        "2.4"
-                      ]
+                      "enum": ["2.4"]
                     },
                     "kind": {
-                      "enum": [
-                        "project",
-                        null
-                      ]
+                      "enum": ["project", null]
                     },
                     "type": {
-                      "enum": [
-                        "application"
-                      ]
+                      "enum": ["application"]
                     },
                     "metadata": {
                       "$ref": "#/then/then/definitions/metadata"
@@ -343,9 +236,7 @@
                   "if": {
                     "properties": {
                       "specVersion": {
-                        "enum": [
-                          "2.3"
-                        ]
+                        "enum": ["2.3"]
                       }
                     }
                   },
@@ -353,20 +244,13 @@
                     "additionalProperties": false,
                     "properties": {
                       "specVersion": {
-                        "enum": [
-                          "2.3"
-                        ]
+                        "enum": ["2.3"]
                       },
                       "kind": {
-                        "enum": [
-                          "project",
-                          null
-                        ]
+                        "enum": ["project", null]
                       },
                       "type": {
-                        "enum": [
-                          "application"
-                        ]
+                        "enum": ["application"]
                       },
                       "metadata": {
                         "$ref": "#/then/then/definitions/metadata"
@@ -393,10 +277,7 @@
                     "if": {
                       "properties": {
                         "specVersion": {
-                          "enum": [
-                            "2.1",
-                            "2.2"
-                          ]
+                          "enum": ["2.1", "2.2"]
                         }
                       }
                     },
@@ -404,21 +285,13 @@
                       "additionalProperties": false,
                       "properties": {
                         "specVersion": {
-                          "enum": [
-                            "2.1",
-                            "2.2"
-                          ]
+                          "enum": ["2.1", "2.2"]
                         },
                         "kind": {
-                          "enum": [
-                            "project",
-                            null
-                          ]
+                          "enum": ["project", null]
                         },
                         "type": {
-                          "enum": [
-                            "application"
-                          ]
+                          "enum": ["application"]
                         },
                         "metadata": {
                           "$ref": "#/then/then/definitions/metadata"
@@ -445,20 +318,13 @@
                       "additionalProperties": false,
                       "properties": {
                         "specVersion": {
-                          "enum": [
-                            "2.0"
-                          ]
+                          "enum": ["2.0"]
                         },
                         "kind": {
-                          "enum": [
-                            "project",
-                            null
-                          ]
+                          "enum": ["project", null]
                         },
                         "type": {
-                          "enum": [
-                            "application"
-                          ]
+                          "enum": ["application"]
                         },
                         "metadata": {
                           "$ref": "#/then/then/definitions/metadata"
@@ -519,10 +385,7 @@
                   "additionalProperties": false,
                   "properties": {
                     "signatureType": {
-                      "enum": [
-                        "time",
-                        "hash"
-                      ]
+                      "enum": ["time", "hash"]
                     }
                   }
                 },
@@ -549,10 +412,7 @@
                   "additionalProperties": false,
                   "properties": {
                     "signatureType": {
-                      "enum": [
-                        "time",
-                        "hash"
-                      ]
+                      "enum": ["time", "hash"]
                     }
                   }
                 },
@@ -579,10 +439,7 @@
                   "additionalProperties": false,
                   "properties": {
                     "signatureType": {
-                      "enum": [
-                        "time",
-                        "hash"
-                      ]
+                      "enum": ["time", "hash"]
                     }
                   }
                 },
@@ -609,10 +466,7 @@
                   "additionalProperties": false,
                   "properties": {
                     "signatureType": {
-                      "enum": [
-                        "time",
-                        "hash"
-                      ]
+                      "enum": ["time", "hash"]
                     }
                   }
                 },
@@ -642,10 +496,7 @@
                   "additionalProperties": false,
                   "properties": {
                     "signatureType": {
-                      "enum": [
-                        "time",
-                        "hash"
-                      ]
+                      "enum": ["time", "hash"]
                     }
                   }
                 },
@@ -678,10 +529,7 @@
                   "additionalProperties": false,
                   "properties": {
                     "signatureType": {
-                      "enum": [
-                        "time",
-                        "hash"
-                      ]
+                      "enum": ["time", "hash"]
                     }
                   }
                 },
@@ -714,18 +562,11 @@
           },
           "then": {
             "type": "object",
-            "required": [
-              "specVersion",
-              "type",
-              "metadata"
-            ],
+            "required": ["specVersion", "type", "metadata"],
             "if": {
               "properties": {
                 "specVersion": {
-                  "enum": [
-                    "3.0",
-                    "3.1"
-                  ]
+                  "enum": ["3.0", "3.1"]
                 }
               }
             },
@@ -733,21 +574,13 @@
               "additionalProperties": false,
               "properties": {
                 "specVersion": {
-                  "enum": [
-                    "3.0",
-                    "3.1"
-                  ]
+                  "enum": ["3.0", "3.1"]
                 },
                 "kind": {
-                  "enum": [
-                    "project",
-                    null
-                  ]
+                  "enum": ["project", null]
                 },
                 "type": {
-                  "enum": [
-                    "library"
-                  ]
+                  "enum": ["library"]
                 },
                 "metadata": {
                   "$ref": "#/then/then/definitions/metadata-3.0"
@@ -774,9 +607,7 @@
               "if": {
                 "properties": {
                   "specVersion": {
-                    "enum": [
-                      "2.6"
-                    ]
+                    "enum": ["2.6"]
                   }
                 }
               },
@@ -784,20 +615,13 @@
                 "additionalProperties": false,
                 "properties": {
                   "specVersion": {
-                    "enum": [
-                      "2.6"
-                    ]
+                    "enum": ["2.6"]
                   },
                   "kind": {
-                    "enum": [
-                      "project",
-                      null
-                    ]
+                    "enum": ["project", null]
                   },
                   "type": {
-                    "enum": [
-                      "library"
-                    ]
+                    "enum": ["library"]
                   },
                   "metadata": {
                     "$ref": "#/then/then/definitions/metadata"
@@ -824,9 +648,7 @@
                 "if": {
                   "properties": {
                     "specVersion": {
-                      "enum": [
-                        "2.5"
-                      ]
+                      "enum": ["2.5"]
                     }
                   }
                 },
@@ -834,20 +656,13 @@
                   "additionalProperties": false,
                   "properties": {
                     "specVersion": {
-                      "enum": [
-                        "2.5"
-                      ]
+                      "enum": ["2.5"]
                     },
                     "kind": {
-                      "enum": [
-                        "project",
-                        null
-                      ]
+                      "enum": ["project", null]
                     },
                     "type": {
-                      "enum": [
-                        "library"
-                      ]
+                      "enum": ["library"]
                     },
                     "metadata": {
                       "$ref": "#/then/then/definitions/metadata"
@@ -874,9 +689,7 @@
                   "if": {
                     "properties": {
                       "specVersion": {
-                        "enum": [
-                          "2.4"
-                        ]
+                        "enum": ["2.4"]
                       }
                     }
                   },
@@ -884,20 +697,13 @@
                     "additionalProperties": false,
                     "properties": {
                       "specVersion": {
-                        "enum": [
-                          "2.4"
-                        ]
+                        "enum": ["2.4"]
                       },
                       "kind": {
-                        "enum": [
-                          "project",
-                          null
-                        ]
+                        "enum": ["project", null]
                       },
                       "type": {
-                        "enum": [
-                          "library"
-                        ]
+                        "enum": ["library"]
                       },
                       "metadata": {
                         "$ref": "#/then/then/definitions/metadata"
@@ -924,9 +730,7 @@
                     "if": {
                       "properties": {
                         "specVersion": {
-                          "enum": [
-                            "2.3"
-                          ]
+                          "enum": ["2.3"]
                         }
                       }
                     },
@@ -934,20 +738,13 @@
                       "additionalProperties": false,
                       "properties": {
                         "specVersion": {
-                          "enum": [
-                            "2.3"
-                          ]
+                          "enum": ["2.3"]
                         },
                         "kind": {
-                          "enum": [
-                            "project",
-                            null
-                          ]
+                          "enum": ["project", null]
                         },
                         "type": {
-                          "enum": [
-                            "library"
-                          ]
+                          "enum": ["library"]
                         },
                         "metadata": {
                           "$ref": "#/then/then/definitions/metadata"
@@ -974,10 +771,7 @@
                       "if": {
                         "properties": {
                           "specVersion": {
-                            "enum": [
-                              "2.1",
-                              "2.2"
-                            ]
+                            "enum": ["2.1", "2.2"]
                           }
                         }
                       },
@@ -985,21 +779,13 @@
                         "additionalProperties": false,
                         "properties": {
                           "specVersion": {
-                            "enum": [
-                              "2.1",
-                              "2.2"
-                            ]
+                            "enum": ["2.1", "2.2"]
                           },
                           "kind": {
-                            "enum": [
-                              "project",
-                              null
-                            ]
+                            "enum": ["project", null]
                           },
                           "type": {
-                            "enum": [
-                              "library"
-                            ]
+                            "enum": ["library"]
                           },
                           "metadata": {
                             "$ref": "#/then/then/definitions/metadata"
@@ -1026,20 +812,13 @@
                         "additionalProperties": false,
                         "properties": {
                           "specVersion": {
-                            "enum": [
-                              "2.0"
-                            ]
+                            "enum": ["2.0"]
                           },
                           "kind": {
-                            "enum": [
-                              "project",
-                              null
-                            ]
+                            "enum": ["project", null]
                           },
                           "type": {
-                            "enum": [
-                              "library"
-                            ]
+                            "enum": ["library"]
                           },
                           "metadata": {
                             "$ref": "#/then/then/definitions/metadata"
@@ -1271,18 +1050,11 @@
             },
             "then": {
               "type": "object",
-              "required": [
-                "specVersion",
-                "type",
-                "metadata"
-              ],
+              "required": ["specVersion", "type", "metadata"],
               "if": {
                 "properties": {
                   "specVersion": {
-                    "enum": [
-                      "3.0",
-                      "3.1"
-                    ]
+                    "enum": ["3.0", "3.1"]
                   }
                 }
               },
@@ -1290,21 +1062,13 @@
                 "additionalProperties": false,
                 "properties": {
                   "specVersion": {
-                    "enum": [
-                      "3.0",
-                      "3.1"
-                    ]
+                    "enum": ["3.0", "3.1"]
                   },
                   "kind": {
-                    "enum": [
-                      "project",
-                      null
-                    ]
+                    "enum": ["project", null]
                   },
                   "type": {
-                    "enum": [
-                      "theme-library"
-                    ]
+                    "enum": ["theme-library"]
                   },
                   "metadata": {
                     "$ref": "#/then/then/definitions/metadata-3.0"
@@ -1331,10 +1095,7 @@
                 "if": {
                   "properties": {
                     "specVersion": {
-                      "enum": [
-                        "2.5",
-                        "2.6"
-                      ]
+                      "enum": ["2.5", "2.6"]
                     }
                   }
                 },
@@ -1342,21 +1103,13 @@
                   "additionalProperties": false,
                   "properties": {
                     "specVersion": {
-                      "enum": [
-                        "2.5",
-                        "2.6"
-                      ]
+                      "enum": ["2.5", "2.6"]
                     },
                     "kind": {
-                      "enum": [
-                        "project",
-                        null
-                      ]
+                      "enum": ["project", null]
                     },
                     "type": {
-                      "enum": [
-                        "theme-library"
-                      ]
+                      "enum": ["theme-library"]
                     },
                     "metadata": {
                       "$ref": "#/then/then/definitions/metadata"
@@ -1383,12 +1136,7 @@
                   "if": {
                     "properties": {
                       "specVersion": {
-                        "enum": [
-                          "2.1",
-                          "2.2",
-                          "2.3",
-                          "2.4"
-                        ]
+                        "enum": ["2.1", "2.2", "2.3", "2.4"]
                       }
                     }
                   },
@@ -1396,23 +1144,13 @@
                     "additionalProperties": false,
                     "properties": {
                       "specVersion": {
-                        "enum": [
-                          "2.1",
-                          "2.2",
-                          "2.3",
-                          "2.4"
-                        ]
+                        "enum": ["2.1", "2.2", "2.3", "2.4"]
                       },
                       "kind": {
-                        "enum": [
-                          "project",
-                          null
-                        ]
+                        "enum": ["project", null]
                       },
                       "type": {
-                        "enum": [
-                          "theme-library"
-                        ]
+                        "enum": ["theme-library"]
                       },
                       "metadata": {
                         "$ref": "#/then/then/definitions/metadata"
@@ -1439,20 +1177,13 @@
                     "additionalProperties": false,
                     "properties": {
                       "specVersion": {
-                        "enum": [
-                          "2.0"
-                        ]
+                        "enum": ["2.0"]
                       },
                       "kind": {
-                        "enum": [
-                          "project",
-                          null
-                        ]
+                        "enum": ["project", null]
                       },
                       "type": {
-                        "enum": [
-                          "theme-library"
-                        ]
+                        "enum": ["theme-library"]
                       },
                       "metadata": {
                         "$ref": "#/then/then/definitions/metadata"
@@ -1513,17 +1244,11 @@
               },
               "then": {
                 "type": "object",
-                "required": [
-                  "specVersion",
-                  "type",
-                  "metadata"
-                ],
+                "required": ["specVersion", "type", "metadata"],
                 "if": {
                   "properties": {
                     "specVersion": {
-                      "enum": [
-                        "3.1"
-                      ]
+                      "enum": ["3.1"]
                     }
                   }
                 },
@@ -1531,20 +1256,13 @@
                   "additionalProperties": false,
                   "properties": {
                     "specVersion": {
-                      "enum": [
-                        "3.1"
-                      ]
+                      "enum": ["3.1"]
                     },
                     "kind": {
-                      "enum": [
-                        "project",
-                        null
-                      ]
+                      "enum": ["project", null]
                     },
                     "type": {
-                      "enum": [
-                        "module"
-                      ]
+                      "enum": ["module"]
                     },
                     "metadata": {
                       "$ref": "#/then/then/definitions/metadata-3.0"
@@ -1568,9 +1286,7 @@
                   "if": {
                     "properties": {
                       "specVersion": {
-                        "enum": [
-                          "3.0"
-                        ]
+                        "enum": ["3.0"]
                       }
                     }
                   },
@@ -1578,20 +1294,13 @@
                     "additionalProperties": false,
                     "properties": {
                       "specVersion": {
-                        "enum": [
-                          "3.0"
-                        ]
+                        "enum": ["3.0"]
                       },
                       "kind": {
-                        "enum": [
-                          "project",
-                          null
-                        ]
+                        "enum": ["project", null]
                       },
                       "type": {
-                        "enum": [
-                          "module"
-                        ]
+                        "enum": ["module"]
                       },
                       "metadata": {
                         "$ref": "#/then/then/definitions/metadata-3.0"
@@ -1615,10 +1324,7 @@
                     "if": {
                       "properties": {
                         "specVersion": {
-                          "enum": [
-                            "2.5",
-                            "2.6"
-                          ]
+                          "enum": ["2.5", "2.6"]
                         }
                       }
                     },
@@ -1626,21 +1332,13 @@
                       "additionalProperties": false,
                       "properties": {
                         "specVersion": {
-                          "enum": [
-                            "2.5",
-                            "2.6"
-                          ]
+                          "enum": ["2.5", "2.6"]
                         },
                         "kind": {
-                          "enum": [
-                            "project",
-                            null
-                          ]
+                          "enum": ["project", null]
                         },
                         "type": {
-                          "enum": [
-                            "module"
-                          ]
+                          "enum": ["module"]
                         },
                         "metadata": {
                           "$ref": "#/then/then/definitions/metadata"
@@ -1664,12 +1362,7 @@
                       "if": {
                         "properties": {
                           "specVersion": {
-                            "enum": [
-                              "2.1",
-                              "2.2",
-                              "2.3",
-                              "2.4"
-                            ]
+                            "enum": ["2.1", "2.2", "2.3", "2.4"]
                           }
                         }
                       },
@@ -1677,23 +1370,13 @@
                         "additionalProperties": false,
                         "properties": {
                           "specVersion": {
-                            "enum": [
-                              "2.1",
-                              "2.2",
-                              "2.3",
-                              "2.4"
-                            ]
+                            "enum": ["2.1", "2.2", "2.3", "2.4"]
                           },
                           "kind": {
-                            "enum": [
-                              "project",
-                              null
-                            ]
+                            "enum": ["project", null]
                           },
                           "type": {
-                            "enum": [
-                              "module"
-                            ]
+                            "enum": ["module"]
                           },
                           "metadata": {
                             "$ref": "#/then/then/definitions/metadata"
@@ -1711,20 +1394,13 @@
                         "additionalProperties": false,
                         "properties": {
                           "specVersion": {
-                            "enum": [
-                              "2.0"
-                            ]
+                            "enum": ["2.0"]
                           },
                           "kind": {
-                            "enum": [
-                              "project",
-                              null
-                            ]
+                            "enum": ["project", null]
                           },
                           "type": {
-                            "enum": [
-                              "module"
-                            ]
+                            "enum": ["module"]
                           },
                           "metadata": {
                             "$ref": "#/then/then/definitions/metadata"
@@ -1789,9 +1465,7 @@
       "definitions": {
         "metadata": {
           "type": "object",
-          "required": [
-            "name"
-          ],
+          "required": ["name"],
           "additionalProperties": false,
           "properties": {
             "name": {
@@ -1816,9 +1490,7 @@
         },
         "metadata-3.0": {
           "type": "object",
-          "required": [
-            "name"
-          ],
+          "required": ["name"],
           "additionalProperties": false,
           "properties": {
             "name": {
@@ -1848,10 +1520,7 @@
           }
         },
         "resources-configuration-propertiesFileSourceEncoding": {
-          "enum": [
-            "UTF-8",
-            "ISO-8859-1"
-          ],
+          "enum": ["UTF-8", "ISO-8859-1"],
           "default": "UTF-8",
           "title": "Encoding of *.properties files",
           "description": "By default, the UI5 Tooling expects *.properties files to be UTF-8 encoded."
@@ -1919,9 +1588,7 @@
         "builder-bundles-bundleDefinition": {
           "type": "object",
           "additionalProperties": false,
-          "required": [
-            "name"
-          ],
+          "required": ["name"],
           "properties": {
             "name": {
               "type": "string"
@@ -1937,21 +1604,13 @@
               "items": {
                 "type": "object",
                 "additionalProperties": false,
-                "required": [
-                  "mode",
-                  "filters"
-                ],
+                "required": ["mode", "filters"],
                 "properties": {
                   "name": {
                     "type": "string"
                   },
                   "mode": {
-                    "enum": [
-                      "raw",
-                      "preload",
-                      "require",
-                      "provided"
-                    ]
+                    "enum": ["raw", "preload", "require", "provided"]
                   },
                   "filters": {
                     "type": "array",
@@ -1987,9 +1646,7 @@
         "builder-bundles-bundleDefinition-2.4": {
           "type": "object",
           "additionalProperties": false,
-          "required": [
-            "name"
-          ],
+          "required": ["name"],
           "properties": {
             "name": {
               "type": "string"
@@ -2005,22 +1662,13 @@
               "items": {
                 "type": "object",
                 "additionalProperties": false,
-                "required": [
-                  "mode",
-                  "filters"
-                ],
+                "required": ["mode", "filters"],
                 "properties": {
                   "name": {
                     "type": "string"
                   },
                   "mode": {
-                    "enum": [
-                      "raw",
-                      "preload",
-                      "require",
-                      "provided",
-                      "bundleInfo"
-                    ]
+                    "enum": ["raw", "preload", "require", "provided", "bundleInfo"]
                   },
                   "filters": {
                     "type": "array",
@@ -2186,10 +1834,7 @@
                   {
                     "type": "object",
                     "additionalProperties": false,
-                    "required": [
-                      "name",
-                      "beforeMiddleware"
-                    ],
+                    "required": ["name", "beforeMiddleware"],
                     "properties": {
                       "name": {
                         "type": "string"
@@ -2206,10 +1851,7 @@
                   {
                     "type": "object",
                     "additionalProperties": false,
-                    "required": [
-                      "name",
-                      "afterMiddleware"
-                    ],
+                    "required": ["name", "afterMiddleware"],
                     "properties": {
                       "name": {
                         "type": "string"
@@ -2231,15 +1873,10 @@
         "framework": {
           "type": "object",
           "additionalProperties": false,
-          "required": [
-            "name"
-          ],
+          "required": ["name"],
           "properties": {
             "name": {
-              "enum": [
-                "OpenUI5",
-                "SAPUI5"
-              ]
+              "enum": ["OpenUI5", "SAPUI5"]
             },
             "version": {
               "type": "string",
@@ -2253,9 +1890,7 @@
               "items": {
                 "type": "object",
                 "additionalProperties": false,
-                "required": [
-                  "name"
-                ],
+                "required": ["name"],
                 "properties": {
                   "name": {
                     "type": "string"
@@ -2275,20 +1910,14 @@
                       {
                         "properties": {
                           "optional": {
-                            "enum": [
-                              false,
-                              null
-                            ]
+                            "enum": [false, null]
                           }
                         }
                       },
                       {
                         "properties": {
                           "development": {
-                            "enum": [
-                              false,
-                              null
-                            ]
+                            "enum": [false, null]
                           }
                         }
                       },
@@ -2333,10 +1962,7 @@
               {
                 "type": "object",
                 "additionalProperties": false,
-                "required": [
-                  "name",
-                  "beforeTask"
-                ],
+                "required": ["name", "beforeTask"],
                 "properties": {
                   "name": {
                     "type": "string"
@@ -2350,10 +1976,7 @@
               {
                 "type": "object",
                 "additionalProperties": false,
-                "required": [
-                  "name",
-                  "afterTask"
-                ],
+                "required": ["name", "afterTask"],
                 "properties": {
                   "name": {
                     "type": "string"
@@ -2409,45 +2032,22 @@
       "if": {
         "properties": {
           "kind": {
-            "enum": [
-              "extension"
-            ]
+            "enum": ["extension"]
           }
         }
       },
       "then": {
         "type": "object",
-        "required": [
-          "specVersion",
-          "kind",
-          "type",
-          "metadata"
-        ],
+        "required": ["specVersion", "kind", "type", "metadata"],
         "properties": {
           "specVersion": {
-            "enum": [
-              "3.1",
-              "3.0",
-              "2.6",
-              "2.5",
-              "2.4",
-              "2.3",
-              "2.2",
-              "2.1",
-              "2.0"
-            ]
+            "enum": ["3.1", "3.0", "2.6", "2.5", "2.4", "2.3", "2.2", "2.1", "2.0"]
           },
           "kind": {
-            "enum": [
-              "extension"
-            ]
+            "enum": ["extension"]
           },
           "type": {
-            "enum": [
-              "task",
-              "server-middleware",
-              "project-shim"
-            ]
+            "enum": ["task", "server-middleware", "project-shim"]
           },
           "metadata": {
             "$ref": "#/then/else/then/definitions/metadata"
@@ -2471,20 +2071,11 @@
           },
           "then": {
             "type": "object",
-            "required": [
-              "specVersion",
-              "kind",
-              "type",
-              "metadata",
-              "task"
-            ],
+            "required": ["specVersion", "kind", "type", "metadata", "task"],
             "if": {
               "properties": {
                 "specVersion": {
-                  "enum": [
-                    "3.0",
-                    "3.1"
-                  ]
+                  "enum": ["3.0", "3.1"]
                 }
               }
             },
@@ -2492,20 +2083,13 @@
               "additionalProperties": false,
               "properties": {
                 "specVersion": {
-                  "enum": [
-                    "3.0",
-                    "3.1"
-                  ]
+                  "enum": ["3.0", "3.1"]
                 },
                 "kind": {
-                  "enum": [
-                    "extension"
-                  ]
+                  "enum": ["extension"]
                 },
                 "type": {
-                  "enum": [
-                    "task"
-                  ]
+                  "enum": ["task"]
                 },
                 "metadata": {
                   "$ref": "#/then/else/then/definitions/metadata-3.0"
@@ -2523,14 +2107,7 @@
               "if": {
                 "properties": {
                   "specVersion": {
-                    "enum": [
-                      "2.1",
-                      "2.2",
-                      "2.3",
-                      "2.4",
-                      "2.5",
-                      "2.6"
-                    ]
+                    "enum": ["2.1", "2.2", "2.3", "2.4", "2.5", "2.6"]
                   }
                 }
               },
@@ -2538,24 +2115,13 @@
                 "additionalProperties": false,
                 "properties": {
                   "specVersion": {
-                    "enum": [
-                      "2.1",
-                      "2.2",
-                      "2.3",
-                      "2.4",
-                      "2.5",
-                      "2.6"
-                    ]
+                    "enum": ["2.1", "2.2", "2.3", "2.4", "2.5", "2.6"]
                   },
                   "kind": {
-                    "enum": [
-                      "extension"
-                    ]
+                    "enum": ["extension"]
                   },
                   "type": {
-                    "enum": [
-                      "task"
-                    ]
+                    "enum": ["task"]
                   },
                   "metadata": {
                     "$ref": "#/then/else/then/definitions/metadata"
@@ -2573,19 +2139,13 @@
                 "additionalProperties": false,
                 "properties": {
                   "specVersion": {
-                    "enum": [
-                      "2.0"
-                    ]
+                    "enum": ["2.0"]
                   },
                   "kind": {
-                    "enum": [
-                      "extension"
-                    ]
+                    "enum": ["extension"]
                   },
                   "type": {
-                    "enum": [
-                      "task"
-                    ]
+                    "enum": ["task"]
                   },
                   "metadata": {
                     "$ref": "#/then/else/then/definitions/metadata"
@@ -2618,20 +2178,11 @@
             },
             "then": {
               "type": "object",
-              "required": [
-                "specVersion",
-                "kind",
-                "type",
-                "metadata",
-                "middleware"
-              ],
+              "required": ["specVersion", "kind", "type", "metadata", "middleware"],
               "if": {
                 "properties": {
                   "specVersion": {
-                    "enum": [
-                      "3.0",
-                      "3.1"
-                    ]
+                    "enum": ["3.0", "3.1"]
                   }
                 }
               },
@@ -2639,20 +2190,13 @@
                 "additionalProperties": false,
                 "properties": {
                   "specVersion": {
-                    "enum": [
-                      "3.0",
-                      "3.1"
-                    ]
+                    "enum": ["3.0", "3.1"]
                   },
                   "kind": {
-                    "enum": [
-                      "extension"
-                    ]
+                    "enum": ["extension"]
                   },
                   "type": {
-                    "enum": [
-                      "server-middleware"
-                    ]
+                    "enum": ["server-middleware"]
                   },
                   "metadata": {
                     "$ref": "#/then/else/then/definitions/metadata-3.0"
@@ -2670,14 +2214,7 @@
                 "if": {
                   "properties": {
                     "specVersion": {
-                      "enum": [
-                        "2.1",
-                        "2.2",
-                        "2.3",
-                        "2.4",
-                        "2.5",
-                        "2.6"
-                      ]
+                      "enum": ["2.1", "2.2", "2.3", "2.4", "2.5", "2.6"]
                     }
                   }
                 },
@@ -2685,24 +2222,13 @@
                   "additionalProperties": false,
                   "properties": {
                     "specVersion": {
-                      "enum": [
-                        "2.1",
-                        "2.2",
-                        "2.3",
-                        "2.4",
-                        "2.5",
-                        "2.6"
-                      ]
+                      "enum": ["2.1", "2.2", "2.3", "2.4", "2.5", "2.6"]
                     },
                     "kind": {
-                      "enum": [
-                        "extension"
-                      ]
+                      "enum": ["extension"]
                     },
                     "type": {
-                      "enum": [
-                        "server-middleware"
-                      ]
+                      "enum": ["server-middleware"]
                     },
                     "metadata": {
                       "$ref": "#/then/else/then/definitions/metadata"
@@ -2720,19 +2246,13 @@
                   "additionalProperties": false,
                   "properties": {
                     "specVersion": {
-                      "enum": [
-                        "2.0"
-                      ]
+                      "enum": ["2.0"]
                     },
                     "kind": {
-                      "enum": [
-                        "extension"
-                      ]
+                      "enum": ["extension"]
                     },
                     "type": {
-                      "enum": [
-                        "server-middleware"
-                      ]
+                      "enum": ["server-middleware"]
                     },
                     "metadata": {
                       "$ref": "#/then/else/then/definitions/metadata"
@@ -2765,20 +2285,11 @@
               },
               "then": {
                 "type": "object",
-                "required": [
-                  "specVersion",
-                  "kind",
-                  "type",
-                  "metadata",
-                  "shims"
-                ],
+                "required": ["specVersion", "kind", "type", "metadata", "shims"],
                 "if": {
                   "properties": {
                     "specVersion": {
-                      "enum": [
-                        "3.0",
-                        "3.1"
-                      ]
+                      "enum": ["3.0", "3.1"]
                     }
                   }
                 },
@@ -2786,20 +2297,13 @@
                   "additionalProperties": false,
                   "properties": {
                     "specVersion": {
-                      "enum": [
-                        "3.0",
-                        "3.1"
-                      ]
+                      "enum": ["3.0", "3.1"]
                     },
                     "kind": {
-                      "enum": [
-                        "extension"
-                      ]
+                      "enum": ["extension"]
                     },
                     "type": {
-                      "enum": [
-                        "project-shim"
-                      ]
+                      "enum": ["project-shim"]
                     },
                     "metadata": {
                       "$ref": "#/then/else/then/definitions/metadata-3.0"
@@ -2817,14 +2321,7 @@
                   "if": {
                     "properties": {
                       "specVersion": {
-                        "enum": [
-                          "2.1",
-                          "2.2",
-                          "2.3",
-                          "2.4",
-                          "2.5",
-                          "2.6"
-                        ]
+                        "enum": ["2.1", "2.2", "2.3", "2.4", "2.5", "2.6"]
                       }
                     }
                   },
@@ -2832,24 +2329,13 @@
                     "additionalProperties": false,
                     "properties": {
                       "specVersion": {
-                        "enum": [
-                          "2.1",
-                          "2.2",
-                          "2.3",
-                          "2.4",
-                          "2.5",
-                          "2.6"
-                        ]
+                        "enum": ["2.1", "2.2", "2.3", "2.4", "2.5", "2.6"]
                       },
                       "kind": {
-                        "enum": [
-                          "extension"
-                        ]
+                        "enum": ["extension"]
                       },
                       "type": {
-                        "enum": [
-                          "project-shim"
-                        ]
+                        "enum": ["project-shim"]
                       },
                       "metadata": {
                         "$ref": "#/then/else/then/definitions/metadata"
@@ -2867,19 +2353,13 @@
                     "additionalProperties": false,
                     "properties": {
                       "specVersion": {
-                        "enum": [
-                          "2.0"
-                        ]
+                        "enum": ["2.0"]
                       },
                       "kind": {
-                        "enum": [
-                          "extension"
-                        ]
+                        "enum": ["extension"]
                       },
                       "type": {
-                        "enum": [
-                          "project-shim"
-                        ]
+                        "enum": ["project-shim"]
                       },
                       "metadata": {
                         "$ref": "#/then/else/then/definitions/metadata"
@@ -2947,9 +2427,7 @@
         "definitions": {
           "metadata": {
             "type": "object",
-            "required": [
-              "name"
-            ],
+            "required": ["name"],
             "additionalProperties": false,
             "properties": {
               "name": {
@@ -2962,9 +2440,7 @@
           },
           "metadata-3.0": {
             "type": "object",
-            "required": [
-              "name"
-            ],
+            "required": ["name"],
             "additionalProperties": false,
             "properties": {
               "name": {
@@ -2989,11 +2465,7 @@
     "if": {
       "properties": {
         "specVersion": {
-          "enum": [
-            "1.1",
-            "1.0",
-            "0.1"
-          ]
+          "enum": ["1.1", "1.0", "0.1"]
         }
       }
     },

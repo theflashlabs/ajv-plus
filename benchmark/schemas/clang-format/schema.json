@@ -40,21 +40,12 @@
     "AlignAfterOpenBracket": {
       "description": "clang-format 3.8\r\r This applies to round brackets (parentheses), angle brackets and square brackets.",
       "type": "string",
-      "enum": [
-        "Align",
-        "DontAlign",
-        "AlwaysBreak",
-        "BlockIndent"
-      ]
+      "enum": ["Align", "DontAlign", "AlwaysBreak", "BlockIndent"]
     },
     "AlignArrayOfStructures": {
       "description": "clang-format 13\r\r if not None, when using initialization for an array of structs aligns the fields into columns.\r\r NOTE: In clang-format 15 this option only applied to arrays with equal number of columns per row.",
       "type": "string",
-      "enum": [
-        "None",
-        "Left",
-        "Right"
-      ]
+      "enum": ["None", "Left", "Right"]
     },
     "AlignConsecutiveMacros": {
       "oneOf": [
@@ -199,20 +190,12 @@
     "AlignEscapedNewlines": {
       "description": "clang-format 5\r\r Options for aligning backslashes in escaped newlines.",
       "type": "string",
-      "enum": [
-        "Left",
-        "Right",
-        "DontAlign"
-      ]
+      "enum": ["Left", "Right", "DontAlign"]
     },
     "AlignOperands": {
       "description": "clang-format 3.5\r\r If true, horizontally align operands of binary and ternary expressions.",
       "type": "string",
-      "enum": [
-        "Align",
-        "DontAlign",
-        "AlignAfterOperator"
-      ]
+      "enum": ["Align", "DontAlign", "AlignAfterOperator"]
     },
     "AlignTrailingComments": {
       "oneOf": [
@@ -227,11 +210,7 @@
             "Kind": {
               "description": "Specifies the way to align trailing comments.",
               "type": "string",
-              "enum": [
-                "Leave",
-                "Always",
-                "Never"
-              ]
+              "enum": ["Leave", "Always", "Never"]
             },
             "OverEmptyLines": {
               "description": "How many empty lines to apply alignment.",
@@ -261,11 +240,7 @@
     "AllowShortBlocksOnASingleLine": {
       "description": "clang-format 3.5\r\r Dependent on the value, while (true) { continue; } can be put on a single line.",
       "type": "string",
-      "enum": [
-        "Never",
-        "Empty",
-        "Always"
-      ]
+      "enum": ["Never", "Empty", "Always"]
     },
     "AllowShortCaseLabelsOnASingleLine": {
       "description": "clang-format 3.6\r\r If true, short case labels will be contracted to a single line.",
@@ -274,33 +249,17 @@
     "AllowShortFunctionsOnASingleLine": {
       "description": "clang-format 3.5\r\r Dependent on the value, int f() { return 0; } can be put on a single line.",
       "type": "string",
-      "enum": [
-        "All",
-        "None",
-        "Inline",
-        "Empty",
-        "InlineOnly"
-      ]
+      "enum": ["All", "None", "Inline", "Empty", "InlineOnly"]
     },
     "AllowShortLambdasOnASingleLine": {
       "description": "clang-format 9\r\r Dependent on the value, auto lambda []() { return 0; } can be put on a single line.",
       "type": "string",
-      "enum": [
-        "None",
-        "Empty",
-        "Inline",
-        "All"
-      ]
+      "enum": ["None", "Empty", "Inline", "All"]
     },
     "AllowShortIfStatementsOnASingleLine": {
       "description": "clang-format 9\r\r If true, if (a) return; can be put on a single line.",
       "type": "string",
-      "enum": [
-        "AllIfsAndElse",
-        "Never",
-        "WithoutElse",
-        "OnlyFirstIf"
-      ]
+      "enum": ["AllIfsAndElse", "Never", "WithoutElse", "OnlyFirstIf"]
     },
     "AllowShortLoopsOnASingleLine": {
       "description": "clang-format 3.7\r\r If true, while (true) continue; can be put on a single line.",
@@ -309,22 +268,12 @@
     "AlwaysBreakAfterDefinitionReturnType": {
       "description": "clang-format 3.7\r\r This option is deprecated and is retained for backwards compatibility.\r\r The function definition return type breaking style to use. This option is deprecated and is retained for backwards compatibility",
       "type": "string",
-      "enum": [
-        "None",
-        "All",
-        "TopLevel"
-      ]
+      "enum": ["None", "All", "TopLevel"]
     },
     "AlwaysBreakAfterReturnType": {
       "description": "clang-format 3.8\r\r The function declaration return type breaking style to use.",
       "type": "string",
-      "enum": [
-        "None",
-        "All",
-        "TopLevel",
-        "AllDefinitions",
-        "TopLevelDefinitions"
-      ]
+      "enum": ["None", "All", "TopLevel", "AllDefinitions", "TopLevelDefinitions"]
     },
     "AlwaysBreakBeforeMultilineStrings": {
       "description": "clang-format 3.4\r\r If true, always break before multiline string literals.",
@@ -333,22 +282,14 @@
     "AlwaysBreakTemplateDeclarations": {
       "description": "clang-format 7\r\r The template declaration breaking style to use.",
       "type": "string",
-      "enum": [
-        "Yes",
-        "No",
-        "MultiLine"
-      ]
+      "enum": ["Yes", "No", "MultiLine"]
     },
     "AttributeMacros": {
       "description": "clang-format 12\r\r A vector of strings that should be interpreted as attributes/qualifiers instead of identifiers. This can be useful for language extensions or static analyzer annotations.",
       "type": "array",
       "items": {
         "type": "string",
-        "examples": [
-          "__capability",
-          "__output",
-          "__ununsed"
-        ]
+        "examples": ["__capability", "__output", "__ununsed"]
       }
     },
     "BinPackArguments": {
@@ -362,12 +303,7 @@
     "BitFieldColonSpacing": {
       "description": "clang-format 12\r\r The BitFieldColonSpacingStyle to use for bitfields.",
       "type": "string",
-      "enum": [
-        "Both",
-        "None",
-        "Before",
-        "After"
-      ]
+      "enum": ["Both", "None", "Before", "After"]
     },
     "BraceWrapping": {
       "description": "clang-format 3.8\r\r Control of individual brace wrapping cases.If BreakBeforeBraces is set to BS_Custom, use this to specify how each individual brace case should be handled. Otherwise, this is ignored.",
@@ -384,11 +320,7 @@
         "AfterControlStatement": {
           "description": "Wrap control statements (if/for/while/switch/...).",
           "type": "string",
-          "enum": [
-            "Never",
-            "MultiLine",
-            "Always"
-          ]
+          "enum": ["Never", "MultiLine", "Always"]
         },
         "AfterEnum": {
           "description": "Wrap enum definitions.",
@@ -455,11 +387,7 @@
     "BreakAfterAttributes": {
       "description": "clang-format 16\r\r Break after a group of C++11 attributes before a function declaration/definition name.",
       "type": "string",
-      "enum": [
-        "Always",
-        "Leave",
-        "Never"
-      ]
+      "enum": ["Always", "Leave", "Never"]
     },
     "BreakAfterJavaFieldAnnotations": {
       "description": "clang-format 3.8\r\r Break after each annotation on a field in Java files.",
@@ -472,20 +400,12 @@
     "BreakBeforeInlineASMColon": {
       "description": "clang-format 16\r\r The inline ASM colon style to use..",
       "type": "string",
-      "enum": [
-        "Never",
-        "OnlyMultiline",
-        "Always"
-      ]
+      "enum": ["Never", "OnlyMultiline", "Always"]
     },
     "BreakBeforeBinaryOperators": {
       "description": "clang-format 3.6\r\r The way to wrap binary operators.",
       "type": "string",
-      "enum": [
-        "None",
-        "NonAssignment",
-        "All"
-      ]
+      "enum": ["None", "NonAssignment", "All"]
     },
     "BreakBeforeBraces": {
       "description": "clang-format 3.7\r\r The brace breaking style to use.",
@@ -510,11 +430,7 @@
         {
           "description": "clang-format 12\r\r The concept declaration style to use.",
           "type": "string",
-          "enum": [
-            "Never",
-            "Allowed",
-            "Always"
-          ]
+          "enum": ["Never", "Allowed", "Always"]
         }
       ]
     },
@@ -529,21 +445,12 @@
     "BreakConstructorInitializers": {
       "description": "clang-format 5\r\r The constructor initializers style to use.",
       "type": "string",
-      "enum": [
-        "BeforeColon",
-        "BeforeComma",
-        "AfterColon"
-      ]
+      "enum": ["BeforeColon", "BeforeComma", "AfterColon"]
     },
     "BreakInheritanceList": {
       "description": "clang-format 7\r\r The inheritance list style to use.",
       "type": "string",
-      "enum": [
-        "BeforeColon",
-        "BeforeComma",
-        "AfterColon",
-        "AfterComma"
-      ]
+      "enum": ["BeforeColon", "BeforeComma", "AfterColon", "AfterComma"]
     },
     "BreakStringLiterals": {
       "description": "clang-format 3.9\r\r Allow breaking string literals when formatting.",
@@ -599,21 +506,12 @@
     "EmptyLineAfterAccessModifier": {
       "description": "clang-format 13\r\r Defines when to put an empty line after access modifiers. EmptyLineBeforeAccessModifier configuration handles the number of empty lines between two access modifiers.",
       "type": "string",
-      "enum": [
-        "Never",
-        "Leave",
-        "Always"
-      ]
+      "enum": ["Never", "Leave", "Always"]
     },
     "EmptyLineBeforeAccessModifier": {
       "description": "clang-format 12\r\r Defines in which cases to put empty line before access modifiers.",
       "type": "string",
-      "enum": [
-        "LogicalBlock",
-        "Never",
-        "Leave",
-        "Always"
-      ]
+      "enum": ["LogicalBlock", "Never", "Leave", "Always"]
     },
     "ExperimentalAutoDetectBinPacking": {
       "description": "clang-format 3.7\r\r If true, clang-format detects whether function calls and definitions are formatted with one parameter per line.",
@@ -628,11 +526,7 @@
       "type": "array",
       "items": {
         "type": "string",
-        "examples": [
-          "foreach",
-          "Q_FOREACH",
-          "BOOST_FOREACH"
-        ]
+        "examples": ["foreach", "Q_FOREACH", "BOOST_FOREACH"]
       }
     },
     "IfMacros": {
@@ -640,19 +534,13 @@
       "type": "array",
       "items": {
         "type": "string",
-        "examples": [
-          "KJ_IF_MAYBE"
-        ]
+        "examples": ["KJ_IF_MAYBE"]
       }
     },
     "IncludeBlocks": {
       "description": "clang-format 7\r\r Dependent on the value, multiple #include blocks can be sorted as one and divided based on category.",
       "type": "string",
-      "enum": [
-        "Regroup",
-        "Preserve",
-        "Merge"
-      ]
+      "enum": ["Regroup", "Preserve", "Merge"]
     },
     "IncludeCategories": {
       "description": "clang-format 7\r\r Regular expressions denoting the different #include categories used for ordering #includes. If none of the regular expressions match, INT_MAX is assigned as category.The main header for a source file automatically gets category 0. so that it is generally kept at the beginning of the #includes (https://llvm.org/docs/CodingStandards.html#include-style). However, you can also assign negative priorities if you have certain headers that always need to be first. \r There is a third and optional field SortPriority which can used while IncludeBlocks = IBS_Regroup to define the priority in which #includes should be ordered. The value of Priority defines the order of #include blocks and also allows the grouping of #includes of different priority. SortPriority is set to the value of Priority as default if it is not assigned.",
@@ -675,10 +563,7 @@
             "type": "boolean"
           }
         },
-        "required": [
-          "Regex",
-          "Priority"
-        ]
+        "required": ["Regex", "Priority"]
       }
     },
     "IncludeIsMainRegex": {
@@ -704,11 +589,7 @@
     "IndentExternBlock": {
       "description": "clang-format 11\r\r IndentExternBlockStyle is the type of indenting of extern blocks.",
       "type": "string",
-      "enum": [
-        "AfterExternBlock",
-        "NoIndent",
-        "Indent"
-      ]
+      "enum": ["AfterExternBlock", "NoIndent", "Indent"]
     },
     "IndentGotoLabels": {
       "description": "clang-format 10\r\r Indent goto labels.\rWhen false, goto labels are flushed left.",
@@ -717,11 +598,7 @@
     "IndentPPDirectives": {
       "description": "clang-format 6\r\r The preprocessor directive indenting style to use.",
       "type": "string",
-      "enum": [
-        "None",
-        "AfterHash",
-        "BeforeHash"
-      ]
+      "enum": ["None", "AfterHash", "BeforeHash"]
     },
     "IndentRequiresClause": {
       "description": "clang-format 15\r\r Indent the requires clause in a template. This only applies when RequiresClausePosition is OwnLine, or WithFollowing.",
@@ -751,10 +628,7 @@
     "InsertTrailingCommas": {
       "description": "clang-fromat 11\r\r If set to TCS_Wrapped will insert trailing commas in container literals (arrays and objects) that wrap across multiple lines. It is currently only available for JavaScript and disabled by default TCS_None. InsertTrailingCommas cannot be used together with BinPackArguments as inserting the comma disables bin-packing.",
       "type": "string",
-      "enum": [
-        "None",
-        "Wrapped"
-      ]
+      "enum": ["None", "Wrapped"]
     },
     "IntegerLiteralSeparator": {
       "description": "clang-format 16\r\r Format integer literal separators (' for C++ and _ for C#, Java, and JavaScript).\r\r Separator format of integer literals of different bases. If negative, remove separators. If 0, leave the literal as is. If positive, insert separators between digits starting from the rightmost digit.\r\r You can also specify a minimum number of digits (BinaryMinDigits, DecimalMinDigits, and HexMinDigits) the integer literal must have in order for the separators to be inserted.",
@@ -793,11 +667,7 @@
     "JavaScriptQuotes": {
       "description": "clang-fromat 3.9\r\r The JavaScriptQuoteStyle to use for JavaScript strings.",
       "type": "string",
-      "enum": [
-        "Leave",
-        "Single",
-        "Double"
-      ]
+      "enum": ["Leave", "Single", "Double"]
     },
     "JavaScriptWrapImports": {
       "description": "clang-format 3.9\r\r Whether to wrap JavaScript import/export statements.",
@@ -810,10 +680,7 @@
     "LambdaBodyIndentation": {
       "description": "clang-format 13\r\r The indentation style of lambda bodies. Signature (the default) causes the lambda body to be indented one additional level relative to the indentation level of the signature. OuterScope forces the lambda body to be indented one additional level relative to the parent scope containing the lambda signature. For callback-heavy code, it may improve readability to have the signature indented two levels and to use OuterScope. The KJ style guide requires OuterScope. KJ style guide",
       "type": "string",
-      "enum": [
-        "Signature",
-        "OuterScope"
-      ]
+      "enum": ["Signature", "OuterScope"]
     },
     "Language": {
       "description": "clang-format 3.5\r\r Language, this format style is targeted at.",
@@ -835,26 +702,17 @@
     "LineEnding": {
       "description": "clang-format 16\r\r Line ending style (\\n or \\r\\n) to use.",
       "type": "string",
-      "enum": [
-        "LF",
-        "CRLF",
-        "DeriveLF",
-        "DeriveCRLF"
-      ]
+      "enum": ["LF", "CRLF", "DeriveLF", "DeriveCRLF"]
     },
     "MacroBlockBegin": {
       "description": "clang-format 3.7\r\r A regular expression matching macros that start a block.",
       "type": "string",
-      "examples": [
-        "^NS_MAP_BEGIN|NS_TABLE_HEAD$"
-      ]
+      "examples": ["^NS_MAP_BEGIN|NS_TABLE_HEAD$"]
     },
     "MacroBlockEnd": {
       "description": "clang-format 3.7\r\r A regular expression matching macros that end a block.",
       "type": "string",
-      "examples": [
-        "^NS_MAP_END|NS_TABLE_.*_END$"
-      ]
+      "examples": ["^NS_MAP_END|NS_TABLE_.*_END$"]
     },
     "MaxEmptyLinesToKeep": {
       "description": "clang-format 3.7\r\r The maximum number of consecutive empty lines to keep.",
@@ -865,31 +723,21 @@
     "NamespaceIndentation": {
       "description": "clnag-format 3.7\r\r The indentation used for namespaces.",
       "type": "string",
-      "enum": [
-        "None",
-        "Inner",
-        "All"
-      ]
+      "enum": ["None", "Inner", "All"]
     },
     "NamespaceMacros": {
       "description": "clnag-format 9\r\r A vector of macros which are used to open namespace blocks.",
       "type": "array",
       "items": {
         "type": "string",
-        "examples": [
-          "TESTSUITE"
-        ]
+        "examples": ["TESTSUITE"]
       }
     },
     "ObjCBinPackProtocolList": {
       "description": "clang-format 7\r\r Controls bin-packing Objective-C protocol conformance list items into as few lines as possible when they go over ColumnLimit.If Auto (the default), delegates to the value in BinPackParameters. If that is true, bin-packs Objective-C protocol conformance list items into as few lines as possible whenever they go over ColumnLimit.\rIf Always, always bin-packs Objective-C protocol conformance list items into as few lines as possible whenever they go over ColumnLimit.\rIf Never, lays out Objective-C protocol conformance list items onto individual lines whenever they go over ColumnLimit.",
       "type": "string",
       "default": "Auto",
-      "enum": [
-        "Never",
-        "Auto",
-        "Always"
-      ]
+      "enum": ["Never", "Auto", "Always"]
     },
     "ObjCBlockIndentWidth": {
       "description": "clang-format 3.7\r\r The number of characters to use for indentation of ObjC blocks.",
@@ -916,12 +764,7 @@
     "PackConstructorInitializers": {
       "description": "clang-format 14\r\r The pack constructor initializers style to use.",
       "type": "string",
-      "enum": [
-        "Never",
-        "BinPack",
-        "CurrentLine",
-        "NextLine"
-      ]
+      "enum": ["Never", "BinPack", "CurrentLine", "NextLine"]
     },
     "PenaltyBreakAssignment": {
       "description": "clang-format 5\r\r The penalty for breaking around an assignment operator.",
@@ -976,42 +819,23 @@
     "PointerAlignment": {
       "description": "clang-format 3.7\r\r Pointer and reference alignment style.",
       "type": "string",
-      "enum": [
-        "Left",
-        "Right",
-        "Middle"
-      ]
+      "enum": ["Left", "Right", "Middle"]
     },
     "QualifierAlignment": {
       "description": "clang-format 14\r\r Different ways to arrange specifiers and qualifiers (e.g. const/volatile).\r\r Warning:Setting QualifierAlignment to something other than Leave, COULD lead to incorrect code formatting due to incorrect decisions made due to clang-formats lack of complete semantic information.\r\r As such extra care should be taken to review code changes made by the use of this option.",
       "type": "string",
-      "enum": [
-        "Leave",
-        "Left",
-        "Right",
-        "Custom"
-      ]
+      "enum": ["Leave", "Left", "Right", "Custom"]
     },
     "QualifierOrder": {
       "description": "clang-format 14\r\r The order in which the qualifiers appear. Order is an array that can contain any of the following. \r\r Note: it MUST contain 'type'. Items to the left of 'type' will be placed to the left of the type and aligned in the order supplied. Items to the right of 'type' will be placed to the right of the type and aligned in the order supplied.",
       "type": "array",
       "contains": {
         "type": "string",
-        "enum": [
-          "type"
-        ]
+        "enum": ["type"]
       },
       "items": {
         "type": "string",
-        "enum": [
-          "const",
-          "inline",
-          "static",
-          "constexpr",
-          "volatile",
-          "restrict",
-          "type"
-        ]
+        "enum": ["const", "inline", "static", "constexpr", "volatile", "restrict", "type"]
       }
     },
     "RawStringFormats": {
@@ -1045,26 +869,13 @@
         "examples": [
           {
             "Language": "Cpp",
-            "Delimiters": [
-              "cc",
-              "CC",
-              "cpp",
-              "Cpp",
-              "CPP",
-              "c++",
-              "C++"
-            ],
+            "Delimiters": ["cc", "CC", "cpp", "Cpp", "CPP", "c++", "C++"],
             "CanonicalDelimiter": "",
             "BasedOnStyle": "google"
           },
           {
             "Language": "TextProto",
-            "Delimiters": [
-              "pb",
-              "PB",
-              "proto",
-              "PROTO"
-            ],
+            "Delimiters": ["pb", "PB", "proto", "PROTO"],
             "EnclosingFunctions": [
               "EqualsProto",
               "EquivToProto",
@@ -1085,12 +896,7 @@
     "ReferenceAlignment": {
       "description": "clang-format 13\r\r Reference alignment style (overrides PointerAlignment for references).",
       "type": "string",
-      "enum": [
-        "Pointer",
-        "Left",
-        "Right",
-        "Middle"
-      ]
+      "enum": ["Pointer", "Left", "Right", "Middle"]
     },
     "ReflowComments": {
       "description": "clang-format 4\r\r If true, clang-format will attempt to re-flow comments. That is it will touch a comment and reflow long comments into new lines, trying to obey the ColumnLimit.",
@@ -1107,29 +913,17 @@
     "RequiresClausePosition": {
       "description": "clang-format 15\r\r The position of the requires clause.",
       "type": "string",
-      "enum": [
-        "OwnLine",
-        "WithPreceding",
-        "WithFollowing",
-        "SingleLine"
-      ]
+      "enum": ["OwnLine", "WithPreceding", "WithFollowing", "SingleLine"]
     },
     "RequiresExpressionIndentation": {
       "description": "clang-format 16 \r\r The indentation used for requires expression bodies.",
       "type": "string",
-      "enum": [
-        "OuterScope",
-        "Keyword"
-      ]
+      "enum": ["OuterScope", "Keyword"]
     },
     "SeparateDefinitionBlocks": {
       "description": "clang-format 14\r\r Specifies the use of empty lines to separate definition blocks, including classes, structs, enums, and functions.",
       "type": "string",
-      "enum": [
-        "Leave",
-        "Always",
-        "Never"
-      ]
+      "enum": ["Leave", "Always", "Never"]
     },
     "ShortNamespaceLines": {
       "description": "clang-format 13\r\r The maximal number of unwrapped lines that a short namespace spans. Defaults to 1.",
@@ -1140,19 +934,12 @@
     "SortIncludes": {
       "description": "clang-format 4\r\r Controls if and how clang-format will sort #includes. If Never, includes are never sorted. If CaseInsensitive, includes are sorted in an ASCIIbetical or case insensitive fashion. If CaseSensitive, includes are sorted in an alphabetical or case sensitive fashion.",
       "type": "string",
-      "enum": [
-        "CaseSensitive",
-        "CaseInsensitive",
-        "Never"
-      ]
+      "enum": ["CaseSensitive", "CaseInsensitive", "Never"]
     },
     "SortJavaStaticImport": {
       "description": "clang-format 12\r\r When sorting Java imports, by default static imports are placed before non-static imports. If JavaStaticImportAfterImport is After, static imports are placed after non-static imports.",
       "type": "string",
-      "enum": [
-        "Before",
-        "After"
-      ]
+      "enum": ["Before", "After"]
     },
     "SortUsingDeclarations": {
       "oneOf": [
@@ -1163,11 +950,7 @@
         {
           "description": "clang-format 16\r\r Controls if and how clang-format will sort using declarations.",
           "type": "string",
-          "enum": [
-            "Never",
-            "Lexicographic",
-            "LexicographicNumeric"
-          ]
+          "enum": ["Never", "Lexicographic", "LexicographicNumeric"]
         }
       ]
     },
@@ -1186,12 +969,7 @@
     "SpaceAroundPointerQualifiers": {
       "description": "clang-format 12\r\r Defines in which cases to put a space before or after pointer qualifiers",
       "type": "string",
-      "enum": [
-        "Default",
-        "Before",
-        "After",
-        "Both"
-      ]
+      "enum": ["Default", "Before", "After", "Both"]
     },
     "SpaceBeforeAssignmentOperators": {
       "description": "clang-format 3.7\r\r If false, spaces will be removed before assignment operators.",
@@ -1291,11 +1069,7 @@
     "SpacesInAngles": {
       "description": "clang-format 3.4\r\r The SpacesInAnglesStyle to use for template argument lists.",
       "type": "string",
-      "enum": [
-        "Never",
-        "Always",
-        "Leave"
-      ]
+      "enum": ["Never", "Always", "Leave"]
     },
     "SpacesInCStyleCastParentheses": {
       "description": "clang-format 3.7\r\r If true, spaces may be inserted into C style casts.",
@@ -1334,24 +1108,14 @@
     "Standard": {
       "description": "clang-format 3.7\r\r Parse and format C++ constructs compatible with this standard.",
       "type": "string",
-      "enum": [
-        "Auto",
-        "Latest",
-        "c++03",
-        "c++11",
-        "c++14",
-        "c++17",
-        "c++20"
-      ]
+      "enum": ["Auto", "Latest", "c++03", "c++11", "c++14", "c++17", "c++20"]
     },
     "StatementAttributeLikeMacros": {
       "description": "clang-format 12\r\r Macros which are ignored in front of a statement, as if they were an attribute. So that they are not parsed as identifier, for example for Qts emit.",
       "type": "array",
       "items": {
         "type": "string",
-        "examples": [
-          "Q_EMIT"
-        ]
+        "examples": ["Q_EMIT"]
       }
     },
     "StatementMacros": {
@@ -1359,10 +1123,7 @@
       "type": "array",
       "items": {
         "type": "string",
-        "examples": [
-          "Q_UNUSED",
-          "QT_REQUIRE_VERSION"
-        ]
+        "examples": ["Q_UNUSED", "QT_REQUIRE_VERSION"]
       }
     },
     "TabWidth": {
@@ -1375,10 +1136,7 @@
       "type": "array",
       "items": {
         "type": "string",
-        "examples": [
-          "STACK_OF",
-          "LIST_ENTRY"
-        ]
+        "examples": ["STACK_OF", "LIST_ENTRY"]
       }
     },
     "UseCRLF": {

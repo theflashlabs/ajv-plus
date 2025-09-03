@@ -5,10 +5,7 @@
   "definitions": {
     "toggle": {
       "type": "string",
-      "enum": [
-        "enable",
-        "disable"
-      ]
+      "enum": ["enable", "disable"]
     },
     "ignore": {
       "properties": {
@@ -43,11 +40,7 @@
         "title": "YAML File",
         "type": "string"
       },
-      "default": [
-        "*.yaml",
-        "*.yml",
-        ".yamllint"
-      ]
+      "default": ["*.yaml", "*.yml", ".yamllint"]
     },
     "locale": {
       "title": "Locale",
@@ -478,10 +471,7 @@
                     },
                     {
                       "type": "string",
-                      "enum": [
-                        "whatever",
-                        "consistent"
-                      ]
+                      "enum": ["whatever", "consistent"]
                     }
                   ],
                   "default": true
@@ -603,11 +593,7 @@
                   "title": "Type",
                   "description": "Unix to use UNIX-typed new line characters (\n), or dos to use DOS-typed new line characters (\r\n).",
                   "type": "string",
-                  "enum": [
-                    "unix",
-                    "dos",
-                    "platform"
-                  ],
+                  "enum": ["unix", "dos", "platform"],
                   "default": "unix"
                 }
               }
@@ -664,11 +650,7 @@
                   "title": "Quote Type",
                   "description": "Defines allowed quotes.",
                   "type": "string",
-                  "enum": [
-                    "single",
-                    "double",
-                    "any"
-                  ],
+                  "enum": ["single", "double", "any"],
                   "default": "any"
                 },
                 "required": {
@@ -768,10 +750,7 @@
                       "off"
                     ]
                   },
-                  "default": [
-                    "true",
-                    "false"
-                  ]
+                  "default": ["true", "false"]
                 },
                 "check-keys": {
                   "title": "Check Keys",

@@ -46,15 +46,8 @@
         },
         "compact": {
           "description": "Do not include superfluous whitespace characters and line terminators. When set to \"auto\" compact is set to true on input sizes of >500KB.",
-          "type": [
-            "string",
-            "boolean"
-          ],
-          "enum": [
-            "auto",
-            true,
-            false
-          ],
+          "type": ["string", "boolean"],
+          "enum": ["auto", true, false],
           "default": "auto"
         },
         "extends": {
@@ -76,20 +69,14 @@
         },
         "ignore": {
           "description": "Opposite of the \"only\" option",
-          "type": [
-            "string",
-            "array"
-          ],
+          "type": ["string", "array"],
           "items": {
             "type": "string"
           }
         },
         "inputSourceMap": {
           "description": "If true, attempt to load an input sourcemap from the file itself. If an object is provided, it will be treated as the source map object itself.",
-          "type": [
-            "boolean",
-            "object"
-          ],
+          "type": ["boolean", "object"],
           "default": true
         },
         "keepModuleIdExtensions": {
@@ -112,10 +99,7 @@
         },
         "only": {
           "description": "A glob, regex, or mixed array of both, matching paths to only compile. Can also be an array of arrays containing paths to explicitly match. When attempting to compile a non-matching file it's returned verbatim.",
-          "type": [
-            "string",
-            "array"
-          ],
+          "type": ["string", "array"],
           "items": {
             "type": "string"
           }
@@ -124,10 +108,7 @@
           "description": "List of plugins to load and use",
           "type": "array",
           "items": {
-            "type": [
-              "string",
-              "array"
-            ],
+            "type": ["string", "array"],
             "items": [
               {
                 "description": "The name of the plugin.",
@@ -144,10 +125,7 @@
           "description": "List of presets (a set of plugins) to load and use",
           "type": "array",
           "items": {
-            "type": [
-              "string",
-              "array"
-            ],
+            "type": ["string", "array"],
             "items": [
               {
                 "description": "The name of the preset.",
@@ -172,16 +150,8 @@
         "sourceMaps": {
           "default": false,
           "description": "If truthy, adds a map property to returned output. If set to \"inline\", a comment with a sourceMappingURL directive is added to the bottom of the returned code. If set to \"both\" then a map property is returned as well as a source map comment appended.",
-          "type": [
-            "string",
-            "boolean"
-          ],
-          "enum": [
-            "both",
-            "inline",
-            true,
-            false
-          ]
+          "type": ["string", "boolean"],
+          "enum": ["both", "inline", true, false]
         },
         "sourceMapTarget": {
           "description": "Set file on returned source map. (defaults to \"filenameRelative\")",

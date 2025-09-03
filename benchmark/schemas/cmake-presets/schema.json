@@ -226,9 +226,7 @@
       "additionalProperties": false
     }
   ],
-  "required": [
-    "version"
-  ],
+  "required": ["version"],
   "definitions": {
     "$schema": {
       "type": "string",
@@ -273,19 +271,12 @@
               "mode": {
                 "type": "string",
                 "description": "An optional string that specifies the trace mode.",
-                "enum": [
-                  "on",
-                  "off",
-                  "expand"
-                ]
+                "enum": ["on", "off", "expand"]
               },
               "format": {
                 "type": "string",
                 "description": "An optional string that specifies the trace output format.",
-                "enum": [
-                  "human",
-                  "json-v1"
-                ]
+                "enum": ["human", "json-v1"]
               },
               "source": {
                 "anyOf": [
@@ -412,10 +403,7 @@
                   "strategy": {
                     "type": "string",
                     "description": "An optional string telling CMake how to handle the field. Valid values are: \"set\" Set the respective value. This will result in an error for generators that do not support the respective field. \"external\" Do not set the value, even if the generator supports it. This is useful if, for example, a preset uses the Ninja generator, and an IDE knows how to set up the Visual C++ environment from the architecture and toolset fields. In that case, CMake will ignore the field, but the IDE can use them to set up the environment before invoking CMake.",
-                    "enum": [
-                      "set",
-                      "external"
-                    ]
+                    "enum": ["set", "external"]
                   }
                 },
                 "additionalProperties": false
@@ -439,10 +427,7 @@
                   "strategy": {
                     "type": "string",
                     "description": "An optional string telling CMake how to handle the field. Valid values are: \"set\" Set the respective value. This will result in an error for generators that do not support the respective field. \"external\" Do not set the value, even if the generator supports it. This is useful if, for example, a preset uses the Ninja generator, and an IDE knows how to set up the Visual C++ environment from the architecture and toolset fields. In that case, CMake will ignore the field, but the IDE can use them to set up the environment before invoking CMake.",
-                    "enum": [
-                      "set",
-                      "external"
-                    ]
+                    "enum": ["set", "external"]
                   }
                 },
                 "additionalProperties": false
@@ -496,9 +481,7 @@
                       ]
                     }
                   },
-                  "required": [
-                    "value"
-                  ],
+                  "required": ["value"],
                   "additionalProperties": false
                 }
               ]
@@ -628,9 +611,7 @@
           "condition": {},
           "trace": {}
         },
-        "required": [
-          "name"
-        ],
+        "required": ["name"],
         "additionalProperties": false
       }
     },
@@ -667,9 +648,7 @@
           "debug": {},
           "condition": {}
         },
-        "required": [
-          "name"
-        ],
+        "required": ["name"],
         "additionalProperties": false
       }
     },
@@ -700,9 +679,7 @@
           "errors": {},
           "debug": {}
         },
-        "required": [
-          "name"
-        ],
+        "required": ["name"],
         "additionalProperties": false
       }
     },
@@ -715,11 +692,7 @@
           "resolvePackageReferences": {
             "type": "string",
             "description": "An optional string specifying the package resolve behavior. Valid values are \"on\" (packages are resolved prior to the build), \"off\" (packages are not resolved prior to the build), and \"only\" (packages are resolved, but no build will be performed).",
-            "enum": [
-              "on",
-              "off",
-              "only"
-            ]
+            "enum": ["on", "off", "only"]
           }
         }
       }
@@ -852,9 +825,7 @@
             }
           }
         },
-        "required": [
-          "name"
-        ]
+        "required": ["name"]
       }
     },
     "buildPresetsV4": {
@@ -892,9 +863,7 @@
           "nativeToolOptions": {},
           "condition": {}
         },
-        "required": [
-          "name"
-        ],
+        "required": ["name"],
         "additionalProperties": false
       }
     },
@@ -929,9 +898,7 @@
           "nativeToolOptions": {},
           "condition": {}
         },
-        "required": [
-          "name"
-        ],
+        "required": ["name"],
         "additionalProperties": false
       }
     },
@@ -962,9 +929,7 @@
           "verbose": {},
           "nativeToolOptions": {}
         },
-        "required": [
-          "name"
-        ],
+        "required": ["name"],
         "additionalProperties": false
       }
     },
@@ -1000,11 +965,7 @@
               "testOutputTruncation": {
                 "type": "string",
                 "description": "An optional string specifying the test output truncation mode. Equivalent to passing --test-output-truncation on the command line. Must be one of the following values: \"tail\", \"middle\", or \"head\".",
-                "enum": [
-                  "tail",
-                  "middle",
-                  "head"
-                ]
+                "enum": ["tail", "middle", "head"]
               }
             }
           }
@@ -1121,11 +1082,7 @@
               "verbosity": {
                 "type": "string",
                 "description": "An optional string specifying verbosity level. Valid values are \"default\" (equivalent to passing no verbosity flags on the command line), \"verbose\" (equivalent to passing --verbose on the command line), and \"extra\" (equivalent to passing --extra-verbose on the command line).",
-                "enum": [
-                  "default",
-                  "verbose",
-                  "extra"
-                ]
+                "enum": ["default", "verbose", "extra"]
               },
               "debug": {
                 "type": "boolean",
@@ -1286,10 +1243,7 @@
               "showOnly": {
                 "type": "string",
                 "description": "An optional string. Equivalent to passing --show-only on the command line. Value must be \"human\" or \"json-v1\".",
-                "enum": [
-                  "human",
-                  "json-v1"
-                ]
+                "enum": ["human", "json-v1"]
               },
               "repeat": {
                 "type": "object",
@@ -1298,21 +1252,14 @@
                   "mode": {
                     "type": "string",
                     "description": "A required string. Must be one of the following values: \"until-fail\", \"until-pass\", or \"after-timeout\".",
-                    "enum": [
-                      "until-fail",
-                      "until-pass",
-                      "after-timeout"
-                    ]
+                    "enum": ["until-fail", "until-pass", "after-timeout"]
                   },
                   "count": {
                     "type": "integer",
                     "description": "A required integer."
                   }
                 },
-                "required": [
-                  "mode",
-                  "count"
-                ],
+                "required": ["mode", "count"],
                 "additionalProperties": false
               },
               "interactiveDebugging": {
@@ -1330,19 +1277,13 @@
               "noTestsAction": {
                 "type": "string",
                 "description": "An optional string specifying the behavior if no tests are found. Must be one of the following values: \"default\" (equivalent to not passing any value on the command line), \"error\" (equivalent to passing --no-tests=error on the command line), or \"ignore\" (equivalent to passing --no-tests-ignore on the command line).",
-                "enum": [
-                  "default",
-                  "error",
-                  "ignore"
-                ]
+                "enum": ["default", "error", "ignore"]
               }
             },
             "additionalProperties": false
           }
         },
-        "required": [
-          "name"
-        ]
+        "required": ["name"]
       }
     },
     "testPresetsV6": {
@@ -1399,9 +1340,7 @@
           "execution": {},
           "condition": {}
         },
-        "required": [
-          "name"
-        ],
+        "required": ["name"],
         "additionalProperties": false
       }
     },
@@ -1455,9 +1394,7 @@
           "execution": {},
           "condition": {}
         },
-        "required": [
-          "name"
-        ],
+        "required": ["name"],
         "additionalProperties": false
       }
     },
@@ -1507,9 +1444,7 @@
           "execution": {},
           "condition": {}
         },
-        "required": [
-          "name"
-        ],
+        "required": ["name"],
         "additionalProperties": false
       }
     },
@@ -1555,9 +1490,7 @@
           "filter": {},
           "execution": {}
         },
-        "required": [
-          "name"
-        ],
+        "required": ["name"],
         "additionalProperties": false
       }
     },
@@ -1699,9 +1632,7 @@
             "description": "An optional string representing the vendor name."
           }
         },
-        "required": [
-          "name"
-        ]
+        "required": ["name"]
       }
     },
     "packagePresetsV6": {
@@ -1735,9 +1666,7 @@
           "packageDirectory": {},
           "vendorName": {}
         },
-        "required": [
-          "name"
-        ],
+        "required": ["name"],
         "additionalProperties": false
       }
     },
@@ -1774,12 +1703,7 @@
                 "type": {
                   "type": "string",
                   "description": "A required string. The first step must be configure. Subsequent steps must be either build, test, or package.",
-                  "enum": [
-                    "configure",
-                    "build",
-                    "test",
-                    "package"
-                  ]
+                  "enum": ["configure", "build", "test", "package"]
                 },
                 "name": {
                   "type": "string",
@@ -1787,18 +1711,12 @@
                   "minLength": 1
                 }
               },
-              "required": [
-                "type",
-                "name"
-              ],
+              "required": ["type", "name"],
               "additionalProperties": false
             }
           }
         },
-        "required": [
-          "name",
-          "steps"
-        ],
+        "required": ["name", "steps"],
         "additionalProperties": false
       }
     },
@@ -1819,10 +1737,7 @@
           "description": {},
           "steps": {}
         },
-        "required": [
-          "name",
-          "steps"
-        ],
+        "required": ["name", "steps"],
         "additionalProperties": false
       }
     },
@@ -1845,10 +1760,7 @@
               "description": "A required boolean which provides a constant value for the condition's evaluation."
             }
           },
-          "required": [
-            "type",
-            "value"
-          ],
+          "required": ["type", "value"],
           "additionalProperties": false
         },
         {
@@ -1868,11 +1780,7 @@
               "description": "Second string to compare. This field supports macro expansion."
             }
           },
-          "required": [
-            "type",
-            "lhs",
-            "rhs"
-          ],
+          "required": ["type", "lhs", "rhs"],
           "additionalProperties": false
         },
         {
@@ -1892,11 +1800,7 @@
               "description": "Second string to compare. This field supports macro expansion."
             }
           },
-          "required": [
-            "type",
-            "lhs",
-            "rhs"
-          ],
+          "required": ["type", "lhs", "rhs"],
           "additionalProperties": false
         },
         {
@@ -1919,11 +1823,7 @@
               }
             }
           },
-          "required": [
-            "type",
-            "string",
-            "list"
-          ],
+          "required": ["type", "string", "list"],
           "additionalProperties": false
         },
         {
@@ -1946,11 +1846,7 @@
               }
             }
           },
-          "required": [
-            "type",
-            "string",
-            "list"
-          ],
+          "required": ["type", "string", "list"],
           "additionalProperties": false
         },
         {
@@ -1970,11 +1866,7 @@
               "description": "A required regular expression to search for. This field supports macro expansion."
             }
           },
-          "required": [
-            "type",
-            "string",
-            "regex"
-          ],
+          "required": ["type", "string", "regex"],
           "additionalProperties": false
         },
         {
@@ -1994,11 +1886,7 @@
               "description": "A required regular expression to search for. This field supports macro expansion."
             }
           },
-          "required": [
-            "type",
-            "string",
-            "regex"
-          ],
+          "required": ["type", "string", "regex"],
           "additionalProperties": false
         },
         {
@@ -2017,10 +1905,7 @@
               }
             }
           },
-          "required": [
-            "type",
-            "conditions"
-          ],
+          "required": ["type", "conditions"],
           "additionalProperties": false
         },
         {
@@ -2039,10 +1924,7 @@
               }
             }
           },
-          "required": [
-            "type",
-            "conditions"
-          ],
+          "required": ["type", "conditions"],
           "additionalProperties": false
         },
         {
@@ -2057,10 +1939,7 @@
               "$ref": "#/definitions/condition"
             }
           },
-          "required": [
-            "type",
-            "condition"
-          ],
+          "required": ["type", "condition"],
           "additionalProperties": false
         }
       ]

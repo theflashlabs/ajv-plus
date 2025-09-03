@@ -5,16 +5,12 @@
   "properties": {
     "$schema": {
       "description": "Ignored. Can be set to get completions, validations and documentation in some editors.",
-      "example": [
-        "https://openapi.vercel.sh/vercel.json"
-      ],
+      "example": ["https://openapi.vercel.sh/vercel.json"],
       "type": "string"
     },
     "alias": {
       "description": "Aliases that will get assigned when the deployment is `READY` and the target is `production`. The client needs to make a `GET` request to its API to ensure the assignment",
-      "example": [
-        "example.vercel.app"
-      ],
+      "example": ["example.vercel.app"],
       "oneOf": [
         {
           "private": true,
@@ -80,9 +76,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "use"
-        ],
+        "required": ["use"],
         "type": "object"
       },
       "maxItems": 128,
@@ -210,10 +204,7 @@
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": [
-          "source",
-          "headers"
-        ],
+        "required": ["source", "headers"],
         "properties": {
           "source": {
             "description": "A pattern that matches each incoming pathname (excluding querystring)",
@@ -227,10 +218,7 @@
             "items": {
               "type": "object",
               "additionalProperties": false,
-              "required": [
-                "key",
-                "value"
-              ],
+              "required": ["key", "value"],
               "properties": {
                 "key": {
                   "type": "string",
@@ -252,10 +240,7 @@
                 {
                   "type": "object",
                   "additionalProperties": false,
-                  "required": [
-                    "type",
-                    "value"
-                  ],
+                  "required": ["type", "value"],
                   "properties": {
                     "type": {
                       "description": "The type of request element to check",
@@ -272,19 +257,12 @@
                 {
                   "type": "object",
                   "additionalProperties": false,
-                  "required": [
-                    "type",
-                    "key"
-                  ],
+                  "required": ["type", "key"],
                   "properties": {
                     "type": {
                       "description": "The type of request element to check",
                       "type": "string",
-                      "enum": [
-                        "header",
-                        "cookie",
-                        "query"
-                      ]
+                      "enum": ["header", "cookie", "query"]
                     },
                     "key": {
                       "description": "The name of the element contained in the particular type",
@@ -310,10 +288,7 @@
                 {
                   "type": "object",
                   "additionalProperties": false,
-                  "required": [
-                    "type",
-                    "value"
-                  ],
+                  "required": ["type", "value"],
                   "properties": {
                     "type": {
                       "description": "The type of request element to check",
@@ -330,19 +305,12 @@
                 {
                   "type": "object",
                   "additionalProperties": false,
-                  "required": [
-                    "type",
-                    "key"
-                  ],
+                  "required": ["type", "key"],
                   "properties": {
                     "type": {
                       "description": "The type of request element to check",
                       "type": "string",
-                      "enum": [
-                        "header",
-                        "cookie",
-                        "query"
-                      ]
+                      "enum": ["header", "cookie", "query"]
                     },
                     "key": {
                       "description": "The name of the element contained in the particular type",
@@ -365,15 +333,10 @@
     "images": {
       "type": "object",
       "additionalProperties": false,
-      "required": [
-        "sizes"
-      ],
+      "required": ["sizes"],
       "properties": {
         "contentDispositionType": {
-          "enum": [
-            "inline",
-            "attachment"
-          ]
+          "enum": ["inline", "attachment"]
         },
         "contentSecurityPolicy": {
           "type": "string",
@@ -398,12 +361,7 @@
           "minItems": 1,
           "maxItems": 4,
           "items": {
-            "enum": [
-              "image/avif",
-              "image/webp",
-              "image/jpeg",
-              "image/png"
-            ]
+            "enum": ["image/avif", "image/webp", "image/jpeg", "image/png"]
           }
         },
         "minimumCacheTTL": {
@@ -418,15 +376,10 @@
           "items": {
             "type": "object",
             "additionalProperties": false,
-            "required": [
-              "hostname"
-            ],
+            "required": ["hostname"],
             "properties": {
               "protocol": {
-                "enum": [
-                  "http",
-                  "https"
-                ]
+                "enum": ["http", "https"]
               },
               "hostname": {
                 "type": "string",
@@ -472,10 +425,7 @@
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": [
-          "source",
-          "destination"
-        ],
+        "required": ["source", "destination"],
         "properties": {
           "source": {
             "description": "A pattern that matches each incoming pathname (excluding querystring).",
@@ -506,10 +456,7 @@
                 {
                   "type": "object",
                   "additionalProperties": false,
-                  "required": [
-                    "type",
-                    "value"
-                  ],
+                  "required": ["type", "value"],
                   "properties": {
                     "type": {
                       "description": "The type of request element to check",
@@ -526,19 +473,12 @@
                 {
                   "type": "object",
                   "additionalProperties": false,
-                  "required": [
-                    "type",
-                    "key"
-                  ],
+                  "required": ["type", "key"],
                   "properties": {
                     "type": {
                       "description": "The type of request element to check",
                       "type": "string",
-                      "enum": [
-                        "header",
-                        "cookie",
-                        "query"
-                      ]
+                      "enum": ["header", "cookie", "query"]
                     },
                     "key": {
                       "description": "The name of the element contained in the particular type",
@@ -564,10 +504,7 @@
                 {
                   "type": "object",
                   "additionalProperties": false,
-                  "required": [
-                    "type",
-                    "value"
-                  ],
+                  "required": ["type", "value"],
                   "properties": {
                     "type": {
                       "description": "The type of request element to check",
@@ -584,19 +521,12 @@
                 {
                   "type": "object",
                   "additionalProperties": false,
-                  "required": [
-                    "type",
-                    "key"
-                  ],
+                  "required": ["type", "key"],
                   "properties": {
                     "type": {
                       "description": "The type of request element to check",
                       "type": "string",
-                      "enum": [
-                        "header",
-                        "cookie",
-                        "query"
-                      ]
+                      "enum": ["header", "cookie", "query"]
                     },
                     "key": {
                       "description": "The name of the element contained in the particular type",
@@ -618,10 +548,7 @@
     },
     "regions": {
       "description": "An array of the regions the deployment's Serverless Functions should be deployed to",
-      "example": [
-        "sfo",
-        "bru"
-      ],
+      "example": ["sfo", "bru"],
       "items": {
         "maxLength": 256,
         "type": "string"
@@ -637,10 +564,7 @@
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": [
-          "source",
-          "destination"
-        ],
+        "required": ["source", "destination"],
         "properties": {
           "source": {
             "description": "A pattern that matches each incoming pathname (excluding querystring).",
@@ -661,10 +585,7 @@
                 {
                   "type": "object",
                   "additionalProperties": false,
-                  "required": [
-                    "type",
-                    "value"
-                  ],
+                  "required": ["type", "value"],
                   "properties": {
                     "type": {
                       "description": "The type of request element to check",
@@ -681,19 +602,12 @@
                 {
                   "type": "object",
                   "additionalProperties": false,
-                  "required": [
-                    "type",
-                    "key"
-                  ],
+                  "required": ["type", "key"],
                   "properties": {
                     "type": {
                       "description": "The type of request element to check",
                       "type": "string",
-                      "enum": [
-                        "header",
-                        "cookie",
-                        "query"
-                      ]
+                      "enum": ["header", "cookie", "query"]
                     },
                     "key": {
                       "description": "The name of the element contained in the particular type",
@@ -719,10 +633,7 @@
                 {
                   "type": "object",
                   "additionalProperties": false,
-                  "required": [
-                    "type",
-                    "value"
-                  ],
+                  "required": ["type", "value"],
                   "properties": {
                     "type": {
                       "description": "The type of request element to check",
@@ -739,19 +650,12 @@
                 {
                   "type": "object",
                   "additionalProperties": false,
-                  "required": [
-                    "type",
-                    "key"
-                  ],
+                  "required": ["type", "key"],
                   "properties": {
                     "type": {
                       "description": "The type of request element to check",
                       "type": "string",
-                      "enum": [
-                        "header",
-                        "cookie",
-                        "query"
-                      ]
+                      "enum": ["header", "cookie", "query"]
                     },
                     "key": {
                       "description": "The name of the element contained in the particular type",
@@ -786,9 +690,7 @@
         "anyOf": [
           {
             "type": "object",
-            "required": [
-              "src"
-            ],
+            "required": ["src"],
             "additionalProperties": false,
             "properties": {
               "src": {
@@ -901,10 +803,7 @@
                     {
                       "type": "object",
                       "additionalProperties": false,
-                      "required": [
-                        "type",
-                        "value"
-                      ],
+                      "required": ["type", "value"],
                       "properties": {
                         "type": {
                           "description": "The type of request element to check",
@@ -921,19 +820,12 @@
                     {
                       "type": "object",
                       "additionalProperties": false,
-                      "required": [
-                        "type",
-                        "key"
-                      ],
+                      "required": ["type", "key"],
                       "properties": {
                         "type": {
                           "description": "The type of request element to check",
                           "type": "string",
-                          "enum": [
-                            "header",
-                            "cookie",
-                            "query"
-                          ]
+                          "enum": ["header", "cookie", "query"]
                         },
                         "key": {
                           "description": "The name of the element contained in the particular type",
@@ -959,10 +851,7 @@
                     {
                       "type": "object",
                       "additionalProperties": false,
-                      "required": [
-                        "type",
-                        "value"
-                      ],
+                      "required": ["type", "value"],
                       "properties": {
                         "type": {
                           "description": "The type of request element to check",
@@ -979,19 +868,12 @@
                     {
                       "type": "object",
                       "additionalProperties": false,
-                      "required": [
-                        "type",
-                        "key"
-                      ],
+                      "required": ["type", "key"],
                       "properties": {
                         "type": {
                           "description": "The type of request element to check",
                           "type": "string",
-                          "enum": [
-                            "header",
-                            "cookie",
-                            "query"
-                          ]
+                          "enum": ["header", "cookie", "query"]
                         },
                         "key": {
                           "description": "The name of the element contained in the particular type",
@@ -1012,22 +894,13 @@
           },
           {
             "type": "object",
-            "required": [
-              "handle"
-            ],
+            "required": ["handle"],
             "additionalProperties": false,
             "properties": {
               "handle": {
                 "type": "string",
                 "maxLength": 32,
-                "enum": [
-                  "error",
-                  "filesystem",
-                  "hit",
-                  "miss",
-                  "resource",
-                  "rewrite"
-                ]
+                "enum": ["error", "filesystem", "hit", "miss", "resource", "rewrite"]
               }
             }
           }
@@ -1065,10 +938,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "domain",
-          "value"
-        ],
+        "required": ["domain", "value"],
         "type": "object"
       },
       "maxItems": 25,
@@ -1078,32 +948,20 @@
     "buildCommand": {
       "description": "The build command for this project. When `null` is used this value will be automatically detected",
       "maxLength": 256,
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "ignoreCommand": {
       "maxLength": 256,
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "devCommand": {
       "description": "The dev command for this project. When `null` is used this value will be automatically detected",
       "maxLength": 256,
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "framework": {
       "description": "The framework that is being used for this project. When `null` is used no framework is selected",
-      "type": [
-        "null",
-        "string"
-      ],
+      "type": ["null", "string"],
       "enum": [
         "blitzjs",
         "nextjs",
@@ -1153,18 +1011,12 @@
     "installCommand": {
       "description": "The install command for this project. When `null` is used this value will be automatically detected",
       "maxLength": 256,
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "outputDirectory": {
       "description": "The output directory of the project. When `null` is used this value will be automatically detected",
       "maxLength": 256,
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "crons": {
       "description": "An array of cron jobs that should be created for production Deployments.",
@@ -1172,10 +1024,7 @@
       "maxItems": 20,
       "items": {
         "type": "object",
-        "required": [
-          "schedule",
-          "path"
-        ],
+        "required": ["schedule", "path"],
         "properties": {
           "schedule": {
             "type": "string",

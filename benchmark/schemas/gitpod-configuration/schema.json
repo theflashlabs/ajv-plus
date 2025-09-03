@@ -9,34 +9,21 @@
       "description": "List of exposed ports.",
       "items": {
         "type": "object",
-        "required": [
-          "port"
-        ],
+        "required": ["port"],
         "properties": {
           "port": {
-            "type": [
-              "number",
-              "string"
-            ],
+            "type": ["number", "string"],
             "pattern": "^\\d+[:-]\\d+$",
             "description": "The port number (e.g. 1337) or range (e.g. 3000-3999) to expose."
           },
           "onOpen": {
             "type": "string",
-            "enum": [
-              "open-browser",
-              "open-preview",
-              "notify",
-              "ignore"
-            ],
+            "enum": ["open-browser", "open-preview", "notify", "ignore"],
             "description": "What to do when a service on this port was detected. 'notify' (default) will show a notification asking the user what to do. 'open-browser' will open a new browser tab. 'open-preview' will open in the preview on the right of the IDE. 'ignore' will do nothing."
           },
           "visibility": {
             "type": "string",
-            "enum": [
-              "private",
-              "public"
-            ],
+            "enum": ["private", "public"],
             "default": "private",
             "description": "Whether the port visibility should be private or public. 'private' (default) will only allow users with workspace access to access the port. 'public' will allow everyone with the port URL to access the port."
           },
@@ -46,10 +33,7 @@
           },
           "protocol": {
             "type": "string",
-            "enum": [
-              "http",
-              "https"
-            ],
+            "enum": ["http", "https"],
             "description": "The protocol of workspace port."
           },
           "description": {
@@ -93,22 +77,12 @@
           },
           "openIn": {
             "type": "string",
-            "enum": [
-              "bottom",
-              "main",
-              "left",
-              "right"
-            ],
+            "enum": ["bottom", "main", "left", "right"],
             "description": "The panel/area where to open the terminal. Default is 'bottom' panel."
           },
           "openMode": {
             "type": "string",
-            "enum": [
-              "split-left",
-              "split-right",
-              "tab-before",
-              "tab-after"
-            ],
+            "enum": ["split-left", "split-right", "tab-before", "tab-after"],
             "description": "The opening mode. Default is 'tab-after'."
           }
         },
@@ -116,15 +90,10 @@
       }
     },
     "image": {
-      "type": [
-        "object",
-        "string"
-      ],
+      "type": ["object", "string"],
       "description": "The Docker image to run your workspace in.",
       "default": "gitpod/workspace-full",
-      "required": [
-        "file"
-      ],
+      "required": ["file"],
       "properties": {
         "file": {
           "type": "string",
@@ -142,14 +111,10 @@
       "description": "List of additional repositories that are part of this project.",
       "items": {
         "type": "object",
-        "required": [
-          "url"
-        ],
+        "required": ["url"],
         "properties": {
           "url": {
-            "type": [
-              "string"
-            ],
+            "type": ["string"],
             "description": "The url of the git repository to clone. Supports any context URLs."
           },
           "checkoutLocation": {
@@ -173,9 +138,7 @@
       "description": "Path to where the IDE's workspace should be opened. Supports vscode's `*.code-workspace` files."
     },
     "gitConfig": {
-      "type": [
-        "object"
-      ],
+      "type": ["object"],
       "description": "Git config values should be provided in pairs. E.g. `core.autocrlf: input`. See https://git-scm.com/docs/git-config#_values.",
       "additionalProperties": {
         "type": "string"
@@ -186,10 +149,7 @@
       "description": "Configures Gitpod's GitHub app",
       "properties": {
         "prebuilds": {
-          "type": [
-            "boolean",
-            "object"
-          ],
+          "type": ["boolean", "object"],
           "description": "Set to true to enable workspace prebuilds, false to disable them. Defaults to true.",
           "properties": {
             "master": {
@@ -213,22 +173,12 @@
               "description": "Add a Review in Gitpod badge to pull requests. Defaults to true."
             },
             "addCheck": {
-              "type": [
-                "boolean",
-                "string"
-              ],
-              "enum": [
-                true,
-                false,
-                "prevent-merge-on-error"
-              ],
+              "type": ["boolean", "string"],
+              "enum": [true, false, "prevent-merge-on-error"],
               "description": "Add a commit check to pull requests. Set to 'fail-on-error' if you want broken prebuilds to block merging. Defaults to true."
             },
             "addLabel": {
-              "type": [
-                "boolean",
-                "string"
-              ],
+              "type": ["boolean", "string"],
               "description": "Add a label to a PR when it's prebuilt. Set to true to use the default label (prebuilt-in-gitpod) or set to a string to use a different label name. This is a beta feature and may be unreliable. Defaults to false."
             }
           }
@@ -342,11 +292,7 @@
           "properties": {
             "version": {
               "type": "string",
-              "enum": [
-                "stable",
-                "latest",
-                "both"
-              ],
+              "enum": ["stable", "latest", "both"],
               "description": "Whether only stable, latest or both versions should be warmed up. Default is stable only."
             }
           }

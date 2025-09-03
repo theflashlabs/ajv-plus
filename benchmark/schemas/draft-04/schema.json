@@ -24,15 +24,7 @@
       ]
     },
     "simpleTypes": {
-      "enum": [
-        "array",
-        "boolean",
-        "integer",
-        "null",
-        "number",
-        "object",
-        "string"
-      ]
+      "enum": ["array", "boolean", "integer", "null", "number", "object", "string"]
     },
     "stringArray": {
       "type": "array",
@@ -209,12 +201,8 @@
     }
   },
   "dependencies": {
-    "exclusiveMaximum": [
-      "maximum"
-    ],
-    "exclusiveMinimum": [
-      "minimum"
-    ]
+    "exclusiveMaximum": ["maximum"],
+    "exclusiveMinimum": ["minimum"]
   },
   "default": {},
   "$id": "http://json-schema.org/draft-04/schema#"

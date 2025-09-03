@@ -3,10 +3,7 @@
   "additionalProperties": false,
   "definitions": {
     "CacheFormat": {
-      "enum": [
-        "legacy",
-        "universal"
-      ],
+      "enum": ["legacy", "universal"],
       "type": "string"
     },
     "CacheSettings": {
@@ -40,10 +37,7 @@
     },
     "CacheStrategy": {
       "description": "The Strategy to use to detect if a file has changed.\n- `metadata` - uses the file system timestamp and size to detect changes (fastest).\n- `content` - uses a hash of the file content to check file changes (slower - more accurate).",
-      "enum": [
-        "metadata",
-        "content"
-      ],
+      "enum": ["metadata", "content"],
       "markdownDescription": "The Strategy to use to detect if a file has changed.\n- `metadata` - uses the file system timestamp and size to detect changes (fastest).\n- `content` - uses a hash of the file content to check file changes (slower - more accurate).",
       "type": "string"
     },
@@ -71,10 +65,7 @@
           "type": "number"
         }
       },
-      "required": [
-        "characters",
-        "cost"
-      ],
+      "required": ["characters", "cost"],
       "type": "object"
     },
     "CostMapDefInsDel": {
@@ -111,10 +102,7 @@
           "type": "number"
         }
       },
-      "required": [
-        "insDel",
-        "map"
-      ],
+      "required": ["insDel", "map"],
       "type": "object"
     },
     "CostMapDefReplace": {
@@ -151,10 +139,7 @@
           "type": "number"
         }
       },
-      "required": [
-        "map",
-        "replace"
-      ],
+      "required": ["map", "replace"],
       "type": "object"
     },
     "CostMapDefSwap": {
@@ -191,10 +176,7 @@
           "type": "number"
         }
       },
-      "required": [
-        "map",
-        "swap"
-      ],
+      "required": ["map", "swap"],
       "type": "object"
     },
     "CustomDictionaryPath": {
@@ -204,11 +186,7 @@
     },
     "CustomDictionaryScope": {
       "description": "Specifies the scope of a dictionary.",
-      "enum": [
-        "user",
-        "workspace",
-        "folder"
-      ],
+      "enum": ["user", "workspace", "folder"],
       "markdownDescription": "Specifies the scope of a dictionary.",
       "type": "string"
     },
@@ -277,10 +255,7 @@
           "type": "boolean"
         }
       },
-      "required": [
-        "file",
-        "name"
-      ],
+      "required": ["file", "name"],
       "type": "object"
     },
     "DictionaryDefinitionAugmented": {
@@ -328,10 +303,7 @@
           "type": "boolean"
         }
       },
-      "required": [
-        "name",
-        "path"
-      ],
+      "required": ["name", "path"],
       "type": "object"
     },
     "DictionaryDefinitionCustom": {
@@ -396,11 +368,7 @@
           "type": "boolean"
         }
       },
-      "required": [
-        "addWords",
-        "name",
-        "path"
-      ],
+      "required": ["addWords", "name", "path"],
       "type": "object"
     },
     "DictionaryDefinitionInline": {
@@ -485,10 +453,7 @@
           "type": "array"
         }
       },
-      "required": [
-        "flagWords",
-        "name"
-      ],
+      "required": ["flagWords", "name"],
       "type": "object"
     },
     "DictionaryDefinitionInlineIgnoreWords": {
@@ -558,10 +523,7 @@
           "type": "array"
         }
       },
-      "required": [
-        "ignoreWords",
-        "name"
-      ],
+      "required": ["ignoreWords", "name"],
       "type": "object"
     },
     "DictionaryDefinitionInlineWords": {
@@ -631,10 +593,7 @@
           "type": "array"
         }
       },
-      "required": [
-        "name",
-        "words"
-      ],
+      "required": ["name", "words"],
       "type": "object"
     },
     "DictionaryDefinitionPreferred": {
@@ -677,19 +636,11 @@
           "type": "boolean"
         }
       },
-      "required": [
-        "name",
-        "path"
-      ],
+      "required": ["name", "path"],
       "type": "object"
     },
     "DictionaryFileTypes": {
-      "enum": [
-        "S",
-        "W",
-        "C",
-        "T"
-      ],
+      "enum": ["S", "W", "C", "T"],
       "type": "string"
     },
     "DictionaryId": {
@@ -947,9 +898,7 @@
           "type": "object"
         }
       },
-      "required": [
-        "aff"
-      ],
+      "required": ["aff"],
       "type": "object"
     },
     "LanguageId": {
@@ -1131,9 +1080,7 @@
           "type": "array"
         }
       },
-      "required": [
-        "languageId"
-      ],
+      "required": ["languageId"],
       "type": "object"
     },
     "LocaleId": {
@@ -1331,10 +1278,7 @@
           "type": "array"
         },
         "pnpFiles": {
-          "default": [
-            ".pnp.js",
-            ".pnp.cjs"
-          ],
+          "default": [".pnp.js", ".pnp.cjs"],
           "description": "The PnP files to search for. Note: `.mjs` files are not currently supported.",
           "items": {
             "type": "string"
@@ -1377,9 +1321,7 @@
           "type": "array"
         }
       },
-      "required": [
-        "filename"
-      ],
+      "required": ["filename"],
       "type": "object"
     },
     "Pattern": {
@@ -1404,11 +1346,7 @@
           "type": "string"
         }
       },
-      "required": [
-        "id",
-        "regexp",
-        "penalty"
-      ],
+      "required": ["id", "regexp", "penalty"],
       "type": "object"
     },
     "PatternId": {
@@ -1493,10 +1431,7 @@
           "markdownDescription": "RegExp pattern or array of RegExp patterns."
         }
       },
-      "required": [
-        "name",
-        "pattern"
-      ],
+      "required": ["name", "pattern"],
       "type": "object"
     },
     "RegExpPatternList": {
@@ -1888,10 +1823,7 @@
       "type": "array"
     },
     "pnpFiles": {
-      "default": [
-        ".pnp.js",
-        ".pnp.cjs"
-      ],
+      "default": [".pnp.js", ".pnp.cjs"],
       "description": "The PnP files to search for. Note: `.mjs` files are not currently supported.",
       "items": {
         "type": "string"
@@ -1906,9 +1838,7 @@
       "type": "boolean"
     },
     "reporters": {
-      "default": [
-        "default"
-      ],
+      "default": ["default"],
       "description": "Define which reports to use. `default` - is a special name for the default cli reporter.\n\nExamples:\n- `[\"default\"]` - to use the default reporter\n- `[\"@cspell/cspell-json-reporter\"]` - use the cspell JSON reporter.\n- `[[\"@cspell/cspell-json-reporter\", { \"outFile\": \"out.json\" }]]`\n- `[ \"default\", [\"@cspell/cspell-json-reporter\", { \"outFile\": \"out.json\" }]]` - Use both the default reporter and the cspell-json-reporter.",
       "items": {
         "$ref": "#/definitions/ReporterSettings"

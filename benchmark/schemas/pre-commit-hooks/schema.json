@@ -310,12 +310,7 @@
   },
   "items": {
     "type": "object",
-    "required": [
-      "id",
-      "name",
-      "entry",
-      "language"
-    ],
+    "required": ["id", "name", "entry", "language"],
     "additionalProperties": false,
     "properties": {
       "id": {
@@ -351,9 +346,7 @@
       "types": {
         "description": "(optional) list of file types to run on (AND).",
         "$ref": "#/definitions/file_types",
-        "default": [
-          "file"
-        ]
+        "default": ["file"]
       },
       "types_or": {
         "description": "(optional) list of file types to run on (OR).",

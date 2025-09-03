@@ -6,26 +6,12 @@
       "description": "Available build configurations. Mirorred from UnrealTargetConfiguration.",
       "markdownDescription": "Available build configurations. Mirorred from `UnrealTargetConfiguration`.",
       "type": "string",
-      "enum": [
-        "Unknown",
-        "Debug",
-        "DebugGame",
-        "Development",
-        "Shipping",
-        "Test"
-      ]
+      "enum": ["Unknown", "Debug", "DebugGame", "Development", "Shipping", "Test"]
     },
     "BuildTargetType": {
       "description": "Enumerates build target types.",
       "type": "string",
-      "enum": [
-        "Unknown",
-        "Game",
-        "Server",
-        "Client",
-        "Editor",
-        "Program"
-      ]
+      "enum": ["Unknown", "Game", "Server", "Client", "Editor", "Program"]
     },
     "ModuleDescriptor": {
       "description": "Description of a loadable module.",
@@ -233,10 +219,7 @@
           }
         }
       },
-      "required": [
-        "Enabled",
-        "Name"
-      ]
+      "required": ["Enabled", "Name"]
     }
   },
   "description": "Descriptor for projects. Contains all the information contained within a .uproject file.",
@@ -312,10 +295,7 @@
       }
     }
   },
-  "required": [
-    "EngineAssociation",
-    "FileVersion"
-  ],
+  "required": ["EngineAssociation", "FileVersion"],
   "title": "JSON schema for Unreal Engine uproject",
   "type": "object",
   "$id": "https://json.schemastore.org/uproject.json"

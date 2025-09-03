@@ -59,23 +59,11 @@
             "elementOrder": {
               "type": "array",
               "description": "Specifies the traits used for ordering elements within a document, along with their precedence.",
-              "default": [
-                "kind",
-                "accessibility",
-                "constant",
-                "static",
-                "readonly"
-              ],
+              "default": ["kind", "accessibility", "constant", "static", "readonly"],
               "items": {
                 "type": "string",
                 "description": "",
-                "enum": [
-                  "accessibility",
-                  "kind",
-                  "constant",
-                  "static",
-                  "readonly"
-                ]
+                "enum": ["accessibility", "kind", "constant", "static", "readonly"]
               },
               "uniqueItems": true
             },
@@ -87,21 +75,13 @@
             "usingDirectivesPlacement": {
               "type": "string",
               "description": "Specifies the desired placement of using directives.\r\ninsideNamespace: Place using directives inside the namespace definition\r\noutsideNamespace: Place using directives outside the namespace definition\r\npreserve: Allow using directives inside or outside the namespace definition",
-              "enum": [
-                "insideNamespace",
-                "outsideNamespace",
-                "preserve"
-              ],
+              "enum": ["insideNamespace", "outsideNamespace", "preserve"],
               "default": "insideNamespace"
             },
             "blankLinesBetweenUsingGroups": {
               "type": "string",
               "description": "Specifies if using groups should be separated by a blank line.\r\nallow: A blank line is allowed, but not required\r\nrequire: A blank line is required\r\nomit: A blank line is not allowed",
-              "enum": [
-                "allow",
-                "require",
-                "omit"
-              ],
+              "enum": ["allow", "require", "omit"],
               "default": "allow"
             }
           }
@@ -143,10 +123,7 @@
             "tupleElementNameCasing": {
               "type": "string",
               "description": "Specifies the casing convention used for tuple element names.",
-              "enum": [
-                "camelCase",
-                "PascalCase"
-              ],
+              "enum": ["camelCase", "PascalCase"],
               "default": "PascalCase"
             }
           }
@@ -159,18 +136,10 @@
             "topLevelTypes": {
               "type": "array",
               "description": "The set of type kinds which should be placed in separate files according to the type name.",
-              "default": [
-                "class"
-              ],
+              "default": ["class"],
               "items": {
                 "type": "string",
-                "enum": [
-                  "class",
-                  "interface",
-                  "struct",
-                  "delegate",
-                  "enum"
-                ]
+                "enum": ["class", "interface", "struct", "delegate", "enum"]
               },
               "uniqueItems": true
             }
@@ -184,11 +153,7 @@
             "newlineAtEndOfFile": {
               "type": "string",
               "description": "Specifies the handling for newline characters which appear at the end of a file\r\nallow: Files are allowed to end with a single newline character, but it is not required\r\nrequire: Files are required to end with a single newline character\r\nomit: Files may not end with a newline character",
-              "enum": [
-                "allow",
-                "require",
-                "omit"
-              ],
+              "enum": ["allow", "require", "omit"],
               "default": "allow"
             },
             "allowConsecutiveUsings": {
@@ -267,10 +232,7 @@
               "type": "string",
               "description": "Specifies the preferred naming convention for files. The default value \"stylecop\" uses the naming convention defined by StyleCop Classic, while \"metadata\" uses a file naming convention that matches the metadata names of types.",
               "default": "stylecop",
-              "enum": [
-                "stylecop",
-                "metadata"
-              ]
+              "enum": ["stylecop", "metadata"]
             },
             "documentationCulture": {
               "type": "string",
@@ -280,9 +242,7 @@
             "excludeFromPunctuationCheck": {
               "type": "array",
               "description": "Specifies the top-level tags within XML documentation that will be excluded from punctuation analysis.",
-              "default": [
-                "seealso"
-              ]
+              "default": ["seealso"]
             }
           }
         }

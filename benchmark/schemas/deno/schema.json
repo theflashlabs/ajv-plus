@@ -49,13 +49,7 @@
         "jsx": {
           "description": "Specify what JSX code is generated.",
           "default": "react",
-          "enum": [
-            "preserve",
-            "react",
-            "react-jsx",
-            "react-jsxdev",
-            "react-native"
-          ]
+          "enum": ["preserve", "react", "react-jsx", "react-jsxdev", "react-native"]
         },
         "jsxFactory": {
           "description": "Specify the JSX factory function used when targeting React JSX emit, e.g. 'React.createElement' or 'h'",
@@ -85,9 +79,7 @@
           "description": "Specify a set of bundled library declaration files that describe the target runtime environment.",
           "type": "array",
           "uniqueItems": true,
-          "default": [
-            "deno.window"
-          ],
+          "default": ["deno.window"],
           "items": {
             "type": "string"
           },
@@ -307,11 +299,7 @@
         },
         "report": {
           "default": "pretty",
-          "enum": [
-            "pretty",
-            "json",
-            "compact"
-          ],
+          "enum": ["pretty", "json", "compact"],
           "description": "The default report format to use when linting"
         }
       }
@@ -376,11 +364,7 @@
         "proseWrap": {
           "description": "Define how prose should be wrapped in Markdown files.",
           "default": "always",
-          "enum": [
-            "always",
-            "never",
-            "preserve"
-          ]
+          "enum": ["always", "never", "preserve"]
         },
         "semiColons": {
           "description": "Whether to prefer using semicolons.",
@@ -413,11 +397,7 @@
             "proseWrap": {
               "description": "Define how prose should be wrapped in Markdown files.",
               "default": "always",
-              "enum": [
-                "always",
-                "never",
-                "preserve"
-              ]
+              "enum": ["always", "never", "preserve"]
             },
             "semiColons": {
               "description": "Whether to prefer using semicolons.",
@@ -527,10 +507,7 @@
     },
     "lock": {
       "description": "Whether to use a lock file or the path to use for the lock file. Can be overridden by CLI arguments.",
-      "type": [
-        "string",
-        "boolean"
-      ],
+      "type": ["string", "boolean"],
       "default": true
     }
   }

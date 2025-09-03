@@ -18,10 +18,7 @@
     },
     "threshold": {
       "title": "Threshold",
-      "type": [
-        "integer",
-        "null"
-      ]
+      "type": ["integer", "null"]
     }
   },
   "description": "Configuration file as an alternative for configuring your repository in the settings page.",

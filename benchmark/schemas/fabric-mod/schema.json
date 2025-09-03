@@ -17,9 +17,7 @@
               "description": "The entrypoint function or class"
             }
           },
-          "required": [
-            "value"
-          ]
+          "required": ["value"]
         },
         {
           "type": "string",
@@ -58,11 +56,7 @@
     },
     "environment": {
       "type": "string",
-      "enum": [
-        "*",
-        "client",
-        "server"
-      ],
+      "enum": ["*", "client", "server"],
       "description": "The environment where this mod will be loaded"
     },
     "nestedJar": {
@@ -73,9 +67,7 @@
           "description": "A string value pointing to a path from the root of the JAR to a nested JAR which should be loaded alongside the outer mod JAR"
         }
       },
-      "required": [
-        "file"
-      ]
+      "required": ["file"]
     },
     "person": {
       "oneOf": [
@@ -95,9 +87,7 @@
               "$ref": "#/definitions/contactInfo"
             }
           },
-          "required": [
-            "name"
-          ]
+          "required": ["name"]
         }
       ]
     },
@@ -335,10 +325,6 @@
       "description": "A map of namespace:id→value for custom data fields."
     }
   },
-  "required": [
-    "id",
-    "version",
-    "schemaVersion"
-  ],
+  "required": ["id", "version", "schemaVersion"],
   "type": "object"
 }

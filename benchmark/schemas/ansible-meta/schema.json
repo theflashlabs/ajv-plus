@@ -10,12 +10,7 @@
         "versions": {
           "default": "all",
           "items": {
-            "enum": [
-              "6.1",
-              "7.1",
-              "7.2",
-              "all"
-            ],
+            "enum": ["6.1", "7.1", "7.2", "all"],
             "type": "string"
           },
           "type": "array"
@@ -34,9 +29,7 @@
         "versions": {
           "default": "all",
           "items": {
-            "enum": [
-              "all"
-            ],
+            "enum": ["all"],
             "type": "string"
           },
           "type": "array"
@@ -55,12 +48,7 @@
         "versions": {
           "default": "all",
           "items": {
-            "enum": [
-              "all",
-              "1",
-              "2",
-              "2023"
-            ],
+            "enum": ["all", "1", "2", "2023"],
             "type": "string"
           },
           "type": "array"
@@ -113,9 +101,7 @@
         "versions": {
           "default": "all",
           "items": {
-            "enum": [
-              "all"
-            ],
+            "enum": ["all"],
             "type": "string"
           },
           "type": "array"
@@ -134,9 +120,7 @@
         "versions": {
           "default": "all",
           "items": {
-            "enum": [
-              "all"
-            ],
+            "enum": ["all"],
             "type": "string"
           },
           "type": "array"
@@ -155,16 +139,7 @@
         "versions": {
           "default": "all",
           "items": {
-            "enum": [
-              "2.5",
-              "3.0",
-              "3.1",
-              "3.2",
-              "3.3",
-              "3.4",
-              "3.5",
-              "all"
-            ],
+            "enum": ["2.5", "3.0", "3.1", "3.2", "3.3", "3.4", "3.5", "all"],
             "type": "string"
           },
           "type": "array"
@@ -214,12 +189,7 @@
         "versions": {
           "default": "all",
           "items": {
-            "enum": [
-              "10",
-              "6",
-              "9",
-              "all"
-            ],
+            "enum": ["10", "6", "9", "all"],
             "type": "string"
           },
           "type": "array"
@@ -232,19 +202,13 @@
       "additionalProperties": true,
       "anyOf": [
         {
-          "required": [
-            "role"
-          ]
+          "required": ["role"]
         },
         {
-          "required": [
-            "src"
-          ]
+          "required": ["src"]
         },
         {
-          "required": [
-            "name"
-          ]
+          "required": ["name"]
         }
       ],
       "markdownDescription": "See https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_reuse_roles.html#role-dependencies and https://github.com/ansible/ansible/blob/devel/lib/ansible/playbook/role/metadata.py#L79\n\nOther keys are treated as role [parameters](https://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse_roles.html#passing-different-parameters).",
@@ -262,10 +226,7 @@
           "type": "string"
         },
         "scm": {
-          "enum": [
-            "hg",
-            "git"
-          ],
+          "enum": ["hg", "git"],
           "title": "Scm",
           "type": "string"
         },
@@ -278,10 +239,7 @@
             "type": "string"
           },
           "title": "Tags",
-          "type": [
-            "array",
-            "string"
-          ]
+          "type": ["array", "string"]
         },
         "vars": {
           "title": "Vars",
@@ -309,13 +267,7 @@
         "versions": {
           "default": "all",
           "items": {
-            "enum": [
-              "ascii",
-              "beowulf",
-              "ceres",
-              "jessie",
-              "all"
-            ],
+            "enum": ["ascii", "beowulf", "ceres", "jessie", "all"],
             "type": "string"
           },
           "type": "array"
@@ -334,11 +286,7 @@
         "versions": {
           "default": "all",
           "items": {
-            "enum": [
-              "5.2",
-              "5.4",
-              "all"
-            ],
+            "enum": ["5.2", "5.4", "all"],
             "type": "string"
           },
           "type": "array"
@@ -357,14 +305,7 @@
         "versions": {
           "default": "all",
           "items": {
-            "enum": [
-              "5",
-              "6",
-              "7",
-              "8",
-              "9",
-              "all"
-            ],
+            "enum": ["5", "6", "7", "8", "9", "all"],
             "type": "string"
           },
           "type": "array"
@@ -477,12 +418,7 @@
           },
           "then": {
             "$comment": "Standalone role, so we require several fields.",
-            "required": [
-              "author",
-              "description",
-              "license",
-              "min_ansible_version"
-            ]
+            "required": ["author", "description", "license", "min_ansible_version"]
           }
         },
         {
@@ -506,17 +442,13 @@
                 "video_links"
               ]
             },
-            "required": [
-              "description"
-            ]
+            "required": ["description"]
           }
         }
       ],
       "else": {
         "$comment": "If standalone is false, then we have a collection role and only description is required",
-        "required": [
-          "description"
-        ]
+        "required": ["description"]
       },
       "properties": {
         "author": {
@@ -602,9 +534,7 @@
         "versions": {
           "default": "all",
           "items": {
-            "enum": [
-              "all"
-            ],
+            "enum": ["all"],
             "type": "string"
           },
           "type": "array"
@@ -623,9 +553,7 @@
         "versions": {
           "default": "all",
           "items": {
-            "enum": [
-              "all"
-            ],
+            "enum": ["all"],
             "type": "string"
           },
           "type": "array"
@@ -644,9 +572,7 @@
         "versions": {
           "default": "all",
           "items": {
-            "enum": [
-              "all"
-            ],
+            "enum": ["all"],
             "type": "string"
           },
           "type": "array"
@@ -665,9 +591,7 @@
         "versions": {
           "default": "all",
           "items": {
-            "enum": [
-              "all"
-            ],
+            "enum": ["all"],
             "type": "string"
           },
           "type": "array"
@@ -686,11 +610,7 @@
         "versions": {
           "default": "all",
           "items": {
-            "enum": [
-              "10",
-              "11",
-              "all"
-            ],
+            "enum": ["10", "11", "all"],
             "type": "string"
           },
           "type": "array"
@@ -709,9 +629,7 @@
         "versions": {
           "default": "all",
           "items": {
-            "enum": [
-              "all"
-            ],
+            "enum": ["all"],
             "type": "string"
           },
           "type": "array"
@@ -730,9 +648,7 @@
         "versions": {
           "default": "all",
           "items": {
-            "enum": [
-              "all"
-            ],
+            "enum": ["all"],
             "type": "string"
           },
           "type": "array"
@@ -751,18 +667,7 @@
         "versions": {
           "default": "all",
           "items": {
-            "enum": [
-              "2.0",
-              "2016",
-              "2017",
-              "2018",
-              "2019",
-              "2020",
-              "2021",
-              "2022",
-              "2023",
-              "all"
-            ],
+            "enum": ["2.0", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "all"],
             "type": "string"
           },
           "type": "array"
@@ -811,11 +716,7 @@
         "versions": {
           "default": "all",
           "items": {
-            "enum": [
-              "7",
-              "8",
-              "all"
-            ],
+            "enum": ["7", "8", "all"],
             "type": "string"
           },
           "type": "array"
@@ -834,9 +735,7 @@
         "versions": {
           "default": "all",
           "items": {
-            "enum": [
-              "all"
-            ],
+            "enum": ["all"],
             "type": "string"
           },
           "type": "array"
@@ -855,17 +754,7 @@
         "versions": {
           "default": "all",
           "items": {
-            "enum": [
-              "8.0",
-              "8.1",
-              "8.2",
-              "9.0",
-              "9.1",
-              "9.2",
-              "9.3",
-              "10.0",
-              "all"
-            ],
+            "enum": ["8.0", "8.1", "8.2", "9.0", "9.1", "9.2", "9.3", "10.0", "all"],
             "type": "string"
           },
           "type": "array"
@@ -923,14 +812,7 @@
         "versions": {
           "default": "all",
           "items": {
-            "enum": [
-              "17.01",
-              "18.06",
-              "19.07",
-              "21.02",
-              "22.03",
-              "all"
-            ],
+            "enum": ["17.01", "18.06", "19.07", "21.02", "22.03", "all"],
             "type": "string"
           },
           "type": "array"
@@ -991,13 +873,7 @@
         "versions": {
           "default": "all",
           "items": {
-            "enum": [
-              "7.1",
-              "8.0",
-              "8.1",
-              "9.0",
-              "all"
-            ],
+            "enum": ["7.1", "8.0", "8.1", "9.0", "all"],
             "type": "string"
           },
           "type": "array"
@@ -1056,9 +932,7 @@
         "versions": {
           "default": "all",
           "items": {
-            "enum": [
-              "all"
-            ],
+            "enum": ["all"],
             "type": "string"
           },
           "type": "array"
@@ -1077,15 +951,7 @@
         "versions": {
           "default": "all",
           "items": {
-            "enum": [
-              "10",
-              "11.0",
-              "11.1",
-              "11.2",
-              "11.3",
-              "11.4",
-              "all"
-            ],
+            "enum": ["10", "11.0", "11.1", "11.2", "11.3", "11.4", "all"],
             "type": "string"
           },
           "type": "array"
@@ -1104,13 +970,7 @@
         "versions": {
           "default": "all",
           "items": {
-            "enum": [
-              "6.0",
-              "6.1",
-              "6.2",
-              "7.0",
-              "all"
-            ],
+            "enum": ["6.0", "6.1", "6.2", "7.0", "all"],
             "type": "string"
           },
           "type": "array"
@@ -1129,13 +989,7 @@
         "versions": {
           "default": "all",
           "items": {
-            "enum": [
-              "12.1",
-              "13.0",
-              "13.1",
-              "14.0",
-              "all"
-            ],
+            "enum": ["12.1", "13.0", "13.1", "14.0", "all"],
             "type": "string"
           },
           "type": "array"
@@ -1201,9 +1055,7 @@
         "versions": {
           "default": "all",
           "items": {
-            "enum": [
-              "all"
-            ],
+            "enum": ["all"],
             "type": "string"
           },
           "type": "array"
@@ -1251,9 +1103,7 @@
         "versions": {
           "default": "all",
           "items": {
-            "enum": [
-              "all"
-            ],
+            "enum": ["all"],
             "type": "string"
           },
           "type": "array"
@@ -1297,9 +1147,7 @@
         "versions": {
           "default": "all",
           "items": {
-            "enum": [
-              "all"
-            ],
+            "enum": ["all"],
             "type": "string"
           },
           "type": "array"
@@ -1318,15 +1166,7 @@
         "versions": {
           "default": "all",
           "items": {
-            "enum": [
-              "Big-Sur",
-              "Catalina",
-              "High-Sierra",
-              "Mojave",
-              "Monterey",
-              "Sierra",
-              "all"
-            ],
+            "enum": ["Big-Sur", "Catalina", "High-Sierra", "Mojave", "Monterey", "Sierra", "all"],
             "type": "string"
           },
           "type": "array"
@@ -1380,9 +1220,7 @@
         "versions": {
           "default": "all",
           "items": {
-            "enum": [
-              "all"
-            ],
+            "enum": ["all"],
             "type": "string"
           },
           "type": "array"
@@ -1544,14 +1382,7 @@
         "versions": {
           "default": "all",
           "items": {
-            "enum": [
-              "5.5",
-              "6.0",
-              "6.5",
-              "6.7",
-              "7.0",
-              "all"
-            ],
+            "enum": ["5.5", "6.0", "6.5", "6.7", "7.0", "all"],
             "type": "string"
           },
           "type": "array"
@@ -1570,14 +1401,7 @@
         "versions": {
           "default": "all",
           "items": {
-            "enum": [
-              "5.5",
-              "6.0",
-              "6.5",
-              "6.7",
-              "7.0",
-              "all"
-            ],
+            "enum": ["5.5", "6.0", "6.5", "6.7", "7.0", "all"],
             "type": "string"
           },
           "type": "array"
@@ -1590,9 +1414,7 @@
   "$id": "https://raw.githubusercontent.com/ansible/ansible-lint/main/src/ansiblelint/schemas/meta.json",
   "$schema": "http://json-schema.org/draft-07/schema#",
   "description": "https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_reuse_roles.html#using-role-dependencies",
-  "examples": [
-    "meta/main.yml"
-  ],
+  "examples": ["meta/main.yml"],
   "properties": {
     "additionalProperties": false,
     "allow_duplicates": {
@@ -1614,8 +1436,5 @@
     }
   },
   "title": "Ansible Meta Schema v1/v2",
-  "type": [
-    "object",
-    "null"
-  ]
+  "type": ["object", "null"]
 }

@@ -18,11 +18,7 @@
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": [
-          "name",
-          "version",
-          "repository"
-        ],
+        "required": ["name", "version", "repository"],
         "properties": {
           "name": {
             "description": "The name of the chart",
@@ -41,11 +37,7 @@
       }
     }
   },
-  "required": [
-    "generated",
-    "digest",
-    "dependencies"
-  ],
+  "required": ["generated", "digest", "dependencies"],
   "title": "Helm Chart.lock",
   "type": "object"
 }
