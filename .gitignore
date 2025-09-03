@@ -40,8 +40,6 @@ test/
 # browser bundles
 bundle/
 
-package-lock.json
-
 spec/_json/*.js
 
 # docs
