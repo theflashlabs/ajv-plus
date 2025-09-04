@@ -9,6 +9,7 @@ on:
 permissions:
   contents: write
   deployments: write
+  pull_requests: write
 
 jobs:
   benchmark:
