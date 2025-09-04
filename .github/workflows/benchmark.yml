@@ -9,7 +9,7 @@ on:
 permissions:
   contents: write
   deployments: write
-  pull_requests: write
+  pull-requests: write
 
 jobs:
   benchmark:
