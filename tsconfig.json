@@ -4,10 +4,10 @@
   "compilerOptions": {
     "rootDir": "./lib",
     "outDir": "dist",
-    "lib": ["ES2018", "DOM"],
+    "lib": ["ES2022", "DOM"],
     "types": ["node"],
     "allowJs": true,
-    "target": "ES2018",
+    "target": "ES2022",
     "resolveJsonModule": true
   }
 }
