@@ -1,5 +1,5 @@
 {
-  "name": "ajv-plus",
+  "name": "@theflashlabs/ajv-plus",
   "version": "0.1.0",
   "description": "A maintained and JSON specification-compliant fork of the original `ajv` package.",
   "main": "dist/ajv.js",
@@ -44,7 +44,7 @@
       "text-summary"
     ]
   },
-  "repository": "bavulapati/ajv-plus",
+  "repository": "theflashlabs/ajv-plus",
   "keywords": [
     "ajv",
     "JSON",
@@ -63,8 +63,8 @@
     "url": "https://bavulapati.com"
   },
   "license": "MIT",
-  "bugs": "https://github.com/bavulapati/ajv-plus/issues",
-  "homepage": "https://github.com/bavulapati/ajv-plus",
+  "bugs": "https://github.com/theflashlabs/ajv-plus/issues",
+  "homepage": "https://github.com/theflashlabs/ajv-plus",
   "runkitExampleFilename": ".runkit_example.js",
   "dependencies": {
     "fast-deep-equal": "^3.1.3",
