@@ -1,6 +1,6 @@
 {
   "name": "@theflashlabs/ajv-plus",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A maintained and JSON specification-compliant fork of the original `ajv` package.",
   "main": "dist/ajv.js",
   "types": "dist/ajv.d.ts",
