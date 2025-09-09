@@ -3,12 +3,12 @@
 This is a maintained and JSON specification-compliant fork of the original `ajv` package.
 The fastest JSON validator for Node.js and browser.
 
-Supports JSON Schema draft-04/06/07/2019-09/2020-12 ([draft-04 support](https://ajv.js.org/json-schema.html#draft-04) requires ajv-draft-04 package).
+Supports JSON Schema 06/07/2019-09/2020-12.
 
-[![build](https://github.com/bavulapati/ajv-plus/actions/workflows/build.yml/badge.svg)](https://github.com/bavulapati/ajv-plus/actions?query=workflow%3Abuild)
-[![npm](https://img.shields.io/npm/v/ajv-plus.svg)](https://www.npmjs.com/package/ajv-plus)
-[![npm downloads](https://img.shields.io/npm/dm/ajv-plus.svg)](https://www.npmjs.com/package/ajv-plus)
-[![Coverage Status](https://coveralls.io/repos/github/bavulapati/ajv-plus/badge.svg?branch=main)](https://coveralls.io/github/bavulapati/ajv-plus?branch=main)
+[![build](https://github.com/theflashlabs/ajv-plus/actions/workflows/build.yml/badge.svg)](https://github.com/theflashlabs/ajv-plus/actions?query=workflow%3Abuild)
+[![npm](https://img.shields.io/npm/v/@theflashlabs/ajv-plus.svg)](https://www.npmjs.com/package/@theflashlabs/ajv-plus)
+[![npm downloads](https://img.shields.io/npm/dm/@theflashlabs/ajv-plus.svg)](https://www.npmjs.com/package/@theflashlabs/ajv-plus)
+[![Coverage Status](https://coveralls.io/repos/github/theflashlabs/ajv-plus/badge.svg?branch=main)](https://coveralls.io/github/theflashlabs/ajv-plus?branch=main)
 
 ## Why fork?
 
@@ -38,7 +38,7 @@ Thank you.
 To install latest version :
 
 ```
-npm install ajv-plus
+npm install @theflashlabs/ajv-plus
 ```
 
 ## <a name="usage"></a>Getting started
@@ -47,9 +47,9 @@ In JavaScript:
 
 ```javascript
 // or ESM/TypeScript import
-import Ajv from "ajv-plus"
+import Ajv from "@theflashlabs/ajv-plus"
 // Node.js require:
-const Ajv = require("ajv-plus")
+const Ajv = require("@theflashlabs/ajv-plus")
 
 const ajv = new Ajv() // options can be passed, e.g. {allErrors: true}
 
@@ -75,7 +75,7 @@ if (!valid) console.log(validate.errors)
 
 ## Changes history
 
-See [https://github.com/bavulapati/ajv-plus/releases](https://github.com/bavulapati/ajv-plus/releases)
+See [https://github.com/theflashlabs/ajv-plus/releases](https://github.com/bavulapati/ajv-plus/releases)
 
 ## Code of conduct
 
