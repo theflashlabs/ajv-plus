@@ -1,3 +1,7 @@
+<img align="right" alt="Ajv-Plus logo" width="160" src="./docs/.vuepress/public/img/ajv-plus.png">
+
+&nbsp;
+
 # Ajv-Plus JSON schema validator
 
 This is a maintained and JSON specification-compliant fork of the original `ajv` package.
@@ -14,6 +18,7 @@ Supports JSON Schema 06/07/2019-09/2020-12.
 
 - Ajv-Plus wants to be actively maintained. Support the upcoming JSON Schema specification version too.
 - Ajv-Plus wants to be 100% compliant with the standard JSON Specification.
+- Benchmarks are available at https://theflashlabs.github.io/ajv-plus/dev/bench/
 
 ## Thanks to Author and contributors of AJV
 
