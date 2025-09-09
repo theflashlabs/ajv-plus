@@ -43,4 +43,4 @@ function validTime(str: string): boolean {
   )
 }
 
-validTimestamp.code = 'require("ajv/dist/runtime/timestamp").default'
+validTimestamp.code = 'require("@theflashlabs/ajv-plus/dist/runtime/timestamp").default'

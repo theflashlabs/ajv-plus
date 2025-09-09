@@ -2,6 +2,6 @@
 import * as equal from "fast-deep-equal"
 
 type Equal = typeof equal & {code: string}
-;(equal as Equal).code = 'require("ajv/dist/runtime/equal").default'
+;(equal as Equal).code = 'require("@theflashlabs/ajv-plus/dist/runtime/equal").default'
 
 export default equal as Equal

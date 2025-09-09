@@ -17,4 +17,4 @@ export default function ucs2length(str: string): number {
   return length
 }
 
-ucs2length.code = 'require("ajv/dist/runtime/ucs2length").default'
+ucs2length.code = 'require("@theflashlabs/ajv-plus/dist/runtime/ucs2length").default'

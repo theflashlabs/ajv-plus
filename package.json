@@ -5,7 +5,6 @@
   "main": "dist/ajv.js",
   "types": "dist/ajv.d.ts",
   "files": [
-    "lib/",
     "dist/",
     ".runkit_example.js"
   ],
@@ -26,7 +25,7 @@
     "test-karma": "karma start",
     "test-browser": "rm -rf .browser && npm run bundle && scripts/prepare-tests && karma start",
     "test-all": "npm run test-cov && if-node-version 12 npm run test-browser",
-    "test": "npm run json-tests && npm run prettier:check && npm run eslint && npm link && npm link --legacy-peer-deps ajv-plus && npm run test-cov",
+    "test": "npm run json-tests && npm run prettier:check && npm run eslint && npm link && npm link --legacy-peer-deps @theflashlabs/ajv-plus && npm run test-cov",
     "test-ci": "AJV_FULL_TEST=true npm test",
     "prepublish": "npm run build",
     "benchmark": "npm i && npm run build && npm link && cd ./benchmark && npm link --legacy-peer-deps ajv-plus && npm i && node ./json_schema.mjs",
@@ -87,7 +86,7 @@
     "@types/require-from-string": "^1.2.3",
     "@typescript-eslint/eslint-plugin": "^7.3.1",
     "@typescript-eslint/parser": "^7.3.1",
-    "ajv-formats": "^3.0.1",
+    "@theflashlabs/ajv-formats": "^0.0.3",
     "browserify": "^17.0.0",
     "chai": "^4.4.1",
     "dayjs": "^1.11.10",

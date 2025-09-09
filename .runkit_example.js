@@ -1,4 +1,4 @@
-const Ajv = require("ajv")
+const Ajv = require("@theflashlabs/ajv-plus")
 const ajv = new Ajv({allErrors: true})
 
 const schema = {

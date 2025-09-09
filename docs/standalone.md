@@ -10,7 +10,7 @@ Ajv supports generating standalone validation functions from JSON Schemas at com
 
 This functionality in Ajv v7 supersedes the deprecated package ajv-pack that can be used with Ajv v6. All schemas, including those with recursive references, formats and user-defined keywords are supported, with few [limitations](#configuration-and-limitations).
 
-## Two-step process 
+## Two-step process
 
 The **first step** is to **generate** the standalone validation function code. This is done at compile/build time of your project and the output is a generated JS file. The **second step** is to **use** the generated JS validation function.
 
@@ -27,6 +27,7 @@ Note that the way the function is exported, differs if you are exporting a singl
 In most cases you would use this functionality via [ajv-cli](https://github.com/ajv-validator/ajv-cli) (>= 4.0.0) to generate the standalone code that exports the validation function. See [ajv-cli](https://github.com/ajv-validator/ajv-cli#compile-schemas) docs and the [cli options](https://github.com/ajv-validator/ajv-cli#ajv-options) for additional information.
 
 #### Using the defaults - ES6 and CJS exports
+
 ```sh
 npm install -g ajv-cli
 ajv compile -s schema.json -o validate_schema.js
@@ -34,7 +35,8 @@ ajv compile -s schema.json -o validate_schema.js
 
 ### Generating using the JS library
 
-Install the package, version >= v7.0.0: 
+Install the package, version >= v7.0.0:
+
 ```sh
 npm install ajv
 ```
@@ -54,7 +56,7 @@ const schema = {
   properties: {
     bar: {type: "string"},
   },
-  "required": ["bar"]
+  required: ["bar"],
 }
 
 // The generated code will have a default export:
@@ -80,8 +82,8 @@ const schemaFoo = {
   $schema: "http://json-schema.org/draft-07/schema#",
   type: "object",
   properties: {
-    foo: {"$ref": "#/definitions/Bar"}
-  }
+    foo: {$ref: "#/definitions/Bar"},
+  },
 }
 const schemaBar = {
   $id: "#/definitions/Bar",
@@ -90,7 +92,7 @@ const schemaBar = {
   properties: {
     bar: {type: "string"},
   },
-  "required": ["bar"]
+  required: ["bar"],
 }
 
 // For CJS, it generates an exports array, will generate
@@ -115,8 +117,8 @@ const schemaFoo = {
   $schema: "http://json-schema.org/draft-07/schema#",
   type: "object",
   properties: {
-    foo: {"$ref": "#/definitions/Bar"}
-  }
+    foo: {$ref: "#/definitions/Bar"},
+  },
 }
 const schemaBar = {
   $id: "#/definitions/Bar",
@@ -125,7 +127,7 @@ const schemaBar = {
   properties: {
     bar: {type: "string"},
   },
-  "required": ["bar"]
+  required: ["bar"],
 }
 
 // For ESM, the export name needs to be a valid export name, it can not be `export const #/definitions/Foo = ...;` so we
@@ -135,8 +137,8 @@ const schemaBar = {
 // and `#/definitions/Bar` respectfully
 const ajv = new Ajv({schemas: [schemaFoo, schemaBar], code: {source: true, esm: true}})
 let moduleCode = standaloneCode(ajv, {
-  "Foo": "#/definitions/Foo",
-  "Bar": "#/definitions/Bar"
+  Foo: "#/definitions/Foo",
+  Bar: "#/definitions/Bar",
 })
 
 // Now you can write the module code to file
@@ -148,87 +150,78 @@ The ESM version only requires the mapping if the ids are not valid export names.
 `Foo` and `Bar` instead of `#/definitions/Foo` and `#/definitions/Bar` then the mapping would not be needed.
 :::
 
-
 ## Using the validation function(s)
 
 ### Validating a single schemas using the JS library - ES6 and CJS
 
 ```javascript
-const Bar = require('./validate-cjs')
+const Bar = require("./validate-cjs")
 
 const barPass = {
-    bar: "something"
+  bar: "something",
 }
 
 const barFail = {
-    // bar: "something" // <= empty/omitted property that is required
+  // bar: "something" // <= empty/omitted property that is required
 }
 
 let validateBar = Bar
-if (!validateBar(barPass))
-  console.log("ERRORS 1:", validateBar.errors) //Never reaches this because valid
+if (!validateBar(barPass)) console.log("ERRORS 1:", validateBar.errors) //Never reaches this because valid
 
-if (!validateBar(barFail))
-  console.log("ERRORS 2:", validateBar.errors) //Errors array gets logged
+if (!validateBar(barFail)) console.log("ERRORS 2:", validateBar.errors) //Errors array gets logged
 ```
 
 ### Validating multiple schemas using the JS library - ES6 and CJS
 
 ```javascript
-const validations = require('./validate-cjs')
+const validations = require("./validate-cjs")
 
 const fooPass = {
   foo: {
-    bar: "something"
-  }
+    bar: "something",
+  },
 }
 
 const fooFail = {
   foo: {
     // bar: "something" // <= empty/omitted property that is required
-  }
+  },
 }
 
-let validateFoo = validations["#/definitions/Foo"];
-if (!validateFoo(fooPass))
-  console.log("ERRORS 1:", validateFoo.errors); //Never reaches this because valid
+let validateFoo = validations["#/definitions/Foo"]
+if (!validateFoo(fooPass)) console.log("ERRORS 1:", validateFoo.errors) //Never reaches this because valid
 
-if (!validateFoo(fooFail))
-  console.log("ERRORS 2:", validateFoo.errors); //Errors array gets logged
-
+if (!validateFoo(fooFail)) console.log("ERRORS 2:", validateFoo.errors) //Errors array gets logged
 ```
 
 ### Validating multiple schemas using the JS library - ES6 and ESM
 
 ```javascript
-import {Foo, Bar} from './validate-multiple-esm.mjs';
+import {Foo, Bar} from "./validate-multiple-esm.mjs"
 
 const fooPass = {
   foo: {
-    bar: "something"
-  }
+    bar: "something",
+  },
 }
 
 const fooFail = {
   foo: {
     // bar: "something" // bar: "something" <= empty properties
-  }
+  },
 }
 
-let validateFoo = Foo;
-if (!validateFoo(fooPass))
-  console.log("ERRORS 1:", validateFoo.errors); //Never reaches here because valid
+let validateFoo = Foo
+if (!validateFoo(fooPass)) console.log("ERRORS 1:", validateFoo.errors) //Never reaches here because valid
 
-if (!validateFoo(fooFail))
-  console.log("ERRORS 2:", validateFoo.errors); //Errors array gets logged
+if (!validateFoo(fooFail)) console.log("ERRORS 2:", validateFoo.errors) //Errors array gets logged
 ```
-
 
 ### Requirement at runtime
 
-One of the main reason for using the standalone mode is to start applications faster to avoid runtime schema compilation. 
+One of the main reason for using the standalone mode is to start applications faster to avoid runtime schema compilation.
 
-The standalone generated functions still has a dependency on the Ajv. Specifically on the code in the [runtime](https://github.com/ajv-validator/ajv/tree/master/lib/runtime) folder of the package. 
+The standalone generated functions still has a dependency on the Ajv. Specifically on the code in the [runtime](https://github.com/ajv-validator/ajv/tree/master/lib/runtime) folder of the package.
 
 Completely isolated validation functions can be generated if desired (won't be for most use cases). Run the generated code through a bundler like ES Build to create completely isolated validation functions that can be imported/required without any dependency on Ajv. This is also not needed if your project is already using a bundler.
 
@@ -243,7 +236,7 @@ To support standalone code generation:
 
 ```javascript
 import myFormats from "./my-formats"
-import Ajv, {_} from "ajv"
+import Ajv, {_} from "@theflashlabs/ajv-plus"
 const ajv = new Ajv({
   formats: myFormats,
   code: {
@@ -252,4 +245,5 @@ const ajv = new Ajv({
   },
 })
 
-If you only use formats from [ajv-formats](https://github.com/ajv-validator/ajv-formats) this option will be set by this package automatically.
+If you only use formats from [ajv-formats](https://github.com/theflashlabs/ajv-formats) this option will be set by this package automatically.
+```

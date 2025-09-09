@@ -2,7 +2,7 @@ import type Ajv from "../dist/core"
 import type {AnyValidateFunction} from "../dist/core"
 import _Ajv from "./ajv"
 import standaloneCode from "../dist/standalone"
-import ajvFormats from "ajv-formats"
+import ajvFormats from "@theflashlabs/ajv-formats"
 import requireFromString = require("require-from-string")
 import {importFromStringSync} from "module-from-string"
 import assert = require("assert")
