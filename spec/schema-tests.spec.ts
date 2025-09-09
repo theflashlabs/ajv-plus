@@ -5,7 +5,7 @@ import {withStandalone} from "./ajv_standalone"
 import jsonSchemaTest = require("json-schema-test")
 import options from "./ajv_options"
 import {afterError, afterEach} from "./after_test"
-import ajvFormats from "ajv-formats"
+import ajvFormats from "@theflashlabs/ajv-formats"
 
 const instances = getAjvInstances(_Ajv, options, {strict: false, formats: {allowedUnknown: true}})
 

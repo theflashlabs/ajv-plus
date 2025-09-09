@@ -8,6 +8,7 @@
     "types": ["node"],
     "allowJs": true,
     "target": "ES2018",
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "sourceMap": false
   }
 }

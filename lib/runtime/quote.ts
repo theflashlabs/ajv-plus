@@ -28,4 +28,4 @@ export default function quote(s: string): string {
   )
 }
 
-quote.code = 'require("ajv/dist/runtime/quote").default'
+quote.code = 'require("@theflashlabs/ajv-plus/dist/runtime/quote").default'

@@ -9,22 +9,24 @@ To add all formats from this plugin:
 <code-group>
 <code-block title="JavaScript">
 ```javascript
-const Ajv = require("ajv")
-const addFormats = require("ajv-formats")
+const Ajv = require("@theflashlabs/ajv-plus")
+const addFormats = require("@theflashlabs/ajv-formats")
 
 const ajv = new Ajv()
 addFormats(ajv)
-```
+
+````
 </code-block>
 
 <code-block title="TypeScript">
 ```typescript
 import Ajv from "ajv"
-import addFormats from "ajv-formats"
+import addFormats from "@theflashlabs/ajv-formats"
 
 const ajv = new Ajv()
 addFormats(ajv)
-```
+````
+
 </code-block>
 </code-group>
 

@@ -1,6 +1,6 @@
 import fs from "fs"
 import readline from "readline"
-import addFormats from "ajv-formats"
+import addFormats from "@theflashlabs/ajv-formats"
 
 const DRAFTS = {
   "https://json-schema.org/draft/2020-12/schema": (await import("../dist/2020.js")).Ajv2020,
