@@ -884,7 +884,7 @@ function keywordMetaschema(this: Ajv, def: KeywordDefinition): void {
 }
 
 const $dataRef = {
-  $ref: "https://raw.githubusercontent.com/theflashlabs/ajv-plus/main/lib/refs/data.json#",
+  $ref: "https://raw.githubusercontent.com/ajv-validator/ajv/master/lib/refs/data.json#",
 }
 
 function schemaOrData(schema: AnySchema): AnySchemaObject {
