@@ -7,7 +7,7 @@ import {withStandalone} from "./ajv_standalone"
 import jsonSchemaTest = require("json-schema-test")
 import options from "./ajv_options"
 import {afterError, afterEach} from "./after_test"
-import ajvFormats from "@theflashlabs/ajv-formats"
+import ajvFormats from "../dist/formats"
 const draft6MetaSchema = require("../dist/refs/json-schema-draft-06.json")
 import {toHash} from "../dist/compile/util"
 import chai from "./chai"
@@ -222,7 +222,6 @@ function runTest({instances, draft, tests, skip = [], remotes = {}}: SchemaTest)
     }
     for (const id in remoteRefs) ajv.addSchema(remoteRefs[id], id)
     for (const id in remotes) ajv.addSchema(remotes[id], id)
-    //@ts-ignore
     ajvFormats(ajv)
   }
 

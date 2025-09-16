@@ -1,3 +1,5 @@
+import {join as pathJoin} from "node:path"
+
 // https://mathiasbynens.be/notes/javascript-encoding
 // https://github.com/bestiejs/punycode.js - punycode.ucs2.decode
 export default function ucs2length(str: string): number {
@@ -17,4 +19,4 @@ export default function ucs2length(str: string): number {
   return length
 }
 
-ucs2length.code = 'require("@theflashlabs/ajv-plus/dist/runtime/ucs2length").default'
+ucs2length.code = `require("${pathJoin(__dirname, "../../dist/runtime/ucs2length")}").default`

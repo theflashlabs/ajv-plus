@@ -2,7 +2,7 @@ import type Ajv from "../dist/core"
 import type {AnyValidateFunction} from "../dist/core"
 import _Ajv from "./ajv"
 import standaloneCode from "../dist/standalone"
-import ajvFormats from "@theflashlabs/ajv-formats"
+import ajvFormats from "../dist/formats"
 import requireFromString = require("require-from-string")
 import {importFromStringSync} from "module-from-string"
 import assert = require("assert")
@@ -341,7 +341,6 @@ describe("standalone code generation", () => {
 
     it("should support formats with standalone code", () => {
       const ajv = new _Ajv({code: {source: true}})
-      //@ts-ignore
       ajvFormats(ajv)
       ajv.addSchema(schema)
       const moduleCode = standaloneCode(ajv, {validateUser: "#/definitions/User"})

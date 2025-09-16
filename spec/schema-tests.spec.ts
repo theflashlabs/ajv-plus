@@ -5,7 +5,7 @@ import {withStandalone} from "./ajv_standalone"
 import jsonSchemaTest = require("json-schema-test")
 import options from "./ajv_options"
 import {afterError, afterEach} from "./after_test"
-import ajvFormats from "@theflashlabs/ajv-formats"
+import ajvFormats from "../dist/formats"
 
 const instances = getAjvInstances(_Ajv, options, {strict: false, formats: {allowedUnknown: true}})
 
@@ -43,6 +43,5 @@ function addRemoteRefsAndFormats(ajv: AjvCore) {
   ajv.opts.code.source = true
   for (const id in remoteRefs) ajv.addSchema(remoteRefs[id], id)
   ajv.addSchema(remoteRefsWithIds)
-  //@ts-ignore
   ajvFormats(ajv)
 }
