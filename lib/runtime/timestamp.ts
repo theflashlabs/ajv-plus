@@ -1,3 +1,5 @@
+import {join as pathJoin} from "node:path"
+
 const DT_SEPARATOR = /t|\s/i
 const DATE = /^(\d\d\d\d)-(\d\d)-(\d\d)$/
 const TIME = /^(\d\d):(\d\d):(\d\d)(?:\.\d+)?(?:z|([+-]\d\d)(?::?(\d\d))?)$/i
@@ -43,4 +45,4 @@ function validTime(str: string): boolean {
   )
 }
 
-validTimestamp.code = 'require("@theflashlabs/ajv-plus/dist/runtime/timestamp").default'
+validTimestamp.code = `require("${pathJoin(__dirname, "../../dist/runtime/timestamp")}").default`

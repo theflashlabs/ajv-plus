@@ -1,3 +1,4 @@
+import {join as pathJoin} from "node:path"
 const rxParseJson = /position\s(\d+)(?: \(line \d+ column \d+\))?$/
 
 export function parseJson(s: string, pos: number): unknown {
@@ -29,7 +30,7 @@ export function parseJson(s: string, pos: number): unknown {
 
 parseJson.message = undefined as string | undefined
 parseJson.position = 0 as number
-parseJson.code = 'require("@theflashlabs/ajv-plus/dist/runtime/parseJson").parseJson'
+parseJson.code = `require("${pathJoin(__dirname, "../../dist/runtime/parseJson")}").parseJson`
 
 export function parseJsonNumber(s: string, pos: number, maxDigits?: number): number | undefined {
   let numStr = ""
@@ -93,7 +94,10 @@ export function parseJsonNumber(s: string, pos: number, maxDigits?: number): num
 
 parseJsonNumber.message = undefined as string | undefined
 parseJsonNumber.position = 0 as number
-parseJsonNumber.code = 'require("@theflashlabs/ajv-plus/dist/runtime/parseJson").parseJsonNumber'
+parseJsonNumber.code = `require("${pathJoin(
+  __dirname,
+  "../../dist/runtime/parseJson"
+)}").parseJsonNumber`
 
 const escapedChars: {[X in string]?: string} = {
   b: "\b",
@@ -174,4 +178,7 @@ export function parseJsonString(s: string, pos: number): string | undefined {
 
 parseJsonString.message = undefined as string | undefined
 parseJsonString.position = 0 as number
-parseJsonString.code = 'require("@theflashlabs/ajv-plus/dist/runtime/parseJson").parseJsonString'
+parseJsonString.code = `require("${pathJoin(
+  __dirname,
+  "../../dist/runtime/parseJson"
+)}").parseJsonString`
