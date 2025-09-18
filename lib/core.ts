@@ -30,7 +30,6 @@ export {KeywordCxt} from "./compile/validate"
 export {DefinedError} from "./vocabularies/errors"
 export {JSONType} from "./compile/rules"
 export {JSONSchemaType} from "./types/json-schema"
-export {JTDSchemaType, SomeJTDSchemaType, JTDDataType} from "./types/jtd-schema"
 export {_, str, stringify, nil, Name, Code, CodeGen, CodeGenOptions} from "./compile/codegen"
 
 import type {
@@ -52,7 +51,6 @@ import type {
   UriResolver,
 } from "./types"
 import type {JSONSchemaType} from "./types/json-schema"
-import type {JTDSchemaType, SomeJTDSchemaType, JTDDataType} from "./types/jtd-schema"
 import ValidationError from "./runtime/validation_error"
 import MissingRefError from "./compile/ref_error"
 import {getRules, ValidationRules, Rule, RuleGroup, JSONType} from "./compile/rules"
@@ -125,7 +123,6 @@ export interface CurrentOptions {
   unevaluated?: boolean // NEW
   dynamicRef?: boolean // NEW
   schemaId?: "id" | "$id"
-  jtd?: boolean // NEW
   meta?: SchemaObject | boolean
   defaultMeta?: string | AnySchemaObject
   validateSchema?: boolean | "log"
@@ -136,7 +133,6 @@ export interface CurrentOptions {
   loopEnum?: number // NEW
   ownProperties?: boolean
   multipleOfPrecision?: number
-  int32range?: boolean // JTD only
   messages?: boolean
   code?: CodeOptions // NEW
   uriResolver?: UriResolver
@@ -229,7 +225,6 @@ type RequiredInstanceOptions = {
     | "addUsedSchema"
     | "validateSchema"
     | "validateFormats"
-    | "int32range"
     | "unicodeRegExp"
     | "uriResolver"]: NonNullable<Options[K]>
 } & {code: InstanceCodeOptions}
@@ -262,7 +257,6 @@ function requiredOptions(o: Options): RequiredInstanceOptions {
     validateSchema: o.validateSchema ?? true,
     validateFormats: o.validateFormats ?? true,
     unicodeRegExp: o.unicodeRegExp ?? true,
-    int32range: o.int32range ?? true,
     uriResolver: uriResolver,
   }
 }
@@ -339,16 +333,6 @@ export default class Ajv {
   validate(schema: Schema | string, data: unknown): boolean
   validate(schemaKeyRef: AnySchema | string, data: unknown): boolean | Promise<unknown>
   validate<T>(schema: Schema | JSONSchemaType<T> | string, data: unknown): data is T
-  // Separated for type inference to work
-  // eslint-disable-next-line @typescript-eslint/unified-signatures
-  validate<T>(schema: JTDSchemaType<T>, data: unknown): data is T
-  // This overload is only intended for typescript inference, the first
-  // argument prevents manual type annotation from matching this overload
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  validate<N extends never, T extends SomeJTDSchemaType>(
-    schema: T,
-    data: unknown
-  ): data is JTDDataType<T>
   // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
   validate<T>(schema: AsyncSchema, data: unknown | T): Promise<T>
   validate<T>(schemaKeyRef: AnySchema | string, data: unknown): data is T | Promise<T>
@@ -373,16 +357,6 @@ export default class Ajv {
   // Create validation function for passed schema
   // _meta: true if schema is a meta-schema. Used internally to compile meta schemas of user-defined keywords.
   compile<T = unknown>(schema: Schema | JSONSchemaType<T>, _meta?: boolean): ValidateFunction<T>
-  // Separated for type inference to work
-  // eslint-disable-next-line @typescript-eslint/unified-signatures
-  compile<T = unknown>(schema: JTDSchemaType<T>, _meta?: boolean): ValidateFunction<T>
-  // This overload is only intended for typescript inference, the first
-  // argument prevents manual type annotation from matching this overload
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  compile<N extends never, T extends SomeJTDSchemaType>(
-    schema: T,
-    _meta?: boolean
-  ): ValidateFunction<JTDDataType<T>>
   compile<T = unknown>(schema: AsyncSchema, _meta?: boolean): AsyncValidateFunction<T>
   compile<T = unknown>(schema: AnySchema, _meta?: boolean): AnyValidateFunction<T>
   compile<T = unknown>(schema: AnySchema, _meta?: boolean): AnyValidateFunction<T> {
@@ -398,9 +372,6 @@ export default class Ajv {
     schema: SchemaObject | JSONSchemaType<T>,
     _meta?: boolean
   ): Promise<ValidateFunction<T>>
-  // Separated for type inference to work
-  // eslint-disable-next-line @typescript-eslint/unified-signatures
-  compileAsync<T = unknown>(schema: JTDSchemaType<T>, _meta?: boolean): Promise<ValidateFunction<T>>
   compileAsync<T = unknown>(schema: AsyncSchema, meta?: boolean): Promise<AsyncValidateFunction<T>>
   // eslint-disable-next-line @typescript-eslint/unified-signatures
   compileAsync<T = unknown>(
@@ -708,8 +679,7 @@ export default class Ajv {
     if (typeof schema == "object") {
       id = schema[schemaId]
     } else {
-      if (this.opts.jtd) throw new Error("schema must be object")
-      else if (typeof schema != "boolean") throw new Error("schema must be object or boolean")
+      if (typeof schema != "boolean") throw new Error("schema must be object or boolean")
     }
     let sch = this._cache.get(schema)
     if (sch !== undefined) return sch

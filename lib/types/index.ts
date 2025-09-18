@@ -57,12 +57,6 @@ export interface ValidateFunction<T = unknown> {
   source?: SourceCode
 }
 
-export interface JTDParser<T = unknown> {
-  (json: string): T | undefined
-  message?: string
-  position?: number
-}
-
 export type EvaluatedProperties = {[K in string]?: true} | true
 
 export type EvaluatedItems = number | true

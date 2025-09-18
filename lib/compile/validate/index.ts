@@ -155,7 +155,6 @@ function checkKeywords(it: SchemaObjCxt): void {
 }
 
 function typeAndKeywords(it: SchemaObjCxt, errsCount?: Name): void {
-  if (it.opts.jtd) return schemaKeywords(it, [], false, errsCount)
   const types = getSchemaTypes(it.schema)
   const checkedTypes = coerceAndCheckDataType(it, types)
   schemaKeywords(it, types, !checkedTypes, errsCount)
@@ -228,7 +227,7 @@ function schemaKeywords(
     gen.block(() => keywordCode(it, "$ref", (RULES.all.$ref as Rule).definition)) // TODO typecast
     return
   }
-  if (!opts.jtd) checkStrictTypes(it, types)
+  checkStrictTypes(it, types)
   gen.block(() => {
     for (const group of RULES.rules) groupKeywords(group)
     groupKeywords(RULES.post)
