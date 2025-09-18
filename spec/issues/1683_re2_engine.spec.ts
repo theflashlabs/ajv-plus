@@ -5,7 +5,7 @@ import jsonSchemaTest = require("json-schema-test")
 import options from "../ajv_options"
 import {afterError, afterEach} from "../after_test"
 import chai from "../chai"
-import re2 from "../../dist/runtime/re2"
+// import re2 from "../../dist/runtime/re2"
 import re2tests from "./re2"
 
 const instances = getAjvAllInstances(options, {
@@ -18,7 +18,7 @@ const instances = getAjvAllInstances(options, {
 instances.forEach((ajv) => {
   ajv.opts.code.source = true
   ajv.opts.code.formats = _`{allowedUnknown: true}`
-  ajv.opts.code.regExp = re2
+  // ajv.opts.code.regExp = re2
 })
 
 jsonSchemaTest(withStandalone(instances), {

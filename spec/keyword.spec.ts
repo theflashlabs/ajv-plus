@@ -4,7 +4,6 @@ import type AjvCore from "../dist/core"
 import {_, nil} from "../dist/compile/codegen/code"
 import getAjvAllInstances from "./ajv_all_instances"
 import _Ajv from "./ajv"
-import equal from "../dist/runtime/equal"
 import assert = require("assert")
 import chai from "./chai"
 const should = chai.should()
@@ -234,7 +233,7 @@ describe("User-defined keywords", () => {
       return typeof schema == "object" && schema !== null ? isDeepEqual : isStrictEqual
 
       function isDeepEqual(data) {
-        return equal(data, schema)
+        return assert.deepEqual(data, schema)
       }
       function isStrictEqual(data) {
         return data === schema
