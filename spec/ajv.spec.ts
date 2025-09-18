@@ -2,7 +2,7 @@ import type Ajv from ".."
 import type {KeywordCxt, SchemaObject} from ".."
 import _Ajv from "./ajv"
 import {_} from "../dist/compile/codegen/code"
-import assert from "assert"
+import assert = require("assert")
 import chai from "./chai"
 const should = chai.should()
 
