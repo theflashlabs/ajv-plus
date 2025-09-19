@@ -1,4 +1,4 @@
-import type {CodeKeywordDefinition} from "../../types"
+import type {CodeKeywordDefinition} from "../../types/index.ts"
 
 const def: CodeKeywordDefinition = {
   keyword: "id",

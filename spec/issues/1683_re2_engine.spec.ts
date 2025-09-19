@@ -1,12 +1,12 @@
-import getAjvAllInstances from "../ajv_all_instances"
-import {withStandalone} from "../ajv_standalone"
-import {_} from "../../dist/compile/codegen/code"
-import jsonSchemaTest = require("json-schema-test")
-import options from "../ajv_options"
-import {afterError, afterEach} from "../after_test"
-import chai from "../chai"
-import re2 from "../../dist/runtime/re2"
-import re2tests from "./re2"
+import getAjvAllInstances from "../ajv_all_instances.ts"
+import {withStandalone} from "../ajv_standalone.ts"
+import {_} from "../../dist/compile/codegen/code.js"
+import jsonSchemaTest from "json-schema-test"
+import options from "../ajv_options.ts"
+import {afterError, afterEach} from "../after_test.ts"
+import chai from "../chai.ts"
+import re2 from "../../dist/runtime/re2.js"
+import re2tests from "./re2.ts"
 
 const instances = getAjvAllInstances(options, {
   $data: true,
@@ -27,7 +27,7 @@ jsonSchemaTest(withStandalone(instances), {
   assert: chai.assert,
   afterError,
   afterEach,
-  cwd: __dirname,
+  cwd: import.meta.dirname,
   hideFolder: "extras/",
   timeout: 90000,
 })

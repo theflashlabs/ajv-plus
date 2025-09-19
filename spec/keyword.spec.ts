@@ -1,12 +1,12 @@
-import type {ErrorObject, SchemaObject, SchemaValidateFunction} from "../dist/types"
-import type AjvCore from "../dist/core"
+import type {ErrorObject, SchemaObject, SchemaValidateFunction} from "../dist/types/index.d.ts"
+import type AjvCore from "../dist/core.d.ts"
 // currently most tests include compiled code, if any code re-compiled locally, instanceof would fail
-import {_, nil} from "../dist/compile/codegen/code"
-import getAjvAllInstances from "./ajv_all_instances"
-import _Ajv from "./ajv"
-import equal from "../dist/runtime/equal"
+import {_, nil} from "../dist/compile/codegen/code.js"
+import getAjvAllInstances from "./ajv_all_instances.ts"
+import _Ajv from "./ajv.ts"
+import equal from "../dist/runtime/equal.js"
 import assert = require("assert")
-import chai from "./chai"
+import chai from "./chai.ts"
 const should = chai.should()
 
 describe("User-defined keywords", () => {

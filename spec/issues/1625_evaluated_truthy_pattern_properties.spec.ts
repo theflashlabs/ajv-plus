@@ -1,4 +1,4 @@
-import _Ajv from "../ajv2020"
+import _Ajv from "../ajv2020.ts"
 import * as assert from "assert"
 
 describe("tracking evaluated properties with pattern properties of schema = true", () => {

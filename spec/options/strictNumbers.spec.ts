@@ -1,4 +1,4 @@
-import _Ajv from "../ajv"
+import _Ajv from "../ajv.ts"
 
 describe("strict option with keywords (replaced structNumbers)", () => {
   describe("strict default", testStrict(new _Ajv()))

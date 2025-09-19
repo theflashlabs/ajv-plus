@@ -1,6 +1,6 @@
-import type {CodeKeywordDefinition, ErrorObject, KeywordErrorDefinition} from "../../types"
-import type {KeywordCxt} from "../../compile/validate"
-import {_, str, operators, Code} from "../../compile/codegen"
+import type {CodeKeywordDefinition, ErrorObject, KeywordErrorDefinition} from "../../types/index.ts"
+import type {KeywordCxt} from "../../compile/validate/index.ts"
+import {_, str, operators, Code} from "../../compile/codegen/index.ts"
 
 const ops = operators
 

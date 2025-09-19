@@ -1,4 +1,4 @@
-import * as re2 from "re2"
+import re2 from "re2"
 
 type Re2 = typeof re2 & {code: string}
 ;(re2 as Re2).code = 'require("@theflashlabs/ajv-plus/dist/runtime/re2").default'

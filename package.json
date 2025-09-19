@@ -126,5 +126,6 @@
   },
   "lint-staged": {
     "*.{json,yaml,js,ts}": "prettier --write"
-  }
+  },
+  "type": "module"
 }

@@ -1,9 +1,9 @@
-import type {CodeKeywordDefinition, ErrorObject, KeywordErrorDefinition} from "../../types"
-import type {KeywordCxt} from "../../compile/validate"
-import {checkDataTypes, getSchemaTypes, DataType} from "../../compile/validate/dataType"
-import {_, str, Name} from "../../compile/codegen"
-import {useFunc} from "../../compile/util"
-import equal from "../../runtime/equal"
+import type {CodeKeywordDefinition, ErrorObject, KeywordErrorDefinition} from "../../types/index.ts"
+import type {KeywordCxt} from "../../compile/validate/index.ts"
+import {checkDataTypes, getSchemaTypes, DataType} from "../../compile/validate/dataType.ts"
+import {_, str, Name} from "../../compile/codegen/index.ts"
+import {useFunc} from "../../compile/util.ts"
+import equal from "../../runtime/equal.ts"
 
 export type UniqueItemsError = ErrorObject<
   "uniqueItems",

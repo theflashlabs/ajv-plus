@@ -1,4 +1,4 @@
-import type {ErrorObject} from "../types"
+import type {ErrorObject} from "../types/index.ts"
 
 export default class ValidationError extends Error {
   readonly errors: Partial<ErrorObject>[]

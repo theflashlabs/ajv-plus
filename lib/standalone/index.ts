@@ -1,8 +1,13 @@
-import type AjvCore from "../core"
-import type {AnyValidateFunction, SourceCode} from "../types"
-import type {SchemaEnv} from "../compile"
-import {UsedScopeValues, UsedValueState, ValueScopeName, varKinds} from "../compile/codegen/scope"
-import {_, nil, _Code, Code, getProperty, getEsmExportName} from "../compile/codegen/code"
+import type AjvCore from "../core.ts"
+import type {AnyValidateFunction, SourceCode} from "../types/index.ts"
+import type {SchemaEnv} from "../compile/index.ts"
+import {
+  UsedScopeValues,
+  UsedValueState,
+  ValueScopeName,
+  varKinds,
+} from "../compile/codegen/scope.ts"
+import {_, nil, _Code, Code, getProperty, getEsmExportName} from "../compile/codegen/code.ts"
 
 function standaloneCode(
   ajv: AjvCore,
@@ -93,8 +98,5 @@ function standaloneCode(
     }
   }
 }
-
-module.exports = exports = standaloneCode
-Object.defineProperty(exports, "__esModule", {value: true})
 
 export default standaloneCode

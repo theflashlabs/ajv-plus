@@ -1,6 +1,6 @@
-import type {AnySchemaObject} from "../../types"
-import type {SchemaObjCxt} from ".."
-import type {JSONType, RuleGroup, Rule} from "../rules"
+import type {AnySchemaObject} from "../../types/index.ts"
+import type {SchemaObjCxt} from "../index.ts"
+import type {JSONType, RuleGroup, Rule} from "../rules.ts"
 
 export function schemaHasRulesForType(
   {schema, self}: SchemaObjCxt,

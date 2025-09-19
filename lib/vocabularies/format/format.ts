@@ -5,9 +5,9 @@ import type {
   CodeKeywordDefinition,
   KeywordErrorDefinition,
   ErrorObject,
-} from "../../types"
-import type {KeywordCxt} from "../../compile/validate"
-import {_, str, nil, or, Code, getProperty, regexpCode} from "../../compile/codegen"
+} from "../../types/index.ts"
+import type {KeywordCxt} from "../../compile/validate/index.ts"
+import {_, str, nil, or, Code, getProperty, regexpCode} from "../../compile/codegen/index.ts"
 
 type FormatValidate =
   | FormatValidator<string>

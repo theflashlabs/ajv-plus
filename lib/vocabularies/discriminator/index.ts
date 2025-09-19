@@ -1,10 +1,14 @@
-import type {CodeKeywordDefinition, AnySchemaObject, KeywordErrorDefinition} from "../../types"
-import type {KeywordCxt} from "../../compile/validate"
-import {_, getProperty, Name} from "../../compile/codegen"
-import {DiscrError, DiscrErrorObj} from "../discriminator/types"
-import {resolveRef, SchemaEnv} from "../../compile"
-import MissingRefError from "../../compile/ref_error"
-import {schemaHasRulesButRef} from "../../compile/util"
+import type {
+  CodeKeywordDefinition,
+  AnySchemaObject,
+  KeywordErrorDefinition,
+} from "../../types/index.ts"
+import type {KeywordCxt} from "../../compile/validate/index.ts"
+import {_, getProperty, Name} from "../../compile/codegen/index.ts"
+import {DiscrError, DiscrErrorObj} from "../discriminator/types.ts"
+import {resolveRef, SchemaEnv} from "../../compile/index.ts"
+import MissingRefError from "../../compile/ref_error.ts"
+import {schemaHasRulesButRef} from "../../compile/util.ts"
 
 export type DiscriminatorError = DiscrErrorObj<DiscrError.Tag> | DiscrErrorObj<DiscrError.Mapping>
 

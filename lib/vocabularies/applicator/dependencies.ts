@@ -4,11 +4,16 @@ import type {
   KeywordErrorDefinition,
   SchemaMap,
   AnySchema,
-} from "../../types"
-import type {KeywordCxt} from "../../compile/validate"
-import {_, str} from "../../compile/codegen"
-import {alwaysValidSchema} from "../../compile/util"
-import {checkReportMissingProp, checkMissingProp, reportMissingProp, propertyInData} from "../code"
+} from "../../types/index.ts"
+import type {KeywordCxt} from "../../compile/validate/index.ts"
+import {_, str} from "../../compile/codegen/index.ts"
+import {alwaysValidSchema} from "../../compile/util.ts"
+import {
+  checkReportMissingProp,
+  checkMissingProp,
+  reportMissingProp,
+  propertyInData,
+} from "../code.ts"
 
 export type PropertyDependencies = {[K in string]?: string[]}
 

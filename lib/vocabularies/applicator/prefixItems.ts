@@ -1,5 +1,5 @@
-import type {CodeKeywordDefinition} from "../../types"
-import {validateTuple} from "./items"
+import type {CodeKeywordDefinition} from "../../types/index.ts"
+import {validateTuple} from "./items.ts"
 
 const def: CodeKeywordDefinition = {
   keyword: "prefixItems",

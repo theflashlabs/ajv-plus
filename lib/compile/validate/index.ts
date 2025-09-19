@@ -4,19 +4,24 @@ import type {
   AnySchemaObject,
   KeywordErrorCxt,
   KeywordCxtParams,
-} from "../../types"
-import type {SchemaCxt, SchemaObjCxt} from ".."
-import type {InstanceOptions} from "../../core"
-import {boolOrEmptySchema, topBoolOrEmptySchema} from "./boolSchema"
-import {coerceAndCheckDataType, getSchemaTypes} from "./dataType"
-import {shouldUseGroup, shouldUseRule} from "./applicability"
-import {checkDataType, checkDataTypes, reportTypeError, DataType} from "./dataType"
-import {assignDefaults} from "./defaults"
-import {funcKeywordCode, macroKeywordCode, validateKeywordUsage, validSchemaType} from "./keyword"
-import {getSubschema, extendSubschemaData, SubschemaArgs, extendSubschemaMode} from "./subschema"
-import {_, nil, str, or, not, getProperty, Block, Code, Name, CodeGen} from "../codegen"
-import N from "../names"
-import {resolveUrl} from "../resolve"
+} from "../../types/index.ts"
+import type {SchemaCxt, SchemaObjCxt} from "../index.ts"
+import type {InstanceOptions} from "../../core.ts"
+import {boolOrEmptySchema, topBoolOrEmptySchema} from "./boolSchema.ts"
+import {coerceAndCheckDataType, getSchemaTypes} from "./dataType.ts"
+import {shouldUseGroup, shouldUseRule} from "./applicability.ts"
+import {checkDataType, checkDataTypes, reportTypeError, DataType} from "./dataType.ts"
+import {assignDefaults} from "./defaults.ts"
+import {
+  funcKeywordCode,
+  macroKeywordCode,
+  validateKeywordUsage,
+  validSchemaType,
+} from "./keyword.ts"
+import {getSubschema, extendSubschemaData, SubschemaArgs, extendSubschemaMode} from "./subschema.ts"
+import {_, nil, str, or, not, getProperty, Block, Code, Name, CodeGen} from "../codegen/index.ts"
+import N from "../names.ts"
+import {resolveUrl} from "../resolve.ts"
 import {
   schemaRefOrVal,
   schemaHasRulesButRef,
@@ -24,15 +29,15 @@ import {
   checkStrictMode,
   unescapeJsonPointer,
   mergeEvaluated,
-} from "../util"
-import type {JSONType, Rule, RuleGroup} from "../rules"
+} from "../util.ts"
+import type {JSONType, Rule, RuleGroup} from "../rules.ts"
 import {
   ErrorPaths,
   reportError,
   reportExtraError,
   resetErrorsCount,
   keyword$DataError,
-} from "../errors"
+} from "../errors.ts"
 
 // schema compilation - generates validation function, subschemaCode (below) is used for subschemas
 export function validateFunctionCode(it: SchemaCxt): void {

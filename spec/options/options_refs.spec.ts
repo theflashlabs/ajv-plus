@@ -1,6 +1,6 @@
-import _Ajv from "../ajv"
-import type {Options} from "../.."
-import chai from "../chai"
+import _Ajv from "../ajv.ts"
+import type {Options} from "../../dist/ajv.d.ts"
+import chai from "../chai.ts"
 const should = chai.should()
 
 describe("referenced schema options", () => {

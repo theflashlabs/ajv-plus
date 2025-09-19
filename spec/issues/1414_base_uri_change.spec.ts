@@ -1,4 +1,4 @@
-import _Ajv from "../ajv"
+import _Ajv from "../ajv.ts"
 import assert = require("assert")
 
 const schema1 = {

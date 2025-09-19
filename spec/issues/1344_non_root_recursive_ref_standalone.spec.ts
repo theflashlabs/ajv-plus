@@ -1,5 +1,5 @@
-import _Ajv from "../ajv"
-import standaloneCode from "../../dist/standalone"
+import _Ajv from "../ajv.ts"
+import standaloneCode from "../../dist/standalone/index.js"
 import requireFromString = require("require-from-string")
 import assert = require("assert")
 

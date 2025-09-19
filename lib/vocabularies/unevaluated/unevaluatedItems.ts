@@ -3,10 +3,10 @@ import type {
   ErrorObject,
   KeywordErrorDefinition,
   AnySchema,
-} from "../../types"
-import type {KeywordCxt} from "../../compile/validate"
-import {_, str, not, Name} from "../../compile/codegen"
-import {alwaysValidSchema, Type} from "../../compile/util"
+} from "../../types/index.ts"
+import type {KeywordCxt} from "../../compile/validate/index.ts"
+import {_, str, not, Name} from "../../compile/codegen/index.ts"
+import {alwaysValidSchema, Type} from "../../compile/util.ts"
 
 export type UnevaluatedItemsError = ErrorObject<"unevaluatedItems", {limit: number}, AnySchema>
 
