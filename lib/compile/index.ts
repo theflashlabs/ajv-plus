@@ -5,17 +5,24 @@ import type {
   AsyncValidateFunction,
   EvaluatedProperties,
   EvaluatedItems,
-} from "../types"
-import type Ajv from "../core"
-import type {InstanceOptions} from "../core"
-import {CodeGen, _, nil, stringify, Name, Code, ValueScopeName} from "./codegen"
-import ValidationError from "../runtime/validation_error"
-import N from "./names"
-import {LocalRefs, getFullPath, _getFullPath, inlineRef, normalizeId, resolveUrl} from "./resolve"
-import {schemaHasRulesButRef, unescapeFragment} from "./util"
-import {validateFunctionCode} from "./validate"
+} from "../types/index.ts"
+import type Ajv from "../core.ts"
+import type {InstanceOptions} from "../core.ts"
+import {CodeGen, _, nil, stringify, Name, Code, ValueScopeName} from "./codegen/index.ts"
+import ValidationError from "../runtime/validation_error.ts"
+import N from "./names.ts"
+import {
+  LocalRefs,
+  getFullPath,
+  _getFullPath,
+  inlineRef,
+  normalizeId,
+  resolveUrl,
+} from "./resolve.ts"
+import {schemaHasRulesButRef, unescapeFragment} from "./util.ts"
+import {validateFunctionCode} from "./validate/index.ts"
 import {URIComponent} from "fast-uri"
-import {JSONType} from "./rules"
+import {JSONType} from "./rules.ts"
 
 export type SchemaRefs = {
   [Ref in string]?: SchemaEnv | AnySchema

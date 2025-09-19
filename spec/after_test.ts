@@ -1,6 +1,6 @@
-import type Ajv from ".."
-import type {AnySchema, ErrorObject} from ".."
-import chai from "./chai"
+import type Ajv from "../dist/ajv.d.ts"
+import type {AnySchema, ErrorObject} from "../dist/ajv.d.ts"
+import chai from "./chai.ts"
 const should = chai.should()
 
 interface TestResult {

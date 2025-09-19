@@ -1,6 +1,6 @@
-import _Ajv from "../ajv"
-import getAjvInstances from "../ajv_instances"
-import chai from "../chai"
+import _Ajv from "../ajv.ts"
+import getAjvInstances from "../ajv_instances.ts"
+import chai from "../chai.ts"
 chai.should()
 
 describe("useDefaults option", () => {

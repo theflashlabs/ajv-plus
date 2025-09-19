@@ -1,8 +1,8 @@
-import type {AnySchema} from "../../types"
-import type {SchemaObjCxt} from ".."
-import {_, str, getProperty, Code, Name} from "../codegen"
-import {escapeFragment, getErrorPath, Type} from "../util"
-import type {JSONType} from "../rules"
+import type {AnySchema} from "../../types/index.ts"
+import type {SchemaObjCxt} from "../index.ts"
+import {_, str, getProperty, Code, Name} from "../codegen/index.ts"
+import {escapeFragment, getErrorPath, Type} from "../util.ts"
+import type {JSONType} from "../rules.ts"
 
 export interface SubschemaContext {
   // TODO use Optional? align with SchemCxt property types

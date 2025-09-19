@@ -1,8 +1,8 @@
-import type {Vocabulary} from "../../types"
-import dynamicAnchor from "./dynamicAnchor"
-import dynamicRef from "./dynamicRef"
-import recursiveAnchor from "./recursiveAnchor"
-import recursiveRef from "./recursiveRef"
+import type {Vocabulary} from "../../types/index.ts"
+import dynamicAnchor from "./dynamicAnchor.ts"
+import dynamicRef from "./dynamicRef.ts"
+import recursiveAnchor from "./recursiveAnchor.ts"
+import recursiveRef from "./recursiveRef.ts"
 
 const dynamic: Vocabulary = [dynamicAnchor, dynamicRef, recursiveAnchor, recursiveRef]
 

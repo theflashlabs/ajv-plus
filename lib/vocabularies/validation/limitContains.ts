@@ -1,6 +1,6 @@
-import type {CodeKeywordDefinition} from "../../types"
-import type {KeywordCxt} from "../../compile/validate"
-import {checkStrictMode} from "../../compile/util"
+import type {CodeKeywordDefinition} from "../../types/index.ts"
+import type {KeywordCxt} from "../../compile/validate/index.ts"
+import {checkStrictMode} from "../../compile/util.ts"
 
 const def: CodeKeywordDefinition = {
   keyword: ["maxContains", "minContains"],

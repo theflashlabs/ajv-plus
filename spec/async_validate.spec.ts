@@ -1,6 +1,6 @@
-import getAjvAsyncInstances from "./ajv_async_instances"
-import _Ajv from "./ajv"
-import chai from "./chai"
+import getAjvAsyncInstances from "./ajv_async_instances.ts"
+import _Ajv from "./ajv.ts"
+import chai from "./chai.ts"
 const should = chai.should()
 
 describe("async schemas, formats and keywords", function () {
@@ -394,8 +394,8 @@ function checkWordOnServer(str) {
   return str === "tomorrow"
     ? Promise.resolve(true)
     : str === "manana"
-    ? Promise.resolve(false)
-    : Promise.reject(new Error("unknown word"))
+      ? Promise.resolve(false)
+      : Promise.reject(new Error("unknown word"))
 }
 
 function shouldBeValid(p, data) {

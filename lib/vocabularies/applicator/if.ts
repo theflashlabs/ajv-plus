@@ -3,11 +3,11 @@ import type {
   ErrorObject,
   KeywordErrorDefinition,
   AnySchema,
-} from "../../types"
-import type {SchemaObjCxt} from "../../compile"
-import type {KeywordCxt} from "../../compile/validate"
-import {_, str, not, Name} from "../../compile/codegen"
-import {alwaysValidSchema, checkStrictMode} from "../../compile/util"
+} from "../../types/index.ts"
+import type {SchemaObjCxt} from "../../compile/index.ts"
+import type {KeywordCxt} from "../../compile/validate/index.ts"
+import {_, str, not, Name} from "../../compile/codegen/index.ts"
+import {alwaysValidSchema, checkStrictMode} from "../../compile/util.ts"
 
 export type IfKeywordError = ErrorObject<"if", {failingKeyword: string}, AnySchema>
 

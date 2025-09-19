@@ -1,10 +1,13 @@
-import _Ajv from "./ajv"
-import getAjvInstances from "./ajv_instances"
-import {withStandalone} from "./ajv_standalone"
-import jsonSchemaTest = require("json-schema-test")
-import options from "./ajv_options"
-import {afterError, afterEach} from "./after_test"
-import chai from "./chai"
+import _Ajv from "./ajv.ts"
+import getAjvInstances from "./ajv_instances.ts"
+import {withStandalone} from "./ajv_standalone.ts"
+import jsonSchemaTest from "json-schema-test"
+import options from "./ajv_options.ts"
+import {afterError, afterEach} from "./after_test.ts"
+import chai from "./chai.ts"
+import {createRequire} from "module"
+
+const require = createRequire(import.meta.url)
 
 const instances = getAjvInstances(_Ajv, options, {
   schemas: [require("../dist/refs/json-schema-secure.json")],
@@ -20,6 +23,6 @@ jsonSchemaTest(withStandalone(instances), {
   assert: chai.assert,
   afterError,
   afterEach,
-  cwd: __dirname,
+  cwd: import.meta.dirname,
   hideFolder: "security/",
 })

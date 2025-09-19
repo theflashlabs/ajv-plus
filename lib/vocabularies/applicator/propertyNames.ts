@@ -3,10 +3,10 @@ import type {
   ErrorObject,
   KeywordErrorDefinition,
   AnySchema,
-} from "../../types"
-import type {KeywordCxt} from "../../compile/validate"
-import {_, not} from "../../compile/codegen"
-import {alwaysValidSchema} from "../../compile/util"
+} from "../../types/index.ts"
+import type {KeywordCxt} from "../../compile/validate/index.ts"
+import {_, not} from "../../compile/codegen/index.ts"
+import {alwaysValidSchema} from "../../compile/util.ts"
 
 export type PropertyNamesError = ErrorObject<"propertyNames", {propertyName: string}, AnySchema>
 

@@ -1,6 +1,6 @@
-import type {AnySchemaObject, SchemaObject, AsyncSchema} from "../.."
-import _Ajv from "../ajv"
-import chai from "../chai"
+import type {AnySchemaObject, SchemaObject, AsyncSchema} from "../../dist/ajv.d.ts"
+import _Ajv from "../ajv.ts"
+import chai from "../chai.ts"
 const should = chai.should()
 
 interface Foo {
@@ -16,7 +16,7 @@ describe("$async validation and type guards", () => {
         type: "object",
         properties: {foo: {type: "number"}},
       })
-      const data: unknown = {foo: 1}
+      const data = {foo: 1}
       let result: boolean
       if ((result = validate(data))) {
         data.foo.should.equal(1)
@@ -30,7 +30,7 @@ describe("$async validation and type guards", () => {
         properties: {foo: {type: "number"}},
       }
       const validate = ajv.compile<Foo>(schema)
-      const data: unknown = {foo: 1}
+      const data = {foo: 1}
       let result: boolean
       if ((result = validate(data))) {
         data.foo.should.equal(1)
@@ -44,7 +44,7 @@ describe("$async validation and type guards", () => {
         properties: {foo: {type: "number"}},
       }
       const validate = ajv.compile<Foo>(schema)
-      const data: unknown = {foo: 1}
+      const data = {foo: 1}
       let result: boolean
       if ((result = validate(data))) {
         data.foo.should.equal(1)

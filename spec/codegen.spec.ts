@@ -9,7 +9,7 @@ import {
   not,
   Code,
   Name,
-} from "../dist/compile/codegen"
+} from "../dist/compile/codegen/index.js"
 import assert = require("assert")
 
 describe("code generation", () => {

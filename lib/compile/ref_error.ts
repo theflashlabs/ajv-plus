@@ -1,5 +1,5 @@
-import {resolveUrl, normalizeId, getFullPath} from "./resolve"
-import type {UriResolver} from "../types"
+import {resolveUrl, normalizeId, getFullPath} from "./resolve.ts"
+import type {UriResolver} from "../types/index.ts"
 
 export default class MissingRefError extends Error {
   readonly missingRef: string

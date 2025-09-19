@@ -1,9 +1,9 @@
-import type {AnySchemaObject} from "./types"
-import AjvCore, {Options} from "./core"
+import type {AnySchemaObject} from "./types/index.ts"
+import AjvCore, {Options} from "./core.ts"
 
-import draft2020Vocabularies from "./vocabularies/draft2020"
-import discriminator from "./vocabularies/discriminator"
-import addMetaSchema2020 from "./refs/json-schema-2020-12"
+import draft2020Vocabularies from "./vocabularies/draft2020.ts"
+import discriminator from "./vocabularies/discriminator/index.ts"
+import addMetaSchema2020 from "./refs/json-schema-2020-12/index.ts"
 
 const META_SCHEMA_ID = "https://json-schema.org/draft/2020-12/schema"
 
@@ -37,10 +37,6 @@ export class Ajv2020 extends AjvCore {
   }
 }
 
-module.exports = exports = Ajv2020
-module.exports.Ajv2020 = Ajv2020
-Object.defineProperty(exports, "__esModule", {value: true})
-
 export default Ajv2020
 
 export {
@@ -62,14 +58,23 @@ export {
   AsyncValidateFunction,
   ErrorObject,
   ErrorNoParams,
-} from "./types"
+} from "./types/index.ts"
 
-export {Plugin, Options, CodeOptions, InstanceOptions, Logger, ErrorsTextOptions} from "./core"
-export {SchemaCxt, SchemaObjCxt} from "./compile"
-export {KeywordCxt} from "./compile/validate"
-export {DefinedError} from "./vocabularies/errors"
-export {JSONType} from "./compile/rules"
-export {JSONSchemaType} from "./types/json-schema"
-export {_, str, stringify, nil, Name, Code, CodeGen, CodeGenOptions} from "./compile/codegen"
-export {default as ValidationError} from "./runtime/validation_error"
-export {default as MissingRefError} from "./compile/ref_error"
+export {Plugin, Options, CodeOptions, InstanceOptions, Logger, ErrorsTextOptions} from "./core.ts"
+export {SchemaCxt, SchemaObjCxt} from "./compile/index.ts"
+export {KeywordCxt} from "./compile/validate/index.ts"
+export {DefinedError} from "./vocabularies/errors.ts"
+export {JSONType} from "./compile/rules.ts"
+export {JSONSchemaType} from "./types/json-schema.ts"
+export {
+  _,
+  str,
+  stringify,
+  nil,
+  Name,
+  Code,
+  CodeGen,
+  CodeGenOptions,
+} from "./compile/codegen/index.ts"
+export {default as ValidationError} from "./runtime/validation_error.ts"
+export {default as MissingRefError} from "./compile/ref_error.ts"

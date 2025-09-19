@@ -1,5 +1,5 @@
-import _Ajv from "../ajv"
-import type Ajv from "../../dist/ajv"
+import _Ajv from "../ajv.ts"
+import type Ajv from "../../dist/ajv.d.ts"
 import assert = require("assert")
 
 describe("integer valid type in number sub-schema (issue #1935)", () => {

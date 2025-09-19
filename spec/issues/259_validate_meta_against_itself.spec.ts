@@ -1,6 +1,9 @@
-import _Ajv from "../ajv"
-import chai from "../chai"
+import _Ajv from "../ajv.ts"
+import chai from "../chai.ts"
+import {createRequire} from "module"
 chai.should()
+
+const require = createRequire(import.meta.url)
 
 describe("issue #259, support validating [meta-]schemas against themselves", () => {
   it('should add schema before validation if "id" is the same as "$schema"', () => {

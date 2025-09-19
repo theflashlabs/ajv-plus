@@ -1,10 +1,10 @@
-import type {CodeKeywordDefinition} from "../../types"
-import type {KeywordCxt} from "../../compile/validate"
-import {allSchemaProperties, usePattern} from "../code"
-import {_, not, Name} from "../../compile/codegen"
-import {alwaysValidSchema, checkStrictMode} from "../../compile/util"
-import {evaluatedPropsToName, Type} from "../../compile/util"
-import {AnySchema} from "../../types"
+import type {CodeKeywordDefinition} from "../../types/index.ts"
+import type {KeywordCxt} from "../../compile/validate/index.ts"
+import {allSchemaProperties, usePattern} from "../code.ts"
+import {_, not, Name} from "../../compile/codegen/index.ts"
+import {alwaysValidSchema, checkStrictMode} from "../../compile/util.ts"
+import {evaluatedPropsToName, Type} from "../../compile/util.ts"
+import {AnySchema} from "../../types/index.ts"
 
 const def: CodeKeywordDefinition = {
   keyword: "patternProperties",

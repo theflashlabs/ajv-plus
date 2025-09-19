@@ -1,8 +1,8 @@
-import type {CodeKeywordDefinition, AnySchema, AnySchemaObject} from "../../types"
-import type {KeywordCxt} from "../../compile/validate"
-import {_} from "../../compile/codegen"
-import {alwaysValidSchema, mergeEvaluated, checkStrictMode} from "../../compile/util"
-import {validateArray} from "../code"
+import type {CodeKeywordDefinition, AnySchema, AnySchemaObject} from "../../types/index.ts"
+import type {KeywordCxt} from "../../compile/validate/index.ts"
+import {_} from "../../compile/codegen/index.ts"
+import {alwaysValidSchema, mergeEvaluated, checkStrictMode} from "../../compile/util.ts"
+import {validateArray} from "../code.ts"
 
 const def: CodeKeywordDefinition = {
   keyword: "items",

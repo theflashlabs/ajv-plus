@@ -1,11 +1,11 @@
-import type {CodeKeywordDefinition, AnySchema} from "../../types"
-import type {KeywordCxt} from "../../compile/validate"
-import MissingRefError from "../../compile/ref_error"
-import {callValidateCode} from "../code"
-import {_, nil, stringify, Code, Name} from "../../compile/codegen"
-import N from "../../compile/names"
-import {SchemaEnv, resolveRef} from "../../compile"
-import {mergeEvaluated} from "../../compile/util"
+import type {CodeKeywordDefinition, AnySchema} from "../../types/index.ts"
+import type {KeywordCxt} from "../../compile/validate/index.ts"
+import MissingRefError from "../../compile/ref_error.ts"
+import {callValidateCode} from "../code.ts"
+import {_, nil, stringify, Code, Name} from "../../compile/codegen/index.ts"
+import N from "../../compile/names.ts"
+import {SchemaEnv, resolveRef} from "../../compile/index.ts"
+import {mergeEvaluated} from "../../compile/util.ts"
 
 const def: CodeKeywordDefinition = {
   keyword: "$ref",

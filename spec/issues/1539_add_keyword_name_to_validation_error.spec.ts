@@ -1,5 +1,5 @@
-import _Ajv from "../ajv2019"
-import chai from "../chai"
+import _Ajv from "../ajv2019.ts"
+import chai from "../chai.ts"
 const should = chai.should()
 
 describe("keyword usage validation error", () => {

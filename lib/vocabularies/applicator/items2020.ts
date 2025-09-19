@@ -3,12 +3,12 @@ import type {
   KeywordErrorDefinition,
   ErrorObject,
   AnySchema,
-} from "../../types"
-import type {KeywordCxt} from "../../compile/validate"
-import {_, str} from "../../compile/codegen"
-import {alwaysValidSchema} from "../../compile/util"
-import {validateArray} from "../code"
-import {validateAdditionalItems} from "./additionalItems"
+} from "../../types/index.ts"
+import type {KeywordCxt} from "../../compile/validate/index.ts"
+import {_, str} from "../../compile/codegen/index.ts"
+import {alwaysValidSchema} from "../../compile/util.ts"
+import {validateArray} from "../code.ts"
+import {validateAdditionalItems} from "./additionalItems.ts"
 
 export type ItemsError = ErrorObject<"items", {limit: number}, AnySchema>
 

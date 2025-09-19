@@ -1,4 +1,4 @@
-import {_, nil, Code, Name} from "./code"
+import {_, nil, Code, Name} from "./code.ts"
 
 interface NameGroup {
   prefix: string

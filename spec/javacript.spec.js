@@ -1,6 +1,6 @@
-const Ajv = require("./ajv")
-const Ajv2019 = require("./ajv2019")
-const assert = require("assert")
+import Ajv from "../test/ajv.js"
+import Ajv2019 from "../test/ajv2019.js"
+import assert from "assert"
 
 describe("using Ajv with javascript", () => {
   describe("draft-07", () => it("should validate", () => test(Ajv)))

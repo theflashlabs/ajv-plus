@@ -1,5 +1,5 @@
-import _Ajv from "../ajv"
-import chai from "../chai"
+import _Ajv from "../ajv.ts"
+import chai from "../chai.ts"
 const should = chai.should()
 
 describe("strict option with defaults (replaced strictDefaults)", () => {

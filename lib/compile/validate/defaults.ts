@@ -1,6 +1,6 @@
-import type {SchemaObjCxt} from ".."
-import {_, getProperty, stringify} from "../codegen"
-import {checkStrictMode} from "../util"
+import type {SchemaObjCxt} from "../index.ts"
+import {_, getProperty, stringify} from "../codegen/index.ts"
+import {checkStrictMode} from "../util.ts"
 
 export function assignDefaults(it: SchemaObjCxt, ty?: string): void {
   const {properties, items} = it.schema

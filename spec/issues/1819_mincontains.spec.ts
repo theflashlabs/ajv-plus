@@ -1,4 +1,4 @@
-import _Ajv from "../ajv2020"
+import _Ajv from "../ajv2020.ts"
 import * as assert from "assert"
 
 describe("`minContains: 0` without valid items (issue #1819)", () => {
