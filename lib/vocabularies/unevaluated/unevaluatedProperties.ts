@@ -3,10 +3,10 @@ import type {
   KeywordErrorDefinition,
   ErrorObject,
   AnySchema,
-} from "../../types"
-import {_, not, and, Name, Code} from "../../compile/codegen"
-import {alwaysValidSchema, Type} from "../../compile/util"
-import N from "../../compile/names"
+} from "../../types/index.ts"
+import {_, not, and, Name, Code} from "../../compile/codegen/index.ts"
+import {alwaysValidSchema, Type} from "../../compile/util.ts"
+import N from "../../compile/names.ts"
 
 export type UnevaluatedPropertiesError = ErrorObject<
   "unevaluatedProperties",

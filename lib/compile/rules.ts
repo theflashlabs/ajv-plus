@@ -1,4 +1,4 @@
-import type {AddedKeywordDefinition} from "../types"
+import type {AddedKeywordDefinition} from "../types/index.ts"
 
 const _jsonTypes = ["string", "number", "integer", "boolean", "null", "object", "array"] as const
 

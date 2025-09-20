@@ -1,6 +1,6 @@
-import type {Vocabulary} from "../../types"
-import unevaluatedProperties from "./unevaluatedProperties"
-import unevaluatedItems from "./unevaluatedItems"
+import type {Vocabulary} from "../../types/index.ts"
+import unevaluatedProperties from "./unevaluatedProperties.ts"
+import unevaluatedItems from "./unevaluatedItems.ts"
 
 const unevaluated: Vocabulary = [unevaluatedProperties, unevaluatedItems]
 

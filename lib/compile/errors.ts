@@ -1,9 +1,9 @@
-import type {KeywordErrorCxt, KeywordErrorDefinition} from "../types"
-import type {SchemaCxt} from "./index"
-import {CodeGen, _, str, strConcat, Code, Name} from "./codegen"
-import {SafeExpr} from "./codegen/code"
-import {getErrorPath, Type} from "./util"
-import N from "./names"
+import type {KeywordErrorCxt, KeywordErrorDefinition} from "../types/index.ts"
+import type {SchemaCxt} from "./index.ts"
+import {CodeGen, _, str, strConcat, Code, Name} from "./codegen/index.ts"
+import {SafeExpr} from "./codegen/code.ts"
+import {getErrorPath, Type} from "./util.ts"
+import N from "./names.ts"
 
 export const keywordError: KeywordErrorDefinition = {
   message: ({keyword}) => str`must pass "${keyword}" keyword validation`,

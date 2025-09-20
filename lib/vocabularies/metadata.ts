@@ -1,4 +1,4 @@
-import type {Vocabulary} from "../types"
+import type {Vocabulary} from "../types/index.ts"
 
 export const metadataVocabulary: Vocabulary = [
   "title",

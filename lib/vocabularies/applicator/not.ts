@@ -1,6 +1,6 @@
-import type {CodeKeywordDefinition, ErrorNoParams, AnySchema} from "../../types"
-import type {KeywordCxt} from "../../compile/validate"
-import {alwaysValidSchema} from "../../compile/util"
+import type {CodeKeywordDefinition, ErrorNoParams, AnySchema} from "../../types/index.ts"
+import type {KeywordCxt} from "../../compile/validate/index.ts"
+import {alwaysValidSchema} from "../../compile/util.ts"
 
 export type NotKeywordError = ErrorNoParams<"not", AnySchema>
 

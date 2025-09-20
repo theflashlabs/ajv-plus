@@ -1,8 +1,8 @@
-import type Ajv from "../dist/core"
-import type {SchemaObject} from ".."
-import _Ajv from "./ajv2019"
-import getAjvInstances from "./ajv_instances"
-import options from "./ajv_options"
+import type Ajv from "../dist/core.d.ts"
+import type {SchemaObject} from "../dist/ajv.d.ts"
+import _Ajv from "./ajv2019.ts"
+import getAjvInstances from "./ajv_instances.ts"
+import options from "./ajv_options.ts"
 import assert = require("assert")
 
 describe("recursiveRef and dynamicRef", () => {

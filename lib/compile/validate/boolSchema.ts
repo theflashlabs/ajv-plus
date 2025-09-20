@@ -1,8 +1,8 @@
-import type {KeywordErrorDefinition, KeywordErrorCxt} from "../../types"
-import type {SchemaCxt} from ".."
-import {reportError} from "../errors"
-import {_, Name} from "../codegen"
-import N from "../names"
+import type {KeywordErrorDefinition, KeywordErrorCxt} from "../../types/index.ts"
+import type {SchemaCxt} from "../index.ts"
+import {reportError} from "../errors.ts"
+import {_, Name} from "../codegen/index.ts"
+import N from "../names.ts"
 
 const boolError: KeywordErrorDefinition = {
   message: "boolean schema is false",

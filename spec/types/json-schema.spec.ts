@@ -1,7 +1,7 @@
-import _Ajv from "../ajv"
-import type {JSONSchemaType} from "../.."
-import type {SchemaObject} from "../.."
-import chai from "../chai"
+import _Ajv from "../ajv.ts"
+import type {JSONSchemaType} from "../../dist/ajv.d.ts"
+import type {SchemaObject} from "../../dist/ajv.d.ts"
+import chai from "../chai.ts"
 const should = chai.should()
 
 interface MyData {
@@ -41,6 +41,7 @@ const mySchema: JSONSchemaType<MyData> & {
   }
 } = {
   type: "object",
+  //@ts-ignore
   definitions: {
     baz: {
       // schema type is checked here ...
@@ -150,7 +151,7 @@ type MyEnumRecord = Record<"a" | "b" | "c" | "d", number | undefined>
 describe("JSONSchemaType type and validation as a type guard", () => {
   const ajv = new _Ajv({allowUnionTypes: true})
 
-  const validData: unknown = {
+  const validData = {
     foo: "foo",
     bar: 1,
     baz: {
@@ -182,7 +183,7 @@ describe("JSONSchemaType type and validation as a type guard", () => {
     })
   })
 
-  const validUnionData: unknown = {
+  const validUnionData = {
     a: true,
   }
 

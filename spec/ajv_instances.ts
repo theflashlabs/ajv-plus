@@ -1,5 +1,5 @@
-import type AjvCore from "../dist/core"
-import type {Options} from ".."
+import type AjvCore from "../dist/core.d.ts"
+import type {Options} from "../dist/ajv.d.ts"
 
 export default function getAjvInstances(
   _Ajv: typeof AjvCore,

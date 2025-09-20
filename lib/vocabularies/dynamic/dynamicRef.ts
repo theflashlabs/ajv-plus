@@ -1,8 +1,8 @@
-import type {CodeKeywordDefinition} from "../../types"
-import type {KeywordCxt} from "../../compile/validate"
-import {_, getProperty, Code, Name} from "../../compile/codegen"
-import N from "../../compile/names"
-import {callRef} from "../core/ref"
+import type {CodeKeywordDefinition} from "../../types/index.ts"
+import type {KeywordCxt} from "../../compile/validate/index.ts"
+import {_, getProperty, Code, Name} from "../../compile/codegen/index.ts"
+import N from "../../compile/names.ts"
+import {callRef} from "../core/ref.ts"
 
 const def: CodeKeywordDefinition = {
   keyword: "$dynamicRef",

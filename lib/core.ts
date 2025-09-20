@@ -18,19 +18,28 @@ export {
   AnyValidateFunction,
   ErrorObject,
   ErrorNoParams,
-} from "./types"
+} from "./types/index.ts"
 
-export {SchemaCxt, SchemaObjCxt} from "./compile"
+export {SchemaCxt, SchemaObjCxt} from "./compile/index.ts"
 export interface Plugin<Opts> {
   (ajv: Ajv, options?: Opts): Ajv
   [prop: string]: any
 }
 
-export {KeywordCxt} from "./compile/validate"
-export {DefinedError} from "./vocabularies/errors"
-export {JSONType} from "./compile/rules"
-export {JSONSchemaType} from "./types/json-schema"
-export {_, str, stringify, nil, Name, Code, CodeGen, CodeGenOptions} from "./compile/codegen"
+export {KeywordCxt} from "./compile/validate/index.ts"
+export {DefinedError} from "./vocabularies/errors.ts"
+export {JSONType} from "./compile/rules.ts"
+export {JSONSchemaType} from "./types/json-schema.ts"
+export {
+  _,
+  str,
+  stringify,
+  nil,
+  Name,
+  Code,
+  CodeGen,
+  CodeGenOptions,
+} from "./compile/codegen/index.ts"
 
 import type {
   Schema,
@@ -49,19 +58,19 @@ import type {
   AddedFormat,
   RegExpEngine,
   UriResolver,
-} from "./types"
-import type {JSONSchemaType} from "./types/json-schema"
-import ValidationError from "./runtime/validation_error"
-import MissingRefError from "./compile/ref_error"
-import {getRules, ValidationRules, Rule, RuleGroup, JSONType} from "./compile/rules"
-import {SchemaEnv, compileSchema, resolveSchema} from "./compile"
-import {Code, ValueScope} from "./compile/codegen"
-import {normalizeId, getSchemaRefs} from "./compile/resolve"
-import {getJSONTypes} from "./compile/validate/dataType"
-import {eachItem} from "./compile/util"
-import * as $dataRefSchema from "./refs/data.json"
+} from "./types/index.ts"
+import type {JSONSchemaType} from "./types/json-schema.ts"
+import ValidationError from "./runtime/validation_error.ts"
+import MissingRefError from "./compile/ref_error.ts"
+import {getRules, ValidationRules, Rule, RuleGroup, JSONType} from "./compile/rules.ts"
+import {SchemaEnv, compileSchema, resolveSchema} from "./compile/index.ts"
+import {Code, ValueScope} from "./compile/codegen/index.ts"
+import {normalizeId, getSchemaRefs} from "./compile/resolve.ts"
+import {getJSONTypes} from "./compile/validate/dataType.ts"
+import {eachItem} from "./compile/util.ts"
+import $dataRefSchema from "./refs/data.json" with {type: "json"}
 
-import DefaultUriResolver from "./runtime/uri"
+import DefaultUriResolver from "./runtime/uri.ts"
 
 const defaultRegExp: RegExpEngine = (str, flags) => new RegExp(str, flags)
 defaultRegExp.code = "new RegExp"

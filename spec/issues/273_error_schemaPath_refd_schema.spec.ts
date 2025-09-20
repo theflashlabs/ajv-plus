@@ -1,5 +1,5 @@
-import _Ajv from "../ajv"
-import chai from "../chai"
+import _Ajv from "../ajv.ts"
+import chai from "../chai.ts"
 chai.should()
 
 describe.skip("issue #273, schemaPath in error in referenced schema", () => {

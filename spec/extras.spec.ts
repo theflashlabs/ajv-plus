@@ -1,10 +1,11 @@
-import getAjvAllInstances from "./ajv_all_instances"
-import {withStandalone} from "./ajv_standalone"
-import {_} from "../dist/compile/codegen/code"
-import jsonSchemaTest = require("json-schema-test")
-import options from "./ajv_options"
-import {afterError, afterEach} from "./after_test"
-import chai from "./chai"
+import getAjvAllInstances from "./ajv_all_instances.ts"
+import {withStandalone} from "./ajv_standalone.ts"
+import {_} from "../dist/compile/codegen/code.js"
+import jsonSchemaTest from "json-schema-test"
+import options from "./ajv_options.ts"
+import {afterError, afterEach} from "./after_test.ts"
+import chai from "./chai.ts"
+import extrasSpec from "../spec/_json/extras.cjs"
 
 const instances = getAjvAllInstances(options, {
   $data: true,
@@ -21,11 +22,11 @@ instances.forEach((ajv) => {
 jsonSchemaTest(withStandalone(instances), {
   description:
     "Extra keywords schemas tests of " + instances.length + " ajv instances with different options",
-  suites: {extras: require("../spec/_json/extras")},
+  suites: {extras: extrasSpec},
   assert: chai.assert,
   afterError,
   afterEach,
-  cwd: __dirname,
+  cwd: import.meta.dirname,
   hideFolder: "extras/",
   timeout: 90000,
 })

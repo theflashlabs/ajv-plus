@@ -1,4 +1,4 @@
-import type {KeywordCxt} from "."
+import type {KeywordCxt} from "./index.ts"
 import type {
   AnySchema,
   SchemaValidateFunction,
@@ -6,13 +6,13 @@ import type {
   AddedKeywordDefinition,
   MacroKeywordDefinition,
   FuncKeywordDefinition,
-} from "../../types"
-import type {SchemaObjCxt} from ".."
-import {_, nil, not, stringify, Code, Name, CodeGen} from "../codegen"
-import N from "../names"
-import type {JSONType} from "../rules"
-import {callValidateCode} from "../../vocabularies/code"
-import {extendErrors} from "../errors"
+} from "../../types/index.ts"
+import type {SchemaObjCxt} from "../index.ts"
+import {_, nil, not, stringify, Code, Name, CodeGen} from "../codegen/index.ts"
+import N from "../names.ts"
+import type {JSONType} from "../rules.ts"
+import {callValidateCode} from "../../vocabularies/code.ts"
+import {extendErrors} from "../errors.ts"
 
 type KeywordCompilationResult = AnySchema | SchemaValidateFunction | AnyValidateFunction
 
@@ -137,8 +137,8 @@ export function validSchemaType(
       st === "array"
         ? Array.isArray(schema)
         : st === "object"
-        ? schema && typeof schema == "object" && !Array.isArray(schema)
-        : typeof schema == st || (allowUndefined && typeof schema == "undefined")
+          ? schema && typeof schema == "object" && !Array.isArray(schema)
+          : typeof schema == st || (allowUndefined && typeof schema == "undefined")
     )
   )
 }

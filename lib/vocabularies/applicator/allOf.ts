@@ -1,6 +1,6 @@
-import type {CodeKeywordDefinition, AnySchema} from "../../types"
-import type {KeywordCxt} from "../../compile/validate"
-import {alwaysValidSchema} from "../../compile/util"
+import type {CodeKeywordDefinition, AnySchema} from "../../types/index.ts"
+import type {KeywordCxt} from "../../compile/validate/index.ts"
+import {alwaysValidSchema} from "../../compile/util.ts"
 
 const def: CodeKeywordDefinition = {
   keyword: "allOf",

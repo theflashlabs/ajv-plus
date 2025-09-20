@@ -1,6 +1,6 @@
-import _Ajv from "./ajv"
-import type Ajv from ".."
-import chai from "./chai"
+import _Ajv from "./ajv.ts"
+import type Ajv from "../dist/ajv.d.ts"
+import chai from "./chai.ts"
 chai.should()
 
 describe("boolean schemas", () => {

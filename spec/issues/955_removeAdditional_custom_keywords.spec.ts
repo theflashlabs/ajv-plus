@@ -1,5 +1,5 @@
-import _Ajv from "../ajv"
-import chai from "../chai"
+import _Ajv from "../ajv.ts"
+import chai from "../chai.ts"
 chai.should()
 
 describe("issue #955: option removeAdditional breaks user-defined keywords", () => {

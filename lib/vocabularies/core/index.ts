@@ -1,6 +1,6 @@
-import type {Vocabulary} from "../../types"
-import idKeyword from "./id"
-import refKeyword from "./ref"
+import type {Vocabulary} from "../../types/index.ts"
+import idKeyword from "./id.ts"
+import refKeyword from "./ref.ts"
 
 const core: Vocabulary = [
   "$schema",

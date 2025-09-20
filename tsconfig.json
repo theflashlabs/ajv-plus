@@ -7,8 +7,12 @@
     "lib": ["ES2018", "DOM"],
     "types": ["node"],
     "allowJs": true,
+    "checkJs": true,
     "target": "ES2018",
     "resolveJsonModule": true,
-    "sourceMap": false
+    "sourceMap": true,
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "rewriteRelativeImportExtensions": true
   }
 }

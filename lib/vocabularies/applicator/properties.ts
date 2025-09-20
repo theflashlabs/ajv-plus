@@ -1,8 +1,8 @@
-import type {CodeKeywordDefinition} from "../../types"
-import {KeywordCxt} from "../../compile/validate"
-import {propertyInData, allSchemaProperties} from "../code"
-import {alwaysValidSchema, toHash, mergeEvaluated} from "../../compile/util"
-import apDef from "./additionalProperties"
+import type {CodeKeywordDefinition} from "../../types/index.ts"
+import {KeywordCxt} from "../../compile/validate/index.ts"
+import {propertyInData, allSchemaProperties} from "../code.ts"
+import {alwaysValidSchema, toHash, mergeEvaluated} from "../../compile/util.ts"
+import apDef from "./additionalProperties.ts"
 
 const def: CodeKeywordDefinition = {
   keyword: "properties",

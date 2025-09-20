@@ -1,4 +1,4 @@
-import {Name} from "./codegen"
+import {Name} from "./codegen/index.ts"
 
 const names = {
   // validation function arguments

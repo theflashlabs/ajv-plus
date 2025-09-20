@@ -1,5 +1,5 @@
-import _Ajv from "../ajv"
-import chai from "../chai"
+import _Ajv from "../ajv.ts"
+import chai from "../chai.ts"
 chai.should()
 
 describe("issue #743, property __proto__ should be removed with removeAdditional option", () => {

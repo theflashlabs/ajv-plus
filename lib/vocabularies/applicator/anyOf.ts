@@ -1,5 +1,5 @@
-import type {CodeKeywordDefinition, ErrorNoParams, AnySchema} from "../../types"
-import {validateUnion} from "../code"
+import type {CodeKeywordDefinition, ErrorNoParams, AnySchema} from "../../types/index.ts"
+import {validateUnion} from "../code.ts"
 
 export type AnyOfError = ErrorNoParams<"anyOf", AnySchema[]>
 

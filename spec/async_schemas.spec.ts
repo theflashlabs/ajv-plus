@@ -1,9 +1,10 @@
-import getAjvAsyncInstances from "./ajv_async_instances"
-import jsonSchemaTest = require("json-schema-test")
-import {afterError} from "./after_test"
-import type Ajv from ".."
-import _Ajv from "./ajv"
-import chai from "./chai"
+import getAjvAsyncInstances from "./ajv_async_instances.ts"
+import jsonSchemaTest from "json-schema-test"
+import {afterError} from "./after_test.ts"
+import type Ajv from "../dist/ajv.d.ts"
+import _Ajv from "./ajv.ts"
+import chai from "./chai.ts"
+import asyncSpec from "../spec/_json/async.cjs"
 
 const instances = getAjvAsyncInstances({$data: true})
 
@@ -12,13 +13,13 @@ instances.forEach(addAsyncFormatsAndKeywords)
 jsonSchemaTest(instances, {
   description:
     "asynchronous schemas tests of " + instances.length + " ajv instances with different options",
-  suites: {"async schemas": require("../spec/_json/async")},
+  suites: {"async schemas": asyncSpec},
   async: true,
   asyncValid: "data",
   assert: chai.assert,
   afterError,
   // afterEach: after.each,
-  cwd: __dirname,
+  cwd: import.meta.dirname,
   hideFolder: "async/",
   timeout: 10000,
 })
@@ -59,8 +60,8 @@ function checkWordOnServer(str: string): Promise<boolean> {
   return str === "tomorrow"
     ? Promise.resolve(true)
     : str === "manana"
-    ? Promise.resolve(false)
-    : Promise.reject(new Error("unknown word"))
+      ? Promise.resolve(false)
+      : Promise.reject(new Error("unknown word"))
 }
 
 function checkIdExists(schema: {table: string}, data: number): Promise<boolean> {

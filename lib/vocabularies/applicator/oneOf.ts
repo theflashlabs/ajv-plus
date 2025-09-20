@@ -3,11 +3,11 @@ import type {
   ErrorObject,
   KeywordErrorDefinition,
   AnySchema,
-} from "../../types"
-import type {KeywordCxt} from "../../compile/validate"
-import {_, Name} from "../../compile/codegen"
-import {alwaysValidSchema} from "../../compile/util"
-import {SchemaCxt} from "../../compile"
+} from "../../types/index.ts"
+import type {KeywordCxt} from "../../compile/validate/index.ts"
+import {_, Name} from "../../compile/codegen/index.ts"
+import {alwaysValidSchema} from "../../compile/util.ts"
+import {SchemaCxt} from "../../compile/index.ts"
 
 export type OneOfError = ErrorObject<
   "oneOf",

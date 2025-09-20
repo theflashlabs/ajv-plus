@@ -1,8 +1,8 @@
-import type {AnySchema, EvaluatedProperties, EvaluatedItems} from "../types"
-import type {SchemaCxt, SchemaObjCxt} from "."
-import {_, getProperty, Code, Name, CodeGen} from "./codegen"
-import {_Code} from "./codegen/code"
-import type {Rule, ValidationRules} from "./rules"
+import type {AnySchema, EvaluatedProperties, EvaluatedItems} from "../types/index.ts"
+import type {SchemaCxt, SchemaObjCxt} from "./index.ts"
+import {_, getProperty, Code, Name, CodeGen} from "./codegen/index.ts"
+import {_Code} from "./codegen/code.ts"
+import type {Rule, ValidationRules} from "./rules.ts"
 
 // TODO refactor to use Set
 export function toHash<T extends string = string>(arr: T[]): {[K in T]?: true} {
@@ -108,10 +108,10 @@ function makeMergeEvaluated<T extends SomeEvaluated>({
       to === undefined
         ? from
         : to instanceof Name
-        ? (from instanceof Name ? mergeNames(gen, from, to) : mergeToName(gen, from, to), to)
-        : from instanceof Name
-        ? (mergeToName(gen, to, from), from)
-        : mergeValues(from, to)
+          ? (from instanceof Name ? mergeNames(gen, from, to) : mergeToName(gen, from, to), to)
+          : from instanceof Name
+            ? (mergeToName(gen, to, from), from)
+            : mergeValues(from, to)
     return toName === Name && !(res instanceof Name) ? resultToName(gen, res) : res
   }
 }
@@ -195,8 +195,8 @@ export function getErrorPath(
         ? _`"[" + ${dataProp} + "]"`
         : _`"['" + ${dataProp} + "']"`
       : isNumber
-      ? _`"/" + ${dataProp}`
-      : _`"/" + ${dataProp}.replace(/~/g, "~0").replace(/\\//g, "~1")` // TODO maybe use global escapePointer
+        ? _`"/" + ${dataProp}`
+        : _`"/" + ${dataProp}.replace(/~/g, "~0").replace(/\\//g, "~1")` // TODO maybe use global escapePointer
   }
   return jsPropertySyntax ? getProperty(dataProp).toString() : "/" + escapeJsonPointer(dataProp)
 }
