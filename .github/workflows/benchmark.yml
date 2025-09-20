@@ -30,6 +30,7 @@ jobs:
           tool: "benchmarkjs"
           output-file-path: benchmark/output.txt
           github-token: ${{ secrets.GITHUB_TOKEN }}
+          auto-push: false
           # show alert with commit comment on detecting possible performance regression
           alert-threshold: "110%"
           comment-on-alert: true
@@ -40,3 +41,8 @@ jobs:
       - name: Push benchmark result
         run: git push ...
         if: github.event_name != 'pull_request'
+        uses: benchmark-action/github-action-benchmark@v1
+        with:
+          tool: "benchmarkjs"
+          output-file-path: benchmark/output.txt
+          github-token: ${{ secrets.GITHUB_TOKEN }}
