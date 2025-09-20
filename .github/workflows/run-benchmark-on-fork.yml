@@ -1,0 +1,39 @@
+name: Comment on PR with Benchmark Results
+
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - ready_for_review
+
+jobs:
+  benchmark:
+    name: Run Benchmark with variety of JSON Schemas
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v4
+
+      - name: Run benchmark
+        run: npm run benchmark | tee benchmark/output.txt
+
+      - name: Download previous benchmark data
+        uses: actions/cache@v4
+        with:
+          path: ./cache
+          key: ${{ runner.os }}-benchmark
+
+      - name: Store benchmark resuults
+        uses: benchmark-action/github-action-benchmark@v1
+        with:
+          name: benchmark regression test
+          tool: "benchmarkjs"
+          output-file-path: benchmark/output.txt
+          external-data-json-path: ./cache/benchmark-data.json
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          alert-threshold: "110%"
+          comment-on-alert: true
+          fail-on-alert: false
+          alert-comment-cc-users: "@bavulapati"
