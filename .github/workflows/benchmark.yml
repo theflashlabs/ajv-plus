@@ -39,10 +39,5 @@ jobs:
           comment-always: true
           alert-comment-cc-users: "@bavulapati"
       - name: Push benchmark result
-        run: git push ...
         if: github.event_name != 'pull_request'
-        uses: benchmark-action/github-action-benchmark@v1
-        with:
-          tool: "benchmarkjs"
-          output-file-path: benchmark/output.txt
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+        run: git push 'https://github-actions:${{ secrets.GITHUB_TOKEN }}@github.com/theflashlabs/ajv-plus.git' gh-pages:gh-pages
