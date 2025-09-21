@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1758434364563,
+  "lastUpdate": 1758435089652,
   "repoUrl": "https://github.com/theflashlabs/ajv-plus",
   "entries": {
     "benchmark.js benchmark": [
@@ -8298,6 +8298,268 @@ window.BENCHMARK_DATA = {
             "name": "yamllint",
             "value": 53.05,
             "range": "±2.36%",
+            "unit": "ops/sec",
+            "extra": "84 samples"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "bavulapati@gmail.com",
+            "name": "Balakrishna Avulapati",
+            "username": "bavulapati"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "ba5e884cf659c252e0af68f41bf72aba3ff0840c",
+          "message": "upgrade prettier deps (#42)",
+          "timestamp": "2025-09-21T11:37:18+05:30",
+          "tree_id": "2e849952314ea932311c07c9168cccfb8b590f78",
+          "url": "https://github.com/theflashlabs/ajv-plus/commit/ba5e884cf659c252e0af68f41bf72aba3ff0840c"
+        },
+        "date": 1758435088530,
+        "tool": "benchmarkjs",
+        "benches": [
+          {
+            "name": "ansible-meta",
+            "value": 26.96,
+            "range": "±8.14%",
+            "unit": "ops/sec",
+            "extra": "69 samples"
+          },
+          {
+            "name": "aws-cdk",
+            "value": 127,
+            "range": "±1.23%",
+            "unit": "ops/sec",
+            "extra": "85 samples"
+          },
+          {
+            "name": "babelrc",
+            "value": 105,
+            "range": "±1.56%",
+            "unit": "ops/sec",
+            "extra": "83 samples"
+          },
+          {
+            "name": "clang-format",
+            "value": 51.65,
+            "range": "±1.67%",
+            "unit": "ops/sec",
+            "extra": "82 samples"
+          },
+          {
+            "name": "cmake-presets",
+            "value": 4.05,
+            "range": "±12.56%",
+            "unit": "ops/sec",
+            "extra": "26 samples"
+          },
+          {
+            "name": "code-climate",
+            "value": 52.39,
+            "range": "±1.26%",
+            "unit": "ops/sec",
+            "extra": "83 samples"
+          },
+          {
+            "name": "cql2",
+            "value": 4.97,
+            "range": "±14.01%",
+            "unit": "ops/sec",
+            "extra": "31 samples"
+          },
+          {
+            "name": "cspell",
+            "value": 22.63,
+            "range": "±2.68%",
+            "unit": "ops/sec",
+            "extra": "58 samples"
+          },
+          {
+            "name": "cypress",
+            "value": 41.28,
+            "range": "±1.83%",
+            "unit": "ops/sec",
+            "extra": "68 samples"
+          },
+          {
+            "name": "deno",
+            "value": 51.38,
+            "range": "±1.78%",
+            "unit": "ops/sec",
+            "extra": "82 samples"
+          },
+          {
+            "name": "dependabot",
+            "value": 89.64,
+            "range": "±1.21%",
+            "unit": "ops/sec",
+            "extra": "84 samples"
+          },
+          {
+            "name": "draft-04",
+            "value": 8.64,
+            "range": "±3.04%",
+            "unit": "ops/sec",
+            "extra": "45 samples"
+          },
+          {
+            "name": "fabric-mod",
+            "value": 47.01,
+            "range": "±3.49%",
+            "unit": "ops/sec",
+            "extra": "76 samples"
+          },
+          {
+            "name": "geojson",
+            "value": 0.72,
+            "range": "±1.12%",
+            "unit": "ops/sec",
+            "extra": "8 samples"
+          },
+          {
+            "name": "gitpod-configuration",
+            "value": 69.05,
+            "range": "±1.89%",
+            "unit": "ops/sec",
+            "extra": "82 samples"
+          },
+          {
+            "name": "helm-chart-lock",
+            "value": 46.17,
+            "range": "±0.77%",
+            "unit": "ops/sec",
+            "extra": "74 samples"
+          },
+          {
+            "name": "importmap",
+            "value": 119,
+            "range": "±3.23%",
+            "unit": "ops/sec",
+            "extra": "80 samples"
+          },
+          {
+            "name": "jasmine",
+            "value": 136,
+            "range": "±1.18%",
+            "unit": "ops/sec",
+            "extra": "81 samples"
+          },
+          {
+            "name": "jsconfig",
+            "value": 33.99,
+            "range": "±1.93%",
+            "unit": "ops/sec",
+            "extra": "80 samples"
+          },
+          {
+            "name": "jshintrc",
+            "value": 47.87,
+            "range": "±1.97%",
+            "unit": "ops/sec",
+            "extra": "76 samples"
+          },
+          {
+            "name": "lazygit",
+            "value": 32.64,
+            "range": "±4.44%",
+            "unit": "ops/sec",
+            "extra": "78 samples"
+          },
+          {
+            "name": "lerna",
+            "value": 121,
+            "range": "±0.87%",
+            "unit": "ops/sec",
+            "extra": "82 samples"
+          },
+          {
+            "name": "nest-cli",
+            "value": 74.76,
+            "range": "±1.46%",
+            "unit": "ops/sec",
+            "extra": "88 samples"
+          },
+          {
+            "name": "omnisharp",
+            "value": 64.4,
+            "range": "±1.53%",
+            "unit": "ops/sec",
+            "extra": "77 samples"
+          },
+          {
+            "name": "pre-commit-hooks",
+            "value": 57.9,
+            "range": "±2.87%",
+            "unit": "ops/sec",
+            "extra": "71 samples"
+          },
+          {
+            "name": "pulumi",
+            "value": 39.8,
+            "range": "±1.95%",
+            "unit": "ops/sec",
+            "extra": "65 samples"
+          },
+          {
+            "name": "semantic-release",
+            "value": 102,
+            "range": "±1.45%",
+            "unit": "ops/sec",
+            "extra": "81 samples"
+          },
+          {
+            "name": "stale",
+            "value": 109,
+            "range": "±1.29%",
+            "unit": "ops/sec",
+            "extra": "85 samples"
+          },
+          {
+            "name": "stylecop",
+            "value": 78.22,
+            "range": "±1.98%",
+            "unit": "ops/sec",
+            "extra": "75 samples"
+          },
+          {
+            "name": "tmuxinator",
+            "value": 111,
+            "range": "±3.74%",
+            "unit": "ops/sec",
+            "extra": "76 samples"
+          },
+          {
+            "name": "ui5",
+            "value": 5.64,
+            "range": "±3.80%",
+            "unit": "ops/sec",
+            "extra": "32 samples"
+          },
+          {
+            "name": "unreal-engine-uproject",
+            "value": 54.39,
+            "range": "±2.91%",
+            "unit": "ops/sec",
+            "extra": "71 samples"
+          },
+          {
+            "name": "vercel",
+            "value": 37.06,
+            "range": "±3.50%",
+            "unit": "ops/sec",
+            "extra": "71 samples"
+          },
+          {
+            "name": "yamllint",
+            "value": 53.21,
+            "range": "±2.23%",
             "unit": "ops/sec",
             "extra": "84 samples"
           }
