@@ -41,6 +41,7 @@ const mySchema: JSONSchemaType<MyData> & {
   }
 } = {
   type: "object",
+  // @ts-ignore
   definitions: {
     baz: {
       // schema type is checked here ...
