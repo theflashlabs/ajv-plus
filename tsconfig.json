@@ -1,14 +1,39 @@
 {
-  "extends": "@ajv-validator/config",
-  "include": ["lib"],
+  "include": ["lib/**/*"],
   "compilerOptions": {
     "rootDir": "./lib",
-    "outDir": "dist",
-    "lib": ["ES2018", "DOM"],
-    "types": ["node"],
+    "outDir": "./dist",
+
+    "module": "nodenext",
+    "target": "esnext",
     "allowJs": true,
-    "target": "ES2018",
     "resolveJsonModule": true,
-    "sourceMap": false
+    "esModuleInterop": true,
+
+    "lib": ["esnext"],
+    "types": ["node"],
+
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true,
+
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "rewriteRelativeImportExtensions": true,
+
+    "strict": true,
+    "verbatimModuleSyntax": true,
+    "isolatedModules": true,
+    "noUncheckedSideEffectImports": true,
+    "moduleDetection": "force",
+    "skipLibCheck": true,
+
+    "strictNullChecks": true,
+    "noImplicitThis": true,
+    "noImplicitAny": true,
+    "forceConsistentCasingInFileNames": true
+    // "noUncheckedIndexedAccess": true
   }
 }
