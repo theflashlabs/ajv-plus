@@ -1,9 +1,36 @@
-import type {ScopeValueSets, NameValue, ValueScope, ValueScopeName} from "./scope"
-import {_, nil, _Code, Code, Name, UsedNames, CodeItem, addCodeArg, _CodeOrName} from "./code"
-import {Scope, varKinds} from "./scope"
+import type {ScopeValueSets, NameValue, ValueScope, ValueScopeName} from "./scope.ts"
+import {
+  _,
+  nil,
+  _Code,
+  type Code,
+  Name,
+  type UsedNames,
+  type CodeItem,
+  addCodeArg,
+  _CodeOrName,
+} from "./code.ts"
+import {Scope, varKinds} from "./scope.ts"
 
-export {_, str, strConcat, nil, getProperty, stringify, regexpCode, Name, Code} from "./code"
-export {Scope, ScopeStore, ValueScope, ValueScopeName, ScopeValueSets, varKinds} from "./scope"
+export {
+  _,
+  str,
+  strConcat,
+  nil,
+  getProperty,
+  stringify,
+  regexpCode,
+  Name,
+  type Code,
+} from "./code.ts"
+export {
+  Scope,
+  type ScopeStore,
+  ValueScope,
+  ValueScopeName,
+  type ScopeValueSets,
+  varKinds,
+} from "./scope.ts"
 
 // type for expressions that can be safely inserted in code without quotes
 export type SafeExpr = Code | number | boolean | null
@@ -179,7 +206,7 @@ abstract class ParentNode extends Node {
     const {nodes} = this
     let i = nodes.length
     while (i--) {
-      const n = nodes[i].optimizeNodes()
+      const n = nodes[i]?.optimizeNodes()
       if (Array.isArray(n)) nodes.splice(i, 1, ...n)
       else if (n) nodes[i] = n
       else nodes.splice(i, 1)
@@ -193,8 +220,8 @@ abstract class ParentNode extends Node {
     while (i--) {
       // iterating backwards improves 1-pass optimization
       const n = nodes[i]
-      if (n.optimizeNames(names, constants)) continue
-      subtractNames(names, n.names)
+      if (n?.optimizeNames(names, constants)) continue
+      subtractNames(names, n?.names)
       nodes.splice(i, 1)
     }
     return nodes.length > 0 ? this : undefined
