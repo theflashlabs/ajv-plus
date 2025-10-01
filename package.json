@@ -15,20 +15,20 @@
     "prettier:check": "prettier --list-different \"./**/*.{json,yaml,js,ts}\"",
     "test-spec": "mocha",
     "test-codegen": "nyc mocha 'test/codegen.spec.js' -R spec",
-    "test-debug": "npm run test-spec -- --inspect-brk",
-    "test-cov": "nyc npm run test-spec",
+    "test-debug": "pnpm run test-spec -- --inspect-brk",
+    "test-cov": "nyc pnpm run test-spec",
     "rollup": "rm -rf bundle && rollup -c",
     "bundle": "rm -rf bundle && node ./scripts/bundle.js ajv ajv7 ajv7 && node ./scripts/bundle.js 2019 ajv2019 ajv2019 && node ./scripts/bundle.js 2020 ajv2020 ajv2020",
-    "build": "rm -rf dist && tsc && npm run build-spec && cp -r lib/refs dist && rm dist/refs/json-schema-2019-09/index.ts && rm dist/refs/json-schema-2020-12/index.ts",
+    "build": "rm -rf dist && tsc && pnpm run build-spec && cp -r lib/refs dist && rm dist/refs/json-schema-2019-09/index.ts && rm dist/refs/json-schema-2020-12/index.ts",
     "build-spec": "rm -rf test && tsc --project ./spec",
     "json-tests": "rm -rf spec/_json/*.js && node scripts/jsontests",
     "test-karma": "karma start",
-    "test-browser": "rm -rf .browser && npm run bundle && scripts/prepare-tests && karma start",
-    "test-all": "npm run test-cov && if-node-version 12 npm run test-browser",
-    "test": "npm run json-tests && npm run prettier:check && npm run eslint && npm link && npm link --legacy-peer-deps @theflashlabs/ajv-plus && npm run test-cov",
-    "test-ci": "AJV_FULL_TEST=true npm test",
-    "prepublish": "npm run build",
-    "benchmark": "npm i && npm run build && npm link && cd ./benchmark && npm link --legacy-peer-deps @theflashlabs/ajv-plus && npm i && node ./json_schema.mjs",
+    "test-browser": "rm -rf .browser && pnpm run bundle && scripts/prepare-tests && karma start",
+    "test-all": "pnpm run test-cov && if-node-version 12 pnpm run test-browser",
+    "test": "pnpm run json-tests && pnpm run prettier:check && pnpm run eslint && pnpm link && pnpm link @theflashlabs/ajv-plus && pnpm run test-cov",
+    "test-ci": "AJV_FULL_TEST=true pnpm test",
+    "prepublish": "pnpm run build",
+    "benchmark": "pnpm i && pnpm run build && pnpm link && cd ./benchmark && pnpm link @theflashlabs/ajv-plus && pnpm i && node ./json_schema.mjs",
     "docs:dev": "./scripts/prepare-site && vuepress dev docs",
     "docs:build": "./scripts/prepare-site && vuepress build docs"
   },
@@ -68,6 +68,7 @@
   "homepage": "https://github.com/theflashlabs/ajv-plus",
   "runkitExampleFilename": ".runkit_example.js",
   "dependencies": {
+    "@theflashlabs/ajv-plus": "link:../../../Library/pnpm/global/5/node_modules/@theflashlabs/ajv-plus",
     "fast-deep-equal": "^3.1.3",
     "fast-uri": "^3.0.1",
     "json-schema-traverse": "^1.0.0",
@@ -118,10 +119,9 @@
     "type": "github",
     "url": "https://github.com/sponsors/bavulapati"
   },
-  "prettier": "@ajv-validator/config/prettierrc.json",
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged && npm test"
+      "pre-commit": "lint-staged && pnpm test"
     }
   },
   "lint-staged": {
