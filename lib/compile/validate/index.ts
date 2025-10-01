@@ -4,19 +4,40 @@ import type {
   AnySchemaObject,
   KeywordErrorCxt,
   KeywordCxtParams,
-} from "../../types"
-import type {SchemaCxt, SchemaObjCxt} from ".."
-import type {InstanceOptions} from "../../core"
-import {boolOrEmptySchema, topBoolOrEmptySchema} from "./boolSchema"
-import {coerceAndCheckDataType, getSchemaTypes} from "./dataType"
-import {shouldUseGroup, shouldUseRule} from "./applicability"
-import {checkDataType, checkDataTypes, reportTypeError, DataType} from "./dataType"
-import {assignDefaults} from "./defaults"
-import {funcKeywordCode, macroKeywordCode, validateKeywordUsage, validSchemaType} from "./keyword"
-import {getSubschema, extendSubschemaData, SubschemaArgs, extendSubschemaMode} from "./subschema"
-import {_, nil, str, or, not, getProperty, Block, Code, Name, CodeGen} from "../codegen"
-import N from "../names"
-import {resolveUrl} from "../resolve"
+} from "../../types/index.ts"
+import type {SchemaCxt, SchemaObjCxt} from "../index.ts"
+import type {InstanceOptions} from "../../core.ts"
+import {boolOrEmptySchema, topBoolOrEmptySchema} from "./boolSchema.ts"
+import {coerceAndCheckDataType, getSchemaTypes} from "./dataType.ts"
+import {shouldUseGroup, shouldUseRule} from "./applicability.ts"
+import {checkDataType, checkDataTypes, reportTypeError, DataType} from "./dataType.ts"
+import {assignDefaults} from "./defaults.ts"
+import {
+  funcKeywordCode,
+  macroKeywordCode,
+  validateKeywordUsage,
+  validSchemaType,
+} from "./keyword.ts"
+import {
+  getSubschema,
+  extendSubschemaData,
+  type SubschemaArgs,
+  extendSubschemaMode,
+} from "./subschema.ts"
+import {
+  _,
+  nil,
+  str,
+  or,
+  not,
+  getProperty,
+  type Block,
+  type Code,
+  Name,
+  CodeGen,
+} from "../codegen/index.ts"
+import N from "../names.ts"
+import {resolveUrl} from "../resolve.ts"
 import {
   schemaRefOrVal,
   schemaHasRulesButRef,
@@ -24,15 +45,15 @@ import {
   checkStrictMode,
   unescapeJsonPointer,
   mergeEvaluated,
-} from "../util"
-import type {JSONType, Rule, RuleGroup} from "../rules"
+} from "../util.ts"
+import type {JSONType, Rule, RuleGroup} from "../rules.ts"
 import {
-  ErrorPaths,
+  type ErrorPaths,
   reportError,
   reportExtraError,
   resetErrorsCount,
   keyword$DataError,
-} from "../errors"
+} from "../errors.ts"
 
 // schema compilation - generates validation function, subschemaCode (below) is used for subschemas
 export function validateFunctionCode(it: SchemaCxt): void {
@@ -300,7 +321,7 @@ function checkKeywordTypes(it: SchemaObjCxt, ts: JSONType[]): void {
     const rule = rules[keyword]
     if (typeof rule == "object" && shouldUseRule(it.schema, rule)) {
       const {type} = rule.definition
-      if (type.length && !type.some((t) => hasApplicableType(ts, t))) {
+      if (type.length && !type.some((t: JSONType) => hasApplicableType(ts, t))) {
         strictTypesError(it, `missing type "${type.join(",")}" for keyword "${keyword}"`)
       }
     }
@@ -554,14 +575,14 @@ export function getData(
   } else {
     const matches = RELATIVE_JSON_POINTER.exec($data)
     if (!matches) throw new Error(`Invalid JSON-pointer: ${$data}`)
-    const up: number = +matches[1]
+    const up: number = +(matches[1] as string)
     jsonPointer = matches[2]
     if (jsonPointer === "#") {
       if (up >= dataLevel) throw new Error(errorMsg("property/index", up))
-      return dataPathArr[dataLevel - up]
+      return dataPathArr[dataLevel - up] as Code | number
     }
     if (up > dataLevel) throw new Error(errorMsg("data", up))
-    data = dataNames[dataLevel - up]
+    data = dataNames[dataLevel - up] as Name
     if (!jsonPointer) return data
   }
 

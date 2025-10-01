@@ -1,7 +1,6 @@
-import type Ajv from "../.."
-import _Ajv from "../ajv"
-import chai from "../chai"
-const should = chai.should()
+import {beforeEach, describe, it, expect} from "vitest"
+import type Ajv from "../../lib/ajv.ts"
+import _Ajv from "../ajv.ts"
 
 describe("code generation options", () => {
   describe("sourceCode", () => {
@@ -9,9 +8,9 @@ describe("code generation options", () => {
       it("should add source.code property", () => {
         test(new _Ajv({code: {source: true}}))
 
-        function test(ajv) {
+        function test(ajv: Ajv) {
           const validate = ajv.compile({type: "number"})
-          validate.source.validateCode.should.be.a("string")
+          expect(validate.source?.validateCode).be.a("string")
         }
       })
     })
@@ -23,7 +22,7 @@ describe("code generation options", () => {
 
         function test(ajv: Ajv) {
           const validate = ajv.compile({type: "number"})
-          should.not.exist(validate.source)
+          expect(validate.source).toBeUndefined()
         }
       })
     })
@@ -40,9 +39,9 @@ describe("code generation options", () => {
       const beautify = require("js-beautify").js_beautify
       const ajvPC = new _Ajv({code: {process: beautify}})
       validate = ajvPC.compile({type: "string"})
-      validate.toString().split("\n").length.should.be.above(unprocessedLines)
-      validate("foo").should.equal(true)
-      validate(1).should.equal(false)
+      expect(validate.toString().split("\n").length).be.above(unprocessedLines)
+      expect(validate("foo")).equal(true)
+      expect(validate(1)).equal(false)
     })
   })
 
@@ -58,8 +57,8 @@ describe("code generation options", () => {
         const validate = getValidate(true)
         const self = {}
         validate.call(self, {})
-        contexts.should.have.length(4)
-        contexts.forEach((ctx) => ctx.should.equal(self))
+        expect(contexts).have.length(4)
+        contexts.forEach((ctx) => expect(ctx).equal(self))
       })
     })
 
@@ -68,12 +67,12 @@ describe("code generation options", () => {
         const validate = getValidate(false)
         const self = {}
         validate.call(self, {})
-        contexts.should.have.length(4)
-        contexts.forEach((ctx) => ctx.should.equal(ajv))
+        expect(contexts).have.length(4)
+        contexts.forEach((ctx) => expect(ctx).equal(ajv))
       })
     })
 
-    function getValidate(passContext) {
+    function getValidate(passContext: boolean) {
       ajv = new _Ajv({passContext: passContext, inlineRefs: false})
       ajv.addKeyword({keyword: "testValidate", validate: storeContext})
       ajv.addKeyword({keyword: "testCompile", compile: compileTestValidate})
@@ -113,10 +112,10 @@ describe("code generation options", () => {
       test(ajv1, {enum: ["foo", "bar", "baz"]})
       test(ajv2, {enum: ["foo", "bar", "baz"]})
 
-      function test(ajv, schema) {
-        ajv.validate(schema, "foo").should.equal(true)
-        ajv.validate(schema, "boo").should.equal(false)
-        ajv.validate(schema, 1).should.equal(false)
+      function test(ajv: Ajv, schema: {enum: string[]}) {
+        expect(ajv.validate(schema, "foo")).equal(true)
+        expect(ajv.validate(schema, "boo")).equal(false)
+        expect(ajv.validate(schema, 1)).equal(false)
       }
     })
   })

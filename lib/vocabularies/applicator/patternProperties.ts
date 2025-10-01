@@ -1,10 +1,10 @@
-import type {CodeKeywordDefinition} from "../../types"
-import type {KeywordCxt} from "../../compile/validate"
-import {allSchemaProperties, usePattern} from "../code"
-import {_, not, Name} from "../../compile/codegen"
-import {alwaysValidSchema, checkStrictMode} from "../../compile/util"
-import {evaluatedPropsToName, Type} from "../../compile/util"
-import {AnySchema} from "../../types"
+import type {CodeKeywordDefinition} from "../../types/index.ts"
+import type {KeywordCxt} from "../../compile/validate/index.ts"
+import {allSchemaProperties, usePattern} from "../code.ts"
+import {_, not, Name} from "../../compile/codegen/index.ts"
+import {alwaysValidSchema, checkStrictMode} from "../../compile/util.ts"
+import {evaluatedPropsToName, Type} from "../../compile/util.ts"
+import {type AnySchema} from "../../types/index.ts"
 
 const def: CodeKeywordDefinition = {
   keyword: "patternProperties",
@@ -60,7 +60,7 @@ const def: CodeKeywordDefinition = {
     }
 
     function validateProperties(pat: string): void {
-      gen.forIn("key", data, (key) => {
+      gen.forIn("key", data, (key: any) => {
         gen.if(_`${usePattern(cxt, pat)}.test(${key})`, () => {
           const alwaysValid = alwaysValidPatterns.includes(pat)
           if (!alwaysValid) {

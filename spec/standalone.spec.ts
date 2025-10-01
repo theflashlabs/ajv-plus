@@ -1,11 +1,12 @@
-import type Ajv from "../dist/core"
-import type {AnyValidateFunction} from "../dist/core"
-import _Ajv from "./ajv"
-import standaloneCode from "../dist/standalone"
+import {beforeEach, describe, it} from "vitest"
+import type Ajv from "../lib/core.ts"
+import type {AnyValidateFunction} from "../lib/core.ts"
+import _Ajv from "./ajv.ts"
+import standaloneCode from "../lib/standalone/index.ts"
 import ajvFormats from "@theflashlabs/ajv-formats"
-import requireFromString = require("require-from-string")
+import requireFromString from "require-from-string"
 import {importFromStringSync} from "module-from-string"
-import assert = require("assert")
+import assert from "node:assert"
 
 function testExportTypeEsm(moduleCode: string, singleExport: boolean) {
   //Must have
@@ -132,11 +133,13 @@ describe("standalone code generation", () => {
     })
 
     function testExports(m: {[n: string]: AnyValidateFunction<unknown>}) {
+      assert(m.validateNumber)
       assert.strictEqual(m.validateNumber(1), true)
       assert.strictEqual(m.validateNumber(0), true)
       assert.strictEqual(m.validateNumber(-1), false)
       assert.strictEqual(m.validateNumber("1"), false)
 
+      assert(m.validateString)
       assert.strictEqual(m.validateString("123"), true)
       assert.strictEqual(m.validateString("12"), true)
       assert.strictEqual(m.validateString("1"), false)
@@ -267,9 +270,11 @@ describe("standalone code generation", () => {
     }
 
     function testExports(validate: {[n: string]: AnyValidateFunction<unknown>}): void {
+      assert(validate.user)
       assert.strictEqual(validate.user({}), false)
       assert.strictEqual(validate.user({name: "usr1"}), true)
 
+      assert(validate.info)
       assert.strictEqual(validate.info({}), false)
       assert.strictEqual(
         validate.info({

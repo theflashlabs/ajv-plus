@@ -1,7 +1,6 @@
-import {DefinedError} from "../.."
-import _Ajv from "../ajv"
-import chai from "../chai"
-const should = chai.should()
+import {describe, expect, it} from "vitest"
+import type {DefinedError} from "../../lib/ajv.ts"
+import _Ajv from "../ajv.ts"
 
 describe("error object parameters type", () => {
   const ajv = new _Ajv({allErrors: true})
@@ -9,21 +8,21 @@ describe("error object parameters type", () => {
   it("should be determined by the keyword", () => {
     const validate = ajv.compile({type: "number", minimum: 0, multipleOf: 2})
     const valid = validate(-1)
-    valid.should.equal(false)
+    expect(valid).equal(false)
     const errs = validate.errors
     if (errs) {
-      errs.length.should.equal(2)
+      expect(errs.length).equal(2)
       for (const err of errs as DefinedError[]) {
         switch (err.keyword) {
           case "minimum":
-            err.params.limit.should.equal(0)
-            err.params.comparison.should.equal(">=")
+            expect(err.params.limit).equal(0)
+            expect(err.params.comparison).equal(">=")
             break
           case "multipleOf":
-            err.params.multipleOf.should.equal(2)
+            expect(err.params.multipleOf).equal(2)
             break
           default:
-            should.fail()
+            expect.fail()
         }
       }
     }

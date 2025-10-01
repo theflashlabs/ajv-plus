@@ -1,5 +1,5 @@
-import type {CodeKeywordDefinition} from "../../types"
-import {validateSchemaDeps} from "./dependencies"
+import type {CodeKeywordDefinition} from "../../types/index.ts"
+import {validateSchemaDeps} from "./dependencies.ts"
 
 const def: CodeKeywordDefinition = {
   keyword: "dependentSchemas",

@@ -1,11 +1,12 @@
-import type AjvCore from "../dist/core"
-import _Ajv from "./ajv"
-import getAjvInstances from "./ajv_instances"
-import {withStandalone} from "./ajv_standalone"
-import jsonSchemaTest = require("json-schema-test")
-import options from "./ajv_options"
-import {afterError, afterEach} from "./after_test"
+import type AjvCore from "../lib/core.ts"
+import _Ajv from "./ajv.ts"
+import getAjvInstances from "./ajv_instances.ts"
+import {withStandalone} from "./ajv_standalone.ts"
+import jsonSchemaTest from "@theflashlabs/json-schema-test"
+import options from "./ajv_options.ts"
+import {afterError, afterEach} from "./after_test.ts"
 import ajvFormats from "@theflashlabs/ajv-formats"
+import {assert, describe, it} from "vitest"
 
 const instances = getAjvInstances(_Ajv, options, {strict: false, formats: {allowedUnknown: true}})
 
@@ -32,16 +33,18 @@ jsonSchemaTest(withStandalone(instances), {
   description: `Schema tests of ${instances.length} ajv instances with different options`,
   suites: {"Schema tests": require("../spec/_json/tests")},
   only: [],
-  assert: require("./chai").assert,
+  assert: assert,
   afterError,
   afterEach,
   cwd: __dirname,
   timeout: 10000,
+  describe,
+  it,
 })
 
 function addRemoteRefsAndFormats(ajv: AjvCore) {
   ajv.opts.code.source = true
-  for (const id in remoteRefs) ajv.addSchema(remoteRefs[id], id)
+  for (const id in remoteRefs) ajv.addSchema(remoteRefs[id as keyof typeof remoteRefs], id)
   ajv.addSchema(remoteRefsWithIds)
   //@ts-ignore
   ajvFormats(ajv)

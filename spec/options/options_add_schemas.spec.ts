@@ -1,6 +1,6 @@
-import _Ajv from "../ajv"
-import chai from "../chai"
-const should = chai.should()
+import {beforeEach, describe, expect, it} from "vitest"
+import _Ajv from "../ajv.ts"
+import type Ajv from "../../lib/ajv.ts"
 
 describe("options to add schemas", () => {
   describe("schemas", () => {
@@ -12,10 +12,10 @@ describe("options to add schemas", () => {
         },
       })
 
-      ajv.validate("int", 123).should.equal(true)
-      ajv.validate("int", "foo").should.equal(false)
-      ajv.validate("str", "foo").should.equal(true)
-      ajv.validate("str", 123).should.equal(false)
+      expect(ajv.validate("int", 123)).equal(true)
+      expect(ajv.validate("int", "foo")).equal(false)
+      expect(ajv.validate("str", "foo")).equal(true)
+      expect(ajv.validate("str", 123)).equal(false)
     })
 
     it("should add schemas from array", () => {
@@ -34,54 +34,54 @@ describe("options to add schemas", () => {
         ],
       })
 
-      ajv.validate("obj", {int: 123, str: "foo"}).should.equal(true)
-      ajv.validate("obj", {int: "foo", str: "bar"}).should.equal(false)
-      ajv.validate("obj", {int: 123, str: 456}).should.equal(false)
+      expect(ajv.validate("obj", {int: 123, str: "foo"})).equal(true)
+      expect(ajv.validate("obj", {int: "foo", str: "bar"})).equal(false)
+      expect(ajv.validate("obj", {int: 123, str: 456})).equal(false)
     })
   })
 
   describe("addUsedSchema", () => {
     ;[true, undefined].forEach((optionValue) => {
       describe("= " + optionValue, () => {
-        let ajv
+        let ajv: Ajv
 
         beforeEach(() => {
-          ajv = new _Ajv({addUsedSchema: optionValue})
+          ajv = new _Ajv({addUsedSchema: optionValue as boolean})
         })
 
         describe("compile and validate", () => {
           it("should add schema", () => {
             let schema = {$id: "str", type: "string"}
             const validate = ajv.compile(schema)
-            validate("abc").should.equal(true)
-            validate(1).should.equal(false)
-            ajv.getSchema("str").should.equal(validate)
+            expect(validate("abc")).equal(true)
+            expect(validate(1)).equal(false)
+            expect(ajv.getSchema("str")).equal(validate)
 
             schema = {$id: "int", type: "integer"}
-            ajv.validate(schema, 1).should.equal(true)
-            ajv.validate(schema, "abc").should.equal(false)
-            ajv.getSchema("int").should.be.a("function")
+            expect(ajv.validate(schema, 1)).equal(true)
+            expect(ajv.validate(schema, "abc")).equal(false)
+            expect(ajv.getSchema("int")).be.a("function")
           })
 
           it("should throw with duplicate ID", () => {
             ajv.compile({$id: "str", type: "string"})
-            should.throw(() => {
+            expect(() => {
               ajv.compile({$id: "str", type: "string", minLength: 2})
-            }, /already exists/)
+            }).toThrowError(/already exists/)
 
             const schema = {$id: "int", type: "integer"}
             const schema2 = {$id: "int", type: "integer", minimum: 0}
-            ajv.validate(schema, 1).should.equal(true)
-            should.throw(() => {
+            expect(ajv.validate(schema, 1)).equal(true)
+            expect(() => {
               ajv.validate(schema2, 1)
-            }, /already exists/)
+            }).toThrowError(/already exists/)
           })
         })
       })
     })
 
     describe("= false", () => {
-      let ajv
+      let ajv: Ajv
 
       beforeEach(() => {
         ajv = new _Ajv({addUsedSchema: false})
@@ -91,28 +91,28 @@ describe("options to add schemas", () => {
         it("should NOT add schema", () => {
           let schema = {$id: "str", type: "string"}
           const validate = ajv.compile(schema)
-          validate("abc").should.equal(true)
-          validate(1).should.equal(false)
-          should.equal(ajv.getSchema("str"), undefined)
+          expect(validate("abc")).equal(true)
+          expect(validate(1)).equal(false)
+          expect(ajv.getSchema("str")).toBeUndefined()
 
           schema = {$id: "int", type: "integer"}
-          ajv.validate(schema, 1).should.equal(true)
-          ajv.validate(schema, "abc").should.equal(false)
-          should.equal(ajv.getSchema("int"), undefined)
+          expect(ajv.validate(schema, 1)).equal(true)
+          expect(ajv.validate(schema, "abc")).equal(false)
+          expect(ajv.getSchema("int")).toBeUndefined()
         })
 
         it("should NOT throw with duplicate ID", () => {
           ajv.compile({$id: "str", type: "string"})
-          should.not.throw(() => {
+          expect(() => {
             ajv.compile({$id: "str", type: "string", minLength: 2})
-          })
+          }).not.throw()
 
           const schema = {$id: "int", type: "integer"}
           const schema2 = {$id: "int", type: "integer", minimum: 0}
-          ajv.validate(schema, 1).should.equal(true)
-          should.not.throw(() => {
-            ajv.validate(schema2, 1).should.equal(true)
-          })
+          expect(ajv.validate(schema, 1)).equal(true)
+          expect(() => {
+            expect(ajv.validate(schema2, 1)).equal(true)
+          }).not.throw()
         })
       })
     })

@@ -1,8 +1,7 @@
-import type Ajv from ".."
-import type {ValidateFunction} from ".."
-import _Ajv from "./ajv"
-import chai from "./chai"
-const should = chai.should()
+import {describe, beforeEach, it, expect} from "vitest"
+import type Ajv from "../lib/ajv.ts"
+import type {ErrorObject, Schema, SchemaObject, ValidateFunction} from "../lib/ajv.ts"
+import _Ajv from "./ajv.ts"
 
 describe("Validation errors", () => {
   let ajv: Ajv, ajvJP: Ajv, fullAjv: Ajv
@@ -187,15 +186,15 @@ describe("Validation errors", () => {
 
     function testRequiredLargeSchema() {
       let schema: any = {required: []}
-      const data = {},
-        invalidData1 = {},
-        invalidData2 = {}
+      const data: any = {},
+        invalidData1: any = {},
+        invalidData2: any = {}
       for (let i = 0; i < 100; i++) {
         schema.required.push("" + i) // properties from '0' to '99' are required
-        data[i] = invalidData1[i] = invalidData2[i] = i
+        data[`${i}`] = invalidData1[`${i}`] = invalidData2[`${i}`] = i
       }
 
-      delete invalidData1[1] // property '1' will be missing
+      delete invalidData1[`${1}`] // property '1' will be missing
       delete invalidData2[2] // properties '2' and '198' will be missing
       delete invalidData2[98]
 
@@ -287,8 +286,8 @@ describe("Validation errors", () => {
 
       const validate = ajv.compile(schema)
 
-      validate({}).should.equal(false)
-      validate.errors?.should.have.length(2)
+      expect(validate({})).equal(false)
+      expect(validate.errors).have.length(2)
     })
 
     it("should not validate required twice with $data ref", () => {
@@ -305,8 +304,8 @@ describe("Validation errors", () => {
 
       const validate = ajv.compile(schema)
 
-      validate({requiredProperties: ["foo", "bar"]}).should.equal(false)
-      validate.errors?.should.have.length(2)
+      expect(validate({requiredProperties: ["foo", "bar"]})).equal(false)
+      expect(validate.errors).have.length(2)
     })
 
     it("should show different error when required is $data of incorrect type", () => {
@@ -452,7 +451,7 @@ describe("Validation errors", () => {
         params("baz")
       )
 
-      function params(missing) {
+      function params(missing: string) {
         const p = {
           property: "a",
           deps: "foo, bar, baz",
@@ -464,7 +463,7 @@ describe("Validation errors", () => {
     }
   })
 
-  function _testRequired(schema, schemaPathPrefix = "#", extraErrors = 0) {
+  function _testRequired(schema: Schema, schemaPathPrefix = "#", extraErrors = 0) {
     const schPath = schemaPathPrefix + "/required"
 
     const data = {foo: 1, bar: 2, baz: 3},
@@ -577,7 +576,7 @@ describe("Validation errors", () => {
     test(ajvJP)
     test(fullAjv)
 
-    function test(_ajv) {
+    function test(_ajv: Ajv) {
       const validate = _ajv.compile(schema)
       shouldBeValid(validate, data)
       shouldBeInvalid(validate, invalidData)
@@ -661,13 +660,13 @@ describe("Validation errors", () => {
       test(ajv)
       test(fullAjv)
 
-      function test(_ajv) {
+      function test(_ajv: Ajv) {
         const validate = _ajv.compile(schema)
-        validate("foo").should.equal(false)
-        validate.errors.length.should.equal(3)
-        validate(1).should.equal(false)
-        validate.errors.length.should.equal(1)
-        validate(1.5).should.equal(true)
+        expect(validate("foo")).equal(false)
+        expect(validate.errors?.length).equal(3)
+        expect(validate(1)).equal(false)
+        expect(validate.errors?.length).equal(1)
+        expect(validate(1.5)).equal(true)
       }
     })
 
@@ -679,24 +678,24 @@ describe("Validation errors", () => {
       test(ajv)
       test(fullAjv)
 
-      function test(_ajv) {
+      function test(_ajv: Ajv) {
         const validate = _ajv.compile(schema)
-        validate(1).should.equal(false)
-        let err = validate.errors.pop()
-        err.keyword.should.equal("oneOf")
-        err.params.should.eql({passingSchemas: [0, 1]})
+        expect(validate(1)).equal(false)
+        let err = validate.errors?.pop()
+        expect(err?.keyword).equal("oneOf")
+        expect(err?.params).eql({passingSchemas: [0, 1]})
 
-        validate(1.5).should.equal(false)
-        err = validate.errors.pop()
-        err.keyword.should.equal("oneOf")
-        err.params.should.eql({passingSchemas: [0, 2]})
+        expect(validate(1.5)).equal(false)
+        err = validate.errors?.pop()
+        expect(err?.keyword).equal("oneOf")
+        expect(err?.params).eql({passingSchemas: [0, 2]})
 
-        validate(2.5).should.equal(true)
+        expect(validate(2.5)).equal(true)
 
-        validate("foo").should.equal(false)
-        err = validate.errors.pop()
-        err.keyword.should.equal("oneOf")
-        err.params.should.eql({passingSchemas: null})
+        expect(validate("foo")).equal(false)
+        err = validate.errors?.pop()
+        expect(err?.keyword).equal("oneOf")
+        expect(err?.params).eql({passingSchemas: null})
       }
     })
   })
@@ -710,12 +709,12 @@ describe("Validation errors", () => {
       test(ajv)
       test(fullAjv)
 
-      function test(_ajv) {
+      function test(_ajv: Ajv) {
         const validate = _ajv.compile(schema)
-        validate("foo").should.equal(false)
-        validate.errors.length.should.equal(3)
-        validate(1).should.equal(true)
-        validate(1.5).should.equal(true)
+        expect(validate("foo")).equal(false)
+        expect(validate.errors?.length).equal(3)
+        expect(validate(1)).equal(true)
+        expect(validate(1.5)).equal(true)
       }
     })
   })
@@ -730,7 +729,7 @@ describe("Validation errors", () => {
         test(fullAjv, 2)
       })
 
-      function test(_ajv, numErrors?: number) {
+      function test(_ajv: Ajv, numErrors?: number) {
         const schema = {
           type: "integer",
           minimum: 5,
@@ -754,7 +753,7 @@ describe("Validation errors", () => {
         test(fullAjv, 2)
       })
 
-      function test(_ajv, numErrors?: number) {
+      function test(_ajv: Ajv, numErrors?: number) {
         const schema = {
           type: "array",
           minItems: 2,
@@ -822,7 +821,11 @@ describe("Validation errors", () => {
           limit: 5,
         })
 
-        function testError(keyword, message, params) {
+        function testError(
+          keyword: string,
+          message: string | undefined,
+          params: Record<string, any> | undefined
+        ) {
           const err = validate.errors?.[0]
           shouldBeError(err, keyword, "#/" + keyword, "", message, params)
         }
@@ -876,7 +879,7 @@ describe("Validation errors", () => {
   })
 
   describe("if/then/else errors", () => {
-    let validate: ValidateFunction, numErrors
+    let validate: ValidateFunction, numErrors: number
 
     it("if/then/else should include failing keyword in message and params", () => {
       const schema = {
@@ -935,12 +938,12 @@ describe("Validation errors", () => {
       })
     })
 
-    function prepareTest(_ajv: Ajv, schema) {
+    function prepareTest(_ajv: Ajv, schema: Schema) {
       validate = _ajv.compile(schema)
       numErrors = _ajv.opts.allErrors ? 2 : 1
     }
 
-    function testIfError(ifClause, multipleOf) {
+    function testIfError(ifClause: string, multipleOf: string | number) {
       let err = validate.errors?.[0]
       shouldBeError(
         err,
@@ -987,7 +990,7 @@ describe("Validation errors", () => {
         testTypeError(0, _ajv.opts.jsPropertySyntax ? "[1]" : "/1")
         if (expectedErrors === 2) testTypeError(1, _ajv.opts.jsPropertySyntax ? "[2]" : "/2")
 
-        function testTypeError(i, instancePath) {
+        function testTypeError(i: number, instancePath: string) {
           const err = validate.errors?.[i]
           shouldBeError(err, "type", "#/items/type", instancePath, "must be number")
         }
@@ -995,13 +998,13 @@ describe("Validation errors", () => {
     })
   })
 
-  function testSchema1(schema, schemaPathPrefix = "#/properties/foo") {
+  function testSchema1(schema: Schema, schemaPathPrefix = "#/properties/foo") {
     _testSchema1(ajv, schema, schemaPathPrefix)
     _testSchema1(ajvJP, schema, schemaPathPrefix)
     _testSchema1(fullAjv, schema, schemaPathPrefix)
   }
 
-  function _testSchema1(_ajv, schema, schemaPathPrefix) {
+  function _testSchema1(_ajv: Ajv, schema: boolean | SchemaObject, schemaPathPrefix: string) {
     const schPath = schemaPathPrefix + "/type"
 
     const data = {foo: 1},
@@ -1018,29 +1021,29 @@ describe("Validation errors", () => {
     )
   }
 
-  function shouldBeValid(validate, data) {
-    validate(data).should.equal(true)
-    should.equal(validate.errors, null)
+  function shouldBeValid(validate: ValidateFunction<unknown>, data: unknown) {
+    expect(validate(data)).equal(true)
+    expect(validate.errors).equal(null)
   }
 
-  function shouldBeInvalid(validate, data, numErrors = 1) {
-    validate(data).should.equal(false)
-    should.equal(validate.errors.length, numErrors)
+  function shouldBeInvalid(validate: ValidateFunction<unknown>, data: unknown, numErrors = 1) {
+    expect(validate(data)).equal(false)
+    expect(validate.errors?.length).equal(numErrors)
   }
 
   function shouldBeError(
-    error,
-    keyword,
-    schemaPath,
-    instancePath,
+    error: ErrorObject<string, Record<string, any>, unknown> | undefined,
+    keyword: string,
+    schemaPath: string,
+    instancePath: string,
     message?: string,
     params?: Record<string, any>
   ) {
-    error.keyword.should.equal(keyword)
-    error.schemaPath.should.equal(schemaPath)
-    error.instancePath.should.equal(instancePath)
-    error.message.should.be.a("string")
-    if (message !== undefined) error.message.should.equal(message)
-    if (params !== undefined) error.params.should.eql(params)
+    expect(error?.keyword).equal(keyword)
+    expect(error?.schemaPath).equal(schemaPath)
+    expect(error?.instancePath).equal(instancePath)
+    expect(error?.message).be.a("string")
+    if (message !== undefined) expect(error?.message).equal(message)
+    if (params !== undefined) expect(error?.params).eql(params)
   }
 })

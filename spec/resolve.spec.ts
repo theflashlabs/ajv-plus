@@ -1,11 +1,11 @@
-import type AjvCore from "../dist/core"
-import getAjvInstances from "./ajv_instances"
-import _Ajv from "./ajv"
-import type {AnyValidateFunction} from "../dist/types"
-import type MissingRefError from "../dist/compile/ref_error"
-import chai from "./chai"
+import {describe, beforeEach, it, expect} from "vitest"
+import type AjvCore from "../lib/core.ts"
+import getAjvInstances from "./ajv_instances.ts"
+import _Ajv from "./ajv.ts"
+import type {AnyValidateFunction, ValidateFunction} from "../lib/types/index.ts"
+import type MissingRefError from "../lib/compile/ref_error.ts"
 import * as uriJs from "uri-js"
-const should = chai.should()
+import assert from "assert"
 
 const uriResolvers = [undefined, uriJs]
 
@@ -21,6 +21,7 @@ uriResolvers.forEach((resolver) => {
       let instances: AjvCore[]
 
       beforeEach(() => {
+        //@ts-expect-error
         instances = getAjvInstances(_Ajv, {
           allErrors: true,
           verbose: true,
@@ -76,7 +77,7 @@ uriResolvers.forEach((resolver) => {
           instances.forEach((ajv) => {
             const validate = ajv.compile(schema)
             const data = {foo: 1, bar: "abc", baz: true, bax: null}
-            validate(data).should.equal(true)
+            expect(validate(data)).equal(true)
           })
         })
 
@@ -99,7 +100,7 @@ uriResolvers.forEach((resolver) => {
             ajv.addSchema(schema, "yaml.json")
             const data = {see_also: 1}
             const validate = ajv.validate("yaml.json#/definitions/Engine", data)
-            validate.should.equal(true)
+            expect(validate).equal(true)
           })
         })
 
@@ -109,7 +110,7 @@ uriResolvers.forEach((resolver) => {
               $id: "http://example.com/1.json",
               type: "integer",
             })
-            should.throw(() => {
+            expect(() => {
               ajv.compile({
                 type: "object",
                 additionalProperties: {
@@ -117,9 +118,9 @@ uriResolvers.forEach((resolver) => {
                   type: "string",
                 },
               })
-            }, /resolves to more than one schema/)
+            }).toThrowError(/resolves to more than one schema/)
 
-            should.throw(() => {
+            expect(() => {
               ajv.compile({
                 type: ["object", "array"],
                 items: {
@@ -131,7 +132,7 @@ uriResolvers.forEach((resolver) => {
                   type: "string",
                 },
               })
-            }, /resolves to more than one schema/)
+            }).toThrowError(/resolves to more than one schema/)
           })
         })
 
@@ -157,7 +158,7 @@ uriResolvers.forEach((resolver) => {
           }
           instances.forEach((ajv) => {
             const validate = ajv.compile(schema)
-            validate(data).should.equal(true)
+            expect(validate(data)).equal(true)
           })
         })
       })
@@ -174,8 +175,8 @@ uriResolvers.forEach((resolver) => {
 
             ajv.addSchema(schema)
             const validate = ajv.compile({$ref: "//e.com/types#/definitions/int"})
-            validate(1).should.equal(true)
-            validate("foo").should.equal(false)
+            expect(validate(1)).equal(true)
+            expect(validate("foo")).equal(false)
           })
         })
       })
@@ -210,14 +211,12 @@ uriResolvers.forEach((resolver) => {
           }
           instances.forEach((ajv) => {
             const validate = ajv.compile(schema)
-            validate(data).should.equal(true)
+            expect(validate(data)).equal(true)
           })
         })
       })
 
-      describe("missing schema error", function () {
-        this.timeout(4000)
-
+      describe("missing schema error", () => {
         it("should contain missingRef and missingSchema", () => {
           testMissingSchemaError({
             baseId: "http://example.com/1.json",
@@ -263,7 +262,12 @@ uriResolvers.forEach((resolver) => {
           })
         })
 
-        function testMissingSchemaError(opts) {
+        function testMissingSchemaError(opts: {
+          baseId: any
+          ref: any
+          expectedMissingRef: any
+          expectedMissingSchema: any
+        }) {
           instances.forEach((ajv) => {
             try {
               ajv.compile({
@@ -273,8 +277,8 @@ uriResolvers.forEach((resolver) => {
               })
             } catch (err) {
               const e = err as MissingRefError
-              e.missingRef.should.equal(opts.expectedMissingRef)
-              e.missingSchema.should.equal(opts.expectedMissingSchema)
+              expect(e.missingRef).equal(opts.expectedMissingRef)
+              expect(e.missingSchema).equal(opts.expectedMissingSchema)
             }
           })
         }
@@ -365,44 +369,49 @@ uriResolvers.forEach((resolver) => {
           ajv.addSchema(schemaMessage)
           const v: any = ajv.getSchema("http://e.com/message.json#")
 
-          v(validMessage).should.equal(true)
-          v.schema.$id.should.equal("http://e.com/message.json#")
+          expect(v(validMessage)).equal(true)
+          expect(v.schema.$id).equal("http://e.com/message.json#")
 
-          v(invalidMessage).should.equal(false)
-          v.errors.should.have.length(1)
-          v.schema.$id.should.equal("http://e.com/message.json#")
+          expect(v(invalidMessage)).equal(false)
+          expect(v.errors).have.length(1)
+          expect(v.schema.$id).equal("http://e.com/message.json#")
 
-          v(validMessage).should.equal(true)
-          v.schema.$id.should.equal("http://e.com/message.json#")
+          expect(v(validMessage)).equal(true)
+          expect(v.schema.$id).equal("http://e.com/message.json#")
         })
 
-        function testSchemas(ajv, expectedInlined) {
+        function testSchemas(ajv: AjvCore, expectedInlined: boolean) {
           const v1 = ajv.getSchema("http://e.com/obj.json"),
             v2 = ajv.getSchema("http://e.com/obj1.json"),
             v3 = ajv.getSchema("http://e.com/list.json")
           testObjSchema(v1)
           testObjSchema(v2)
           testListSchema(v3)
+          assert(v1)
           testInlined(v1, expectedInlined)
+          assert(v2)
           testInlined(v2, expectedInlined)
+          assert(v3)
           testInlined(v3, false)
         }
 
-        function testObjSchema(validate) {
-          validate({a: 3}).should.equal(true)
-          validate({a: 1}).should.equal(false)
-          validate({a: 5}).should.equal(false)
+        function testObjSchema(validate: ValidateFunction<unknown> | undefined) {
+          assert(validate)
+          expect(validate({a: 3})).equal(true)
+          expect(validate({a: 1})).equal(false)
+          expect(validate({a: 5})).equal(false)
         }
 
-        function testListSchema(validate) {
-          validate([{a: 3}]).should.equal(true)
-          validate([{a: 1}]).should.equal(false)
-          validate([{a: 5}]).should.equal(false)
+        function testListSchema(validate: AnyValidateFunction<unknown> | undefined) {
+          assert(validate)
+          expect(validate([{a: 3}])).equal(true)
+          expect(validate([{a: 1}])).equal(false)
+          expect(validate([{a: 5}])).equal(false)
         }
 
-        function testInlined(validate: AnyValidateFunction, expectedInlined) {
+        function testInlined(validate: AnyValidateFunction, expectedInlined: boolean) {
           const inlined: any = !validate.source?.scopeValues.validate
-          inlined.should.equal(expectedInlined)
+          expect(inlined).equal(expectedInlined)
         }
       })
 
@@ -428,7 +437,7 @@ uriResolvers.forEach((resolver) => {
           }
 
           instances.forEach((ajv) =>
-            should.throw(() => ajv.compile(schema), /nope.*resolves to more than one schema/)
+            expect(() => ajv.compile(schema)).toThrowError(/nope.*resolves to more than one schema/)
           )
         })
 
@@ -449,7 +458,7 @@ uriResolvers.forEach((resolver) => {
           }
 
           instances.forEach((ajv) =>
-            should.throw(() => ajv.compile(schema), /nope.*resolves to more than one schema/)
+            expect(() => ajv.compile(schema)).toThrowError(/nope.*resolves to more than one schema/)
           )
         })
       })

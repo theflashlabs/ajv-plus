@@ -1,7 +1,6 @@
-import type {JSONSchemaType} from "../.."
-import _Ajv from "../ajv"
-import chai from "../chai"
-const should = chai.should()
+import {describe, expect, it} from "vitest"
+import type {Ajv, JSONSchemaType, Schema} from "../../lib/ajv.ts"
+import _Ajv from "../ajv.ts"
 
 describe("strict mode", () => {
   describe(
@@ -40,7 +39,7 @@ describe("strict mode", () => {
         patternProperties: {foo: false},
       }
       ajv.compile(schema)
-      should.not.exist(output.warning)
+      expect(output.warning).toBeUndefined()
     })
   })
 
@@ -50,96 +49,96 @@ describe("strict mode", () => {
 
     describe("multiple/union types", () => {
       it("should prohibit multiple types", () => {
-        should.throw(() => {
+        expect(() => {
           ajv.compile({type: ["number", "string"]})
-        }, /use allowUnionTypes to allow union type/)
+        }).toThrowError(/use allowUnionTypes to allow union type/)
       })
 
       it("should allow multiple types with option allowUnionTypes", () => {
-        should.not.throw(() => {
+        expect(() => {
           ajvUT.compile({type: ["number", "string"]})
-        })
+        }).not.throw()
       })
 
       it("should allow nullable", () => {
-        should.not.throw(() => {
+        expect(() => {
           ajv.compile({type: ["number", "null"]})
           ajv.compile({type: ["number"], nullable: true})
-        })
+        }).not.throw()
       })
     })
 
     describe("contradictory types", () => {
       it("should prohibit contradictory types", () => {
-        should.throw(() => {
+        expect(() => {
           ajv.compile({
             type: "object",
             anyOf: [{type: "object"}, {type: "array"}],
           })
-        }, /type "array" not allowed by context "object"/)
+        }).toThrowError(/type "array" not allowed by context "object"/)
       })
 
       it("should allow narrowing types", () => {
-        should.not.throw(() => {
+        expect(() => {
           ajvUT.compile({
             type: ["object", "array"],
             anyOf: [{type: "object"}, {type: "array"}],
           })
-        })
+        }).not.throw()
       })
 
       it('should allow "integer" in "number" context', () => {
-        should.not.throw(() => {
+        expect(() => {
           ajv.compile({
             type: "number",
             anyOf: [{type: "integer"}],
           })
-        })
+        }).not.throw()
       })
 
       it('should prohibit "number" in "integer" context', () => {
-        should.throw(() => {
+        expect(() => {
           ajv.compile({
             type: "integer",
             anyOf: [{type: "number"}],
           })
-        }, /type "number" not allowed by context "integer"/)
+        }).toThrowError(/type "number" not allowed by context "integer"/)
       })
     })
 
     describe("applicable types", () => {
       it("should prohibit keywords without applicable types", () => {
-        should.throw(() => {
+        expect(() => {
           ajv.compile({
             properties: {
               foo: {type: "number", minimum: 0},
             },
           })
-        }, /missing type "object" for keyword "properties"/)
+        }).toThrowError(/missing type "object" for keyword "properties"/)
 
-        should.throw(() => {
+        expect(() => {
           ajv.compile({
             type: "object",
             properties: {
               foo: {minimum: 0},
             },
           })
-        }, /missing type "number" for keyword "minimum"/)
+        }).toThrowError(/missing type "number" for keyword "minimum"/)
       })
 
       it("should allow keywords with applicable types", () => {
-        should.not.throw(() => {
+        expect(() => {
           ajv.compile({
             type: "object",
             properties: {
               foo: {type: "number", minimum: 0},
             },
           })
-        })
+        }).not.throw()
       })
 
       it("should allow keywords with applicable type in parent schema", () => {
-        should.not.throw(() => {
+        expect(() => {
           ajv.compile({
             type: "object",
             anyOf: [
@@ -155,7 +154,7 @@ describe("strict mode", () => {
               },
             ],
           })
-        })
+        }).not.throw()
       })
     })
 
@@ -171,12 +170,12 @@ describe("strict mode", () => {
           propertyNames: {type: "string", maxLength: 5},
         })
 
-        should.throw(() => {
+        expect(() => {
           ajv.compile({
             type: "object",
             propertyNames: {type: "number"},
           })
-        }, /type "number" not allowed by context/)
+        }).toThrowError(/type "number" not allowed by context/)
       })
     })
   })
@@ -192,9 +191,9 @@ describe("strict mode", () => {
         minItems: 2,
         additionalItems: false,
       }
-      should.not.throw(() => {
+      expect(() => {
         ajv.compile(schema1)
-      })
+      }).not.throw()
 
       const schema2: JSONSchemaType<MyTuple> = {
         type: "array",
@@ -202,9 +201,9 @@ describe("strict mode", () => {
         minItems: 2,
         maxItems: 2,
       }
-      should.not.throw(() => {
+      expect(() => {
         ajv.compile(schema2)
-      })
+      }).not.throw()
 
       //@ts-expect-error
       const badSchema1: JSONSchemaType<MyTuple> = {
@@ -217,9 +216,11 @@ describe("strict mode", () => {
           },
         },
       }
-      should.throw(() => {
+      expect(() => {
         ajv.compile(badSchema1)
-      }, / minItems or maxItems\/additionalItems are not specified or different at path "#\/properties\/test"/)
+      }).toThrowError(
+        / minItems or maxItems\/additionalItems are not specified or different at path "#\/properties\/test"/
+      )
 
       //@ts-expect-error
       const badSchema2: JSONSchemaType<MyTuple> = {
@@ -232,9 +233,11 @@ describe("strict mode", () => {
           },
         },
       }
-      should.throw(() => {
+      expect(() => {
         ajv.compile(badSchema2)
-      }, / minItems or maxItems\/additionalItems are not specified or different at path "#\/properties\/test"/)
+      }).toThrowError(
+        / minItems or maxItems\/additionalItems are not specified or different at path "#\/properties\/test"/
+      )
 
       //@ts-expect-error
       const badSchema3: JSONSchemaType<MyTuple> = {
@@ -248,9 +251,11 @@ describe("strict mode", () => {
           },
         },
       }
-      should.throw(() => {
+      expect(() => {
         ajv.compile(badSchema3)
-      }, / minItems or maxItems\/additionalItems are not specified or different at path "#\/properties\/test"/)
+      }).toThrowError(
+        / minItems or maxItems\/additionalItems are not specified or different at path "#\/properties\/test"/
+      )
     })
   })
 
@@ -269,19 +274,18 @@ describe("strict mode", () => {
       }
 
       it("should prohibit with strictRequired: true", () => {
-        should.throw(
-          () => ajv.compile(schema),
+        expect(() => ajv.compile(schema)).toThrowError(
           'strict mode: required property "test" is not defined at "#" (strictRequired)'
         )
       })
 
       it("should NOT prohibit when strictRequired is not set", () => {
-        should.not.throw(() => new _Ajv().compile(schema))
+        expect(() => new _Ajv().compile(schema)).not.throw()
       })
     })
 
     it("should prohibit in second level of a schema", () => {
-      should.throw(() => {
+      expect(() => {
         ajv.compile({
           type: "object",
           properties: {
@@ -292,22 +296,24 @@ describe("strict mode", () => {
             },
           },
         })
-      }, 'strict mode: required property "keyname" is not defined at "#/properties/test" (strictRequired)')
+      }).toThrowError(
+        'strict mode: required property "keyname" is not defined at "#/properties/test" (strictRequired)'
+      )
     })
 
     it.skip("should not throw with a same level if then", () => {
-      should.not.throw(() => {
+      expect(() => {
         ajv.compile({
           type: "object",
           properties: {foo: {}},
           if: {required: ["foo"]},
           then: {properties: {bar: {type: "boolean"}}},
         })
-      })
+      }).not.throw()
     })
 
     it("should throw if a required property exists in a parent object but not in the subschema that the require keyword references", () => {
-      should.throw(() => {
+      expect(() => {
         ajv.compile({
           type: "object",
           properties: {
@@ -322,11 +328,11 @@ describe("strict mode", () => {
             },
           },
         })
-      })
+      }).throw()
     })
 
     it("should throw if property exists in parent but not in actual object required references", () => {
-      should.throw(() => {
+      expect(() => {
         ajv.compile({
           type: "object",
           properties: {
@@ -341,11 +347,11 @@ describe("strict mode", () => {
             },
           },
         })
-      })
+      }).throw()
     })
 
     it.skip("should not throw because all referenced properties are defined", () => {
-      should.not.throw(() => {
+      expect(() => {
         ajv.compile({
           type: "object",
           properties: {foo: {}, bar: {}},
@@ -360,11 +366,11 @@ describe("strict mode", () => {
             },
           ],
         })
-      })
+      }).not.throw()
     })
 
     it("should throw because baz does not exist as a property", () => {
-      should.throw(() => {
+      expect(() => {
         ajv.compile({
           type: "object",
           properties: {foo: {}, bar: {}},
@@ -379,12 +385,12 @@ describe("strict mode", () => {
             },
           ],
         })
-      })
+      }).throw()
     })
   })
 })
 
-function testStrictMode(schema, logPattern) {
+function testStrictMode(schema: Schema, logPattern: string | RegExp) {
   return () => {
     describe("strict = false", () => {
       it("should NOT throw an error or log a warning", () => {
@@ -394,7 +400,7 @@ function testStrictMode(schema, logPattern) {
           logger: getLogger(output),
         })
         ajv.compile(schema)
-        should.not.exist(output.warning)
+        expect(output.warning).toBeUndefined()
       })
     })
 
@@ -403,10 +409,10 @@ function testStrictMode(schema, logPattern) {
         test(new _Ajv({strict: true}))
         test(new _Ajv())
 
-        function test(ajv) {
-          should.throw(() => {
+        function test(ajv: Ajv) {
+          expect(() => {
             ajv.compile(schema)
-          }, logPattern)
+          }, logPattern as string).throw()
         }
       })
     })
@@ -419,18 +425,18 @@ function testStrictMode(schema, logPattern) {
           logger: getLogger(output),
         })
         ajv.compile(schema)
-        output.warning.should.match(logPattern)
+        expect(output.warning).match(logPattern as RegExp)
       })
     })
   }
 }
 
-function getLogger(output) {
+function getLogger(output: {warning: any}) {
   return {
     log() {
       throw new Error("log should not be called")
     },
-    warn(msg) {
+    warn(msg: any) {
       output.warning = msg
     },
     error() {

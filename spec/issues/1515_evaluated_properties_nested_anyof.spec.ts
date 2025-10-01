@@ -1,5 +1,6 @@
-import _Ajv from "../ajv2019"
-import * as assert from "assert"
+import {describe, it} from "vitest"
+import _Ajv from "../ajv2019.ts"
+import assert from "assert"
 
 describe("tracking evaluated properties with nested anyOf", () => {
   it("should initialize evaluated properties", () => {

@@ -1,7 +1,7 @@
-import _Ajv from "../ajv"
-import type Ajv from "../.."
-import chai from "../chai"
-chai.should()
+import {describe, beforeEach, it, expect} from "vitest"
+import _Ajv from "../ajv.ts"
+import type Ajv from "../../lib/ajv.ts"
+import type {Schema} from "../../lib/core.ts"
 
 describe("ownProperties option", () => {
   let ajv: Ajv, ajvOP: Ajv, ajvOP1: Ajv
@@ -163,24 +163,24 @@ describe("ownProperties option", () => {
     test(schema, obj, proto, 2)
   })
 
-  function test(schema, obj, proto, errors = 1, reverse?: boolean) {
+  function test(schema: Schema, obj: object, proto: object, errors = 1, reverse?: boolean) {
     const validate = ajv.compile(schema)
     const validateOP = ajvOP.compile(schema)
     const validateOP1 = ajvOP1.compile(schema)
     const data = Object.create(proto)
-    for (const key in obj) data[key] = obj[key]
+    for (const key in obj) data[key] = (obj as any)[key]
 
     if (reverse) {
-      validate(data).should.equal(true)
-      validateOP(data).should.equal(false)
-      validateOP.errors?.should.have.length(errors)
-      validateOP1(data).should.equal(false)
-      validateOP1.errors?.should.have.length(1)
+      expect(validate(data)).equal(true)
+      expect(validateOP(data)).equal(false)
+      expect(validateOP.errors).have.length(errors)
+      expect(validateOP1(data)).equal(false)
+      expect(validateOP1.errors).have.length(1)
     } else {
-      validate(data).should.equal(false)
-      validate.errors?.should.have.length(errors)
-      validateOP(data).should.equal(true)
-      validateOP1(data).should.equal(true)
+      expect(validate(data)).equal(false)
+      expect(validate.errors).have.length(errors)
+      expect(validateOP(data)).equal(true)
+      expect(validateOP1(data)).equal(true)
     }
   }
 })

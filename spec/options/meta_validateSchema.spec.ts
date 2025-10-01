@@ -1,52 +1,52 @@
-import _Ajv from "../ajv"
-import chai from "../chai"
-const should = chai.should()
+import {beforeEach, describe, expect, it} from "vitest"
+import _Ajv from "../ajv.ts"
+import type Ajv from "../../lib/ajv.ts"
 
 describe("meta and validateSchema options", () => {
   it("should add draft-7 meta schema by default", () => {
     testOptionMeta(new _Ajv())
     testOptionMeta(new _Ajv({meta: true}))
 
-    function testOptionMeta(ajv) {
-      ajv.getSchema("http://json-schema.org/draft-07/schema").should.be.a("function")
-      ajv.validateSchema({$id: "ok", type: "integer"}).should.equal(true)
-      ajv.validateSchema({$id: "wrong", type: 123}).should.equal(false)
-      should.not.throw(() => {
+    function testOptionMeta(ajv: Ajv) {
+      expect(ajv.getSchema("http://json-schema.org/draft-07/schema")).be.a("function")
+      expect(ajv.validateSchema({$id: "ok", type: "integer"})).equal(true)
+      expect(ajv.validateSchema({$id: "wrong", type: 123})).equal(false)
+      expect(() => {
         ajv.addSchema({$id: "ok", type: "integer"})
-      })
-      should.throw(() => {
+      }).not.throw()
+      expect(() => {
         ajv.addSchema({$id: "wrong", type: 123})
-      }, /schema is invalid/)
+      }).toThrowError(/schema is invalid/)
     }
   })
 
   it("should throw if meta: false and validateSchema: true", () => {
     const ajv = new _Ajv({meta: false, logger: false})
-    should.not.exist(ajv.getSchema("http://json-schema.org/draft-07/schema"))
-    should.not.throw(() => {
+    expect(ajv.getSchema("http://json-schema.org/draft-07/schema")).toBeUndefined()
+    expect(() => {
       ajv.addSchema({type: "wrong_type"}, "integer")
-    })
+    }).not.throw()
   })
 
   it("should skip schema validation with validateSchema: false", () => {
     let ajv = new _Ajv()
-    should.throw(() => {
+    expect(() => {
       ajv.addSchema({type: 123}, "integer")
-    }, /schema is invalid/)
+    }).toThrowError(/schema is invalid/)
 
     ajv = new _Ajv({validateSchema: false})
-    should.not.throw(() => {
+    expect(() => {
       ajv.addSchema({type: 123}, "integer")
-    })
+    }).not.throw()
 
     ajv = new _Ajv({validateSchema: false, meta: false})
-    should.not.throw(() => {
+    expect(() => {
       ajv.addSchema({type: 123}, "integer")
-    })
+    }).not.throw()
   })
 
   describe('validateSchema: "log"', () => {
-    let loggedError, loggedWarning
+    let loggedError: boolean, loggedWarning: boolean
     const logger = {
       log() {},
       warn: () => (loggedWarning = true),
@@ -60,27 +60,27 @@ describe("meta and validateSchema options", () => {
 
     it("should not throw on invalid schema", () => {
       const ajv = new _Ajv({validateSchema: "log", logger})
-      should.not.throw(() => {
+      expect(() => {
         ajv.addSchema({type: 123}, "integer")
-      })
-      loggedError.should.equal(true)
-      loggedWarning.should.equal(false)
+      }).not.throw()
+      expect(loggedError).equal(true)
+      expect(loggedWarning).equal(false)
     })
 
     it("should not throw on invalid schema with meta: false", () => {
       const ajv = new _Ajv({validateSchema: "log", meta: false, logger})
-      should.not.throw(() => {
+      expect(() => {
         ajv.addSchema({type: 123}, "integer")
-      })
-      loggedError.should.equal(false)
-      loggedWarning.should.equal(true)
+      }).not.throw()
+      expect(loggedError).equal(false)
+      expect(loggedWarning).equal(true)
     })
   })
 
   it("should validate v6 schema", () => {
     const ajv = new _Ajv()
-    ajv.validateSchema({contains: {minimum: 2}}).should.equal(true)
-    ajv.validateSchema({contains: 2}).should.equal(false)
+    expect(ajv.validateSchema({contains: {minimum: 2}})).equal(true)
+    expect(ajv.validateSchema({contains: 2})).equal(false)
   })
 
   it("should use option meta as default meta schema", () => {
@@ -91,17 +91,17 @@ describe("meta and validateSchema options", () => {
       },
     }
     let ajv = new _Ajv({meta: meta})
-    ajv.validateSchema({myKeyword: true}).should.equal(true)
-    ajv.validateSchema({myKeyword: 2}).should.equal(false)
-    ajv
-      .validateSchema({
+    expect(ajv.validateSchema({myKeyword: true})).equal(true)
+    expect(ajv.validateSchema({myKeyword: 2})).equal(false)
+    expect(
+      ajv.validateSchema({
         $schema: "http://json-schema.org/draft-07/schema",
         myKeyword: 2,
       })
-      .should.equal(true)
+    ).equal(true)
 
     ajv = new _Ajv()
-    ajv.validateSchema({myKeyword: true}).should.equal(true)
-    ajv.validateSchema({myKeyword: 2}).should.equal(true)
+    expect(ajv.validateSchema({myKeyword: true})).equal(true)
+    expect(ajv.validateSchema({myKeyword: 2})).equal(true)
   })
 })

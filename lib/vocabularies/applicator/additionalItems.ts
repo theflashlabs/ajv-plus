@@ -3,10 +3,10 @@ import type {
   ErrorObject,
   KeywordErrorDefinition,
   AnySchema,
-} from "../../types"
-import type {KeywordCxt} from "../../compile/validate"
-import {_, str, not, Name} from "../../compile/codegen"
-import {alwaysValidSchema, checkStrictMode, Type} from "../../compile/util"
+} from "../../types/index.ts"
+import type {KeywordCxt} from "../../compile/validate/index.ts"
+import {_, str, not, Name} from "../../compile/codegen/index.ts"
+import {alwaysValidSchema, checkStrictMode, Type} from "../../compile/util.ts"
 
 export type AdditionalItemsError = ErrorObject<"additionalItems", {limit: number}, AnySchema>
 
@@ -46,7 +46,7 @@ export function validateAdditionalItems(cxt: KeywordCxt, items: AnySchema[]): vo
   }
 
   function validateItems(valid: Name): void {
-    gen.forRange("i", items.length, len, (i) => {
+    gen.forRange("i", items.length, len, (i: any) => {
       cxt.subschema({keyword, dataProp: i, dataPropType: Type.Num}, valid)
       if (!it.allErrors) gen.if(not(valid), () => gen.break())
     })

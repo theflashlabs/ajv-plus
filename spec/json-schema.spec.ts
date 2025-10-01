@@ -1,16 +1,16 @@
-import type Ajv from "../dist/core"
-import _Ajv from "./ajv"
-import _Ajv2019 from "./ajv2019"
-import _Ajv2020 from "./ajv2020"
-import getAjvInstances from "./ajv_instances"
-import {withStandalone} from "./ajv_standalone"
-import jsonSchemaTest = require("json-schema-test")
-import options from "./ajv_options"
-import {afterError, afterEach} from "./after_test"
+import type Ajv from "../lib/core.ts"
+import _Ajv from "./ajv.ts"
+import _Ajv2019 from "./ajv2019.ts"
+import _Ajv2020 from "./ajv2020.ts"
+import getAjvInstances from "./ajv_instances.ts"
+import {withStandalone} from "./ajv_standalone.ts"
+import jsonSchemaTest from "@theflashlabs/json-schema-test"
+import options from "./ajv_options.ts"
+import {afterError, afterEach} from "./after_test.ts"
 import ajvFormats from "@theflashlabs/ajv-formats"
-const draft6MetaSchema = require("../dist/refs/json-schema-draft-06.json")
-import {toHash} from "../dist/compile/util"
-import chai from "./chai"
+import draft6MetaSchema from "../lib/refs/json-schema-draft-06.json" with {type: "json"}
+import {toHash} from "../lib/compile/util.ts"
+import {assert, describe, it} from "vitest"
 
 const remoteRefs = {
   "http://localhost:1234/integer.json": require("../spec/JSON-Schema-Test-Suite/remotes/integer.json"),
@@ -220,7 +220,7 @@ function runTest({instances, draft, tests, skip = [], remotes = {}}: SchemaTest)
       ajv.addMetaSchema(draft6MetaSchema)
       ajv.opts.defaultMeta = "http://json-schema.org/draft-06/schema#"
     }
-    for (const id in remoteRefs) ajv.addSchema(remoteRefs[id], id)
+    for (const id in remoteRefs) ajv.addSchema(remoteRefs[id as keyof typeof remoteRefs], id)
     for (const id in remotes) ajv.addSchema(remotes[id], id)
     //@ts-ignore
     ajvFormats(ajv)
@@ -231,12 +231,14 @@ function runTest({instances, draft, tests, skip = [], remotes = {}}: SchemaTest)
     suites: {tests},
     only: [],
     skip,
-    assert: chai.assert,
+    assert: assert,
     afterError,
     afterEach,
     cwd: __dirname,
     hideFolder: `draft${draft}/`,
     timeout: 30000,
+    describe,
+    it,
   })
 }
 
@@ -262,7 +264,7 @@ function skipTestCases(suites: TestSuite[], skipCases: SkippedTestCases): TestSu
             t.skip = true
           } else {
             t.tests.forEach((testCase: any) => {
-              if (skippedCases.includes(testCase.description)) {
+              if (skippedCases?.includes(testCase.description)) {
                 testCase.skip = true
               }
             })

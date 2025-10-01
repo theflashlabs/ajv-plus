@@ -1,9 +1,8 @@
-import type AjvCore from "../../dist/core"
-import type AjvPack from "../../dist/standalone/instance"
-import {getStandalone} from "../ajv_standalone"
-import _Ajv from "../ajv"
-import chai from "../chai"
-const should = chai.should()
+import {describe, expect, it} from "vitest"
+import type AjvCore from "../../lib/core.ts"
+import type AjvPack from "../../lib/standalone/instance.ts"
+import {getStandalone} from "../ajv_standalone.ts"
+import _Ajv from "../ajv.ts"
 
 describe('issue #50: references with "definitions"', () => {
   const schema1 = {
@@ -62,7 +61,7 @@ describe('issue #50: references with "definitions"', () => {
       role: "Programmer",
     })
 
-    result.should.equal(true)
-    should.equal(ajv.errors, null)
+    expect(result).equal(true)
+    expect(ajv.errors).equal(null)
   }
 })

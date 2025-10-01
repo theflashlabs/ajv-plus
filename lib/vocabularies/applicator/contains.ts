@@ -3,10 +3,10 @@ import type {
   KeywordErrorDefinition,
   ErrorObject,
   AnySchema,
-} from "../../types"
-import type {KeywordCxt} from "../../compile/validate"
-import {_, str, Name} from "../../compile/codegen"
-import {alwaysValidSchema, checkStrictMode, Type} from "../../compile/util"
+} from "../../types/index.ts"
+import type {KeywordCxt} from "../../compile/validate/index.ts"
+import {_, str, Name} from "../../compile/codegen/index.ts"
+import {alwaysValidSchema, checkStrictMode, Type} from "../../compile/util.ts"
 
 export type ContainsError = ErrorObject<
   "contains",
@@ -79,7 +79,7 @@ const def: CodeKeywordDefinition = {
     }
 
     function validateItems(_valid: Name, block: () => void): void {
-      gen.forRange("i", 0, len, (i) => {
+      gen.forRange("i", 0, len, (i: any) => {
         cxt.subschema(
           {
             keyword: "contains",

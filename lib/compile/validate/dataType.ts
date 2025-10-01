@@ -3,13 +3,13 @@ import type {
   KeywordErrorCxt,
   ErrorObject,
   AnySchemaObject,
-} from "../../types"
-import type {SchemaObjCxt} from ".."
-import {isJSONType, JSONType} from "../rules"
-import {schemaHasRulesForType} from "./applicability"
-import {reportError} from "../errors"
-import {_, nil, and, not, operators, Code, Name} from "../codegen"
-import {toHash, schemaRefOrVal} from "../util"
+} from "../../types/index.ts"
+import type {SchemaObjCxt} from "../index.ts"
+import {isJSONType, type JSONType} from "../rules.ts"
+import {schemaHasRulesForType} from "./applicability.ts"
+import {reportError} from "../errors.ts"
+import {_, nil, and, not, operators, type Code, Name} from "../codegen/index.ts"
+import {toHash, schemaRefOrVal} from "../util.ts"
 
 export enum DataType {
   Correct,
@@ -42,7 +42,11 @@ export function coerceAndCheckDataType(it: SchemaObjCxt, types: JSONType[]): boo
   const coerceTo = coerceToTypes(types, opts.coerceTypes)
   const checkTypes =
     types.length > 0 &&
-    !(coerceTo.length === 0 && types.length === 1 && schemaHasRulesForType(it, types[0]))
+    !(
+      coerceTo.length === 0 &&
+      types.length === 1 &&
+      schemaHasRulesForType(it, types[0] as JSONType)
+    )
   if (checkTypes) {
     const wrongType = checkDataTypes(types, data, opts.strictNumbers, DataType.Wrong)
     gen.if(wrongType, () => {
@@ -182,7 +186,7 @@ export function checkDataTypes(
   correct?: DataType
 ): Code {
   if (dataTypes.length === 1) {
-    return checkDataType(dataTypes[0], data, strictNums, correct)
+    return checkDataType(dataTypes[0] as JSONType, data, strictNums, correct)
   }
   let cond: Code
   const types = toHash(dataTypes)

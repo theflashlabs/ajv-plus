@@ -1,6 +1,5 @@
-import _Ajv from "../ajv"
-import chai from "../chai"
-chai.should()
+import {describe, expect, it} from "vitest"
+import _Ajv from "../ajv.ts"
 
 describe("$comment option", () => {
   describe("= true", () => {
@@ -33,17 +32,21 @@ describe("$comment option", () => {
         test({foo: 1, bar: 2}, true, [["object root"], ["property foo"], ["property bar"]])
         test({foo: 1, bar: "baz"}, false, [["object root"], ["property foo"], ["property bar"]])
 
-        function test(data, valid, expectedLogCalls) {
+        function test(
+          data: {foo?: number; bar?: string | number},
+          valid: boolean,
+          expectedLogCalls: string[][]
+        ) {
           logCalls = []
-          validate(data).should.equal(valid)
-          logCalls.should.eql(expectedLogCalls)
+          expect(validate(data)).equal(valid)
+          expect(logCalls).eql(expectedLogCalls)
         }
       })
     })
   })
 
   describe("function hook", () => {
-    let hookCalls
+    let hookCalls: any[]
 
     function hook(...args: any[]) {
       hookCalls.push(Array.prototype.slice.call(args))
@@ -81,10 +84,10 @@ describe("$comment option", () => {
           ["property bar", "#/properties/bar/$comment", schema],
         ])
 
-        function test(data, valid, expectedHookCalls) {
+        function test(data: any, valid: boolean, expectedHookCalls: any[]) {
           hookCalls = []
-          validate(data).should.equal(valid)
-          hookCalls.should.eql(expectedHookCalls)
+          expect(validate(data)).equal(valid)
+          expect(hookCalls).eql(expectedHookCalls)
         }
       })
     })

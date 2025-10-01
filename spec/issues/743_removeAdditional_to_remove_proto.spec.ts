@@ -1,6 +1,5 @@
-import _Ajv from "../ajv"
-import chai from "../chai"
-chai.should()
+import {describe, expect, it} from "vitest"
+import _Ajv from "../ajv.ts"
 
 describe("issue #743, property __proto__ should be removed with removeAdditional option", () => {
   it("should remove additional properties", () => {
@@ -35,7 +34,7 @@ describe("issue #743, property __proto__ should be removed with removeAdditional
 
     const data = {obj: obj}
 
-    ajv.validate(schema, data).should.equal(true)
-    Object.keys(data.obj).should.eql(["a", "b"])
+    expect(ajv.validate(schema, data)).equal(true)
+    expect(Object.keys(data.obj)).eql(["a", "b"])
   })
 })

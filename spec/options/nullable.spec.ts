@@ -1,9 +1,10 @@
-import _Ajv from "../ajv"
-import chai from "../chai"
-const should = chai.should()
+import {describe, beforeEach, it, expect} from "vitest"
+import _Ajv from "../ajv.ts"
+import type Ajv from "../../lib/ajv.ts"
+import type {Schema} from "../../lib/ajv.ts"
 
 describe("nullable keyword", () => {
-  let ajv
+  let ajv: Ajv
 
   beforeEach(() => {
     ajv = new _Ajv()
@@ -47,33 +48,33 @@ describe("nullable keyword", () => {
   })
 
   it("should throw if type includes null with nullable: false", () => {
-    should.throw(() => {
+    expect(() => {
       ajv.compile({
         type: ["number", "null"],
         nullable: false,
       })
-    }, "type: null contradicts nullable: false")
+    }).toThrowError("type: null contradicts nullable: false")
   })
 
   it("should throw if nullable is used without type", () => {
-    should.throw(() => {
+    expect(() => {
       ajv.compile({
         nullable: true,
       })
-    }, '"nullable" cannot be used without "type"')
+    }).toThrowError('"nullable" cannot be used without "type"')
   })
 
-  function testNullable(schema) {
+  function testNullable(schema: Schema) {
     const validate = ajv.compile(schema)
-    validate(1).should.equal(true)
-    validate(null).should.equal(true)
-    validate("1").should.equal(false)
+    expect(validate(1)).equal(true)
+    expect(validate(null)).equal(true)
+    expect(validate("1")).equal(false)
   }
 
-  function testNotNullable(schema) {
+  function testNotNullable(schema: Schema) {
     const validate = ajv.compile(schema)
-    validate(1).should.equal(true)
-    validate(null).should.equal(false)
-    validate("1").should.equal(false)
+    expect(validate(1)).equal(true)
+    expect(validate(null)).equal(false)
+    expect(validate("1")).equal(false)
   }
 })

@@ -1,6 +1,5 @@
-import _Ajv from "../ajv"
-import chai from "../chai"
-chai.should()
+import {describe, expect, it} from "vitest"
+import _Ajv from "../ajv.ts"
 
 describe("issue #204, options schemas and $data used together", () => {
   it("should use v5 metaschemas by default", () => {
@@ -12,10 +11,10 @@ describe("issue #204, options schemas and $data used together", () => {
     const schema = {const: 42}
     const validate = ajv.compile(schema)
 
-    validate(42).should.equal(true)
-    validate(43).should.equal(false)
+    expect(validate(42)).equal(true)
+    expect(validate(43)).equal(false)
 
-    ajv.validate("str", "foo").should.equal(true)
-    ajv.validate("str", 42).should.equal(false)
+    expect(ajv.validate("str", "foo")).equal(true)
+    expect(ajv.validate("str", 42)).equal(false)
   })
 })

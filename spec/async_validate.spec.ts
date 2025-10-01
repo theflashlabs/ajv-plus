@@ -1,14 +1,16 @@
-import getAjvAsyncInstances from "./ajv_async_instances"
-import _Ajv from "./ajv"
-import chai from "./chai"
-const should = chai.should()
+import {describe, beforeEach, it, expect} from "vitest"
+import getAjvAsyncInstances from "./ajv_async_instances.ts"
+import _Ajv from "./ajv.ts"
+import type AjvCore from "../lib/core.ts"
+import type Ajv from "../lib/ajv.ts"
+import assert from "assert"
 
-describe("async schemas, formats and keywords", function () {
-  this.timeout(30000)
-  let ajv, instances
+describe("async schemas, formats and keywords", () => {
+  let ajv: Ajv, instances: AjvCore[]
 
   beforeEach(() => {
     instances = getAjvAsyncInstances()
+    assert(instances[0])
     ajv = instances[0]
   })
 
@@ -24,7 +26,7 @@ describe("async schemas, formats and keywords", function () {
         return Promise.all(instances.map(test))
       })
 
-      function test(_ajv) {
+      function test(_ajv: Ajv) {
         const validate = _ajv.compile(schema)
 
         return Promise.all([
@@ -47,9 +49,9 @@ describe("async schemas, formats and keywords", function () {
         },
       }
 
-      should.throw(() => {
+      expect(() => {
         ajv.compile(schema)
-      }, "async schema in sync schema")
+      }).toThrowError("async schema in sync schema")
 
       ajv.compile({...schema, $async: true})
     })
@@ -65,9 +67,9 @@ describe("async schemas, formats and keywords", function () {
           format: "english_word",
         }
 
-        should.throw(() => {
+        expect(() => {
           _ajv.compile(schema)
-        }, "async format in sync schema")
+        }).toThrowError("async format in sync schema")
         schema = {...schema, $async: true}
         _ajv.compile(schema)
       })
@@ -107,9 +109,9 @@ describe("async schemas, formats and keywords", function () {
           },
         }
 
-        should.throw(() => {
+        expect(() => {
           _ajv.compile(schema)
-        }, "async keyword in sync schema")
+        }).toThrowError("async keyword in sync schema")
 
         schema = {...schema, $async: true}
         _ajv.compile(schema)
@@ -144,7 +146,7 @@ describe("async schemas, formats and keywords", function () {
       )
     })
 
-    function checkIdExists(schema, data) {
+    function checkIdExists(schema: {table: any}, data: any) {
       switch (schema.table) {
         case "users":
           return check([1, 5, 8])
@@ -154,12 +156,12 @@ describe("async schemas, formats and keywords", function () {
           throw new Error("no such table")
       }
 
-      function check(IDs) {
+      function check(IDs: number[]) {
         return Promise.resolve(IDs.indexOf(data) >= 0)
       }
     }
 
-    function checkIdExistsWithError(schema, data) {
+    function checkIdExistsWithError(schema: {table: any}, data: any) {
       const {table} = schema
       switch (table) {
         case "users":
@@ -170,7 +172,7 @@ describe("async schemas, formats and keywords", function () {
           throw new Error("no such table")
       }
 
-      function check(_table, IDs) {
+      function check(_table: string, IDs: number[]) {
         if (IDs.indexOf(data) >= 0) return Promise.resolve(true)
         const error = {
           keyword: "idExistsWithError",
@@ -343,16 +345,16 @@ describe("async schemas, formats and keywords", function () {
         validate: checkWordOnServer,
       })
 
-      should.throw(() => {
+      expect(() => {
         ajv.compile(schema)
-      }, "async schema referenced by sync schema")
+      }).toThrowError("async schema referenced by sync schema")
 
       schema = {...schema, $id: "http://e.com/obj2.json#", $async: true}
 
       ajv.compile(schema)
     })
 
-    function recursiveTest(schema, refSchema?) {
+    function recursiveTest(schema: any, refSchema?: any) {
       return repeat(() => {
         return Promise.all(
           instances.map((_ajv) => {
@@ -390,7 +392,7 @@ describe("async schemas, formats and keywords", function () {
   }
 })
 
-function checkWordOnServer(str) {
+function checkWordOnServer(str: string) {
   return str === "tomorrow"
     ? Promise.resolve(true)
     : str === "manana"
@@ -398,40 +400,40 @@ function checkWordOnServer(str) {
       : Promise.reject(new Error("unknown word"))
 }
 
-function shouldBeValid(p, data) {
-  return p.then((valid) => valid.should.equal(data))
+async function shouldBeValid(p: boolean | Promise<any>, data: any) {
+  const valid = await p
+  return expect(valid).equal(data)
 }
 
 const SHOULD_BE_INVALID = "test: should be invalid"
-function shouldBeInvalid(p, expectedMessages?: string[]) {
-  return checkNotValid(p).then((err) => {
-    err.should.be.instanceof(_Ajv.ValidationError)
-    err.errors.should.be.an("array")
-    err.validation.should.equal(true)
-    if (expectedMessages) {
-      const messages = err.errors.map((e) => e.message)
-      messages.should.eql(expectedMessages)
-    }
-  })
+async function shouldBeInvalid(p: boolean | Promise<any>, expectedMessages?: string[]) {
+  const err = await checkNotValid(p)
+  expect(err).be.instanceof(_Ajv.ValidationError)
+  expect(err.errors).be.an("array")
+  expect(err.validation).equal(true)
+  if (expectedMessages) {
+    const messages = err.errors.map((e: {message: any}) => e.message)
+    expect(messages).eql(expectedMessages)
+  }
 }
 
-function shouldThrow(p, exception) {
-  return checkNotValid(p).then((err) => err.message.should.equal(exception))
+async function shouldThrow(p: boolean | Promise<any>, exception: string) {
+  const err = await checkNotValid(p)
+  return expect(err.message).equal(exception)
 }
 
-function checkNotValid(p) {
-  return p
-    .then((/* valid */) => {
-      throw new Error(SHOULD_BE_INVALID)
-    })
-    .catch((err) => {
-      err.should.be.instanceof(Error)
-      if (err.message === SHOULD_BE_INVALID) throw err
-      return err
-    })
+async function checkNotValid(p: boolean | Promise<any>) {
+  try {
+    await p
+    throw new Error(SHOULD_BE_INVALID)
+  } catch (err: any) {
+    expect(err).be.instanceof(Error)
+    if (err.message === SHOULD_BE_INVALID) throw err
+    return err
+  }
 }
 
-function repeat(func) {
+function repeat(func: any) {
   return func()
   // var promises = [];
   // for (var i=0; i<1000; i++) promises.push(func());

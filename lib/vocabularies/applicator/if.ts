@@ -3,17 +3,17 @@ import type {
   ErrorObject,
   KeywordErrorDefinition,
   AnySchema,
-} from "../../types"
-import type {SchemaObjCxt} from "../../compile"
-import type {KeywordCxt} from "../../compile/validate"
-import {_, str, not, Name} from "../../compile/codegen"
-import {alwaysValidSchema, checkStrictMode} from "../../compile/util"
+} from "../../types/index.ts"
+import type {SchemaObjCxt} from "../../compile/index.ts"
+import type {KeywordCxt} from "../../compile/validate/index.ts"
+import {_, str, not, Name} from "../../compile/codegen/index.ts"
+import {alwaysValidSchema, checkStrictMode} from "../../compile/util.ts"
 
 export type IfKeywordError = ErrorObject<"if", {failingKeyword: string}, AnySchema>
 
 const error: KeywordErrorDefinition = {
-  message: ({params}) => str`must match "${params.ifClause}" schema`,
-  params: ({params}) => _`{failingKeyword: ${params.ifClause}}`,
+  message: ({params}: {params: any}) => str`must match "${params.ifClause}" schema`,
+  params: ({params}: {params: any}) => _`{failingKeyword: ${params.ifClause}}`,
 }
 
 const def: CodeKeywordDefinition = {

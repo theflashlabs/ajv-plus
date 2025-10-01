@@ -1,7 +1,7 @@
-import type Ajv from ".."
-import _Ajv from "./ajv"
-import chai from "./chai"
-chai.should()
+import {describe, it, beforeEach, expect} from "vitest"
+import type Ajv from "../lib/ajv.ts"
+import _Ajv from "./ajv.ts"
+import type {SchemaObject} from "../lib/ajv.ts"
 
 const coercionRules = {
   string: {
@@ -187,13 +187,20 @@ describe("Type coercion", () => {
   })
 
   it("should coerce scalar values", () => {
-    testRules(coercionRules, (test, schema, canCoerce /*, toType, fromType*/) => {
-      instances.forEach((_ajv) => {
-        const valid = _ajv.validate(schema, test.from)
-        //if (valid !== canCoerce) console.log('true', toType, fromType, test, ajv.errors);
-        valid.should.equal(canCoerce)
-      })
-    })
+    testRules(
+      coercionRules,
+      (
+        test: {from: unknown},
+        schema: string | boolean | SchemaObject,
+        canCoerce: any /*, toType, fromType*/
+      ) => {
+        instances.forEach((_ajv) => {
+          const valid = _ajv.validate(schema, test.from)
+          //if (valid !== canCoerce) console.log('true', toType, fromType, test, ajv.errors);
+          expect(valid).equal(canCoerce)
+        })
+      }
+    )
   })
 
   it("should coerce scalar values (coerceTypes = array)", () => {
@@ -201,47 +208,64 @@ describe("Type coercion", () => {
     fullAjv = new _Ajv({coerceTypes: "array", verbose: true, allErrors: true})
     instances = [ajv, fullAjv]
 
-    testRules(coercionArrayRules, (test, schema, canCoerce, toType, fromType) => {
-      instances.forEach((_ajv) => {
-        const valid = _ajv.validate(schema, test.from)
-        if (valid !== canCoerce) console.log(toType, ".", fromType, test, schema, ajv.errors)
-        valid.should.equal(canCoerce)
-      })
-    })
+    testRules(
+      coercionArrayRules,
+      (
+        test: {from: unknown},
+        schema: string | boolean | SchemaObject,
+        canCoerce: boolean,
+        toType: any,
+        fromType: any
+      ) => {
+        instances.forEach((_ajv) => {
+          const valid = _ajv.validate(schema, test.from)
+          if (valid !== canCoerce) console.log(toType, ".", fromType, test, schema, ajv.errors)
+          expect(valid).equal(canCoerce)
+        })
+      }
+    )
   })
 
   it("should coerce values in objects/arrays and update properties/items", () => {
-    testRules(coercionRules, (test, schema, canCoerce /*, toType, fromType*/) => {
-      const schemaObject = {
-        type: "object",
-        properties: {
-          foo: schema,
-        },
-      }
+    testRules(
+      coercionRules,
+      (test: {from: any; to: any}, schema: any, canCoerce: any /*, toType, fromType*/) => {
+        const schemaObject = {
+          type: "object",
+          properties: {
+            foo: schema,
+          },
+        }
 
-      const schemaArray = {
-        type: "array",
-        items: schema,
-      }
+        const schemaArray = {
+          type: "array",
+          items: schema,
+        }
 
-      const schemaArrObj = {
-        type: "array",
-        items: schemaObject,
-      }
+        const schemaArrObj = {
+          type: "array",
+          items: schemaObject,
+        }
 
-      instances.forEach((_ajv) => {
-        testCoercion(_ajv, schemaArray, [test.from], [test.to])
-        testCoercion(_ajv, schemaObject, {foo: test.from}, {foo: test.to})
-        testCoercion(_ajv, schemaArrObj, [{foo: test.from}], [{foo: test.to}])
-      })
+        instances.forEach((_ajv) => {
+          testCoercion(_ajv, schemaArray, [test.from], [test.to])
+          testCoercion(_ajv, schemaObject, {foo: test.from}, {foo: test.to})
+          testCoercion(_ajv, schemaArrObj, [{foo: test.from}], [{foo: test.to}])
+        })
 
-      function testCoercion(_ajv, _schema, fromData, toData) {
-        const valid = _ajv.validate(_schema, fromData)
-        //if (valid !== canCoerce) console.log(schema, fromData, toData);
-        valid.should.equal(canCoerce)
-        if (valid) fromData.should.eql(toData)
+        function testCoercion(
+          _ajv: Ajv,
+          _schema: {type: string; items?: any; properties?: {foo: any}},
+          fromData: any[] | any,
+          toData: any[] | any
+        ) {
+          const valid = _ajv.validate(_schema, fromData)
+          //if (valid !== canCoerce) console.log(schema, fromData, toData);
+          expect(valid).equal(canCoerce)
+          if (valid) expect(fromData).eql(toData)
+        }
       }
-    })
+    )
   })
 
   it("should coerce to multiple types in order with number type", () => {
@@ -257,32 +281,32 @@ describe("Type coercion", () => {
     instances.forEach((_ajv) => {
       let data
 
-      _ajv.validate(schema, (data = {foo: "1"})).should.equal(true)
-      data.should.eql({foo: 1})
+      expect(_ajv.validate(schema, (data = {foo: "1"}))).equal(true)
+      expect(data).eql({foo: 1})
 
-      _ajv.validate(schema, (data = {foo: "1.5"})).should.equal(true)
-      data.should.eql({foo: 1.5})
+      expect(_ajv.validate(schema, (data = {foo: "1.5"}))).equal(true)
+      expect(data).eql({foo: 1.5})
 
-      _ajv.validate(schema, (data = {foo: "false"})).should.equal(true)
-      data.should.eql({foo: false})
+      expect(_ajv.validate(schema, (data = {foo: "false"}))).equal(true)
+      expect(data).eql({foo: false})
 
-      _ajv.validate(schema, (data = {foo: 1})).should.equal(true)
-      data.should.eql({foo: 1}) // no coercion
+      expect(_ajv.validate(schema, (data = {foo: 1}))).equal(true)
+      expect(data).eql({foo: 1}) // no coercion
 
-      _ajv.validate(schema, (data = {foo: true})).should.equal(true)
-      data.should.eql({foo: true}) // no coercion
+      expect(_ajv.validate(schema, (data = {foo: true}))).equal(true)
+      expect(data).eql({foo: true}) // no coercion
 
-      _ajv.validate(schema, (data = {foo: null})).should.equal(true)
-      data.should.eql({foo: null}) // no coercion
+      expect(_ajv.validate(schema, (data = {foo: null}))).equal(true)
+      expect(data).eql({foo: null}) // no coercion
 
-      _ajv.validate(schema, (data = {foo: "abc"})).should.equal(false)
-      data.should.eql({foo: "abc"}) // can't coerce
+      expect(_ajv.validate(schema, (data = {foo: "abc"}))).equal(false)
+      expect(data).eql({foo: "abc"}) // can't coerce
 
-      _ajv.validate(schema, (data = {foo: {}})).should.equal(false)
-      data.should.eql({foo: {}}) // can't coerce
+      expect(_ajv.validate(schema, (data = {foo: {}}))).equal(false)
+      expect(data).eql({foo: {}}) // can't coerce
 
-      _ajv.validate(schema, (data = {foo: []})).should.equal(false)
-      data.should.eql({foo: []}) // can't coerce
+      expect(_ajv.validate(schema, (data = {foo: []}))).equal(false)
+      expect(data).eql({foo: []}) // can't coerce
     })
   })
 
@@ -299,29 +323,29 @@ describe("Type coercion", () => {
     instances.forEach((_ajv) => {
       let data
 
-      _ajv.validate(schema, (data = {foo: "1"})).should.equal(true)
-      data.should.eql({foo: 1})
+      expect(_ajv.validate(schema, (data = {foo: "1"}))).equal(true)
+      expect(data).eql({foo: 1})
 
-      _ajv.validate(schema, (data = {foo: "false"})).should.equal(true)
-      data.should.eql({foo: false})
+      expect(_ajv.validate(schema, (data = {foo: "false"}))).equal(true)
+      expect(data).eql({foo: false})
 
-      _ajv.validate(schema, (data = {foo: 1})).should.equal(true)
-      data.should.eql({foo: 1}) // no coercion
+      expect(_ajv.validate(schema, (data = {foo: 1}))).equal(true)
+      expect(data).eql({foo: 1}) // no coercion
 
-      _ajv.validate(schema, (data = {foo: true})).should.equal(true)
-      data.should.eql({foo: true}) // no coercion
+      expect(_ajv.validate(schema, (data = {foo: true}))).equal(true)
+      expect(data).eql({foo: true}) // no coercion
 
-      _ajv.validate(schema, (data = {foo: null})).should.equal(true)
-      data.should.eql({foo: null}) // no coercion
+      expect(_ajv.validate(schema, (data = {foo: null}))).equal(true)
+      expect(data).eql({foo: null}) // no coercion
 
-      _ajv.validate(schema, (data = {foo: "abc"})).should.equal(false)
-      data.should.eql({foo: "abc"}) // can't coerce
+      expect(_ajv.validate(schema, (data = {foo: "abc"}))).equal(false)
+      expect(data).eql({foo: "abc"}) // can't coerce
 
-      _ajv.validate(schema, (data = {foo: {}})).should.equal(false)
-      data.should.eql({foo: {}}) // can't coerce
+      expect(_ajv.validate(schema, (data = {foo: {}}))).equal(false)
+      expect(data).eql({foo: {}}) // can't coerce
 
-      _ajv.validate(schema, (data = {foo: []})).should.equal(false)
-      data.should.eql({foo: []}) // can't coerce
+      expect(_ajv.validate(schema, (data = {foo: []}))).equal(false)
+      expect(data).eql({foo: []}) // can't coerce
     })
   })
 
@@ -341,12 +365,12 @@ describe("Type coercion", () => {
 
     instances.forEach((_ajv) => {
       const data: any = {foo: "123", bar: "bar"}
-      _ajv.validate(schema, data).should.equal(false)
-      data.should.eql({foo: 123, bar: "bar"})
+      expect(_ajv.validate(schema, data)).equal(false)
+      expect(data).eql({foo: 123, bar: "bar"})
 
       const data2: any = ["123", "bar"]
-      _ajv.validate(schema2, data2).should.equal(false)
-      data2.should.eql([123, "bar"])
+      expect(_ajv.validate(schema2, data2)).equal(false)
+      expect(data2).eql([123, "bar"])
     })
   })
 
@@ -408,11 +432,15 @@ describe("Type coercion", () => {
       testCoercion(schemaRecursive, {foo: {foo: "1"}}, {foo: {foo: 1}})
       testCoercion(schemaRecursive2, {foo: {foo: {foo: "1"}}}, {foo: {foo: {foo: 1}}})
 
-      function testCoercion(_schema, fromData, toData) {
+      function testCoercion(
+        _schema: string | boolean | SchemaObject,
+        fromData: unknown,
+        toData: {foo: number | {foo: number} | {foo: {foo: number}}}
+      ) {
         const valid = _ajv.validate(_schema, fromData)
         // if (!valid) console.log(schema, fromData, toData);
-        valid.should.equal(true)
-        fromData.should.eql(toData)
+        expect(valid).equal(true)
+        expect(fromData).eql(toData)
       }
     })
   })
@@ -425,13 +453,13 @@ describe("Type coercion", () => {
 
     instances.forEach((_ajv) => {
       const validate = _ajv.compile(schema)
-      validate(9).should.equal(false)
-      validate.errors?.length.should.equal(1)
+      expect(validate(9)).equal(false)
+      expect(validate.errors?.length).equal(1)
 
-      validate(11).should.equal(true)
+      expect(validate(11)).equal(true)
 
-      validate("foo").should.equal(false)
-      validate.errors?.length.should.equal(1)
+      expect(validate("foo")).equal(false)
+      expect(validate.errors?.length).equal(1)
     })
   })
 
@@ -444,11 +472,11 @@ describe("Type coercion", () => {
 
     instances.forEach((_ajv) => {
       const validate = _ajv.compile(schema)
-      validate([1, "2", 3]).should.equal(true)
+      expect(validate([1, "2", 3])).equal(true)
 
-      validate([1, "2", 2]).should.equal(false)
-      validate.errors?.length.should.equal(1)
-      validate.errors?.[0].keyword.should.equal("uniqueItems")
+      expect(validate([1, "2", 2])).equal(false)
+      expect(validate.errors?.length).equal(1)
+      expect(validate.errors?.[0]?.keyword).equal("uniqueItems")
     })
   })
 
@@ -461,18 +489,18 @@ describe("Type coercion", () => {
 
     instances.forEach((_ajv) => {
       const validate = _ajv.compile(schema)
-      validate([1, "2", 3]).should.equal(true)
+      expect(validate([1, "2", 3])).equal(true)
 
-      validate([1, "3", 4]).should.equal(false)
-      validate.errors?.pop()?.keyword.should.equal("contains")
+      expect(validate([1, "3", 4])).equal(false)
+      expect(validate.errors?.pop()?.keyword).equal("contains")
     })
   })
 
-  function testRules(rules, cb) {
+  function testRules(rules: any, cb: Function) {
     for (const toType in rules) {
       for (const fromType in rules[toType]) {
         const tests = rules[toType][fromType]
-        tests.forEach((test) => {
+        tests.forEach((test: {to: any[] | undefined}) => {
           const canCoerce = test.to !== undefined
           const schema = canCoerce
             ? Array.isArray(test.to)

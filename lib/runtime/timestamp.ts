@@ -7,22 +7,22 @@ export default function validTimestamp(str: string, allowDate: boolean): boolean
   // http://tools.ietf.org/html/rfc3339#section-5.6
   const dt: string[] = str.split(DT_SEPARATOR)
   return (
-    (dt.length === 2 && validDate(dt[0]) && validTime(dt[1])) ||
-    (allowDate && dt.length === 1 && validDate(dt[0]))
+    (dt.length === 2 && validDate(dt[0] as string) && validTime(dt[1] as string)) ||
+    (allowDate && dt.length === 1 && validDate(dt[0] as string))
   )
 }
 
 function validDate(str: string): boolean {
   const matches: string[] | null = DATE.exec(str)
   if (!matches) return false
-  const y: number = +matches[1]
-  const m: number = +matches[2]
-  const d: number = +matches[3]
+  const y: number = +(matches[1] as string)
+  const m: number = +(matches[2] as string)
+  const d: number = +(matches[3] as string)
   return (
     m >= 1 &&
     m <= 12 &&
     d >= 1 &&
-    (d <= DAYS[m] ||
+    (d <= (DAYS[m] as number) ||
       // leap year: https://tools.ietf.org/html/rfc3339#appendix-C
       (m === 2 && d === 29 && (y % 100 === 0 ? y % 400 === 0 : y % 4 === 0)))
   )
@@ -31,9 +31,9 @@ function validDate(str: string): boolean {
 function validTime(str: string): boolean {
   const matches: string[] | null = TIME.exec(str)
   if (!matches) return false
-  const hr: number = +matches[1]
-  const min: number = +matches[2]
-  const sec: number = +matches[3]
+  const hr: number = +(matches[1] as string)
+  const min: number = +(matches[2] as string)
+  const sec: number = +(matches[3] as string)
   const tzH: number = +(matches[4] || 0)
   const tzM: number = +(matches[5] || 0)
   return (

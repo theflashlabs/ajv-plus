@@ -1,7 +1,6 @@
-import type Ajv2020 from "../dist/2020"
-const AjvClass: typeof Ajv2020 =
-  typeof window == "object" ? (window as any).ajv2020 : require("" + "../dist/2020")
+import type Ajv2020 from "../lib/2020.ts"
+import ajvModule from "../lib/2020.ts"
+
+const AjvClass: typeof Ajv2020 = typeof window == "object" ? (window as any).ajv2020 : ajvModule
 
 export default AjvClass
-module.exports = AjvClass
-module.exports.default = AjvClass

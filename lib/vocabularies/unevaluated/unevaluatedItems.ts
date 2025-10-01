@@ -3,10 +3,10 @@ import type {
   ErrorObject,
   KeywordErrorDefinition,
   AnySchema,
-} from "../../types"
-import type {KeywordCxt} from "../../compile/validate"
-import {_, str, not, Name} from "../../compile/codegen"
-import {alwaysValidSchema, Type} from "../../compile/util"
+} from "../../types/index.ts"
+import type {KeywordCxt} from "../../compile/validate/index.ts"
+import {_, str, not, Name} from "../../compile/codegen/index.ts"
+import {alwaysValidSchema, Type} from "../../compile/util.ts"
 
 export type UnevaluatedItemsError = ErrorObject<"unevaluatedItems", {limit: number}, AnySchema>
 
@@ -36,7 +36,7 @@ const def: CodeKeywordDefinition = {
     it.items = true
 
     function validateItems(valid: Name, from: Name | number): void {
-      gen.forRange("i", from, len, (i) => {
+      gen.forRange("i", from, len, (i: any) => {
         cxt.subschema({keyword: "unevaluatedItems", dataProp: i, dataPropType: Type.Num}, valid)
         if (!it.allErrors) gen.if(not(valid), () => gen.break())
       })

@@ -14,7 +14,7 @@ export function parseJson(s: string, pos: number): unknown {
       parseJson.message = "unexpected end"
       return undefined
     }
-    endPos = +matches[1]
+    endPos = +(matches[1] as string)
     const c = s[endPos]
     s = s.slice(0, endPos)
     parseJson.position = pos + endPos
@@ -60,10 +60,10 @@ export function parseJsonNumber(s: string, pos: number, maxDigits?: number): num
       return undefined
     }
   }
-  if (((c = s[pos]), c === "e" || c === "E")) {
+  if (((c = s[pos] as string), c === "e" || c === "E")) {
     numStr += "e"
     pos++
-    if (((c = s[pos]), c === "+" || c === "-")) {
+    if (((c = s[pos] as string), c === "+" || c === "-")) {
       numStr += c
       pos++
     }
@@ -77,7 +77,9 @@ export function parseJsonNumber(s: string, pos: number, maxDigits?: number): num
 
   function parseDigits(maxLen?: number): boolean {
     let digit = false
-    while (((c = s[pos]), c >= "0" && c <= "9" && (maxLen === undefined || maxLen-- > 0))) {
+    while (
+      ((c = s[pos] as string), c >= "0" && c <= "9" && (maxLen === undefined || maxLen-- > 0))
+    ) {
       digit = true
       numStr += c
       pos++
@@ -118,7 +120,7 @@ export function parseJsonString(s: string, pos: number): string | undefined {
     c = s[pos++]
     if (c === '"') break
     if (c === "\\") {
-      c = s[pos]
+      c = s[pos] as string
       if (c in escapedChars) {
         str += escapedChars[c]
         pos++

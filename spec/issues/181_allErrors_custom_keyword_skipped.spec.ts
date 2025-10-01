@@ -1,7 +1,6 @@
-import _Ajv from "../ajv"
-import {KeywordDefinition, SchemaValidateFunction} from "../../dist/types"
-import chai from "../chai"
-chai.should()
+import {describe, expect, it} from "vitest"
+import _Ajv from "../ajv.ts"
+import type {KeywordDefinition, SchemaValidateFunction} from "../../lib/types/index.ts"
 
 describe("issue #181, user-defined keyword is not validated in allErrors mode if there were previous error", () => {
   it("should validate user-defined keyword that doesn't create errors", () => {
@@ -49,13 +48,13 @@ describe("issue #181, user-defined keyword is not validated in allErrors mode if
 
     const validate: any = ajv.compile(schema)
 
-    validate({foo: 1}).should.equal(false)
-    validate.errors.should.have.length(1)
-    validate.errors[0].keyword.should.equal("alwaysFails")
+    expect(validate({foo: 1})).equal(false)
+    expect(validate.errors).have.length(1)
+    expect(validate.errors[0].keyword).equal("alwaysFails")
 
-    validate({}).should.equal(false)
-    validate.errors.should.have.length(2)
-    validate.errors[0].keyword.should.equal("required")
-    validate.errors[1].keyword.should.equal("alwaysFails")
+    expect(validate({})).equal(false)
+    expect(validate.errors).have.length(2)
+    expect(validate.errors[0].keyword).equal("required")
+    expect(validate.errors[1].keyword).equal("alwaysFails")
   }
 })

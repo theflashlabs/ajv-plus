@@ -1,16 +1,17 @@
+import {describe, it, beforeEach} from "vitest"
 import {
   CodeGen,
-  CodeGenOptions,
-  ScopeStore,
+  type CodeGenOptions,
+  type ScopeStore,
   ValueScope,
   _,
   str,
   nil,
   not,
-  Code,
+  type Code,
   Name,
-} from "../dist/compile/codegen"
-import assert = require("assert")
+} from "../lib/compile/codegen/index.ts"
+import assert from "assert"
 
 describe("code generation", () => {
   describe("Name", () => {

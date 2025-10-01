@@ -1,6 +1,5 @@
-import _Ajv from "../ajv"
-import chai from "../chai"
-chai.should()
+import {describe, expect, it} from "vitest"
+import _Ajv from "../ajv.ts"
 
 describe("issue #485, order of type validation", () => {
   it("should validate types before keywords", () => {
@@ -11,18 +10,18 @@ describe("issue #485, order of type validation", () => {
       minimum: 2,
     })
 
-    validate(2).should.equal(true)
-    validate("foo").should.equal(true)
+    expect(validate(2)).equal(true)
+    expect(validate("foo")).equal(true)
 
-    validate(1.5).should.equal(false)
+    expect(validate(1.5)).equal(false)
     checkErrors(["type", "minimum"])
 
-    validate({}).should.equal(false)
+    expect(validate({})).equal(false)
     checkErrors(["type", "required"])
 
-    function checkErrors(expectedErrs) {
-      validate.errors.should.have.length(expectedErrs.length)
-      expectedErrs.forEach((keyword, i) => validate.errors[i].keyword.should.equal(keyword))
+    function checkErrors(expectedErrs: string[]) {
+      expect(validate.errors).have.length(expectedErrs.length)
+      expectedErrs.forEach((keyword, i) => expect(validate.errors[i].keyword).equal(keyword))
     }
   })
 })

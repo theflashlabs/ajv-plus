@@ -1,6 +1,5 @@
-import _Ajv from "../ajv"
-import chai from "../chai"
-const should = chai.should()
+import {describe, expect, it} from "vitest"
+import _Ajv from "../ajv.ts"
 
 describe("unicodeRegExp option", () => {
   const unicodeChar = "\uD83D\uDC4D"
@@ -25,43 +24,43 @@ describe("unicodeRegExp option", () => {
   describe("= true (default)", () => {
     const ajv = new _Ajv()
     it("should fail schema compilation if used invalid (unnecessary) escape sequence for pattern", () => {
-      should.throw(() => {
+      expect(() => {
         ajv.compile(schemaWithEscape)
-      }, /Invalid escape/)
+      }).throw(/Invalid escape/)
     })
 
     it("should fail schema compilation if used invalid (unnecessary) escape sequence for patternProperties", () => {
-      should.throw(() => {
+      expect(() => {
         ajv.compile(patternPropertiesSchema)
-      }, /Invalid escape/)
+      }).throw(/Invalid escape/)
     })
 
     it("should validate unicode character", () => {
       const validate = ajv.compile(unicodeSchema)
-      validate(unicodeChar).should.equal(true)
+      expect(validate(unicodeChar)).equal(true)
     })
   })
 
   describe("= false", () => {
     const ajv = new _Ajv({unicodeRegExp: false})
     it("should pass schema compilation if used unnecessary escape sequence for pattern", () => {
-      should.not.throw(() => {
+      expect(() => {
         const validate = ajv.compile(schemaWithEscape)
-        validate(":").should.equal(true)
-      })
+        expect(validate(":")).equal(true)
+      }).not.throw()
     })
 
     it("should pass schema compilation if used unnecessary escape sequence for patternProperties", () => {
-      should.not.throw(() => {
+      expect(() => {
         const validate = ajv.compile(patternPropertiesSchema)
-        validate({":test": 1}).should.equal(true)
-        validate({test: 1}).should.equal(false)
-      })
+        expect(validate({":test": 1})).equal(true)
+        expect(validate({test: 1})).equal(false)
+      }).not.throw()
     })
 
     it("should not validate unicode character", () => {
       const validate = ajv.compile(unicodeSchema)
-      validate(unicodeChar).should.equal(false)
+      expect(validate(unicodeChar)).equal(false)
     })
   })
 })

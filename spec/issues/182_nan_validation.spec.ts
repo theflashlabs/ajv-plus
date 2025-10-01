@@ -1,6 +1,7 @@
-import _Ajv from "../ajv"
-import chai from "../chai"
-chai.should()
+import {describe, expect, it} from "vitest"
+import _Ajv from "../ajv.ts"
+import type Ajv from "../../lib/ajv.ts"
+import type {Schema} from "../../lib/ajv.ts"
 
 describe("issue #182, NaN validation", () => {
   const ajv = new _Ajv({strictTypes: false})
@@ -34,8 +35,8 @@ describe("issue #182, NaN validation", () => {
     testNaN(ajv, {type: "integer"}, false)
   })
 
-  function testNaN(_ajv, schema, NaNisValid) {
+  function testNaN(_ajv: Ajv, schema: Schema, NaNisValid: boolean) {
     const validate = _ajv.compile(schema)
-    validate(NaN).should.equal(NaNisValid)
+    expect(validate(NaN)).equal(NaNisValid)
   }
 })

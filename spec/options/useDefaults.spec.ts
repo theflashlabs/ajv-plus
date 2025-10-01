@@ -1,7 +1,8 @@
-import _Ajv from "../ajv"
-import getAjvInstances from "../ajv_instances"
-import chai from "../chai"
-chai.should()
+import {beforeEach, describe, expect, it} from "vitest"
+import _Ajv from "../ajv.ts"
+import getAjvInstances from "../ajv_instances.ts"
+import type Ajv from "../../lib/ajv.ts"
+import type {Schema} from "../../lib/ajv.ts"
 
 describe("useDefaults option", () => {
   it("should replace undefined property with default value", () => {
@@ -16,7 +17,7 @@ describe("useDefaults option", () => {
 
     instances.forEach(test)
 
-    function test(ajv) {
+    function test(ajv: Ajv) {
       const schema = {
         type: "object",
         properties: {
@@ -34,8 +35,8 @@ describe("useDefaults option", () => {
       const validate = ajv.compile(schema)
 
       let data = {}
-      validate(data).should.equal(true)
-      data.should.eql({
+      expect(validate(data)).equal(true)
+      expect(data).eql({
         foo: "abc",
         bar: 1,
         baz: false,
@@ -45,8 +46,8 @@ describe("useDefaults option", () => {
       })
 
       data = {foo: "foo", bar: 2, obj: {test: true}}
-      validate(data).should.equal(true)
-      data.should.eql({
+      expect(validate(data)).equal(true)
+      expect(data).eql({
         foo: "foo",
         bar: 2,
         baz: false,
@@ -61,7 +62,7 @@ describe("useDefaults option", () => {
     test(new _Ajv({useDefaults: true}))
     test(new _Ajv({useDefaults: true, allErrors: true}))
 
-    function test(ajv) {
+    function test(ajv: Ajv) {
       const schema = {
         type: "array",
         items: [
@@ -76,17 +77,17 @@ describe("useDefaults option", () => {
       const validate = ajv.compile(schema)
 
       let data: any = []
-      validate(data).should.equal(true)
-      data.should.eql(["abc", 1, false])
+      expect(validate(data)).equal(true)
+      expect(data).eql(["abc", 1, false])
 
       data = ["foo"]
-      validate(data).should.equal(true)
-      data.should.eql(["foo", 1, false])
+      expect(validate(data)).equal(true)
+      expect(data).eql(["foo", 1, false])
 
       data = ["foo", 2, "false"]
-      validate(data).should.equal(false)
-      validate.errors.should.have.length(1)
-      data.should.eql(["foo", 2, "false"])
+      expect(validate(data)).equal(false)
+      expect(validate.errors).have.length(1)
+      expect(data).eql(["foo", 2, "false"])
     }
   })
 
@@ -94,7 +95,7 @@ describe("useDefaults option", () => {
     test(new _Ajv({useDefaults: true}))
     test(new _Ajv({useDefaults: true, allErrors: true}))
 
-    function test(ajv) {
+    function test(ajv: Ajv) {
       const schema = {
         type: "object",
         if: {required: ["foo"]},
@@ -113,12 +114,12 @@ describe("useDefaults option", () => {
       const validate = ajv.compile(schema)
 
       let data = {}
-      validate(data).should.equal(true)
-      data.should.eql({foo: 1})
+      expect(validate(data)).equal(true)
+      expect(data).eql({foo: 1})
 
       data = {foo: 1}
-      validate(data).should.equal(true)
-      data.should.eql({foo: 1, bar: 2})
+      expect(validate(data)).equal(true)
+      expect(data).eql({foo: 1, bar: 2})
     }
   })
 
@@ -128,7 +129,7 @@ describe("useDefaults option", () => {
       test(new _Ajv({useDefaults: true, allErrors: true}))
     })
 
-    function test(ajv) {
+    function test(ajv: Ajv) {
       const schema = {
         type: "object",
         properties: {
@@ -142,21 +143,21 @@ describe("useDefaults option", () => {
       const validate = ajv.compile(schema)
 
       const data: any = {}
-      validate(data).should.equal(true)
-      data.items.should.eql(["a-default"])
+      expect(validate(data)).equal(true)
+      expect(data.items).eql(["a-default"])
 
       data.items.push("another-value")
-      data.items.should.eql(["a-default", "another-value"])
+      expect(data.items).eql(["a-default", "another-value"])
 
       const data2: any = {}
-      validate(data2).should.equal(true)
+      expect(validate(data2)).equal(true)
 
-      data2.items.should.eql(["a-default"])
+      expect(data2.items).eql(["a-default"])
     }
   })
 
   describe('defaults with "empty" values', () => {
-    let schema, data
+    let schema: Schema, data: unknown
 
     beforeEach(() => {
       schema = {
@@ -193,10 +194,10 @@ describe("useDefaults option", () => {
     it('should NOT assign defaults when useDefaults is true/"shared"', () => {
       test(new _Ajv({useDefaults: true}))
 
-      function test(ajv) {
+      function test(ajv: Ajv) {
         const validate = ajv.compile(schema)
-        validate(data).should.equal(true)
-        data.should.eql({
+        expect(validate(data)).equal(true)
+        expect(data).eql({
           obj: {
             str: "",
             n1: null,
@@ -211,8 +212,8 @@ describe("useDefaults option", () => {
     it('should assign defaults when useDefaults = "empty"', () => {
       const ajv = new _Ajv({useDefaults: "empty"})
       const validate = ajv.compile(schema)
-      validate(data).should.equal(true)
-      data.should.eql({
+      expect(validate(data)).equal(true)
+      expect(data).eql({
         obj: {
           str: "foo",
           n1: 1,

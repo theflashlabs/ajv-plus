@@ -1,7 +1,6 @@
-import type Ajv from "../.."
-import _Ajv from "../ajv"
-import chai from "../chai"
-chai.should()
+import {describe, it, expect} from "vitest"
+import _Ajv from "../ajv.ts"
+import type Ajv from "../../lib/core.ts"
 
 const DATE_FORMAT = /^\d\d\d\d-[0-1]\d-[0-3]\d$/
 
@@ -14,8 +13,8 @@ describe("validation options", () => {
       const schema = {type: "string", format: "date"}
       const invalideDateTime = "06/19/1963" // expects hyphens
 
-      ajv.validate(schema, invalideDateTime).should.equal(false)
-      ajvFF.validate(schema, invalideDateTime).should.equal(true)
+      expect(ajv.validate(schema, invalideDateTime)).equal(false)
+      expect(ajvFF.validate(schema, invalideDateTime)).equal(true)
     })
   })
 
@@ -33,10 +32,10 @@ describe("validation options", () => {
         format: "identifier",
       })
 
-      validate("Abc1").should.equal(true)
-      validate("foo bar").should.equal(false)
-      validate("123").should.equal(false)
-      validate(123).should.equal(true)
+      expect(validate("Abc1")).equal(true)
+      expect(validate("foo bar")).equal(false)
+      expect(validate("123")).equal(false)
+      expect(validate(123)).equal(true)
     })
   })
 
@@ -48,7 +47,7 @@ describe("validation options", () => {
           {
             keyword: "identifier",
             type: "string",
-            validate: function (_schema, data) {
+            validate: function (_schema: any, data: string) {
               return /^[a-z_$][a-z0-9_$]*$/i.test(data)
             },
           },
@@ -83,10 +82,10 @@ describe("validation options", () => {
         identifier: true,
       })
 
-      validate("Abc1").should.equal(true)
-      validate("foo bar").should.equal(false)
-      validate("123").should.equal(false)
-      validate(123).should.equal(true)
+      expect(validate("Abc1")).equal(true)
+      expect(validate("foo bar")).equal(false)
+      expect(validate("123")).equal(false)
+      expect(validate(123)).equal(true)
     }
   })
 
@@ -100,14 +99,14 @@ describe("validation options", () => {
         let validateWithUnicode = ajvUnicode.compile({type: "string", minLength: 2})
         let validate = ajv.compile({type: "string", minLength: 2})
 
-        validateWithUnicode("😀").should.equal(false)
-        validate("😀").should.equal(true)
+        expect(validateWithUnicode("😀")).equal(false)
+        expect(validate("😀")).equal(true)
 
         validateWithUnicode = ajvUnicode.compile({type: "string", maxLength: 1})
         validate = ajv.compile({type: "string", maxLength: 1})
 
-        validateWithUnicode("😀").should.equal(true)
-        validate("😀").should.equal(false)
+        expect(validateWithUnicode("😀")).equal(true)
+        expect(validate("😀")).equal(false)
       }
     })
   })
@@ -117,19 +116,19 @@ describe("validation options", () => {
       test(new _Ajv({multipleOfPrecision: 7}))
       test(new _Ajv({multipleOfPrecision: 7, allErrors: true}))
 
-      function test(ajv) {
+      function test(ajv: Ajv) {
         let schema = {type: "number", multipleOf: 0.01}
         let validate = ajv.compile(schema)
 
-        validate(4.18).should.equal(true)
-        validate(4.181).should.equal(false)
+        expect(validate(4.18)).equal(true)
+        expect(validate(4.181)).equal(false)
 
         schema = {type: "number", multipleOf: 0.0000001}
         validate = ajv.compile(schema)
 
-        validate(53.198098).should.equal(true)
-        validate(53.1980981).should.equal(true)
-        validate(53.19809811).should.equal(false)
+        expect(validate(53.198098)).equal(true)
+        expect(validate(53.1980981)).equal(true)
+        expect(validate(53.19809811)).equal(false)
       }
     })
   })
