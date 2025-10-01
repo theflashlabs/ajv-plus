@@ -1,9 +1,9 @@
-import getAjvAsyncInstances from "./ajv_async_instances"
-import jsonSchemaTest = require("json-schema-test")
-import {afterError} from "./after_test"
-import type Ajv from ".."
-import _Ajv from "./ajv"
-import chai from "./chai"
+import {assert, describe, it} from "vitest"
+import getAjvAsyncInstances from "./ajv_async_instances.ts"
+import jsonSchemaTest from "@theflashlabs/json-schema-test"
+import {afterError} from "./after_test.ts"
+import type {Ajv} from "../lib/ajv.ts"
+import _Ajv from "./ajv.ts"
 
 const instances = getAjvAsyncInstances({$data: true})
 
@@ -12,15 +12,17 @@ instances.forEach(addAsyncFormatsAndKeywords)
 jsonSchemaTest(instances, {
   description:
     "asynchronous schemas tests of " + instances.length + " ajv instances with different options",
-  suites: {"async schemas": require("../spec/_json/async")},
+  suites: {"async schemas": (await import("../spec/_json/async.js")).default},
   async: true,
   asyncValid: "data",
-  assert: chai.assert,
+  assert: assert,
   afterError,
   // afterEach: after.each,
   cwd: __dirname,
   hideFolder: "async/",
   timeout: 10000,
+  describe,
+  it,
 })
 
 function addAsyncFormatsAndKeywords(ajv: Ajv) {

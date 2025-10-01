@@ -1,5 +1,6 @@
-import _Ajv from "../ajv2020"
-import * as assert from "assert"
+import {describe, it} from "vitest"
+import _Ajv from "../ajv2020.ts"
+import assert from "assert"
 
 describe("tracking evaluated properties with pattern properties of schema = true", () => {
   it("should initialize evaluated properties", () => {

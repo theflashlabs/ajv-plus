@@ -1,6 +1,6 @@
-import type AjvCore from "../dist/core"
-import type {Options} from ".."
-import AjvPack from "../dist/standalone/instance"
+import type AjvCore from "../lib/core.ts"
+import type {Options} from "../lib/ajv.ts"
+import AjvPack from "../lib/standalone/instance.ts"
 
 export function withStandalone(instances: AjvCore[]): (AjvCore | AjvPack)[] {
   return [...(instances as (AjvCore | AjvPack)[]), ...instances.map(makeStandalone)]

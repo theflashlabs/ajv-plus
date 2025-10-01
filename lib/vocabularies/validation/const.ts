@@ -1,14 +1,14 @@
-import type {CodeKeywordDefinition, ErrorObject, KeywordErrorDefinition} from "../../types"
-import type {KeywordCxt} from "../../compile/validate"
-import {_} from "../../compile/codegen"
-import {useFunc} from "../../compile/util"
-import equal from "../../runtime/equal"
+import type {CodeKeywordDefinition, ErrorObject, KeywordErrorDefinition} from "../../types/index.ts"
+import type {KeywordCxt} from "../../compile/validate/index.ts"
+import {_} from "../../compile/codegen/index.ts"
+import {useFunc} from "../../compile/util.ts"
+import equal from "../../runtime/equal.ts"
 
 export type ConstError = ErrorObject<"const", {allowedValue: any}>
 
 const error: KeywordErrorDefinition = {
   message: "must be equal to constant",
-  params: ({schemaCode}) => _`{allowedValue: ${schemaCode}}`,
+  params: ({schemaCode}: {schemaCode: any}) => _`{allowedValue: ${schemaCode}}`,
 }
 
 const def: CodeKeywordDefinition = {

@@ -1,6 +1,6 @@
-import type {CodeKeywordDefinition, ErrorObject, KeywordErrorDefinition} from "../../types"
-import type {KeywordCxt} from "../../compile/validate"
-import {_, str, operators, Code} from "../../compile/codegen"
+import type {CodeKeywordDefinition, ErrorObject, KeywordErrorDefinition} from "../../types/index.ts"
+import type {KeywordCxt} from "../../compile/validate/index.ts"
+import {_, str, operators, type Code} from "../../compile/codegen/index.ts"
 
 const ops = operators
 
@@ -22,8 +22,9 @@ export type LimitNumberError = ErrorObject<
 >
 
 const error: KeywordErrorDefinition = {
-  message: ({keyword, schemaCode}) => str`must be ${KWDs[keyword as Kwd].okStr} ${schemaCode}`,
-  params: ({keyword, schemaCode}) =>
+  message: ({keyword, schemaCode}: {keyword: any; schemaCode: any}) =>
+    str`must be ${KWDs[keyword as Kwd].okStr} ${schemaCode}`,
+  params: ({keyword, schemaCode}: {keyword: any; schemaCode: any}) =>
     _`{comparison: ${KWDs[keyword as Kwd].okStr}, limit: ${schemaCode}}`,
 }
 

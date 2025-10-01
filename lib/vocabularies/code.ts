@@ -1,10 +1,21 @@
-import type {AnySchema, SchemaMap} from "../types"
-import type {SchemaCxt} from "../compile"
-import type {KeywordCxt} from "../compile/validate"
-import {CodeGen, _, and, or, not, nil, strConcat, getProperty, Code, Name} from "../compile/codegen"
-import {alwaysValidSchema, Type} from "../compile/util"
-import N from "../compile/names"
-import {useFunc} from "../compile/util"
+import type {AnySchema, SchemaMap} from "../types/index.ts"
+import type {SchemaCxt} from "../compile/index.ts"
+import type {KeywordCxt} from "../compile/validate/index.ts"
+import {
+  CodeGen,
+  _,
+  and,
+  or,
+  not,
+  nil,
+  strConcat,
+  getProperty,
+  type Code,
+  Name,
+} from "../compile/codegen/index.ts"
+import {alwaysValidSchema, Type} from "../compile/util.ts"
+import N from "../compile/names.ts"
+import {useFunc} from "../compile/util.ts"
 export function checkReportMissingProp(cxt: KeywordCxt, prop: string): void {
   const {gen, data, it} = cxt
   gen.if(noPropertyInData(gen, data, prop, it.opts.ownProperties), () => {
@@ -118,7 +129,7 @@ export function validateArray(cxt: KeywordCxt): Name {
 
   function validateItems(notValid: () => void): void {
     const len = gen.const("len", _`${data}.length`)
-    gen.forRange("i", 0, len, (i) => {
+    gen.forRange("i", 0, len, (i: any) => {
       cxt.subschema(
         {
           keyword,

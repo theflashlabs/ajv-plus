@@ -1,12 +1,12 @@
-import type Ajv from "../../core"
-import type {AnySchemaObject} from "../../types"
-import * as metaSchema from "./schema.json"
-import * as applicator from "./meta/applicator.json"
-import * as content from "./meta/content.json"
-import * as core from "./meta/core.json"
-import * as format from "./meta/format.json"
-import * as metadata from "./meta/meta-data.json"
-import * as validation from "./meta/validation.json"
+import type Ajv from "../../core.ts"
+import type {AnySchemaObject} from "../../types/index.ts"
+import * as metaSchema from "./schema.json" with {type: "json"}
+import * as applicator from "./meta/applicator.json" with {type: "json"}
+import * as content from "./meta/content.json" with {type: "json"}
+import * as core from "./meta/core.json" with {type: "json"}
+import * as format from "./meta/format.json" with {type: "json"}
+import * as metadata from "./meta/meta-data.json" with {type: "json"}
+import * as validation from "./meta/validation.json" with {type: "json"}
 
 const META_SUPPORT_DATA = ["/properties"]
 

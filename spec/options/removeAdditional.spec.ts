@@ -1,6 +1,5 @@
-import _Ajv from "../ajv"
-import chai from "../chai"
-chai.should()
+import {describe, it, expect} from "vitest"
+import _Ajv from "../ajv.ts"
 
 describe("removeAdditional option", () => {
   it("should remove all additional properties", () => {
@@ -18,10 +17,10 @@ describe("removeAdditional option", () => {
       baz: "baz-to-be-removed",
     }
 
-    ajv.validate("//test/fooBar", object).should.equal(true)
-    object.should.have.property("foo")
-    object.should.have.property("bar")
-    object.should.not.have.property("baz")
+    expect(ajv.validate("//test/fooBar", object)).equal(true)
+    expect(object).have.property("foo")
+    expect(object).have.property("bar")
+    expect(object).not.have.property("baz")
   })
 
   it("should remove properties that would error when `additionalProperties = false`", () => {
@@ -40,10 +39,10 @@ describe("removeAdditional option", () => {
       baz: "baz-to-be-removed",
     }
 
-    ajv.validate("//test/fooBar", object).should.equal(true)
-    object.should.have.property("foo")
-    object.should.have.property("bar")
-    object.should.not.have.property("baz")
+    expect(ajv.validate("//test/fooBar", object)).equal(true)
+    expect(object).have.property("foo")
+    expect(object).have.property("bar")
+    expect(object).not.have.property("baz")
   })
 
   it("should remove properties that would error when `additionalProperties = false` (many properties, boolean schema)", () => {
@@ -78,8 +77,8 @@ describe("removeAdditional option", () => {
       },
     }
 
-    ajv.validate(schema, data).should.equal(false)
-    data.should.eql({
+    expect(ajv.validate(schema, data)).equal(false)
+    expect(data).eql({
       obj: {
         a: "valid",
         b: "should not be removed",
@@ -104,11 +103,11 @@ describe("removeAdditional option", () => {
       fizz: 1000,
     }
 
-    ajv.validate("//test/fooBar", object).should.equal(true)
-    object.should.have.property("foo")
-    object.should.have.property("bar")
-    object.should.have.property("baz")
-    object.should.not.have.property("fizz")
+    expect(ajv.validate("//test/fooBar", object)).equal(true)
+    expect(object).have.property("foo")
+    expect(object).have.property("bar")
+    expect(object).have.property("baz")
+    expect(object).not.have.property("fizz")
 
     ajv.addSchema({
       $id: "//test/fooBar2",
@@ -125,10 +124,10 @@ describe("removeAdditional option", () => {
       fizz: 1000,
     }
 
-    ajv.validate("//test/fooBar2", object1).should.equal(true)
-    object1.should.have.property("foo")
-    object1.should.have.property("bar")
-    object1.should.have.property("baz")
-    object1.should.not.have.property("fizz")
+    expect(ajv.validate("//test/fooBar2", object1)).equal(true)
+    expect(object1).have.property("foo")
+    expect(object1).have.property("bar")
+    expect(object1).have.property("baz")
+    expect(object1).not.have.property("fizz")
   })
 })

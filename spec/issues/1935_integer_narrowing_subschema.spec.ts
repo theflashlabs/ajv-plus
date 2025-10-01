@@ -1,10 +1,11 @@
-import _Ajv from "../ajv"
-import type Ajv from "../../dist/ajv"
-import assert = require("assert")
+import {beforeEach, describe, it} from "vitest"
+import _Ajv from "../ajv.ts"
+import type Ajv from "../../lib/ajv.ts"
+import * as assert from "assert"
 
 describe("integer valid type in number sub-schema (issue #1935)", () => {
   let ajv: Ajv
-  before(() => {
+  beforeEach(() => {
     ajv = new _Ajv({strict: true})
   })
 

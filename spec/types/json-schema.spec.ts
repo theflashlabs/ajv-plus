@@ -1,8 +1,7 @@
-import _Ajv from "../ajv"
-import type {JSONSchemaType} from "../.."
-import type {SchemaObject} from "../.."
-import chai from "../chai"
-const should = chai.should()
+import {describe, expect, it} from "vitest"
+import _Ajv from "../ajv.ts"
+import type {JSONSchemaType} from "../../lib/ajv.ts"
+import type {SchemaObject} from "../../lib/ajv.ts"
 
 interface MyData {
   foo: string
@@ -172,14 +171,14 @@ describe("JSONSchemaType type and validation as a type guard", () => {
     it("should prove the type of validated data", () => {
       const validate = ajv.compile(mySchema)
       if (validate(validData)) {
-        validData.foo.should.equal("foo")
+        expect(validData.foo).equal("foo")
       }
-      should.not.exist(validate.errors)
+      expect(validate.errors).toBeNull()
 
       if (ajv.validate(mySchema, validData)) {
-        validData.foo.should.equal("foo")
+        expect(validData.foo).equal("foo")
       }
-      should.not.exist(ajv.errors)
+      expect(ajv.errors).toBeNull()
     })
   })
 
@@ -192,58 +191,58 @@ describe("JSONSchemaType type and validation as a type guard", () => {
       const validate = ajv.compile(myUnionSchema)
       if (validate(validUnionData)) {
         if (typeof validUnionData === "string") {
-          should.fail("not a string")
+          expect.fail("not a string")
         } else if (typeof validUnionData === "number") {
-          should.fail("not a number")
+          expect.fail("not a number")
         } else {
-          validUnionData.a.should.equal(true)
+          expect(validUnionData.a).equal(true)
         }
       } else {
-        should.fail("is valid")
+        expect.fail("is valid")
       }
-      should.not.exist(validate.errors)
+      expect(validate.errors).toBeNull()
 
       if (ajv.validate(myUnionSchema, validUnionData)) {
         if (typeof validUnionData === "string") {
-          should.fail("not a string")
+          expect.fail("not a string")
         } else if (typeof validUnionData === "number") {
-          should.fail("not a number")
+          expect.fail("not a number")
         } else {
-          validUnionData.a.should.equal(true)
+          expect(validUnionData.a).equal(true)
         }
       } else {
-        should.fail("is valid")
+        expect.fail("is valid")
       }
-      should.not.exist(ajv.errors)
+      expect(ajv.errors).toBeNull()
     })
 
     it("should prove the type of validated nested data", () => {
       const validate = ajv.compile(myNestedUnionSchema)
       if (validate(validUnionData)) {
         if (typeof validUnionData === "string") {
-          should.fail("not a string")
+          expect.fail("not a string")
         } else if (typeof validUnionData === "number") {
-          should.fail("not a number")
+          expect.fail("not a number")
         } else {
-          validUnionData.a.should.equal(true)
+          expect(validUnionData.a).equal(true)
         }
       } else {
-        should.fail("is valid")
+        expect.fail("is valid")
       }
-      should.not.exist(validate.errors)
+      expect(validate.errors).toBeNull()
 
       if (ajv.validate(myNestedUnionSchema, validUnionData)) {
         if (typeof validUnionData === "string") {
-          should.fail("not a string")
+          expect.fail("not a string")
         } else if (typeof validUnionData === "number") {
-          should.fail("not a number")
+          expect.fail("not a number")
         } else {
-          validUnionData.a.should.equal(true)
+          expect(validUnionData.a).equal(true)
         }
       } else {
-        should.fail("is valid")
+        expect.fail("is valid")
       }
-      should.not.exist(ajv.errors)
+      expect(ajv.errors).toBeNull()
     })
 
     it("should fail for invalid unions", () => {
@@ -268,14 +267,14 @@ describe("JSONSchemaType type and validation as a type guard", () => {
       const schema = mySchema as SchemaObject
       const validate = ajv.compile<MyData>(schema)
       if (validate(validData)) {
-        validData.foo.should.equal("foo")
+        expect(validData.foo).equal("foo")
       }
-      should.not.exist(validate.errors)
+      expect(validate.errors).toBeNull()
 
       if (ajv.validate<MyData>(schema, validData)) {
-        validData.foo.should.equal("foo")
+        expect(validData.foo).equal("foo")
       }
-      should.not.exist(ajv.errors)
+      expect(ajv.errors).toBeNull()
     })
   })
 
@@ -347,7 +346,7 @@ describe("JSONSchemaType type and validation as a type guard", () => {
       } as const
       const validate = ajv.compile(nullSchema)
       // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-      validate(null).should.be.true
+      expect(validate(null)).be.true
     })
   })
 })

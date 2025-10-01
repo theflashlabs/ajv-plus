@@ -1,20 +1,19 @@
-import type Ajv from ".."
-import type AjvPack from "../dist/standalone/instance"
-import type AjvCore from "../dist/core"
-import type {SchemaObject} from ".."
-import _Ajv from "./ajv"
-import _Ajv2019 from "./ajv2019"
-import getAjvInstances from "./ajv_instances"
-import {withStandalone} from "./ajv_standalone"
-import options from "./ajv_options"
+import {beforeAll, describe, it} from "vitest"
+import type Ajv from "../lib/ajv.ts"
+import type AjvPack from "../lib/standalone/instance.ts"
+import type AjvCore from "../lib/core.ts"
+import type {Options, SchemaObject} from "../lib/ajv.ts"
+import _Ajv from "./ajv.ts"
+import _Ajv2019 from "./ajv2019.ts"
+import getAjvInstances from "./ajv_instances.ts"
+import {withStandalone} from "./ajv_standalone.ts"
+import options from "./ajv_options.ts"
 import * as assert from "assert"
 
-describe("discriminator keyword", function () {
+describe("discriminator keyword", () => {
   let ajvs: (Ajv | AjvPack)[]
 
-  this.timeout(10000)
-
-  before(() => {
+  beforeAll(() => {
     ajvs = [...getAjvs(_Ajv), ...getAjvs(_Ajv2019)]
   })
 
@@ -205,12 +204,13 @@ describe("discriminator keyword", function () {
       assert.strictEqual(validate(badData), false)
     })
     it("compileAsync should loadSchema each $ref", async () => {
-      const opts = {
+      const opts: Options = {
         discriminator: true,
-        loadSchema(url) {
+        // @ts-expect-error
+        loadSchema(url: string) {
           if (!url.startsWith("https://host/")) return undefined
           const name = url.substring("https://host/".length)
-          return schemas[name]
+          return schemas[name as keyof typeof schemas]
         },
       }
       const ajv = new _Ajv(opts)

@@ -11,12 +11,12 @@ const testSuitePaths = {
   async: "spec/async/",
 }
 
-const glob = require("glob")
-const fs = require("fs")
+import {sync} from "glob"
+import {writeFileSync} from "fs"
 
 for (const suite in testSuitePaths) {
   const p = testSuitePaths[suite]
-  const files = glob.sync(`${p}{**/,}*.json`)
+  const files = sync(`${p}{**/,}*.json`)
   if (files.length === 0) {
     console.error(`Missing folder ${p}\nTry: git submodule update --init\n`)
     process.exit(1)
@@ -25,8 +25,8 @@ for (const suite in testSuitePaths) {
     .map((f) => {
       const name = f.replace(p, "").replace(/\.json$/, "")
       const testPath = f.replace(/^spec/, "..")
-      return `\n  {name: "${name}", test: require("${testPath}")},`
+      return `\n  {name: "${name}", test: (await import("${testPath}", { with: { type: "json"}})).default},`
     })
     .reduce((list, f) => list + f)
-  fs.writeFileSync(`./spec/_json/${suite}.js`, `module.exports = [${code}\n]\n`)
+  writeFileSync(`./spec/_json/${suite}.js`, `export default [${code}\n]\n`)
 }

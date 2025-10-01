@@ -1,8 +1,8 @@
-import type {AnySchema, EvaluatedProperties, EvaluatedItems} from "../types"
-import type {SchemaCxt, SchemaObjCxt} from "."
-import {_, getProperty, Code, Name, CodeGen} from "./codegen"
-import {_Code} from "./codegen/code"
-import type {Rule, ValidationRules} from "./rules"
+import type {AnySchema, EvaluatedProperties, EvaluatedItems} from "../types/index.ts"
+import type {SchemaCxt, SchemaObjCxt} from "./index.ts"
+import {_, getProperty, type Code, Name, CodeGen} from "./codegen/index.ts"
+import {_Code} from "./codegen/code.ts"
+import type {Rule, ValidationRules} from "./rules.ts"
 
 // TODO refactor to use Set
 export function toHash<T extends string = string>(arr: T[]): {[K in T]?: true} {

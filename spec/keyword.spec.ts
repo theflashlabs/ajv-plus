@@ -1,13 +1,13 @@
-import type {ErrorObject, SchemaObject, SchemaValidateFunction} from "../dist/types"
-import type AjvCore from "../dist/core"
+//@ts-nocheck
+import {describe, beforeEach, it, expect} from "vitest"
+import type {ErrorObject, SchemaObject, SchemaValidateFunction} from "../lib/types/index.ts"
+import type AjvCore from "../lib/core.ts"
 // currently most tests include compiled code, if any code re-compiled locally, instanceof would fail
-import {_, nil} from "../dist/compile/codegen/code"
-import getAjvAllInstances from "./ajv_all_instances"
-import _Ajv from "./ajv"
-import equal from "../dist/runtime/equal"
-import assert = require("assert")
-import chai from "./chai"
-const should = chai.should()
+import {_, nil} from "../lib/compile/codegen/code.ts"
+import getAjvAllInstances from "./ajv_all_instances.ts"
+import _Ajv from "./ajv.ts"
+import equal from "../lib/runtime/equal.ts"
+import assert from "assert"
 
 describe("User-defined keywords", () => {
   let ajv: AjvCore, instances: AjvCore[]
@@ -234,6 +234,7 @@ describe("User-defined keywords", () => {
       return typeof schema == "object" && schema !== null ? isDeepEqual : isStrictEqual
 
       function isDeepEqual(data) {
+        // @ts-expect-error
         return equal(data, schema)
       }
       function isStrictEqual(data) {
@@ -278,11 +279,13 @@ describe("User-defined keywords", () => {
       instances.forEach((_ajv) => {
         _ajv.addKeyword({
           keyword: "macroRef",
-          macro(schema, _parentSchema, it) {
-            it.baseId.should.equal("#")
+          macro(schema, _parentSchema, schemaCxt) {
+            expect(schemaCxt.baseId).equal("#")
             const ref = schema.$ref
             const validate = _ajv.getSchema(ref)
-            if (!validate) throw new _Ajv.MissingRefError(_ajv.opts.uriResolver, it.baseId, ref)
+            if (!validate) {
+              throw new _Ajv.MissingRefError(_ajv.opts.uriResolver, schemaCxt.baseId, ref)
+            }
             return validate.schema
           },
           metaSchema: {
@@ -529,9 +532,9 @@ describe("User-defined keywords", () => {
       ajv.addKeyword({keyword: "invalid", macro: macroInvalid})
       const schema = {invalid: true}
 
-      should.throw(() => {
+      expect(() => {
         ajv.compile(schema)
-      }, /type must be equal to one of the allowed values/)
+      }).toThrowError(/type must be equal to one of the allowed values/)
 
       function macroInvalid(/* schema */) {
         return {type: "invalid"}
@@ -653,7 +656,7 @@ describe("User-defined keywords", () => {
         compile: compileEven,
         validate: validateEven,
       })
-      compileCalled.should.equal(true)
+      expect(compileCalled).equal(true)
 
       function validateEven(schema, data) {
         if (typeof schema != "boolean") return false
@@ -686,7 +689,7 @@ describe("User-defined keywords", () => {
         validate: validateEven,
         metaSchema: {type: "boolean"},
       })
-      compileCalled.should.equal(true)
+      expect(compileCalled).equal(true)
       shouldBeInvalidSchema({
         type: "number",
         "x-even-$data": "false",
@@ -721,7 +724,7 @@ describe("User-defined keywords", () => {
         },
         2
       )
-      macroCalled.should.equal(true)
+      expect(macroCalled).equal(true)
 
       function validateEven(schema, data) {
         if (typeof schema != "boolean") return false
@@ -749,7 +752,7 @@ describe("User-defined keywords", () => {
         },
         2
       )
-      macroCalled.should.equal(true)
+      expect(macroCalled).equal(true)
       shouldBeInvalidSchema({
         type: "number",
         "x-even-$data": "false",
@@ -798,7 +801,7 @@ describe("User-defined keywords", () => {
     })
 
     it('should fail if "macro" keyword definition has "$data" but no "code" or "validate"', () => {
-      should.throw(() => {
+      expect(() => {
         ajv.addKeyword({
           keyword: "even",
           type: "number",
@@ -807,7 +810,7 @@ describe("User-defined keywords", () => {
             return {}
           },
         })
-      }, /\$data keyword must have "code" or "validate" function/)
+      }).toThrowError(/\$data keyword must have "code" or "validate" function/)
     })
 
     it("should support schemaType with $data", () => {
@@ -1015,7 +1018,7 @@ describe("User-defined keywords", () => {
   ) {
     delete error.schema
     delete error.data
-    error.should.eql({
+    expect(error).eql({
       keyword: "x-range",
       instancePath,
       schemaPath,
@@ -1046,13 +1049,13 @@ describe("User-defined keywords", () => {
   }
 
   function shouldBeValid(validate, data) {
-    validate(data).should.equal(true)
-    should.not.exist(validate.errors)
+    expect(validate(data)).equal(true)
+    expect(validate.errors).toBeNull()
   }
 
   function shouldBeInvalid(validate, data, numErrors = 1) {
-    validate(data).should.equal(false)
-    validate.errors.should.have.length(numErrors)
+    expect(validate(data)).equal(false)
+    expect(validate.errors).have.length(numErrors)
   }
 
   function shouldBeInvalidSchema(
@@ -1060,9 +1063,9 @@ describe("User-defined keywords", () => {
     msg: string | RegExp = /keyword .+ value is invalid at path/
   ) {
     instances.forEach((_ajv) => {
-      should.throw(() => {
+      expect(() => {
         _ajv.compile(schema)
-      }, msg)
+      }).toThrowError(msg)
     })
   }
 
@@ -1075,9 +1078,9 @@ describe("User-defined keywords", () => {
 
       function testThrow(keywords) {
         TEST_TYPES.forEach((dataType, index) => {
-          should.throw(() => {
+          expect(() => {
             _addKeyword(keywords[index], dataType)
-          }, /already defined/)
+          }).toThrowError(/already defined/)
         })
       }
 
@@ -1087,61 +1090,61 @@ describe("User-defined keywords", () => {
           TEST_TYPES.forEach((dataType2) => {
             const keyword = keywordPrefix + index++
             _addKeyword(keyword, dataType1)
-            should.throw(() => {
+            expect(() => {
               _addKeyword(keyword, dataType2)
-            }, /already defined/)
+            }).toThrowError(/already defined/)
           })
         })
       }
     })
 
     it("should throw if keyword is not a valid name", () => {
-      should.not.throw(() => {
+      expect(() => {
         ajv.addKeyword("mykeyword")
-      })
+      }).not.to.throw()
 
-      should.not.throw(() => {
+      expect(() => {
         ajv.addKeyword("hyphens-are-valid")
-      })
+      }).not.to.throw()
 
-      should.not.throw(() => {
+      expect(() => {
         ajv.addKeyword("colons:are-valid")
-      })
+      }).not.to.throw()
 
-      should.throw(() => {
+      expect(() => {
         ajv.addKeyword("single-'quote-not-valid")
-      }, /invalid name/)
+      }).toThrowError(/invalid name/)
 
-      should.throw(() => {
+      expect(() => {
         ajv.addKeyword("3-start-with-number-not-valid")
-      }, /invalid name/)
+      }).toThrowError(/invalid name/)
 
-      should.throw(() => {
+      expect(() => {
         ajv.addKeyword("-start-with-hyphen-not-valid")
-      }, /invalid name/)
+      }).toThrowError(/invalid name/)
 
-      should.throw(() => {
+      expect(() => {
         ajv.addKeyword("spaces not valid")
-      }, /invalid name/)
+      }).toThrowError(/invalid name/)
     })
 
     it("should return instance of itself", () => {
       const res = ajv.addKeyword("any")
-      res.should.equal(ajv)
+      expect(res).equal(ajv)
     })
 
     it("should throw if unknown type is passed", () => {
-      should.throw(() => {
+      expect(() => {
         _addKeyword("user-defined1", "wrongtype")
-      }, /type must be JSONType/)
+      }).toThrowError(/type must be JSONType/)
 
-      should.throw(() => {
+      expect(() => {
         _addKeyword("user-defined2", ["number", "wrongtype"])
-      }, /type must be JSONType/)
+      }).toThrowError(/type must be JSONType/)
 
-      should.throw(() => {
+      expect(() => {
         _addKeyword("user-defined3", ["number", undefined])
-      }, /type must be JSONType/)
+      }).toThrowError(/type must be JSONType/)
     })
 
     it("should support old API addKeyword", () => {
@@ -1156,8 +1159,8 @@ describe("User-defined keywords", () => {
         type: "number",
         min: 0,
       })
-      validate(1).should.equal(true)
-      validate(-1).should.equal(false)
+      expect(validate(1)).equal(true)
+      expect(validate(-1)).equal(false)
     })
 
     function _addKeyword(keyword, dataType) {
@@ -1172,7 +1175,7 @@ describe("User-defined keywords", () => {
   describe("getKeyword", () => {
     // TODO update this test
     it("should return false for unknown keywords", () => {
-      ajv.getKeyword("unknown").should.equal(false)
+      expect(ajv.getKeyword("unknown")).equal(false)
     })
 
     // TODO change to account for pre-defined keywords with definitions
@@ -1185,7 +1188,7 @@ describe("User-defined keywords", () => {
       ajv.addKeyword(definition)
       const def = ajv.getKeyword("mykeyword")
       assert(typeof def == "object")
-      def.keyword.should.equal("mykeyword")
+      expect(def.keyword).equal("mykeyword")
     })
   })
 
@@ -1202,10 +1205,10 @@ describe("User-defined keywords", () => {
       const schema = {type: "number", positive: true}
 
       let validate = ajv.compile(schema)
-      validate(0).should.equal(false)
-      validate(1).should.equal(true)
+      expect(validate(0)).equal(false)
+      expect(validate(1)).equal(true)
 
-      should.throw(() => {
+      expect(() => {
         ajv.addKeyword({
           keyword: "positive",
           type: "number",
@@ -1213,12 +1216,12 @@ describe("User-defined keywords", () => {
             return data >= 0
           },
         })
-      }, /already defined/)
+      }).toThrowError(/already defined/)
 
       ajv.removeKeyword("positive")
       ajv.removeSchema(schema)
       validate = ajv.compile(schema)
-      validate(-1).should.equal(true)
+      expect(validate(-1)).equal(true)
       ajv.removeSchema(schema)
 
       ajv.addKeyword({
@@ -1230,9 +1233,9 @@ describe("User-defined keywords", () => {
       })
 
       validate = ajv.compile(schema)
-      validate(-1).should.equal(false)
-      validate(0).should.equal(true)
-      validate(1).should.equal(true)
+      expect(validate(-1)).equal(false)
+      expect(validate(0)).equal(true)
+      expect(validate(1)).equal(true)
     })
 
     it("should remove and allow redefining standard keyword", () => {
@@ -1240,17 +1243,17 @@ describe("User-defined keywords", () => {
 
       const schema = {minimum: 1}
       let validate = ajv.compile(schema)
-      validate(0).should.equal(false)
-      validate(1).should.equal(true)
-      validate(2).should.equal(true)
+      expect(validate(0)).equal(false)
+      expect(validate(1)).equal(true)
+      expect(validate(2)).equal(true)
 
       ajv.removeKeyword("minimum")
       ajv.removeSchema(schema)
 
       validate = ajv.compile(schema)
-      validate(0).should.equal(true)
-      validate(1).should.equal(true)
-      validate(2).should.equal(true)
+      expect(validate(0)).equal(true)
+      expect(validate(1)).equal(true)
+      expect(validate(2)).equal(true)
 
       ajv.addKeyword({
         keyword: "minimum",
@@ -1261,22 +1264,22 @@ describe("User-defined keywords", () => {
       ajv.removeSchema(schema)
 
       validate = ajv.compile(schema)
-      validate(0).should.equal(false)
-      validate(1).should.equal(false)
-      validate(2).should.equal(true)
+      expect(validate(0)).equal(false)
+      expect(validate(1)).equal(false)
+      expect(validate(2)).equal(true)
     })
 
     it("should return instance of itself", () => {
       const res = ajv.addKeyword("any").removeKeyword("any")
-      res.should.equal(ajv)
+      expect(res).equal(ajv)
     })
   })
 
   describe("user-defined keywords mutating data", () => {
     it("should NOT update data without option modifying", () => {
-      should.throw(() => {
+      expect(() => {
         testModifying(false)
-      }, /expected false to equal true/)
+      }).toThrowError(/expected false to equal true/)
     })
 
     it("should update data with option modifying", () => {
@@ -1324,8 +1327,8 @@ describe("User-defined keywords", () => {
 
       const obj: any = {foo: "bar,baz,quux"}
 
-      validate(obj).should.equal(true)
-      obj.should.eql({foo: ["bar", "baz", "quux"]})
+      expect(validate(obj)).equal(true)
+      expect(obj).eql({foo: ["bar", "baz", "quux"]})
     }
   })
 
@@ -1343,8 +1346,8 @@ describe("User-defined keywords", () => {
         valid: false,
       })
 
-      ajv.validate({pass: ""}, 1).should.equal(true)
-      ajv.validate({fail: ""}, 1).should.equal(false)
+      expect(ajv.validate({pass: ""}, 1)).equal(true)
+      expect(ajv.validate({fail: ""}, 1)).equal(false)
     })
   })
 
@@ -1364,9 +1367,9 @@ describe("User-defined keywords", () => {
         allRequired: true,
       }
 
-      should.throw(() => {
+      expect(() => {
         ajv.compile(invalidSchema)
-      }, /parent schema must have dependencies of allRequired: properties/)
+      }).toThrowError(/parent schema must have dependencies of allRequired: properties/)
 
       const schema = {
         type: "object",
@@ -1377,8 +1380,8 @@ describe("User-defined keywords", () => {
       }
 
       const v = ajv.compile(schema)
-      v({foo: 1}).should.equal(true)
-      v({}).should.equal(false)
+      expect(v({foo: 1})).equal(true)
+      expect(v({})).equal(false)
     })
   })
 })

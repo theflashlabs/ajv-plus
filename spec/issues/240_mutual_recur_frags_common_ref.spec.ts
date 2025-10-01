@@ -1,9 +1,9 @@
-import type AjvCore from "../../dist/core"
-import type AjvPack from "../../dist/standalone/instance"
-import {getStandalone} from "../ajv_standalone"
-import _Ajv from "../ajv"
-import chai from "../chai"
-chai.should()
+import {describe, expect, it} from "vitest"
+import type AjvCore from "../../lib/core.ts"
+import type AjvPack from "../../lib/standalone/instance.ts"
+import {getStandalone} from "../ajv_standalone.ts"
+import _Ajv from "../ajv.ts"
+import type {AnyValidateFunction} from "../../lib/core.ts"
 
 describe("issue #240, mutually recursive fragment refs reference a common schema", () => {
   const apiSchema = {
@@ -230,11 +230,11 @@ describe("issue #240, mutually recursive fragment refs reference a common schema
     }
   })
 
-  function testSchema(validate) {
-    validate({data: {type: "Library", id: "123"}}).should.equal(true)
-    validate({data: {type: "Library", id: 123}}).should.equal(false)
-    validate({data: {type: "CatalogItem", id: "123"}}).should.equal(true)
-    validate({data: {type: "CatalogItem", id: 123}}).should.equal(false)
-    validate({data: {type: "Foo", id: "123"}}).should.equal(false)
+  function testSchema(validate: AnyValidateFunction) {
+    expect(validate({data: {type: "Library", id: "123"}})).equal(true)
+    expect(validate({data: {type: "Library", id: 123}})).equal(false)
+    expect(validate({data: {type: "CatalogItem", id: "123"}})).equal(true)
+    expect(validate({data: {type: "CatalogItem", id: 123}})).equal(false)
+    expect(validate({data: {type: "Foo", id: "123"}})).equal(false)
   }
 })

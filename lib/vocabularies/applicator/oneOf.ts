@@ -3,11 +3,11 @@ import type {
   ErrorObject,
   KeywordErrorDefinition,
   AnySchema,
-} from "../../types"
-import type {KeywordCxt} from "../../compile/validate"
-import {_, Name} from "../../compile/codegen"
-import {alwaysValidSchema} from "../../compile/util"
-import {SchemaCxt} from "../../compile"
+} from "../../types/index.ts"
+import type {KeywordCxt} from "../../compile/validate/index.ts"
+import {_, Name} from "../../compile/codegen/index.ts"
+import {alwaysValidSchema} from "../../compile/util.ts"
+import {type SchemaCxt} from "../../compile/index.ts"
 
 export type OneOfError = ErrorObject<
   "oneOf",
@@ -17,7 +17,7 @@ export type OneOfError = ErrorObject<
 
 const error: KeywordErrorDefinition = {
   message: "must match exactly one schema in oneOf",
-  params: ({params}) => _`{passingSchemas: ${params.passing}}`,
+  params: ({params}: {params: any}) => _`{passingSchemas: ${params.passing}}`,
 }
 
 const def: CodeKeywordDefinition = {

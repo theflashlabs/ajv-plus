@@ -1,7 +1,6 @@
-import type {AnySchemaObject, SchemaObject, AsyncSchema} from "../.."
-import _Ajv from "../ajv"
-import chai from "../chai"
-const should = chai.should()
+import {describe, expect, it} from "vitest"
+import type {AnySchemaObject, SchemaObject, AsyncSchema} from "../../lib/ajv.ts"
+import _Ajv from "../ajv.ts"
 
 interface Foo {
   foo: number
@@ -19,9 +18,9 @@ describe("$async validation and type guards", () => {
       const data: unknown = {foo: 1}
       let result: boolean
       if ((result = validate(data))) {
-        data.foo.should.equal(1)
+        expect(data.foo).equal(1)
       }
-      result.should.equal(true)
+      expect(result).equal(true)
     })
 
     it("should have result type boolean 2", () => {
@@ -33,9 +32,9 @@ describe("$async validation and type guards", () => {
       const data: unknown = {foo: 1}
       let result: boolean
       if ((result = validate(data))) {
-        data.foo.should.equal(1)
+        expect(data.foo).equal(1)
       }
-      result.should.equal(true)
+      expect(result).equal(true)
     })
 
     it("should have result type boolean 3", () => {
@@ -47,9 +46,9 @@ describe("$async validation and type guards", () => {
       const data: unknown = {foo: 1}
       let result: boolean
       if ((result = validate(data))) {
-        data.foo.should.equal(1)
+        expect(data.foo).equal(1)
       }
-      result.should.equal(true)
+      expect(result).equal(true)
     })
   })
 
@@ -57,21 +56,21 @@ describe("$async validation and type guards", () => {
     it("should have result type boolean 1", () => {
       const validate = ajv.compile({$async: false})
       const result: boolean = validate({})
-      should.exist(result)
+      expect(result).toBeDefined()
     })
 
     it("should have result type boolean 2", () => {
       const schema: SchemaObject = {$async: false}
       const validate = ajv.compile(schema)
       const result: boolean = validate({})
-      should.exist(result)
+      expect(result).toBeDefined()
     })
 
     it("should have result type boolean 3", () => {
       const schema: AnySchemaObject = {$async: false}
       const validate = ajv.compile(schema)
       const result: boolean = validate({})
-      should.exist(result)
+      expect(result).toBeDefined()
     })
   })
 
@@ -83,7 +82,7 @@ describe("$async validation and type guards", () => {
         properties: {foo: {type: "number"}},
       })
       const result: Promise<Foo> = validate({foo: 1})
-      await result.then((data) => data.should.exist)
+      await result.then((data) => expect(data).not.toBeUndefined())
     })
 
     it("should have result type promise 2", async () => {
@@ -94,7 +93,7 @@ describe("$async validation and type guards", () => {
       }
       const validate = ajv.compile<Foo>(schema)
       const result: Promise<Foo> = validate({foo: 1})
-      await result.then((data) => data.foo.should.equal(1))
+      await result.then((data) => expect(data.foo).equal(1))
     })
   })
 
@@ -110,12 +109,12 @@ describe("$async validation and type guards", () => {
       let result: boolean | Promise<Foo>
       if ((result = validate(data))) {
         if (result instanceof Promise) {
-          await result.then((_data) => _data.foo.should.equal(1))
+          await result.then((_data) => expect(_data.foo).equal(1))
         } else {
-          should.fail()
+          expect.fail()
         }
       } else {
-        should.fail()
+        expect.fail()
       }
     })
 
@@ -124,9 +123,9 @@ describe("$async validation and type guards", () => {
       const validate = ajv.compile<any>(schema)
       const result = validate({})
       if (typeof result === "boolean") {
-        should.exist(result)
+        expect(result).not.toBeUndefined()
       } else {
-        await result.then((data) => data.should.exist)
+        await result.then((data) => expect(data.should).not.toBeUndefined)
       }
     })
   })
@@ -142,9 +141,9 @@ describe("$async validation and type guards", () => {
       const data = {foo: 1}
       let result: boolean
       if ((result = validate(data))) {
-        data.foo.should.equal(1)
+        expect(data.foo).equal(1)
       }
-      result.should.equal(true)
+      expect(result).equal(true)
     })
   })
 
@@ -153,7 +152,7 @@ describe("$async validation and type guards", () => {
     const validate = ajv.compile(schema)
     it("should have result type boolean | promise", () => {
       const result: boolean = validate({})
-      result.should.equal(true)
+      expect(result).equal(true)
     })
   })
 })

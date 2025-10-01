@@ -1,5 +1,6 @@
-import _Ajv from "../ajv"
-import assert = require("assert")
+import {describe, it} from "vitest"
+import _Ajv from "../ajv.ts"
+import assert from "assert"
 
 const schema1 = {
   $id: "one",

@@ -4,12 +4,12 @@ import type {
   ErrorObject,
   KeywordErrorDefinition,
   AnySchema,
-} from "../../types"
-import {allSchemaProperties, usePattern, isOwnProperty} from "../code"
-import {_, nil, or, not, Code, Name} from "../../compile/codegen"
-import N from "../../compile/names"
-import type {SubschemaArgs} from "../../compile/validate/subschema"
-import {alwaysValidSchema, schemaRefOrVal, Type} from "../../compile/util"
+} from "../../types/index.ts"
+import {allSchemaProperties, usePattern, isOwnProperty} from "../code.ts"
+import {_, nil, or, not, type Code, Name} from "../../compile/codegen/index.ts"
+import N from "../../compile/names.ts"
+import type {SubschemaArgs} from "../../compile/validate/subschema.ts"
+import {alwaysValidSchema, schemaRefOrVal, Type} from "../../compile/util.ts"
 
 export type AdditionalPropertiesError = ErrorObject<
   "additionalProperties",
@@ -19,7 +19,7 @@ export type AdditionalPropertiesError = ErrorObject<
 
 const error: KeywordErrorDefinition = {
   message: "must NOT have additional properties",
-  params: ({params}) => _`{additionalProperty: ${params.additionalProperty}}`,
+  params: ({params}: {params: any}) => _`{additionalProperty: ${params.additionalProperty}}`,
 }
 
 const def: CodeKeywordDefinition & AddedKeywordDefinition = {

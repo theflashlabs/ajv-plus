@@ -1,13 +1,13 @@
-import type {CodeKeywordDefinition, KeywordErrorDefinition} from "../../types"
-import type {KeywordCxt} from "../../compile/validate"
-import {_, str, operators} from "../../compile/codegen"
+import type {CodeKeywordDefinition, KeywordErrorDefinition} from "../../types/index.ts"
+import type {KeywordCxt} from "../../compile/validate/index.ts"
+import {_, str, operators} from "../../compile/codegen/index.ts"
 
 const error: KeywordErrorDefinition = {
-  message({keyword, schemaCode}) {
+  message({keyword, schemaCode}: {keyword: any; schemaCode: any}) {
     const comp = keyword === "maxProperties" ? "more" : "fewer"
     return str`must NOT have ${comp} than ${schemaCode} properties`
   },
-  params: ({schemaCode}) => _`{limit: ${schemaCode}}`,
+  params: ({schemaCode}: {schemaCode: any}) => _`{limit: ${schemaCode}}`,
 }
 
 const def: CodeKeywordDefinition = {

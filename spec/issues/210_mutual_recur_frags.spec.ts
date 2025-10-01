@@ -1,9 +1,8 @@
-import type AjvCore from "../../dist/core"
-import type AjvPack from "../../dist/standalone/instance"
-import {getStandalone} from "../ajv_standalone"
-import _Ajv from "../ajv"
-import chai from "../chai"
-chai.should()
+import {describe, expect, it} from "vitest"
+import type AjvCore from "../../lib/core.ts"
+import type AjvPack from "../../lib/standalone/instance.ts"
+import {getStandalone} from "../ajv_standalone.ts"
+import _Ajv from "../ajv.ts"
 
 describe("issue #210, mutual recursive $refs that are schema fragments", () => {
   describe("one ref is fragment", () => {
@@ -36,8 +35,8 @@ describe("issue #210, mutual recursive $refs that are schema fragments", () => {
         })
 
         const validate = ajv.compile({$ref: "foo#/definitions/bar"})
-        validate({baz: {quux: {baz: 42}}}).should.equal(true)
-        validate({baz: {quux: {baz: "foo"}}}).should.equal(false)
+        expect(validate({baz: {quux: {baz: 42}}})).equal(true)
+        expect(validate({baz: {quux: {baz: "foo"}}})).equal(false)
       }
     }
   })
@@ -77,8 +76,8 @@ describe("issue #210, mutual recursive $refs that are schema fragments", () => {
 
         const validate = ajv.compile({$ref: "foo#/definitions/bar"})
 
-        validate({baz: {quux: {baz: 42}}}).should.equal(true)
-        validate({baz: {quux: {baz: "foo"}}}).should.equal(false)
+        expect(validate({baz: {quux: {baz: 42}}})).equal(true)
+        expect(validate({baz: {quux: {baz: "foo"}}})).equal(false)
       }
     }
   })

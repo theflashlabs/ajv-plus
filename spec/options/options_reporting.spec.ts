@@ -1,6 +1,7 @@
-import _Ajv from "../ajv"
-import chai from "../chai"
-const should = chai.should()
+import {afterEach, beforeEach, describe, expect, it} from "vitest"
+import _Ajv from "../ajv.ts"
+import type Ajv from "../../lib/core.ts"
+import assert from "assert"
 
 describe("reporting options", () => {
   describe("verbose", () => {
@@ -8,7 +9,7 @@ describe("reporting options", () => {
       testVerbose(new _Ajv({verbose: true}))
       testVerbose(new _Ajv({verbose: true, allErrors: true}))
 
-      function testVerbose(ajv) {
+      function testVerbose(ajv: Ajv) {
         const schema = {
           type: "object",
           properties: {
@@ -18,14 +19,15 @@ describe("reporting options", () => {
         const validate = ajv.compile(schema)
 
         const data = {foo: 3}
-        validate(data).should.equal(false)
-        validate.errors.should.have.length(1)
+        expect(validate(data)).equal(false)
+        expect(validate.errors).have.length(1)
+        assert(validate.errors)
         const err = validate.errors[0]
 
-        should.equal(err.schema, 5)
-        err.parentSchema.should.eql({type: "number", minimum: 5})
-        err.parentSchema.should.equal(schema.properties.foo) // by reference
-        should.equal(err.data, 3)
+        expect(err?.schema).equal(5)
+        expect(err?.parentSchema).eql({type: "number", minimum: 5})
+        expect(err?.parentSchema).equal(schema.properties.foo) // by reference
+        expect(err?.data).equal(3)
       }
     })
   })
@@ -35,7 +37,7 @@ describe("reporting options", () => {
       test(new _Ajv(), false)
       test(new _Ajv({allErrors: true}), true)
 
-      function test(ajv, allErrors) {
+      function test(ajv: Ajv, allErrors: boolean) {
         let format1called = false,
           format2called = false
 
@@ -54,20 +56,20 @@ describe("reporting options", () => {
           allOf: [{format: "format1"}, {format: "format2"}],
         }
 
-        ajv.validate(schema1, "abc").should.equal(false)
-        ajv.errors.should.have.length(allErrors ? 2 : 1)
-        format1called.should.equal(true)
-        format2called.should.equal(allErrors)
+        expect(ajv.validate(schema1, "abc")).equal(false)
+        expect(ajv.errors).have.length(allErrors ? 2 : 1)
+        expect(format1called).equal(true)
+        expect(format2called).equal(allErrors)
 
         const schema2 = {
           not: schema1,
         }
 
         format1called = format2called = false
-        ajv.validate(schema2, "abc").should.equal(true)
-        should.equal(ajv.errors, null)
-        format1called.should.equal(true)
-        format2called.should.equal(false)
+        expect(ajv.validate(schema2, "abc")).equal(true)
+        expect(ajv.errors).equal(null)
+        expect(format1called).equal(true)
+        expect(format2called).equal(false)
       }
     })
   })
@@ -78,7 +80,7 @@ describe("reporting options", () => {
      */
 
     const origConsoleWarn = console.warn
-    let consoleCalled
+    let consoleCalled: boolean
 
     beforeEach(() => {
       consoleCalled = false
@@ -97,7 +99,7 @@ describe("reporting options", () => {
         minimum: 1,
       })
 
-      should.equal(consoleCalled, true)
+      expect(consoleCalled).equal(true)
     })
 
     it("user-defined logger is an object - logs should only report to it", () => {
@@ -119,8 +121,8 @@ describe("reporting options", () => {
         minimum: 1,
       })
 
-      should.equal(loggerCalled, true)
-      should.equal(consoleCalled, false)
+      expect(loggerCalled).equal(true)
+      expect(consoleCalled).equal(false)
 
       function log() {
         loggerCalled = true
@@ -138,7 +140,7 @@ describe("reporting options", () => {
         minimum: 1,
       })
 
-      should.equal(consoleCalled, false)
+      expect(consoleCalled).equal(false)
     })
 
     it("logger option is an object without required methods - an error should be thrown", () => {
@@ -146,10 +148,7 @@ describe("reporting options", () => {
         meta: false,
         logger: {},
       }
-      ;(() => new _Ajv(opts)).should.throw(
-        Error,
-        /logger must implement log, warn and error methods/
-      )
+      expect(() => new _Ajv(opts)).toThrowError(/logger must implement log, warn and error methods/)
     })
   })
 })

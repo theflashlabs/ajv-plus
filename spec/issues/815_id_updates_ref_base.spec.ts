@@ -1,7 +1,6 @@
-import type {ValidateFunction} from "../.."
-import _Ajv from "../ajv"
-import chai from "../chai"
-chai.should()
+import {describe, it, expect, beforeAll} from "vitest"
+import type {ValidateFunction} from "../../lib/ajv.ts"
+import _Ajv from "../ajv.ts"
 
 describe("issue #815, id and $id fields should reset base", () => {
   let validate: ValidateFunction
@@ -28,37 +27,43 @@ describe("issue #815, id and $id fields should reset base", () => {
     additionalProperties: false,
   }
 
-  before(() => {
+  beforeAll(() => {
     validate = new _Ajv().compile(schema)
   })
 
   it("should set # to reference the closest ancestor with $id", () => {
-    validate({
-      newRoot: {
-        name: "test",
-      },
-    }).should.equal(true)
-
-    validate({
-      newRoot: {
-        name: "test",
-        recurse: {
-          name: "test2",
+    expect(
+      validate({
+        newRoot: {
+          name: "test",
         },
-      },
-    }).should.equal(true)
-  })
+      })
+    ).equal(true)
 
-  it("should NOT set # to reference the absolute document root", () => {
-    validate({
-      newRoot: {
-        name: "test",
-        recurse: {
-          newRoot: {
+    expect(
+      validate({
+        newRoot: {
+          name: "test",
+          recurse: {
             name: "test2",
           },
         },
-      },
-    }).should.equal(false)
+      })
+    ).equal(true)
+  })
+
+  it("should NOT set # to reference the absolute document root", () => {
+    expect(
+      validate({
+        newRoot: {
+          name: "test",
+          recurse: {
+            newRoot: {
+              name: "test2",
+            },
+          },
+        },
+      })
+    ).equal(false)
   })
 })

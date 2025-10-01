@@ -1,5 +1,6 @@
-import _Ajv from "../ajv2020"
-import * as assert from "assert"
+import {describe, it} from "vitest"
+import _Ajv from "../ajv2020.ts"
+import assert from "assert"
 
 describe("`minContains: 0` without valid items (issue #1819)", () => {
   const ajv = new _Ajv()

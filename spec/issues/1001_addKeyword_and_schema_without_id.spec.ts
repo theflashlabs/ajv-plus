@@ -1,6 +1,5 @@
-import _Ajv from "../ajv"
-import chai from "../chai"
-chai.should()
+import {describe, expect, it} from "vitest"
+import _Ajv from "../ajv.ts"
 
 describe("issue #1001: addKeyword breaks schema without ID", () => {
   it("should allow using schemas without ID with addKeyword", () => {
@@ -13,6 +12,6 @@ describe("issue #1001: addKeyword breaks schema without ID", () => {
     const ajv: any = new _Ajv()
     ajv.addSchema(schema)
     ajv.addKeyword("myKeyword")
-    ajv.getSchema("#/definitions/foo").should.be.a("function")
+    expect(ajv.getSchema("#/definitions/foo")).to.be.a("function")
   })
 })

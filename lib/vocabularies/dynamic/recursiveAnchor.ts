@@ -1,6 +1,6 @@
-import type {CodeKeywordDefinition} from "../../types"
-import {dynamicAnchor} from "./dynamicAnchor"
-import {checkStrictMode} from "../../compile/util"
+import type {CodeKeywordDefinition} from "../../types/index.ts"
+import {dynamicAnchor} from "./dynamicAnchor.ts"
+import {checkStrictMode} from "../../compile/util.ts"
 
 const def: CodeKeywordDefinition = {
   keyword: "$recursiveAnchor",

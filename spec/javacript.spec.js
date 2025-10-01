@@ -1,6 +1,7 @@
-const Ajv = require("./ajv")
-const Ajv2019 = require("./ajv2019")
-const assert = require("assert")
+import Ajv from "./ajv.ts"
+import Ajv2019 from "./ajv2019.ts"
+import {strictEqual} from "assert"
+import {describe, it} from "vitest"
 
 describe("using Ajv with javascript", () => {
   describe("draft-07", () => it("should validate", () => test(Ajv)))
@@ -9,7 +10,7 @@ describe("using Ajv with javascript", () => {
   function test(_Ajv) {
     const ajv = new _Ajv()
     const validate = ajv.compile({type: "number"})
-    assert.strictEqual(validate(1), true)
-    assert.strictEqual(validate("1"), false)
+    strictEqual(validate(1), true)
+    strictEqual(validate("1"), false)
   }
 })

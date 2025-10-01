@@ -1,4 +1,4 @@
-import type {ErrorObject} from "../../types"
+import type {ErrorObject} from "../../types/index.ts"
 
 export enum DiscrError {
   Tag = "tag",

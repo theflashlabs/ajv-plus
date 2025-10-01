@@ -1,6 +1,5 @@
-import _Ajv from "../ajv"
-import chai from "../chai"
-chai.should()
+import {describe, it, expect} from "vitest"
+import _Ajv from "../ajv.ts"
 
 describe("issue #955: option removeAdditional breaks user-defined keywords", () => {
   it("should support user-defined keywords with option removeAdditional", () => {
@@ -34,14 +33,14 @@ describe("issue #955: option removeAdditional breaks user-defined keywords", () 
       foo: "   bar   ",
       baz: "",
     }
-    validate(data).should.equal(true)
-    data.should.not.have.property("baz")
+    expect(validate(data)).equal(true)
+    expect(data).not.have.property("baz")
 
     data = {
       foo: "   ba   ",
       baz: "",
     }
-    validate(data).should.equal(false)
-    data.should.not.have.property("baz")
+    expect(validate(data)).equal(false)
+    expect(data).not.have.property("baz")
   })
 })

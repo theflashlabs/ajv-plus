@@ -1,31 +1,31 @@
-import _Ajv from "../ajv"
-import chai from "../chai"
-chai.should()
+import {beforeAll, describe, expect, it} from "vitest"
+import _Ajv from "../ajv.ts"
+import type {ValidateFunction} from "../../lib/core.ts"
 
 describe("issue #342, support uniqueItems with some non-JSON objects", () => {
-  let validate
+  let validate: ValidateFunction
 
-  before(() => {
+  beforeAll(() => {
     const ajv = new _Ajv()
     validate = ajv.compile({type: "array", uniqueItems: true})
   })
 
   it("should allow different RegExps", () => {
-    validate([/foo/, /bar/]).should.equal(true)
-    validate([/foo/gi, /foo/gi]).should.equal(false)
-    validate([/foo/, {}]).should.equal(true)
+    expect(validate([/foo/, /bar/])).equal(true)
+    expect(validate([/foo/gi, /foo/gi])).equal(false)
+    expect(validate([/foo/, {}])).equal(true)
   })
 
   it("should allow different Dates", () => {
-    validate([new Date("2016-11-11"), new Date("2016-11-12")]).should.equal(true)
-    validate([new Date("2016-11-11"), new Date("2016-11-11")]).should.equal(false)
-    validate([new Date("2016-11-11"), {}]).should.equal(true)
+    expect(validate([new Date("2016-11-11"), new Date("2016-11-12")])).equal(true)
+    expect(validate([new Date("2016-11-11"), new Date("2016-11-11")])).equal(false)
+    expect(validate([new Date("2016-11-11"), {}])).equal(true)
   })
 
   it("should allow undefined properties", () => {
-    validate([{}, {foo: undefined}]).should.equal(true)
-    validate([{foo: undefined}, {}]).should.equal(true)
-    validate([{foo: undefined}, {bar: undefined}]).should.equal(true)
-    validate([{foo: undefined}, {foo: undefined}]).should.equal(false)
+    expect(validate([{}, {foo: undefined}])).equal(true)
+    expect(validate([{foo: undefined}, {}])).equal(true)
+    expect(validate([{foo: undefined}, {bar: undefined}])).equal(true)
+    expect(validate([{foo: undefined}, {foo: undefined}])).equal(false)
   })
 })

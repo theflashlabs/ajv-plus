@@ -1,13 +1,13 @@
-import type {CodeKeywordDefinition, ErrorObject, KeywordErrorDefinition} from "../../types"
-import type {KeywordCxt} from "../../compile/validate"
-import {usePattern} from "../code"
-import {_, str} from "../../compile/codegen"
+import type {CodeKeywordDefinition, ErrorObject, KeywordErrorDefinition} from "../../types/index.ts"
+import type {KeywordCxt} from "../../compile/validate/index.ts"
+import {usePattern} from "../code.ts"
+import {_, str} from "../../compile/codegen/index.ts"
 
 export type PatternError = ErrorObject<"pattern", {pattern: string}, string | {$data: string}>
 
 const error: KeywordErrorDefinition = {
-  message: ({schemaCode}) => str`must match pattern "${schemaCode}"`,
-  params: ({schemaCode}) => _`{pattern: ${schemaCode}}`,
+  message: ({schemaCode}: {schemaCode: any}) => str`must match pattern "${schemaCode}"`,
+  params: ({schemaCode}: {schemaCode: any}) => _`{pattern: ${schemaCode}}`,
 }
 
 const def: CodeKeywordDefinition = {

@@ -1,9 +1,8 @@
-import type AjvCore from "../../dist/core"
-import type AjvPack from "../../dist/standalone/instance"
-import _Ajv from "../ajv"
-import {getStandalone} from "../ajv_standalone"
-import chai from "../chai"
-chai.should()
+import {describe, it, expect} from "vitest"
+import type AjvCore from "../../lib/core.ts"
+import type AjvPack from "../../lib/standalone/instance.ts"
+import _Ajv from "../ajv.ts"
+import {getStandalone} from "../ajv_standalone.ts"
 
 describe("issue #8: schema with shared references", () => {
   const propertySchema = {
@@ -42,10 +41,10 @@ describe("issue #8: schema with shared references", () => {
 
   function spec(ajv: AjvCore | AjvPack): void {
     let result = ajv.validate("obj.json#", {foo: "abc", bar: "def"})
-    result.should.equal(true)
+    expect(result).equal(true)
 
     result = ajv.validate("obj.json#", {foo: "abcde", bar: "fghg"})
-    result.should.equal(false)
-    ajv.errors?.should.have.length(1)
+    expect(result).equal(false)
+    expect(ajv.errors).have.length(1)
   }
 })

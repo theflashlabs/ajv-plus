@@ -1,6 +1,6 @@
-import _Ajv from "../ajv"
-import chai from "../chai"
-const should = chai.should()
+import {describe, expect, it} from "vitest"
+import _Ajv from "../ajv.ts"
+import type Ajv from "../../lib/core.ts"
 
 describe("strict option with defaults (replaced strictDefaults)", () => {
   describe("useDefaults = true", () => {
@@ -18,7 +18,7 @@ describe("strict option with defaults (replaced strictDefaults)", () => {
         }
 
         ajv.compile(schema)
-        should.not.exist(output.warning)
+        expect(output.warning).toBeUndefined()
       })
 
       it("should NOT throw an error or log a warning given an ignored default #2", () => {
@@ -42,7 +42,7 @@ describe("strict option with defaults (replaced strictDefaults)", () => {
         }
 
         ajv.compile(schema)
-        should.not.exist(output.warning)
+        expect(output.warning).toBeUndefined()
       })
     })
 
@@ -51,13 +51,13 @@ describe("strict option with defaults (replaced strictDefaults)", () => {
         test(new _Ajv({useDefaults: true}))
         test(new _Ajv({useDefaults: true, strict: true}))
 
-        function test(ajv) {
+        function test(ajv: Ajv) {
           const schema = {
             default: 5,
             type: "object",
             properties: {},
           }
-          should.throw(() => ajv.compile(schema), /default is ignored in the schema root/)
+          expect(() => ajv.compile(schema)).toThrowError(/default is ignored in the schema root/)
         }
       })
 
@@ -65,7 +65,7 @@ describe("strict option with defaults (replaced strictDefaults)", () => {
         test(new _Ajv({useDefaults: true}))
         test(new _Ajv({useDefaults: true, strict: true}))
 
-        function test(ajv) {
+        function test(ajv: Ajv) {
           const schema = {
             oneOf: [
               {enum: ["foo", "bar"]},
@@ -79,9 +79,9 @@ describe("strict option with defaults (replaced strictDefaults)", () => {
               },
             ],
           }
-          should.throw(() => {
+          expect(() => {
             ajv.compile(schema)
-          }, /default is ignored/)
+          }).throw(/default is ignored/)
         }
       })
     })
@@ -100,7 +100,7 @@ describe("strict option with defaults (replaced strictDefaults)", () => {
           properties: {},
         }
         ajv.compile(schema)
-        output.warning.should.match(/default is ignored in the schema root/)
+        expect(output.warning).match(/default is ignored in the schema root/)
       })
 
       it('should log a warning given an ignored default in oneOf when strict is "log"', () => {
@@ -124,7 +124,7 @@ describe("strict option with defaults (replaced strictDefaults)", () => {
           ],
         }
         ajv.compile(schema)
-        output.warning.should.match(/default is ignored for: data.foo/)
+        expect(output.warning).match(/default is ignored for: data.foo/)
       })
     })
   })
@@ -136,15 +136,15 @@ describe("strict option with defaults (replaced strictDefaults)", () => {
       test(new _Ajv())
       test(new _Ajv({strict: true}))
 
-      function test(ajv) {
+      function test(ajv: Ajv) {
         const schema = {
           type: "object",
           default: 5,
           properties: {},
         }
-        should.not.throw(() => {
+        expect(() => {
           ajv.compile(schema)
-        })
+        }).not.throw()
       }
     })
 
@@ -154,7 +154,7 @@ describe("strict option with defaults (replaced strictDefaults)", () => {
       test(new _Ajv())
       test(new _Ajv({strict: true}))
 
-      function test(ajv) {
+      function test(ajv: Ajv) {
         const schema = {
           oneOf: [
             {enum: ["foo", "bar"]},
@@ -168,19 +168,19 @@ describe("strict option with defaults (replaced strictDefaults)", () => {
             },
           ],
         }
-        should.not.throw(() => {
+        expect(() => {
           ajv.compile(schema)
-        })
+        }).not.throw()
       }
     })
   })
 
-  function getLogger(output) {
+  function getLogger(output: {warning: any}) {
     return {
       log: () => {
         throw new Error("log should not be called")
       },
-      warn: function (warning) {
+      warn: function (warning: any) {
         output.warning = warning
       },
       error: () => {

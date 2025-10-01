@@ -1,12 +1,12 @@
-import _Ajv from "./ajv"
-import type Ajv from ".."
-import chai from "./chai"
-chai.should()
+import {beforeAll, describe, expect, it} from "vitest"
+import _Ajv from "./ajv.ts"
+import type Ajv from "../lib/ajv.ts"
+import type {ValidateFunction} from "../lib/ajv.ts"
 
 describe("boolean schemas", () => {
   let ajvs: Ajv[]
 
-  before(() => {
+  beforeAll(() => {
     ajvs = [
       new _Ajv({strictTuples: false}),
       new _Ajv({allErrors: true, strictTuples: false}),
@@ -28,8 +28,8 @@ describe("boolean schemas", () => {
       })
     })
 
-    function test(boolSchema, valid) {
-      return function (ajv) {
+    function test(boolSchema: boolean, valid: boolean) {
+      return function (ajv: Ajv) {
         const validate = ajv.compile(boolSchema)
         testSchema(validate, valid)
       }
@@ -49,8 +49,8 @@ describe("boolean schemas", () => {
       })
     })
 
-    function test(boolSchema, valid) {
-      return function (ajv) {
+    function test(boolSchema: boolean, valid: boolean) {
+      return function (ajv: Ajv) {
         const schema = {
           type: "object",
           properties: {
@@ -65,15 +65,15 @@ describe("boolean schemas", () => {
         }
 
         const validate = ajv.compile(schema)
-        validate({foo: 1, bar: {baz: 1}}).should.equal(valid)
-        validate({foo: "1", bar: {baz: "1"}}).should.equal(valid)
-        validate({foo: {}, bar: {baz: {}}}).should.equal(valid)
-        validate({foo: [], bar: {baz: []}}).should.equal(valid)
-        validate({foo: true, bar: {baz: true}}).should.equal(valid)
-        validate({foo: false, bar: {baz: false}}).should.equal(valid)
-        validate({foo: null, bar: {baz: null}}).should.equal(valid)
+        expect(validate({foo: 1, bar: {baz: 1}})).equal(valid)
+        expect(validate({foo: "1", bar: {baz: "1"}})).equal(valid)
+        expect(validate({foo: {}, bar: {baz: {}}})).equal(valid)
+        expect(validate({foo: [], bar: {baz: []}})).equal(valid)
+        expect(validate({foo: true, bar: {baz: true}})).equal(valid)
+        expect(validate({foo: false, bar: {baz: false}})).equal(valid)
+        expect(validate({foo: null, bar: {baz: null}})).equal(valid)
 
-        validate({bar: {quux: 1}}).should.equal(true)
+        expect(validate({bar: {quux: 1}})).equal(true)
       }
     }
   })
@@ -91,25 +91,25 @@ describe("boolean schemas", () => {
       })
     })
 
-    function test(boolSchema, valid) {
-      return function (ajv) {
+    function test(boolSchema: boolean, valid: boolean) {
+      return function (ajv: Ajv) {
         let schema = {
           type: "array",
           items: boolSchema,
         }
 
         let validate = ajv.compile(schema)
-        validate([1]).should.equal(valid)
-        validate(["1"]).should.equal(valid)
-        validate([{}]).should.equal(valid)
-        validate([[]]).should.equal(valid)
-        validate([true]).should.equal(valid)
-        validate([false]).should.equal(valid)
-        validate([null]).should.equal(valid)
+        expect(validate([1])).equal(valid)
+        expect(validate(["1"])).equal(valid)
+        expect(validate([{}])).equal(valid)
+        expect(validate([[]])).equal(valid)
+        expect(validate([true])).equal(valid)
+        expect(validate([false])).equal(valid)
+        expect(validate([null])).equal(valid)
 
-        validate([]).should.equal(true)
+        expect(validate([])).equal(true)
 
-        schema = {
+        let anotherSchema = {
           type: "array",
           items: [
             true,
@@ -121,16 +121,16 @@ describe("boolean schemas", () => {
           ],
         }
 
-        validate = ajv.compile(schema)
-        validate([1, [1, 1], 1]).should.equal(valid)
-        validate(["1", ["1", "1"], "1"]).should.equal(valid)
-        validate([{}, [{}, {}], {}]).should.equal(valid)
-        validate([[], [[], []], []]).should.equal(valid)
-        validate([true, [true, true], true]).should.equal(valid)
-        validate([false, [false, false], false]).should.equal(valid)
-        validate([null, [null, null], null]).should.equal(valid)
+        validate = ajv.compile(anotherSchema)
+        expect(validate([1, [1, 1], 1])).equal(valid)
+        expect(validate(["1", ["1", "1"], "1"])).equal(valid)
+        expect(validate([{}, [{}, {}], {}])).equal(valid)
+        expect(validate([[], [[], []], []])).equal(valid)
+        expect(validate([true, [true, true], true])).equal(valid)
+        expect(validate([false, [false, false], false])).equal(valid)
+        expect(validate([null, [null, null], null])).equal(valid)
 
-        validate([1, [1]]).should.equal(true)
+        expect(validate([1, [1]])).equal(true)
       }
     }
   })
@@ -148,8 +148,8 @@ describe("boolean schemas", () => {
       })
     })
 
-    function test(boolSchema, valid) {
-      return function (ajv) {
+    function test(boolSchema: boolean, valid: boolean) {
+      return function (ajv: Ajv) {
         const schema = {
           type: "object",
           dependencies: {
@@ -164,15 +164,15 @@ describe("boolean schemas", () => {
         }
 
         const validate = ajv.compile(schema)
-        validate({foo: 1, bar: 1, baz: 1}).should.equal(valid)
-        validate({foo: "1", bar: "1", baz: "1"}).should.equal(valid)
-        validate({foo: {}, bar: {}, baz: {}}).should.equal(valid)
-        validate({foo: [], bar: [], baz: []}).should.equal(valid)
-        validate({foo: true, bar: true, baz: true}).should.equal(valid)
-        validate({foo: false, bar: false, baz: false}).should.equal(valid)
-        validate({foo: null, bar: null, baz: null}).should.equal(valid)
+        expect(validate({foo: 1, bar: 1, baz: 1})).equal(valid)
+        expect(validate({foo: "1", bar: "1", baz: "1"})).equal(valid)
+        expect(validate({foo: {}, bar: {}, baz: {}})).equal(valid)
+        expect(validate({foo: [], bar: [], baz: []})).equal(valid)
+        expect(validate({foo: true, bar: true, baz: true})).equal(valid)
+        expect(validate({foo: false, bar: false, baz: false})).equal(valid)
+        expect(validate({foo: null, bar: null, baz: null})).equal(valid)
 
-        validate({bar: 1, quux: 1}).should.equal(true)
+        expect(validate({bar: 1, quux: 1})).equal(true)
       }
     }
   })
@@ -190,8 +190,8 @@ describe("boolean schemas", () => {
       })
     })
 
-    function test(boolSchema, valid) {
-      return function (ajv) {
+    function test(boolSchema: boolean, valid: boolean) {
+      return function (ajv: Ajv) {
         const schema = {
           type: "object",
           patternProperties: {
@@ -206,15 +206,15 @@ describe("boolean schemas", () => {
         }
 
         const validate = ajv.compile(schema)
-        validate({foo: 1, bar: {baz: 1}}).should.equal(valid)
-        validate({foo: "1", bar: {baz: "1"}}).should.equal(valid)
-        validate({foo: {}, bar: {baz: {}}}).should.equal(valid)
-        validate({foo: [], bar: {baz: []}}).should.equal(valid)
-        validate({foo: true, bar: {baz: true}}).should.equal(valid)
-        validate({foo: false, bar: {baz: false}}).should.equal(valid)
-        validate({foo: null, bar: {baz: null}}).should.equal(valid)
+        expect(validate({foo: 1, bar: {baz: 1}})).equal(valid)
+        expect(validate({foo: "1", bar: {baz: "1"}})).equal(valid)
+        expect(validate({foo: {}, bar: {baz: {}}})).equal(valid)
+        expect(validate({foo: [], bar: {baz: []}})).equal(valid)
+        expect(validate({foo: true, bar: {baz: true}})).equal(valid)
+        expect(validate({foo: false, bar: {baz: false}})).equal(valid)
+        expect(validate({foo: null, bar: {baz: null}})).equal(valid)
 
-        validate({bar: {quux: 1}}).should.equal(true)
+        expect(validate({bar: {quux: 1}})).equal(true)
       }
     }
   })
@@ -232,18 +232,18 @@ describe("boolean schemas", () => {
       })
     })
 
-    function test(boolSchema, valid) {
-      return function (ajv) {
+    function test(boolSchema: boolean, valid: boolean) {
+      return function (ajv: Ajv) {
         const schema = {
           type: "object",
           propertyNames: boolSchema,
         }
 
         const validate = ajv.compile(schema)
-        validate({foo: 1}).should.equal(valid)
-        validate({bar: 1}).should.equal(valid)
+        expect(validate({foo: 1})).equal(valid)
+        expect(validate({bar: 1})).equal(valid)
 
-        validate({}).should.equal(true)
+        expect(validate({})).equal(true)
       }
     }
   })
@@ -261,23 +261,23 @@ describe("boolean schemas", () => {
       })
     })
 
-    function test(boolSchema, valid) {
-      return function (ajv) {
+    function test(boolSchema: boolean, valid: boolean) {
+      return function (ajv: Ajv) {
         const schema = {
           type: "array",
           contains: boolSchema,
         }
 
         const validate = ajv.compile(schema)
-        validate([1]).should.equal(valid)
-        validate(["foo"]).should.equal(valid)
-        validate([{}]).should.equal(valid)
-        validate([[]]).should.equal(valid)
-        validate([true]).should.equal(valid)
-        validate([false]).should.equal(valid)
-        validate([null]).should.equal(valid)
+        expect(validate([1])).equal(valid)
+        expect(validate(["foo"])).equal(valid)
+        expect(validate([{}])).equal(valid)
+        expect(validate([[]])).equal(valid)
+        expect(validate([true])).equal(valid)
+        expect(validate([false])).equal(valid)
+        expect(validate([null])).equal(valid)
 
-        validate([]).should.equal(false)
+        expect(validate([])).equal(false)
       }
     }
   })
@@ -295,8 +295,8 @@ describe("boolean schemas", () => {
       })
     })
 
-    function test(boolSchema, valid) {
-      return function (ajv) {
+    function test(boolSchema: boolean, valid: boolean) {
+      return function (ajv: Ajv) {
         const schema = {
           not: boolSchema,
         }
@@ -320,8 +320,8 @@ describe("boolean schemas", () => {
       })
     })
 
-    function test(boolSchema, valid) {
-      return function (ajv) {
+    function test(boolSchema: boolean, valid: boolean) {
+      return function (ajv: Ajv) {
         let schema = {
           allOf: [false, boolSchema],
         }
@@ -352,8 +352,8 @@ describe("boolean schemas", () => {
       })
     })
 
-    function test(boolSchema, valid) {
-      return function (ajv) {
+    function test(boolSchema: boolean, valid: boolean) {
+      return function (ajv: Ajv) {
         let schema = {
           anyOf: [false, boolSchema],
         }
@@ -384,8 +384,8 @@ describe("boolean schemas", () => {
       })
     })
 
-    function test(boolSchema, valid) {
-      return function (ajv) {
+    function test(boolSchema: boolean, valid: boolean) {
+      return function (ajv: Ajv) {
         let schema = {
           oneOf: [false, boolSchema],
         }
@@ -416,8 +416,8 @@ describe("boolean schemas", () => {
       })
     })
 
-    function test(boolSchema, valid) {
-      return function (ajv) {
+    function test(boolSchema: boolean, valid: boolean) {
+      return function (ajv: Ajv) {
         const schema = {
           $ref: "#/definitions/bool",
           definitions: {
@@ -431,13 +431,13 @@ describe("boolean schemas", () => {
     }
   })
 
-  function testSchema(validate, valid) {
-    validate(1).should.equal(valid)
-    validate("foo").should.equal(valid)
-    validate({}).should.equal(valid)
-    validate([]).should.equal(valid)
-    validate(true).should.equal(valid)
-    validate(false).should.equal(valid)
-    validate(null).should.equal(valid)
+  function testSchema(validate: ValidateFunction<unknown>, valid: boolean) {
+    expect(validate(1)).equal(valid)
+    expect(validate("foo")).equal(valid)
+    expect(validate({})).equal(valid)
+    expect(validate([])).equal(valid)
+    expect(validate(true)).equal(valid)
+    expect(validate(false)).equal(valid)
+    expect(validate(null)).equal(valid)
   }
 })

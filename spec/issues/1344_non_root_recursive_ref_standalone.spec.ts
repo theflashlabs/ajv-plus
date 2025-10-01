@@ -1,7 +1,8 @@
-import _Ajv from "../ajv"
-import standaloneCode from "../../dist/standalone"
-import requireFromString = require("require-from-string")
-import assert = require("assert")
+import {describe, it} from "vitest"
+import _Ajv from "../ajv.ts"
+import standaloneCode from "../../lib/standalone/index.ts"
+import requireFromString from "require-from-string"
+import assert from "assert"
 
 const schema = {
   $schema: "http://json-schema.org/draft-07/schema#",

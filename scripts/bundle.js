@@ -1,18 +1,18 @@
 "use strict"
 
-const fs = require("fs")
-const path = require("path")
-const browserify = require("browserify")
-const {minify} = require("terser")
+import {existsSync, mkdirSync, writeFileSync} from "fs"
+import {join} from "path"
+import browserify from "browserify"
+import {minify} from "terser"
 
 const [sourceFile, outFile, globalName] = process.argv.slice(2)
 
-const json = require(path.join(__dirname, "..", "package.json"))
-const bundleDir = path.join(__dirname, "..", "bundle")
-if (!fs.existsSync(bundleDir)) fs.mkdirSync(bundleDir)
+const json = await import(join(import.meta.dirname, "..", "package.json"), {with: {type: "json"}})
+const bundleDir = join(import.meta.dirname, "..", "bundle")
+if (!existsSync(bundleDir)) mkdirSync(bundleDir)
 
 browserify({standalone: globalName})
-  .require(path.join(__dirname, "../dist", sourceFile), {expose: sourceFile})
+  .require(join(import.meta.dirname, "../dist", sourceFile), {expose: sourceFile})
   .bundle(saveAndMinify)
 
 async function saveAndMinify(err, buf) {
@@ -21,7 +21,7 @@ async function saveAndMinify(err, buf) {
     process.exit(1)
   }
 
-  const bundlePath = path.join(bundleDir, outFile)
+  const bundlePath = join(bundleDir, outFile)
   const opts = {
     ecma: 2018,
     warnings: true,
@@ -41,8 +41,8 @@ async function saveAndMinify(err, buf) {
 
   const result = await minify(buf.toString(), opts)
 
-  fs.writeFileSync(bundlePath + ".bundle.js", buf)
-  fs.writeFileSync(bundlePath + ".min.js", result.code)
-  fs.writeFileSync(bundlePath + ".min.js.map", result.map)
+  writeFileSync(bundlePath + ".bundle.js", buf)
+  writeFileSync(bundlePath + ".min.js", result.code)
+  writeFileSync(bundlePath + ".min.js.map", result.map)
   if (result.warnings) result.warnings.forEach((msg) => console.warn("terser.minify warning:", msg))
 }

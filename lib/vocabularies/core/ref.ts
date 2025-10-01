@@ -1,11 +1,11 @@
-import type {CodeKeywordDefinition, AnySchema} from "../../types"
-import type {KeywordCxt} from "../../compile/validate"
-import MissingRefError from "../../compile/ref_error"
-import {callValidateCode} from "../code"
-import {_, nil, stringify, Code, Name} from "../../compile/codegen"
-import N from "../../compile/names"
-import {SchemaEnv, resolveRef} from "../../compile"
-import {mergeEvaluated} from "../../compile/util"
+import type {CodeKeywordDefinition, AnySchema} from "../../types/index.ts"
+import type {KeywordCxt} from "../../compile/validate/index.ts"
+import MissingRefError from "../../compile/ref_error.ts"
+import {callValidateCode} from "../code.ts"
+import {_, nil, stringify, type Code, Name} from "../../compile/codegen/index.ts"
+import N from "../../compile/names.ts"
+import {SchemaEnv, resolveRef} from "../../compile/index.ts"
+import {mergeEvaluated} from "../../compile/util.ts"
 
 const def: CodeKeywordDefinition = {
   keyword: "$ref",
@@ -76,7 +76,7 @@ export function callRef(cxt: KeywordCxt, v: Code, sch?: SchemaEnv, $async?: bool
         addEvaluatedFrom(v) // TODO will not work with async, it has to be returned with the result
         if (!allErrors) gen.assign(valid, true)
       },
-      (e) => {
+      (e: any) => {
         gen.if(_`!(${e} instanceof ${it.ValidationError as Name})`, () => gen.throw(e))
         addErrorsFrom(e)
         if (!allErrors) gen.assign(valid, false)

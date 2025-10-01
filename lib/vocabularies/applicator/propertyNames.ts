@@ -3,16 +3,16 @@ import type {
   ErrorObject,
   KeywordErrorDefinition,
   AnySchema,
-} from "../../types"
-import type {KeywordCxt} from "../../compile/validate"
-import {_, not} from "../../compile/codegen"
-import {alwaysValidSchema} from "../../compile/util"
+} from "../../types/index.ts"
+import type {KeywordCxt} from "../../compile/validate/index.ts"
+import {_, not} from "../../compile/codegen/index.ts"
+import {alwaysValidSchema} from "../../compile/util.ts"
 
 export type PropertyNamesError = ErrorObject<"propertyNames", {propertyName: string}, AnySchema>
 
 const error: KeywordErrorDefinition = {
   message: "property name must be valid",
-  params: ({params}) => _`{propertyName: ${params.propertyName}}`,
+  params: ({params}: {params: any}) => _`{propertyName: ${params.propertyName}}`,
 }
 
 const def: CodeKeywordDefinition = {
@@ -25,7 +25,7 @@ const def: CodeKeywordDefinition = {
     if (alwaysValidSchema(it, schema)) return
     const valid = gen.name("valid")
 
-    gen.forIn("key", data, (key) => {
+    gen.forIn("key", data, (key: any) => {
       cxt.setParams({propertyName: key})
       cxt.subschema(
         {

@@ -1,7 +1,6 @@
-import _Ajv from "../ajv"
-import type {Options} from "../.."
-import chai from "../chai"
-const should = chai.should()
+import {describe, it, expect} from "vitest"
+import _Ajv from "../ajv.ts"
+import type {Options} from "../../lib/ajv.ts"
 
 describe("referenced schema options", () => {
   describe("ignoreKeywordsWithRef", () => {
@@ -37,8 +36,8 @@ describe("referenced schema options", () => {
       }
 
       let validate = ajv.compile(schema)
-      validate(10).should.equal(true)
-      validate(1).should.equal(!shouldExtendRef)
+      expect(validate(10)).equal(true)
+      expect(validate(1)).equal(!shouldExtendRef)
 
       const schema1 = {
         definitions: {
@@ -59,15 +58,14 @@ describe("referenced schema options", () => {
       }
 
       validate = ajv.compile(schema1)
-      validate({foo: 10, bar: 10}).should.equal(true)
-      validate({foo: 1, bar: 10}).should.equal(!shouldExtendRef)
-      validate({foo: 10, bar: 1}).should.equal(false)
+      expect(validate({foo: 10, bar: 10})).equal(true)
+      expect(validate({foo: 1, bar: 10})).equal(!shouldExtendRef)
+      expect(validate({foo: 10, bar: 1})).equal(false)
     }
 
     function testWarning(opts: Options = {}, msgPattern?: RegExp) {
-      let oldConsole
+      let oldConsole = console.warn
       try {
-        oldConsole = console.warn
         let consoleMsg
         console.warn = function (...args: any[]) {
           consoleMsg = Array.prototype.join.call(args, " ")
@@ -85,8 +83,8 @@ describe("referenced schema options", () => {
         }
 
         ajv.compile(schema)
-        if (msgPattern) consoleMsg.should.match(msgPattern)
-        else should.not.exist(consoleMsg)
+        if (msgPattern) expect(consoleMsg).match(msgPattern)
+        else expect(consoleMsg).toBeUndefined()
       } finally {
         console.warn = oldConsole
       }
@@ -96,9 +94,9 @@ describe("referenced schema options", () => {
   describe("missingRefs", () => {
     it("should throw if ref is missing without this option", () => {
       const ajv = new _Ajv()
-      should.throw(() => {
+      expect(() => {
         ajv.compile({$ref: "missing_reference"})
-      }, /can't resolve reference missing_reference/)
+      }).toThrowError(/can't resolve reference missing_reference/)
     })
   })
 })

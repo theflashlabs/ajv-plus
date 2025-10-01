@@ -1,6 +1,6 @@
-import _Ajv from "../ajv"
-import chai from "../chai"
-const should = chai.should()
+import {describe, expect, it} from "vitest"
+import _Ajv from "../ajv.ts"
+import type Ajv from "../../lib/core.ts"
 
 describe("strict option with keywords (replaced strictKeywords)", () => {
   describe("strict = false", () => {
@@ -16,7 +16,7 @@ describe("strict option with keywords (replaced strictKeywords)", () => {
       }
 
       ajv.compile(schema)
-      should.not.exist(output.warning)
+      expect(output.warning).toBeUndefined()
     })
   })
 
@@ -25,13 +25,13 @@ describe("strict option with keywords (replaced strictKeywords)", () => {
       test(new _Ajv({strict: true}))
       test(new _Ajv())
 
-      function test(ajv) {
+      function test(ajv: Ajv) {
         const schema = {
           type: "object",
           properties: {},
           unknownKeyword: 1,
         }
-        should.throw(() => ajv.compile(schema), /unknown keyword/)
+        expect(() => ajv.compile(schema)).throw(/unknown keyword/)
       }
     })
   })
@@ -49,7 +49,7 @@ describe("strict option with keywords (replaced strictKeywords)", () => {
         unknownKeyword: 1,
       }
       ajv.compile(schema)
-      output.warning.should.match(/unknown keyword: "unknownKeyword"/)
+      expect(output.warning).match(/unknown keyword: "unknownKeyword"/)
     })
   })
 
@@ -58,21 +58,21 @@ describe("strict option with keywords (replaced strictKeywords)", () => {
       test(new _Ajv({strict: true}))
       test(new _Ajv())
 
-      function test(ajv) {
+      function test(ajv: Ajv) {
         const schema = {
           anyOf: [{unknownKeyword: 1}],
         }
-        should.throw(() => ajv.compile(schema), /unknown keyword/)
+        expect(() => ajv.compile(schema)).throw(/unknown keyword/)
       }
     })
   })
 
-  function getLogger(output) {
+  function getLogger(output: {warning: any}) {
     return {
       log() {
         throw new Error("log should not be called")
       },
-      warn(msg) {
+      warn(msg: any) {
         output.warning = msg
       },
       error() {

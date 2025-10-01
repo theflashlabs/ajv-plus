@@ -1,12 +1,12 @@
-import type {AnySchemaObject} from "./types"
-import AjvCore, {Options} from "./core"
+import type {AnySchemaObject} from "./types/index.ts"
+import AjvCore, {type Options} from "./core.ts"
 
-import draft7Vocabularies from "./vocabularies/draft7"
-import dynamicVocabulary from "./vocabularies/dynamic"
-import nextVocabulary from "./vocabularies/next"
-import unevaluatedVocabulary from "./vocabularies/unevaluated"
-import discriminator from "./vocabularies/discriminator"
-import addMetaSchema2019 from "./refs/json-schema-2019-09"
+import draft7Vocabularies from "./vocabularies/draft7.ts"
+import dynamicVocabulary from "./vocabularies/draft7.ts"
+import nextVocabulary from "./vocabularies/next.ts"
+import unevaluatedVocabulary from "./vocabularies/unevaluated/index.ts"
+import discriminator from "./vocabularies/discriminator/index.ts"
+import addMetaSchema2019 from "./refs/json-schema-2019-09/index.ts"
 
 const META_SCHEMA_ID = "https://json-schema.org/draft/2019-09/schema"
 
@@ -22,6 +22,7 @@ export class Ajv2019 extends AjvCore {
 
   _addVocabularies(): void {
     super._addVocabularies()
+    //@ts-expect-error
     this.addVocabulary(dynamicVocabulary)
     draft7Vocabularies.forEach((v) => this.addVocabulary(v))
     this.addVocabulary(nextVocabulary)
@@ -43,13 +44,9 @@ export class Ajv2019 extends AjvCore {
   }
 }
 
-module.exports = exports = Ajv2019
-module.exports.Ajv2019 = Ajv2019
-Object.defineProperty(exports, "__esModule", {value: true})
-
 export default Ajv2019
 
-export {
+export type {
   Format,
   FormatDefinition,
   AsyncFormatDefinition,
@@ -68,14 +65,30 @@ export {
   AsyncValidateFunction,
   ErrorObject,
   ErrorNoParams,
-} from "./types"
+} from "./types/index.ts"
 
-export {Plugin, Options, CodeOptions, InstanceOptions, Logger, ErrorsTextOptions} from "./core"
-export {SchemaCxt, SchemaObjCxt} from "./compile"
-export {KeywordCxt} from "./compile/validate"
-export {DefinedError} from "./vocabularies/errors"
-export {JSONType} from "./compile/rules"
-export {JSONSchemaType} from "./types/json-schema"
-export {_, str, stringify, nil, Name, Code, CodeGen, CodeGenOptions} from "./compile/codegen"
-export {default as ValidationError} from "./runtime/validation_error"
-export {default as MissingRefError} from "./compile/ref_error"
+export type {
+  Plugin,
+  Options,
+  CodeOptions,
+  InstanceOptions,
+  Logger,
+  ErrorsTextOptions,
+} from "./core.ts"
+export type {SchemaCxt, SchemaObjCxt} from "./compile/index.ts"
+export {KeywordCxt} from "./compile/validate/index.ts"
+export type {DefinedError} from "./vocabularies/errors.ts"
+export type {JSONType} from "./compile/rules.ts"
+export type {JSONSchemaType} from "./types/json-schema.ts"
+export {
+  _,
+  str,
+  stringify,
+  nil,
+  Name,
+  type Code,
+  CodeGen,
+  type CodeGenOptions,
+} from "./compile/codegen/index.ts"
+export {default as ValidationError} from "./runtime/validation_error.ts"
+export {default as MissingRefError} from "./compile/ref_error.ts"

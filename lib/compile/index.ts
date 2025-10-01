@@ -5,17 +5,24 @@ import type {
   AsyncValidateFunction,
   EvaluatedProperties,
   EvaluatedItems,
-} from "../types"
-import type Ajv from "../core"
-import type {InstanceOptions} from "../core"
-import {CodeGen, _, nil, stringify, Name, Code, ValueScopeName} from "./codegen"
-import ValidationError from "../runtime/validation_error"
-import N from "./names"
-import {LocalRefs, getFullPath, _getFullPath, inlineRef, normalizeId, resolveUrl} from "./resolve"
-import {schemaHasRulesButRef, unescapeFragment} from "./util"
-import {validateFunctionCode} from "./validate"
-import {URIComponent} from "fast-uri"
-import {JSONType} from "./rules"
+} from "../types/index.ts"
+import type Ajv from "../core.ts"
+import type {InstanceOptions} from "../core.ts"
+import {CodeGen, _, nil, stringify, Name, type Code, ValueScopeName} from "./codegen/index.ts"
+import ValidationError from "../runtime/validation_error.ts"
+import N from "./names.ts"
+import {
+  type LocalRefs,
+  getFullPath,
+  _getFullPath,
+  inlineRef,
+  normalizeId,
+  resolveUrl,
+} from "./resolve.ts"
+import {schemaHasRulesButRef, unescapeFragment} from "./util.ts"
+import {validateFunctionCode} from "./validate/index.ts"
+import {type URIComponent} from "fast-uri"
+import {type JSONType} from "./rules.ts"
 
 export type SchemaRefs = {
   [Ref in string]?: SchemaEnv | AnySchema
@@ -94,10 +101,10 @@ export class SchemaEnv implements SchemaEnvArgs {
     this.schemaId = env.schemaId
     this.root = env.root || this
     this.baseId = env.baseId ?? normalizeId(schema?.[env.schemaId || "$id"])
-    this.schemaPath = env.schemaPath
-    this.localRefs = env.localRefs
-    this.meta = env.meta
-    this.$async = schema?.$async
+    this.schemaPath = env.schemaPath as string
+    this.localRefs = env.localRefs as LocalRefs
+    this.meta = env.meta as boolean
+    this.$async = schema?.$async as boolean
     this.refs = {}
   }
 }

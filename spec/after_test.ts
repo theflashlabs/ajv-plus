@@ -1,32 +1,22 @@
-import type Ajv from ".."
-import type {AnySchema, ErrorObject} from ".."
-import chai from "./chai"
-const should = chai.should()
-
-interface TestResult {
-  validator: Ajv
-  schema: AnySchema
-  data: unknown
-  valid: boolean
-  expected: boolean
-  errors: ErrorObject[] | null
-  passed: boolean // true if valid == expected
-}
+import {expect, expectTypeOf} from "vitest"
+import type {TestResult} from "@theflashlabs/json-schema-test"
+import type Ajv from "../lib/ajv.ts"
+import type {ErrorObject} from "../lib/ajv.ts"
 
 export function afterError(res: TestResult): void {
-  console.log("ajv options:", res.validator.opts)
+  console.log("ajv options:", (res.validator as Ajv).opts)
 }
 
 export function afterEach(res: TestResult): void {
   // console.log(res.errors);
-  res.valid.should.be.a("boolean")
+  expectTypeOf(res.valid).toBeBoolean()
   if (res.valid === true) {
-    should.equal(res.errors, null)
+    expect(res.errors).toBeNull()
   } else {
     const errs = res.errors as ErrorObject[]
-    errs.should.be.an("array")
+    expectTypeOf(errs).toBeArray()
     for (const err of errs) {
-      err.should.be.an("object")
+      expectTypeOf(err).toBeObject()
     }
   }
 }

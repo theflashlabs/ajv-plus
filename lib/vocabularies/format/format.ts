@@ -5,9 +5,9 @@ import type {
   CodeKeywordDefinition,
   KeywordErrorDefinition,
   ErrorObject,
-} from "../../types"
-import type {KeywordCxt} from "../../compile/validate"
-import {_, str, nil, or, Code, getProperty, regexpCode} from "../../compile/codegen"
+} from "../../types/index.ts"
+import type {KeywordCxt} from "../../compile/validate/index.ts"
+import {_, str, nil, or, type Code, getProperty, regexpCode} from "../../compile/codegen/index.ts"
 
 type FormatValidate =
   | FormatValidator<string>
@@ -21,8 +21,8 @@ type FormatValidate =
 export type FormatError = ErrorObject<"format", {format: string}, string | {$data: string}>
 
 const error: KeywordErrorDefinition = {
-  message: ({schemaCode}) => str`must match format "${schemaCode}"`,
-  params: ({schemaCode}) => _`{format: ${schemaCode}}`,
+  message: ({schemaCode}: {schemaCode: any}) => str`must match format "${schemaCode}"`,
+  params: ({schemaCode}: {schemaCode: any}) => _`{format: ${schemaCode}}`,
 }
 
 const def: CodeKeywordDefinition = {
