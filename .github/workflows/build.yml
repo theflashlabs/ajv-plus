@@ -16,11 +16,17 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
+        with:
+          version: 10
+          run_install: false
+          cache: "pnpm"
       - name: use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npm install
+      - run: pnpm install
       - run: git submodule update --init
       - name: update website
         if: ${{ false && github.event_name == 'push' && matrix.node-version == '16.x' }}
@@ -29,8 +35,8 @@ jobs:
           GH_TOKEN_PUBLIC: ${{ secrets.GH_TOKEN_PUBLIC }}
           GIT_USER_EMAIL: ${{ secrets.GIT_USER_EMAIL }}
           GIT_USER_NAME: ${{ secrets.GIT_USER_NAME }}
-      - run: npm run build
-      - run: npm run test-ci
+      - run: pnpm run build
+      - run: pnpm run test-ci
       - name: coveralls
         uses: coverallsapp/github-action@v2
         with:

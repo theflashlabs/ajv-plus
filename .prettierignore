@@ -7,3 +7,4 @@ bundle
 .nyc_output
 spec/_json
 docs/.vuepress/components/_contributors.js
+pnpm-lock.yaml
