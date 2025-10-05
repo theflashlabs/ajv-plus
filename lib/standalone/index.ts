@@ -2,7 +2,7 @@ import type AjvCore from "../core"
 import type {AnyValidateFunction, SourceCode} from "../types"
 import type {SchemaEnv} from "../compile"
 import {UsedScopeValues, UsedValueState, ValueScopeName, varKinds} from "../compile/codegen/scope"
-import {_, nil, _Code, Code, getProperty, getEsmExportName} from "../compile/codegen/code"
+import {_, nil, _Code, Code, getProperty, getEsmExportName} from "../compile/codegen/code.mjs"
 
 function standaloneCode(
   ajv: AjvCore,

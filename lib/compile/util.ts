@@ -1,7 +1,7 @@
 import type {AnySchema, EvaluatedProperties, EvaluatedItems} from "../types"
 import type {SchemaCxt, SchemaObjCxt} from "."
 import {_, getProperty, Code, Name, CodeGen} from "./codegen"
-import {_Code} from "./codegen/code"
+import {_Code} from "./codegen/code.mjs"
 import type {Rule, ValidationRules} from "./rules"
 
 // TODO refactor to use Set

@@ -1,7 +1,7 @@
 import type {KeywordErrorCxt, KeywordErrorDefinition} from "../types"
 import type {SchemaCxt} from "./index"
 import {CodeGen, _, str, strConcat, Code, Name} from "./codegen"
-import {SafeExpr} from "./codegen/code"
+import {SafeExpr} from "./codegen/code.mjs"
 import {getErrorPath, Type} from "./util"
 import N from "./names"
 
