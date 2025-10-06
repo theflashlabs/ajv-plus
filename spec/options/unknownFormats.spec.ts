@@ -7,7 +7,7 @@ const DATE_FORMAT = /^\d\d\d\d-[0-1]\d-[0-3]\d$/
 describe("specifying allowed unknown formats with `formats` option", () => {
   describe("= true (default)", () => {
     it("should fail schema compilation if unknown format is used", () => {
-      test(new _Ajv())
+      test(new _Ajv({strict: true}))
 
       function test(ajv) {
         should.throw(() => {
@@ -17,7 +17,7 @@ describe("specifying allowed unknown formats with `formats` option", () => {
     })
 
     it("should fail validation if unknown format is used via $data", () => {
-      test(new _Ajv({$data: true}))
+      test(new _Ajv({strict: true, $data: true}))
 
       function test(ajv) {
         ajv.addFormat("date", DATE_FORMAT)
@@ -72,7 +72,7 @@ describe("specifying allowed unknown formats with `formats` option", () => {
 
   describe("= [String]", () => {
     it("should pass schema compilation and be valid if allowed unknown format is used", () => {
-      test(new _Ajv({formats: {allowed: true}}))
+      test(new _Ajv({strict: true, formats: {allowed: true}}))
 
       function test(ajv) {
         const validate = ajv.compile({type: "string", format: "allowed"})
@@ -85,7 +85,7 @@ describe("specifying allowed unknown formats with `formats` option", () => {
     })
 
     it("should be valid if allowed unknown format is used via $data", () => {
-      test(new _Ajv({$data: true, formats: {allowed: true}, allowUnionTypes: true}))
+      test(new _Ajv({strict: true, $data: true, formats: {allowed: true}, allowUnionTypes: true}))
 
       function test(ajv) {
         ajv.addFormat("date", DATE_FORMAT)

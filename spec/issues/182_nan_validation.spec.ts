@@ -5,9 +5,9 @@ chai.should()
 describe("issue #182, NaN validation", () => {
   const ajv = new _Ajv({strictTypes: false})
 
-  it("should pass minimum/maximum validation without type", () => {
-    testNaN(ajv, {minimum: 1}, true)
-    testNaN(ajv, {maximum: 1}, true)
+  it("should NOT pass minimum/maximum validation without type", () => {
+    testNaN(ajv, {minimum: 1}, false)
+    testNaN(ajv, {maximum: 1}, false)
   })
 
   it("should NOT pass minimum/maximum validation without type when strict: false", () => {
@@ -26,8 +26,8 @@ describe("issue #182, NaN validation", () => {
     testNaN(_ajv, {type: "number"}, true)
   })
 
-  it("should not pass type: number validation (changed in v7 - strict by default)", () => {
-    testNaN(ajv, {type: "number"}, false)
+  it("should pass type: number validation (changed in fork - not strict by default)", () => {
+    testNaN(ajv, {type: "number"}, true)
   })
 
   it("should not pass type: integer validation", () => {

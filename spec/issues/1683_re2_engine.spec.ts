@@ -11,6 +11,7 @@ import re2tests from "./re2"
 const instances = getAjvAllInstances(options, {
   $data: true,
   formats: {allowedUnknown: true},
+  strict: true,
   strictTypes: false,
   strictTuples: false,
 })

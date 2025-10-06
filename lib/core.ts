@@ -241,8 +241,8 @@ function requiredOptions(o: Options): RequiredInstanceOptions {
   const regExp = o.code?.regExp ?? defaultRegExp
   const uriResolver = o.uriResolver ?? DefaultUriResolver
   return {
-    strictSchema: o.strictSchema ?? s ?? true,
-    strictNumbers: o.strictNumbers ?? s ?? true,
+    strictSchema: o.strictSchema ?? s ?? false,
+    strictNumbers: o.strictNumbers ?? s ?? false,
     strictTypes: o.strictTypes ?? s ?? "log",
     strictTuples: o.strictTuples ?? s ?? "log",
     strictRequired: o.strictRequired ?? s ?? false,

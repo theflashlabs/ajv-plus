@@ -398,10 +398,9 @@ function testStrictMode(schema, logPattern) {
       })
     })
 
-    describe("strict = true or undefined", () => {
+    describe("strict = true", () => {
       it("should throw an error", () => {
         test(new _Ajv({strict: true}))
-        test(new _Ajv())
 
         function test(ajv) {
           should.throw(() => {
