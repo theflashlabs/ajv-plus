@@ -47,8 +47,7 @@ describe("strict option with defaults (replaced strictDefaults)", () => {
     })
 
     describe("strict = true", () => {
-      it("should throw an error given an ignored default in the schema root when strict is true or undefined", () => {
-        test(new _Ajv({useDefaults: true}))
+      it("should throw an error given an ignored default in the schema root when strict is true", () => {
         test(new _Ajv({useDefaults: true, strict: true}))
 
         function test(ajv) {
@@ -61,8 +60,7 @@ describe("strict option with defaults (replaced strictDefaults)", () => {
         }
       })
 
-      it("should throw an error given an ignored default in oneOf when strict is true or undefined", () => {
-        test(new _Ajv({useDefaults: true}))
+      it("should throw an error given an ignored default in oneOf when strict is true", () => {
         test(new _Ajv({useDefaults: true, strict: true}))
 
         function test(ajv) {

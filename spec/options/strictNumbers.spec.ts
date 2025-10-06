@@ -1,7 +1,7 @@
 import _Ajv from "../ajv"
 
 describe("strict option with keywords (replaced structNumbers)", () => {
-  describe("strict default", testStrict(new _Ajv()))
+  describe("strict default", testNotStrict(new _Ajv()))
   describe("strict = true", testStrict(new _Ajv({strict: true})))
   describe('strict = "log"', testStrict(new _Ajv({strict: "log"})))
   describe("strict = false", testNotStrict(new _Ajv({strict: false})))

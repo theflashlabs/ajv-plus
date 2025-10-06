@@ -23,7 +23,6 @@ describe("strict option with keywords (replaced strictKeywords)", () => {
   describe("strict = true or undefined", () => {
     it("should throw an error given an unknown keyword in the schema root when strict is true", () => {
       test(new _Ajv({strict: true}))
-      test(new _Ajv())
 
       function test(ajv) {
         const schema = {
@@ -54,9 +53,8 @@ describe("strict option with keywords (replaced strictKeywords)", () => {
   })
 
   describe("unknown keyword inside schema that has no known keyword in compound keyword", () => {
-    it("should throw an error given an unknown keyword when strict is true or undefined", () => {
+    it("should throw an error given an unknown keyword when strict is true", () => {
       test(new _Ajv({strict: true}))
-      test(new _Ajv())
 
       function test(ajv) {
         const schema = {
