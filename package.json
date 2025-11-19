@@ -11,8 +11,8 @@
   "sideEffects": false,
   "scripts": {
     "eslint": "eslint \"lib/**/*.ts\" \"spec/**/*.*s\" --ignore-pattern spec/JSON-Schema-Test-Suite",
-    "prettier:write": "prettier --write \"./**/*.{json,yaml,js,ts}\"",
-    "prettier:check": "prettier --list-different \"./**/*.{json,yaml,js,ts}\"",
+    "prettier:write": "prettier --write \"./**/*.{json,yaml,js,ts,mts,mjs}\"",
+    "prettier:check": "prettier --list-different \"./**/*.{json,yaml,js,ts,mts,mjs}\"",
     "test-spec": "mocha",
     "test-codegen": "nyc mocha 'test/codegen.spec.js' -R spec",
     "test-debug": "npm run test-spec -- --inspect-brk",
