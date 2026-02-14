@@ -1,6 +1,6 @@
-import type {ValidateFunction} from "../.."
-import _Ajv from "../ajv"
-import chai from "../chai"
+import type {ValidateFunction} from "../../dist/ajv.d.ts"
+import _Ajv from "../ajv.ts"
+import chai from "../chai.ts"
 chai.should()
 
 describe("issue #815, id and $id fields should reset base", () => {

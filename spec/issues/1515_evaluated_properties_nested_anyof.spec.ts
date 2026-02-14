@@ -1,4 +1,4 @@
-import _Ajv from "../ajv2019"
+import _Ajv from "../ajv2019.ts"
 import * as assert from "assert"
 
 describe("tracking evaluated properties with nested anyOf", () => {

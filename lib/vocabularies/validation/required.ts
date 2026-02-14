@@ -1,14 +1,14 @@
-import type {CodeKeywordDefinition, ErrorObject, KeywordErrorDefinition} from "../../types"
-import type {KeywordCxt} from "../../compile/validate"
+import type {CodeKeywordDefinition, ErrorObject, KeywordErrorDefinition} from "../../types/index.ts"
+import type {KeywordCxt} from "../../compile/validate/index.ts"
 import {
   checkReportMissingProp,
   checkMissingProp,
   reportMissingProp,
   propertyInData,
   noPropertyInData,
-} from "../code"
-import {_, str, nil, not, Name, Code} from "../../compile/codegen"
-import {checkStrictMode} from "../../compile/util"
+} from "../code.ts"
+import {_, str, nil, not, Name, Code} from "../../compile/codegen/index.ts"
+import {checkStrictMode} from "../../compile/util.ts"
 
 export type RequiredError = ErrorObject<
   "required",

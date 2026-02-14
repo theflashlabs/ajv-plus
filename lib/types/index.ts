@@ -1,9 +1,9 @@
 import {URIComponent} from "fast-uri"
-import type {CodeGen, Code, Name, ScopeValueSets, ValueScopeName} from "../compile/codegen"
-import type {SchemaEnv, SchemaCxt, SchemaObjCxt} from "../compile"
-import type {JSONType} from "../compile/rules"
-import type {KeywordCxt} from "../compile/validate"
-import type Ajv from "../core"
+import type {CodeGen, Code, Name, ScopeValueSets, ValueScopeName} from "../compile/codegen/index.ts"
+import type {SchemaEnv, SchemaCxt, SchemaObjCxt} from "../compile/index.ts"
+import type {JSONType} from "../compile/rules.ts"
+import type {KeywordCxt} from "../compile/validate/index.ts"
+import type Ajv from "../core.ts"
 
 interface _SchemaObject {
   id?: string

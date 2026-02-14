@@ -1,6 +1,6 @@
-import _Ajv from "../ajv"
-import {KeywordDefinition, SchemaValidateFunction} from "../../dist/types"
-import chai from "../chai"
+import _Ajv from "../ajv.ts"
+import {KeywordDefinition, SchemaValidateFunction} from "../../dist/types/index.js"
+import chai from "../chai.ts"
 chai.should()
 
 describe("issue #181, user-defined keyword is not validated in allErrors mode if there were previous error", () => {

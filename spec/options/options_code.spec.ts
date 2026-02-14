@@ -1,7 +1,9 @@
-import type Ajv from "../.."
-import _Ajv from "../ajv"
-import chai from "../chai"
+import type Ajv from "../../dist/ajv.d.ts"
+import _Ajv from "../ajv.ts"
+import chai from "../chai.ts"
+import {createRequire} from "module"
 const should = chai.should()
+const require = createRequire(import.meta.url)
 
 describe("code generation options", () => {
   describe("sourceCode", () => {

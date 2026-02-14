@@ -1,6 +1,6 @@
-import getAjvAsyncInstances from "./ajv_async_instances"
-import _Ajv from "./ajv"
-import chai from "./chai"
+import getAjvAsyncInstances from "./ajv_async_instances.ts"
+import _Ajv from "./ajv.ts"
+import chai from "./chai.ts"
 const should = chai.should()
 
 describe("async schemas, formats and keywords", function () {

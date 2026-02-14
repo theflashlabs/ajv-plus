@@ -1,10 +1,10 @@
-import type {CodeKeywordDefinition, ErrorObject} from "../../types"
+import type {CodeKeywordDefinition, ErrorObject} from "../../types/index.ts"
 import {
   validatePropertyDeps,
   error,
   DependenciesErrorParams,
   PropertyDependencies,
-} from "../applicator/dependencies"
+} from "../applicator/dependencies.ts"
 
 export type DependentRequiredError = ErrorObject<
   "dependentRequired",

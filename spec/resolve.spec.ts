@@ -1,9 +1,9 @@
-import type AjvCore from "../dist/core"
-import getAjvInstances from "./ajv_instances"
-import _Ajv from "./ajv"
-import type {AnyValidateFunction} from "../dist/types"
-import type MissingRefError from "../dist/compile/ref_error"
-import chai from "./chai"
+import type AjvCore from "../dist/core.d.ts"
+import getAjvInstances from "./ajv_instances.ts"
+import _Ajv from "./ajv.ts"
+import type {AnyValidateFunction} from "../dist/types/index.d.ts"
+import type MissingRefError from "../dist/compile/ref_error.d.ts"
+import chai from "./chai.ts"
 import * as uriJs from "uri-js"
 const should = chai.should()
 

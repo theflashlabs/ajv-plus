@@ -1,8 +1,8 @@
-import type {CodeKeywordDefinition, KeywordErrorDefinition} from "../../types"
-import type {KeywordCxt} from "../../compile/validate"
-import {_, str, operators} from "../../compile/codegen"
-import {useFunc} from "../../compile/util"
-import ucs2length from "../../runtime/ucs2length"
+import type {CodeKeywordDefinition, KeywordErrorDefinition} from "../../types/index.ts"
+import type {KeywordCxt} from "../../compile/validate/index.ts"
+import {_, str, operators} from "../../compile/codegen/index.ts"
+import {useFunc} from "../../compile/util.ts"
+import ucs2length from "../../runtime/ucs2length.ts"
 
 const error: KeywordErrorDefinition = {
   message({keyword, schemaCode}) {

@@ -1,5 +1,5 @@
-import type {CodeKeywordDefinition} from "../../types"
-import {dynamicRef} from "./dynamicRef"
+import type {CodeKeywordDefinition} from "../../types/index.ts"
+import {dynamicRef} from "./dynamicRef.ts"
 
 const def: CodeKeywordDefinition = {
   keyword: "$recursiveRef",

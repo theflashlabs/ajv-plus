@@ -1,6 +1,6 @@
-import type Ajv from "../.."
-import _Ajv from "../ajv"
-import chai from "../chai"
+import type Ajv from "../../dist/ajv.d.ts"
+import _Ajv from "../ajv.ts"
+import chai from "../chai.ts"
 chai.should()
 
 const DATE_FORMAT = /^\d\d\d\d-[0-1]\d-[0-3]\d$/

@@ -1,16 +1,19 @@
-import type Ajv from "../dist/core"
-import _Ajv from "./ajv"
-import _Ajv2019 from "./ajv2019"
-import _Ajv2020 from "./ajv2020"
-import getAjvInstances from "./ajv_instances"
-import {withStandalone} from "./ajv_standalone"
-import jsonSchemaTest = require("json-schema-test")
-import options from "./ajv_options"
-import {afterError, afterEach} from "./after_test"
+import type Ajv from "../dist/core.d.ts"
+import _Ajv from "./ajv.ts"
+import _Ajv2019 from "./ajv2019.ts"
+import _Ajv2020 from "./ajv2020.ts"
+import getAjvInstances from "./ajv_instances.ts"
+import {withStandalone} from "./ajv_standalone.ts"
+import jsonSchemaTest from "json-schema-test"
+import options from "./ajv_options.ts"
+import {afterError, afterEach} from "./after_test.ts"
 import ajvFormats from "@theflashlabs/ajv-formats"
-const draft6MetaSchema = require("../dist/refs/json-schema-draft-06.json")
-import {toHash} from "../dist/compile/util"
-import chai from "./chai"
+import draft6MetaSchema from "../lib/refs/json-schema-draft-06.json" with {type: "json"}
+import {toHash} from "../dist/compile/util.js"
+import chai from "./chai.ts"
+import {createRequire} from "module"
+
+const require = createRequire(import.meta.url)
 
 const remoteRefs = {
   "http://localhost:1234/integer.json": require("../spec/JSON-Schema-Test-Suite/remotes/integer.json"),
@@ -234,7 +237,7 @@ function runTest({instances, draft, tests, skip = [], remotes = {}}: SchemaTest)
     assert: chai.assert,
     afterError,
     afterEach,
-    cwd: __dirname,
+    cwd: import.meta.dirname,
     hideFolder: `draft${draft}/`,
     timeout: 30000,
   })

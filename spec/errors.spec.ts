@@ -1,7 +1,7 @@
-import type Ajv from ".."
-import type {ValidateFunction} from ".."
-import _Ajv from "./ajv"
-import chai from "./chai"
+import type Ajv from "../dist/ajv.d.ts"
+import type {ValidateFunction} from "../dist/ajv.d.ts"
+import _Ajv from "./ajv.ts"
+import chai from "./chai.ts"
 const should = chai.should()
 
 describe("Validation errors", () => {

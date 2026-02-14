@@ -1,7 +1,7 @@
-import type Ajv from "../.."
-import _Ajv from "../ajv"
+import type Ajv from "../../dist/ajv.d.ts"
+import _Ajv from "../ajv.ts"
 import assert = require("assert")
-import chai from "../chai"
+import chai from "../chai.ts"
 const should = chai.should()
 
 describe("removed schemaId option", () => {

@@ -1,8 +1,8 @@
-import type AjvCore from "../../dist/core"
-import type AjvPack from "../../dist/standalone/instance"
-import {getStandalone} from "../ajv_standalone"
-import _Ajv from "../ajv"
-import chai from "../chai"
+import type AjvCore from "../../dist/core.d.ts"
+import type AjvPack from "../../dist/standalone/instance.d.ts"
+import {getStandalone} from "../ajv_standalone.ts"
+import _Ajv from "../ajv.ts"
+import chai from "../chai.ts"
 chai.should()
 
 describe("issue #210, mutual recursive $refs that are schema fragments", () => {

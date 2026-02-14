@@ -1,6 +1,6 @@
-import _Ajv from "./ajv"
-import type {SchemaObject, AnyValidateFunction} from "../dist/types"
-import chai from "./chai"
+import _Ajv from "./ajv.ts"
+import type {SchemaObject, AnyValidateFunction} from "../dist/types/index.d.ts"
+import chai from "./chai.ts"
 const should = chai.should()
 
 describe("compileAsync method", () => {

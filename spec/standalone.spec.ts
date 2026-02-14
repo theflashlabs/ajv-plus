@@ -1,7 +1,7 @@
-import type Ajv from "../dist/core"
-import type {AnyValidateFunction} from "../dist/core"
-import _Ajv from "./ajv"
-import standaloneCode from "../dist/standalone"
+import type Ajv from "../dist/core.d.ts"
+import type {AnyValidateFunction} from "../dist/core.d.ts"
+import _Ajv from "./ajv.ts"
+import standaloneCode from "../dist/standalone/index.js"
 import ajvFormats from "@theflashlabs/ajv-formats"
 import requireFromString = require("require-from-string")
 import {importFromStringSync} from "module-from-string"

@@ -1,9 +1,9 @@
-import type Ajv from ".."
-import type {KeywordCxt, SchemaObject} from ".."
-import _Ajv from "./ajv"
-import {_} from "../dist/compile/codegen/code"
+import type Ajv from "../dist/ajv.d.ts"
+import type {KeywordCxt, SchemaObject} from "../dist/ajv.d.ts"
+import _Ajv from "./ajv.ts"
+import {_} from "../dist/compile/codegen/code.js"
 import assert = require("assert")
-import chai from "./chai"
+import chai from "./chai.ts"
 const should = chai.should()
 
 describe("Ajv", () => {

@@ -3,13 +3,13 @@ import type {
   KeywordErrorCxt,
   ErrorObject,
   AnySchemaObject,
-} from "../../types"
-import type {SchemaObjCxt} from ".."
-import {isJSONType, JSONType} from "../rules"
-import {schemaHasRulesForType} from "./applicability"
-import {reportError} from "../errors"
-import {_, nil, and, not, operators, Code, Name} from "../codegen"
-import {toHash, schemaRefOrVal} from "../util"
+} from "../../types/index.ts"
+import type {SchemaObjCxt} from "../index.ts"
+import {isJSONType, JSONType} from "../rules.ts"
+import {schemaHasRulesForType} from "./applicability.ts"
+import {reportError} from "../errors.ts"
+import {_, nil, and, not, operators, Code, Name} from "../codegen/index.ts"
+import {toHash, schemaRefOrVal} from "../util.ts"
 
 export enum DataType {
   Correct,

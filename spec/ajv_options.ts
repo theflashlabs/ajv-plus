@@ -1,4 +1,4 @@
-import type {Options} from ".."
+import type {Options} from "../dist/ajv.d.ts"
 
 const isBrowser = typeof window == "object"
 const fullTest = !isBrowser && process.env.AJV_FULL_TEST

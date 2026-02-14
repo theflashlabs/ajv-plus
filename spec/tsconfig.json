@@ -5,6 +5,8 @@
     "rootDir": ".",
     "outDir": "../test",
     "types": ["node", "mocha"],
-    "noImplicitAny": false
+    "noImplicitAny": false,
+    "checkJs": false,
+    "esModuleInterop": true
   }
 }
